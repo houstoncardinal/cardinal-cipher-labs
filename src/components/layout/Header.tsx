@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 
 const navItems = [
-  { label: "Divisions", href: "#divisions" },
+  { label: "Services", href: "#services" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Process", href: "#process" },
   { label: "Industries", href: "#industries" },
-  { label: "Approach", href: "#approach" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -37,9 +38,14 @@ export function Header() {
             <div className="w-8 h-8 bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-serif text-lg font-semibold">C</span>
             </div>
-            <span className="text-foreground font-serif text-xl tracking-tight">
-              Cardinal
-            </span>
+            <div className="flex flex-col">
+              <span className="text-foreground font-serif text-xl tracking-tight leading-none">
+                Cardinal
+              </span>
+              <span className="text-[10px] text-muted-foreground tracking-[0.15em] uppercase">
+                Consulting
+              </span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
@@ -56,9 +62,16 @@ export function Header() {
           </nav>
 
           {/* CTA */}
-          <div className="hidden lg:block">
-            <Button variant="executive" size="sm">
-              Request Briefing
+          <div className="hidden lg:flex items-center gap-4">
+            <a 
+              href="tel:281-901-7016" 
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Phone size={14} />
+              <span>(281) 901-7016</span>
+            </a>
+            <Button variant="executive" size="sm" asChild>
+              <a href="#contact">Free Consultation</a>
             </Button>
           </div>
 
@@ -92,9 +105,18 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <Button variant="executive" size="sm" className="mt-4">
-              Request Briefing
-            </Button>
+            <div className="pt-4 border-t border-border">
+              <a 
+                href="tel:281-901-7016" 
+                className="flex items-center gap-2 text-sm text-foreground mb-4"
+              >
+                <Phone size={14} />
+                <span>(281) 901-7016</span>
+              </a>
+              <Button variant="primary" size="sm" className="w-full" asChild>
+                <a href="#contact">Free Consultation</a>
+              </Button>
+            </div>
           </nav>
         </motion.div>
       )}

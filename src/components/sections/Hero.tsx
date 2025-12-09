@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight, Shield, Check } from "lucide-react";
 
 export function Hero() {
   return (
@@ -32,7 +32,7 @@ export function Hero() {
           >
             <Shield size={14} className="text-primary" />
             <span className="text-xs tracking-[0.2em] uppercase text-muted-foreground">
-              Enterprise Digital Operations
+              Premier Digital Agency
             </span>
           </motion.div>
 
@@ -43,9 +43,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-foreground leading-[1.1] mb-6"
           >
-            Strategic Digital
+            Custom Websites & Apps
             <br />
-            <span className="text-gradient">Infrastructure</span>
+            <span className="text-gradient">That Convert Visitors</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -53,10 +53,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            We architect, engineer, and deploy mission-critical digital systems 
-            for organizations that demand precision, security, and measurable outcomes.
+            Transform your business into a digital powerhouse with custom websites, 
+            mobile applications, and AI-powered solutions that deliver measurable ROI. 
+            Serving clients worldwide with 500+ successful projects completed.
           </motion.p>
 
           {/* CTAs */}
@@ -64,15 +65,38 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
           >
-            <Button variant="primary" size="lg" className="group">
-              Schedule Consultation
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <Button variant="primary" size="lg" className="group" asChild>
+              <a href="#contact">
+                Start Your Project
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
-            <Button variant="outline" size="lg">
-              View Capabilities
+            <Button variant="outline" size="lg" asChild>
+              <a href="#services">View Services</a>
             </Button>
+          </motion.div>
+
+          {/* Trust signals */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex items-center justify-center gap-6 text-sm text-muted-foreground"
+          >
+            <div className="flex items-center gap-2">
+              <Check size={14} className="text-primary" />
+              <span>No obligation</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check size={14} className="text-primary" />
+              <span>Free consultation</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check size={14} className="text-primary" />
+              <span>100% custom</span>
+            </div>
           </motion.div>
 
           {/* Metrics bar */}
@@ -84,10 +108,10 @@ export function Hero() {
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { value: "150+", label: "Enterprise Clients" },
-                { value: "99.9%", label: "System Uptime" },
-                { value: "12", label: "Industry Verticals" },
-                { value: "24/7", label: "Operations Support" },
+                { value: "500+", label: "Projects Completed" },
+                { value: "72hrs", label: "Expedited Delivery" },
+                { value: "24/7", label: "Support Available" },
+                { value: "98%", label: "Client Satisfaction" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="font-serif text-2xl md:text-3xl text-foreground mb-1">

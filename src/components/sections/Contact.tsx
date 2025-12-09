@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowRight, Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export function Contact() {
   return (
@@ -20,52 +20,66 @@ export function Contact() {
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-px bg-primary" />
               <span className="text-xs tracking-[0.3em] uppercase text-primary">
-                Initiate Contact
+                Contact
               </span>
             </div>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-              Request a strategic briefing
+              Let's start your digital transformation
             </h2>
             <p className="text-muted-foreground leading-relaxed text-lg mb-10">
-              Initial consultations are complimentary. Share your operational objectives 
-              and we'll prepare a preliminary assessment of how Cardinal can support your mission.
+              Ready to elevate your business with cutting-edge digital solutions? 
+              We're here to turn your vision into reality.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-secondary flex items-center justify-center">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-secondary flex items-center justify-center shrink-0">
                   <Mail size={20} className="text-primary" />
                 </div>
                 <div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Email</div>
-                  <a href="mailto:briefings@cardinal.consulting" className="text-foreground hover:text-primary transition-colors">
-                    briefings@cardinal.consulting
+                  <a href="mailto:hello@cardinalhtx.com" className="text-foreground hover:text-primary transition-colors block">
+                    hello@cardinalhtx.com
+                  </a>
+                  <a href="mailto:support@cardinalhtx.com" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                    support@cardinalhtx.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-secondary flex items-center justify-center">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-secondary flex items-center justify-center shrink-0">
                   <Phone size={20} className="text-primary" />
                 </div>
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Direct Line</div>
-                  <a href="tel:+18885551234" className="text-foreground hover:text-primary transition-colors">
-                    +1 (888) 555-1234
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Phone</div>
+                  <a href="tel:281-901-7016" className="text-foreground hover:text-primary transition-colors block">
+                    (281) 901-7016
                   </a>
+                  <span className="text-muted-foreground text-sm">Available 24/7</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-secondary flex items-center justify-center">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-secondary flex items-center justify-center shrink-0">
                   <MapPin size={20} className="text-primary" />
                 </div>
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Headquarters</div>
-                  <span className="text-foreground">
-                    New York · San Francisco · London
-                  </span>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Office</div>
+                  <span className="text-foreground block">2100 West Loop S Fwy</span>
+                  <span className="text-muted-foreground text-sm">Houston, TX 77027</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-secondary flex items-center justify-center shrink-0">
+                  <Clock size={20} className="text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Hours</div>
+                  <span className="text-foreground block">Mon-Fri: 9AM-6PM</span>
+                  <span className="text-muted-foreground text-sm">Sat-Sun: By appointment</span>
                 </div>
               </div>
             </div>
@@ -79,73 +93,109 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-background border border-border p-8 lg:p-10"
           >
+            <h3 className="font-serif text-2xl text-foreground mb-6">Get Started Today</h3>
+            
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
-                    Full Name
+                    First Name *
                   </label>
                   <input
                     type="text"
+                    required
                     className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
-                    placeholder="John Smith"
+                    placeholder="John"
                   />
                 </div>
                 <div>
                   <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
-                    Organization
+                    Last Name *
                   </label>
                   <input
                     type="text"
+                    required
                     className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
-                    placeholder="Company Name"
+                    placeholder="Smith"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                    placeholder="john@company.com"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                    placeholder="(555) 123-4567"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
-                  Email Address
+                  Company Name *
                 </label>
                 <input
-                  type="email"
+                  type="text"
+                  required
                   className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
-                  placeholder="john@company.com"
+                  placeholder="Your Company"
                 />
               </div>
 
               <div>
                 <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
-                  Division of Interest
+                  Service of Interest *
                 </label>
-                <select className="w-full bg-transparent border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary/50 transition-colors">
-                  <option value="" className="bg-background">Select a division</option>
-                  <option value="infrastructure" className="bg-background">Digital Infrastructure</option>
-                  <option value="intelligence" className="bg-background">Intelligence & Dashboards</option>
-                  <option value="search" className="bg-background">Search & Authority</option>
-                  <option value="industry" className="bg-background">Industry Solutions</option>
-                  <option value="branding" className="bg-background">Branding & Physical</option>
+                <select 
+                  required
+                  className="w-full bg-transparent border border-border px-4 py-3 text-foreground focus:outline-none focus:border-primary/50 transition-colors"
+                >
+                  <option value="" className="bg-background">Select a service</option>
+                  <option value="web" className="bg-background">Web Development</option>
+                  <option value="mobile" className="bg-background">Mobile App Development</option>
+                  <option value="seo" className="bg-background">SEO & Analytics</option>
+                  <option value="marketing" className="bg-background">Digital Marketing</option>
+                  <option value="branding" className="bg-background">Brand Identity</option>
+                  <option value="ux" className="bg-background">UX/UI Design</option>
+                  <option value="other" className="bg-background">Other</option>
                 </select>
               </div>
 
               <div>
                 <label className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
-                  Project Overview
+                  How can we help? *
                 </label>
                 <textarea
                   rows={4}
+                  required
                   className="w-full bg-transparent border border-border px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
-                  placeholder="Describe your operational objectives and timeline..."
+                  placeholder="Tell us about your project..."
                 />
               </div>
 
               <Button variant="primary" size="lg" className="w-full group">
-                Submit Briefing Request
+                Send Message
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                All communications are confidential. Response within 24 business hours.
+                ✓ 24-hour response • ✓ No commitment required • ✓ Free consultation
               </p>
             </form>
           </motion.div>
