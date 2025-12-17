@@ -4,15 +4,15 @@
 export const siteConfig = {
   name: 'Cardinal Consulting',
   description: 'Enterprise-grade software development and consulting services. We deliver innovative solutions with proven expertise in cloud architecture, AI integration, and digital transformation.',
-  url: 'https://cardinalconsulting.com',
-  ogImage: 'https://cardinalconsulting.com/og-image.jpg',
+  url: 'https://visitcardinal.com',
+  ogImage: 'https://visitcardinal.com/og-image.jpg',
   links: {
     twitter: 'https://twitter.com/cardinalconsult',
     linkedin: 'https://linkedin.com/company/cardinal-consulting',
     github: 'https://github.com/cardinal-consulting',
   },
   contact: {
-    email: 'cardinal.hunain@gmail.com',
+    email: 'hunain@visitcardinal.com',
     phone: '+1-555-0100',
     address: {
       streetAddress: '123 Business Plaza',
@@ -53,7 +53,7 @@ export const siteConfig = {
     {
       name: 'Hunain Qureshi',
       role: 'Founder & CEO',
-      email: 'cardinal.hunain@gmail.com',
+      email: 'hunain@visitcardinal.com',
       expertise: ['Enterprise Architecture', 'Strategic Consulting', 'AI/ML'],
       credentials: [
         'MS Computer Science - Stanford University',
