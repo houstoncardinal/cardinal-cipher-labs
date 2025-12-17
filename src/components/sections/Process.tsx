@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap } from "lucide-react";
+import { LuxuryCard } from "@/components/ui/luxury-card";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { ArrowRight, Zap, Clock } from "lucide-react";
 
 const phases = [
   {
@@ -81,30 +83,43 @@ export function Process() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="glass p-6 mb-10"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <Zap size={20} className="text-primary" />
-                <span className="text-sm font-medium text-foreground">Expedited Delivery</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Need it faster? We offer 72-hour rush delivery for urgent projects.
-              </p>
+              <LuxuryCard
+                elevation={3}
+                borderStyle="metallic-gold"
+                hoverLift={true}
+                className="p-6 mb-10"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <motion.div
+                    animate={{ rotate: [0, 15, -15, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Zap size={20} className="text-primary" />
+                  </motion.div>
+                  <span className="text-sm font-medium text-foreground">Expedited Delivery</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Need it faster? We offer 72-hour rush delivery for urgent projects.
+                </p>
+              </LuxuryCard>
             </motion.div>
 
-            <Button variant="primary" size="lg" className="group" asChild>
-              <a href="#contact">
-                Schedule Discovery Call
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
+            <MagneticButton strength={30}>
+              <Button variant="primary" size="lg" className="group" asChild>
+                <a href="#contact">
+                  Schedule Discovery Call
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </a>
+              </Button>
+            </MagneticButton>
           </motion.div>
 
           {/* Right Column - Phases */}
           <div className="relative">
             {/* Vertical line */}
             <motion.div
-              className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-border to-transparent"
+              className="absolute left-6 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary via-primary/30 to-transparent glow-luxury-hover"
               initial={{ scaleY: 0, originY: 0 }}
               animate={isInView ? { scaleY: 1 } : {}}
               transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
@@ -120,41 +135,65 @@ export function Process() {
                   className="group relative pl-16 pb-16 last:pb-0"
                 >
                   {/* Timeline node */}
-                  <motion.div 
-                    className="absolute left-0 top-0 w-12 h-12 flex items-center justify-center"
-                    whileHover={{ scale: 1.1 }}
+                  <motion.div
+                    className="absolute left-0 top-0 w-16 h-16 flex items-center justify-center"
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                    transition={{ duration: 0.6, delay: index * 0.15 + 0.2, type: "spring", stiffness: 200 }}
+                    whileHover={{ scale: 1.15, rotate: 5 }}
                   >
-                    <div className="w-12 h-12 bg-background border border-border group-hover:border-primary/50 flex items-center justify-center transition-all duration-300">
-                      <span className="text-lg">{phase.icon}</span>
-                    </div>
-                    
-                    {/* Animated pulse */}
+                    <LuxuryCard
+                      elevation={2}
+                      hoverLift={true}
+                      rippleOnClick={true}
+                      className="w-16 h-16 flex items-center justify-center p-0 glow-luxury-hover"
+                    >
+                      <motion.span
+                        className="text-2xl"
+                        whileHover={{ scale: 1.2, rotate: -5 }}
+                      >
+                        {phase.icon}
+                      </motion.span>
+                    </LuxuryCard>
+
+                    {/* Ripple effect */}
                     <motion.div
-                      className="absolute inset-0 border border-primary/30 opacity-0 group-hover:opacity-100"
-                      animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute inset-0 border-2 border-primary/30 rounded-sm"
+                      initial={{ scale: 1, opacity: 0.8 }}
+                      animate={{ scale: [1, 1.5, 2], opacity: [0.8, 0.3, 0] }}
+                      transition={{ duration: 2, delay: index * 0.15 + 0.4, repeat: Infinity }}
                     />
                   </motion.div>
                   
                   {/* Content */}
-                  <div className="glass p-6 group-hover:border-primary/20 transition-all duration-300">
+                  <LuxuryCard
+                    elevation={2}
+                    borderStyle={index === 0 ? "metallic-crimson" : "none"}
+                    hoverLift={true}
+                    className="p-6"
+                  >
                     <div className="flex items-center gap-4 mb-3">
                       <span className="text-xs tracking-[0.2em] text-primary font-medium">
                         PHASE {phase.number}
                       </span>
-                      <span className="text-xs text-muted-foreground px-2 py-0.5 bg-secondary/50 border border-border/50">
+                      <motion.span
+                        className="text-xs text-muted-foreground px-3 py-1 bg-secondary/50 border border-border/50 sheen-metallic flex items-center gap-1.5"
+                        animate={{ scale: [1, 1.02, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <Clock size={12} className="text-primary" />
                         {phase.duration}
-                      </span>
+                      </motion.span>
                     </div>
-                    
+
                     <h3 className="font-serif text-xl text-foreground mb-3 group-hover:text-gradient-primary transition-all">
                       {phase.title}
                     </h3>
-                    
+
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {phase.description}
                     </p>
-                  </div>
+                  </LuxuryCard>
 
                   {/* Connecting line to next phase */}
                   {index < phases.length - 1 && (

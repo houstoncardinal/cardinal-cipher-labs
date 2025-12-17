@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { 
-  Stethoscope, 
-  Scale, 
-  TrendingUp, 
-  Cpu, 
+import { LuxuryCard } from "@/components/ui/luxury-card";
+import {
+  Stethoscope,
+  Scale,
+  TrendingUp,
+  Cpu,
   Brain,
   Building2
 } from "lucide-react";
@@ -92,60 +93,97 @@ export function Industries() {
           </h2>
         </motion.div>
 
-        {/* Industries Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30">
-          {industries.map((industry, index) => (
-            <motion.div
-              key={industry.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
-              className="group bg-background p-10 text-center relative overflow-hidden"
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
-                e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
-              }}
-            >
-              {/* Hover gradient */}
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        {/* Industries Grid - EXPLOSIVE CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {industries.map((industry, index) => {
+            const animations = ["animate-explosive-entrance", "animate-mega-bounce", "animate-spiral-in", "animate-zoom-blast"];
+            const animationClass = isInView ? animations[index % animations.length] : "";
+            const borders = ["metallic-gold", "metallic-crimson", "metallic-platinum", "none"];
+            const borderStyle = borders[index % borders.length] as "metallic-gold" | "metallic-crimson" | "metallic-platinum" | "none";
+
+            return (
+              <motion.div
+                key={industry.name}
+                className={`ultra-hover-lift card-3d-flip color-shift-glow ${animationClass}`}
                 style={{
-                  background: `radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(var(--primary) / 0.1), transparent 40%)`,
+                  animationDelay: `${index * 0.15}s`,
+                  animationFillMode: "both"
                 }}
-              />
-
-              <motion.div 
-                className="relative w-20 h-20 mx-auto mb-8 flex items-center justify-center border border-border/50 group-hover:border-primary/30 transition-all duration-500"
-                whileHover={{ rotate: 5, scale: 1.05 }}
               >
-                <industry.icon size={32} className="text-muted-foreground group-hover:text-primary transition-colors duration-500" />
-                
-                {/* Corner decorations */}
-                <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-primary/0 group-hover:border-primary/50 transition-all duration-300" />
-                <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-primary/0 group-hover:border-primary/50 transition-all duration-300" />
+                <LuxuryCard
+                  elevation={3}
+                  borderStyle={borderStyle}
+                  hoverLift={true}
+                  cornerDecorations={true}
+                  className="p-10 text-center group h-full"
+                >
+                  {/* EXPLOSIVE ICON with 3D rotation */}
+                  <motion.div
+                    className="relative w-24 h-24 mx-auto mb-8 flex items-center justify-center glow-luxury-hover"
+                    whileHover={{
+                      scale: 1.3,
+                      rotateY: 360,
+                      rotateX: 15
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 15,
+                      rotateY: { duration: 0.6 }
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-xl" />
+                    <industry.icon size={40} className="text-primary relative z-10 drop-shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
+
+                    {/* Pulsing rings */}
+                    {[...Array(2)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute inset-0 border-2 border-primary/30 rounded-full"
+                        initial={{ scale: 1, opacity: 0.8 }}
+                        animate={{
+                          scale: [1, 1.5, 2],
+                          opacity: [0.8, 0.3, 0]
+                        }}
+                        transition={{
+                          duration: 2,
+                          delay: i * 0.4,
+                          repeat: Infinity,
+                          ease: "easeOut"
+                        }}
+                      />
+                    ))}
+                  </motion.div>
+
+                  <h3 className="font-serif text-3xl text-foreground mb-4 relative group-hover:text-gradient-primary transition-all">
+                    {industry.name}
+                  </h3>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 relative">
+                    {industry.description}
+                  </p>
+
+                  {/* Stat badge with sheen */}
+                  <motion.div
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 sheen-metallic"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <motion.div
+                      className="w-2 h-2 bg-primary rounded-full"
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [1, 0.5, 1]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <span className="text-xs text-primary tracking-wider uppercase font-medium">
+                      {industry.stat}
+                    </span>
+                  </motion.div>
+                </LuxuryCard>
               </motion.div>
-
-              <h3 className="font-serif text-2xl text-foreground mb-3 relative">
-                {industry.name}
-              </h3>
-              
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4 relative">
-                {industry.description}
-              </p>
-
-              <motion.span 
-                className="inline-block text-xs text-primary tracking-wider uppercase relative"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ delay: index * 0.1 + 0.3 }}
-              >
-                {industry.stat}
-              </motion.span>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

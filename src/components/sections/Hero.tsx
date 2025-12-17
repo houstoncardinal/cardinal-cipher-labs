@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { LuxuryCard } from "@/components/ui/luxury-card";
+import { FloatingParticles } from "@/components/ui/floating-particles";
 import { ArrowRight, Shield, Check } from "lucide-react";
 
 function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
@@ -33,29 +37,18 @@ function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: strin
   return <span ref={ref}>{displayValue}{suffix}</span>;
 }
 
-function FloatingOrb({ delay = 0, size = 400, x = 0, y = 0 }: { delay?: number; size?: number; x?: number; y?: number }) {
+function MorphingBlob({ delay = "0s", size = 400, x = 0, y = 0 }: { delay?: string; size?: number; x?: number; y?: number }) {
   return (
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
+    <div
+      className="absolute pointer-events-none animate-morph-blob"
       style={{
         width: size,
         height: size,
         left: `${x}%`,
         top: `${y}%`,
-        background: `radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)`,
-        filter: "blur(60px)",
-      }}
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.3, 0.5, 0.3],
-        x: [0, 30, 0],
-        y: [0, -20, 0],
-      }}
-      transition={{
-        duration: 8,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut",
+        background: `radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)`,
+        filter: "blur(80px)",
+        animationDelay: delay,
       }}
     />
   );
@@ -122,9 +115,35 @@ export function Hero() {
     >
       {/* Premium background effects */}
       <GridBackground />
-      <FloatingOrb delay={0} size={600} x={20} y={20} />
-      <FloatingOrb delay={2} size={400} x={70} y={60} />
-      <FloatingOrb delay={4} size={500} x={80} y={10} />
+      <FloatingParticles count={30} speed="slow" size="medium" />
+      <MorphingBlob delay="0s" size={600} x={20} y={20} />
+      <MorphingBlob delay="7s" size={500} x={70} y={60} />
+      <MorphingBlob delay="14s" size={550} x={80} y={10} />
+
+      {/* Floating 3D Geometric Elements */}
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute pointer-events-none float-3d"
+          style={{
+            left: `${20 + i * 18}%`,
+            top: `${30 + (i % 3) * 20}%`,
+            width: 40 + i * 15,
+            height: 40 + i * 15,
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 0.15, scale: 1 }}
+          transition={{ duration: 1, delay: i * 0.2 }}
+        >
+          <div
+            className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent border border-primary/30 backdrop-blur-sm"
+            style={{
+              transform: `rotate(${i * 45}deg)`,
+              borderRadius: i % 2 === 0 ? "30%" : "0%",
+            }}
+          />
+        </motion.div>
+      ))}
       
       {/* Radial gradient overlay */}
       <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
@@ -139,10 +158,10 @@ export function Hero() {
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 glass mb-10"
+            initial={{ opacity: 0, scale: 0, rotate: -180 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
+            className="inline-flex items-center gap-3 px-5 py-2.5 glass sheen-metallic mb-10 float-3d"
           >
             <motion.div
               animate={{ rotate: 360 }}
@@ -158,25 +177,27 @@ export function Hero() {
 
           {/* Headline */}
           <div className="overflow-hidden mb-8">
-            <motion.h1
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-              className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.05] tracking-tight"
-            >
-              Custom Websites & Apps
-            </motion.h1>
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.05] tracking-tight">
+              <TextReveal
+                text="Custom Websites & Apps"
+                mode="words"
+                animation="slide-up"
+                delay={0.1}
+                duration={0.8}
+              />
+            </h1>
           </div>
-          
+
           <div className="overflow-hidden mb-8">
-            <motion.h2
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-              className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gradient-primary leading-[1.05]"
-            >
-              That Convert Visitors
-            </motion.h2>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gradient-primary leading-[1.05]">
+              <TextReveal
+                text="That Convert Visitors"
+                mode="chars"
+                animation="char-reveal"
+                delay={0.8}
+                duration={0.6}
+              />
+            </h2>
           </div>
 
           {/* Subheadline */}
@@ -197,30 +218,34 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
-            <Button variant="primary" size="lg" className="group relative overflow-hidden" asChild>
-              <a href="#contact">
-                <span className="relative z-10">Start Your Project</span>
-                <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </a>
-            </Button>
-            <Button variant="outline" size="lg" className="group glass" asChild>
-              <a href="#services">
-                <span>View Services</span>
-                <motion.span
-                  className="inline-block ml-2"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  →
-                </motion.span>
-              </a>
-            </Button>
+            <MagneticButton strength={30}>
+              <Button variant="primary" size="lg" className="group relative overflow-hidden" asChild>
+                <a href="#contact">
+                  <span className="relative z-10">Start Your Project</span>
+                  <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </a>
+              </Button>
+            </MagneticButton>
+            <MagneticButton strength={20}>
+              <Button variant="outline" size="lg" className="group glass" asChild>
+                <a href="#services">
+                  <span>View Services</span>
+                  <motion.span
+                    className="inline-block ml-2"
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    →
+                  </motion.span>
+                </a>
+              </Button>
+            </MagneticButton>
           </motion.div>
 
           {/* Trust signals */}
@@ -251,25 +276,38 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.9, ease: [0.23, 1, 0.32, 1] }}
             className="mt-24 pt-12 border-t border-border/50"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { value: "500", suffix: "+", label: "Projects Completed" },
                 { value: "72", suffix: "hrs", label: "Expedited Delivery" },
                 { value: "24", suffix: "/7", label: "Support Available" },
                 { value: "98", suffix: "%", label: "Client Satisfaction" },
               ].map((stat, index) => (
-                <motion.div 
-                  key={index} 
-                  className="text-center group"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0, rotate: -90 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 1.2 + index * 0.1,
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 12
+                  }}
                 >
-                  <div className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-2 tabular-nums">
+                  <LuxuryCard
+                    elevation={2}
+                    hoverLift={true}
+                    borderStyle={index === 3 ? "metallic-crimson" : "none"}
+                    className="p-6 text-center group ultra-hover-lift card-3d-flip"
+                  >
+                  <div className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-2 tabular-nums group-hover:animate-number-flip">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="text-xs text-muted-foreground tracking-[0.15em] uppercase group-hover:text-primary transition-colors">
                     {stat.label}
                   </div>
+                  </LuxuryCard>
                 </motion.div>
               ))}
             </div>

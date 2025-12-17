@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Trophy, Users, Star } from "lucide-react";
+import { LuxuryCard } from "@/components/ui/luxury-card";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const caseStudies = [
   {
@@ -100,8 +102,13 @@ export function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-background/50 backdrop-blur-sm border border-border/50 overflow-hidden"
             >
+              <LuxuryCard
+                elevation={4}
+                borderStyle="metallic-crimson"
+                glassStrength="medium"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden inset-luxury"
+              >
               {/* Image */}
               <div className="relative overflow-hidden aspect-video lg:aspect-auto group">
                 <motion.img
@@ -117,9 +124,14 @@ export function Portfolio() {
                 
                 {/* Project number */}
                 <motion.div
-                  className="absolute bottom-6 left-6 font-serif text-8xl text-foreground/10"
+                  className="absolute bottom-6 left-6 font-serif text-8xl text-gradient-primary"
+                  style={{
+                    WebkitTextStroke: "2px hsl(var(--primary) / 0.5)",
+                    WebkitTextFillColor: "transparent",
+                    opacity: 0.3
+                  }}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 0.3, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
                   0{activeIndex + 1}
@@ -176,25 +188,41 @@ export function Portfolio() {
                 </motion.div>
 
                 {/* Metrics */}
-                <motion.div 
-                  className="flex gap-10 pt-8 border-t border-border/50"
+                <motion.div
+                  className="flex flex-wrap gap-4 pt-8 border-t border-border/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  {caseStudies[activeIndex].metrics.map((metric, i) => (
-                    <motion.div 
-                      key={metric.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.7 + i * 0.1 }}
-                    >
-                      <div className="font-serif text-3xl text-foreground">{metric.value}</div>
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{metric.label}</div>
-                    </motion.div>
-                  ))}
+                  {caseStudies[activeIndex].metrics.map((metric, i) => {
+                    const icons = [Trophy, Users, Star];
+                    const Icon = icons[i];
+                    return (
+                      <motion.div
+                        key={metric.label}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7 + i * 0.1 }}
+                      >
+                        <LuxuryCard
+                          elevation={2}
+                          hoverLift={true}
+                          className="px-6 py-4"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Icon size={20} className="text-primary" />
+                            <div>
+                              <div className="font-serif text-2xl text-foreground sheen-metallic">{metric.value}</div>
+                              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-0.5">{metric.label}</div>
+                            </div>
+                          </div>
+                        </LuxuryCard>
+                      </motion.div>
+                    );
+                  })}
                 </motion.div>
               </div>
+              </LuxuryCard>
             </motion.div>
           </AnimatePresence>
 
@@ -206,13 +234,18 @@ export function Portfolio() {
                 <button
                   key={i}
                   onClick={() => setActiveIndex(i)}
-                  className="relative h-1 w-12 bg-border/50 overflow-hidden"
+                  className={`relative h-0.5 w-16 bg-border/50 overflow-hidden ${
+                    i === activeIndex ? "glow-luxury-hover" : ""
+                  }`}
                 >
                   <motion.div
-                    className="absolute inset-y-0 left-0 bg-primary"
+                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary via-primary/80 to-primary"
                     initial={{ width: 0 }}
                     animate={{ width: i === activeIndex ? "100%" : "0%" }}
-                    transition={{ duration: i === activeIndex ? 5 : 0.3 }}
+                    transition={{
+                      duration: i === activeIndex ? 5 : 0.3,
+                      ease: "easeOut"
+                    }}
                   />
                 </button>
               ))}
@@ -220,22 +253,28 @@ export function Portfolio() {
 
             {/* Arrow navigation */}
             <div className="flex items-center gap-2">
-              <motion.button
-                onClick={prevSlide}
-                className="w-12 h-12 flex items-center justify-center border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronLeft size={20} className="text-muted-foreground" />
-              </motion.button>
-              <motion.button
-                onClick={nextSlide}
-                className="w-12 h-12 flex items-center justify-center border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronRight size={20} className="text-muted-foreground" />
-              </motion.button>
+              <MagneticButton strength={20}>
+                <LuxuryCard
+                  elevation={1}
+                  hoverLift={true}
+                  rippleOnClick={true}
+                  className="w-14 h-14 flex items-center justify-center p-0 cursor-pointer group"
+                  onClick={prevSlide}
+                >
+                  <ChevronLeft size={20} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </LuxuryCard>
+              </MagneticButton>
+              <MagneticButton strength={20}>
+                <LuxuryCard
+                  elevation={1}
+                  hoverLift={true}
+                  rippleOnClick={true}
+                  className="w-14 h-14 flex items-center justify-center p-0 cursor-pointer group"
+                  onClick={nextSlide}
+                >
+                  <ChevronRight size={20} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </LuxuryCard>
+              </MagneticButton>
             </div>
           </div>
         </div>

@@ -1,14 +1,15 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { 
-  Globe, 
-  Smartphone, 
-  Search, 
-  Megaphone, 
-  Palette, 
+import {
+  Globe,
+  Smartphone,
+  Search,
+  Megaphone,
+  Palette,
   MousePointer,
-  ArrowUpRight 
+  ArrowUpRight
 } from "lucide-react";
+import { LuxuryCard } from "@/components/ui/luxury-card";
 
 const services = [
   {
@@ -71,22 +72,26 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const animations = ["animate-explosive-entrance", "animate-mega-bounce", "animate-spiral-in", "animate-zoom-blast", "animate-explosive-entrance", "animate-mega-bounce"];
+  const animationClass = isInView ? animations[index % animations.length] : "";
+
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
-      className="group relative"
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
-        e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+      className={`group relative card-3d-flip ultra-hover-lift color-shift-glow ${animationClass}`}
+      style={{
+        animationDelay: `${index * 0.1}s`,
+        animationFillMode: "both"
       }}
     >
-      <div className="card-enterprise h-full bg-card/50 backdrop-blur-sm border border-border/50 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-card/80">
+      <LuxuryCard
+        elevation={3}
+        borderStyle="metallic-platinum"
+        hoverLift={true}
+        cornerDecorations={true}
+        rippleOnClick={true}
+        className="h-full p-8 transition-all duration-500 hover:border-primary/30"
+      >
         {/* Gradient background on hover */}
         <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
         
@@ -101,12 +106,86 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             {service.category}
           </motion.span>
 
-          {/* Icon */}
-          <motion.div 
-            className="w-14 h-14 bg-secondary/50 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-all duration-500 group-hover:scale-110"
-            whileHover={{ rotate: 5 }}
+          {/* EXPLOSIVE Icon with Particle Ring */}
+          <motion.div
+            className="relative w-20 h-20 bg-secondary/50 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-all duration-500 glow-luxury-hover"
+            whileHover={{
+              rotateY: 360,
+              scale: 1.3,
+              rotateZ: 10
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 15,
+              rotateY: { duration: 0.8 }
+            }}
           >
-            <service.icon size={26} className="text-primary transition-transform group-hover:scale-110" />
+            {/* Explosive glow background */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-2xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+
+            {/* Rotating particle ring */}
+            {[...Array(8)].map((_, i) => {
+              const angle = (i / 8) * 360;
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute w-1.5 h-1.5 bg-primary/50 rounded-full"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                  }}
+                  animate={{
+                    x: [
+                      Math.cos((angle * Math.PI) / 180) * 35,
+                      Math.cos((angle * Math.PI) / 180) * 45,
+                      Math.cos((angle * Math.PI) / 180) * 35
+                    ],
+                    y: [
+                      Math.sin((angle * Math.PI) / 180) * 35,
+                      Math.sin((angle * Math.PI) / 180) * 45,
+                      Math.sin((angle * Math.PI) / 180) * 35
+                    ],
+                    opacity: [0.3, 1, 0.3],
+                    scale: [1, 1.5, 1]
+                  }}
+                  transition={{
+                    duration: 2,
+                    delay: i * 0.1,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              );
+            })}
+
+            {/* Pulsing rings */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute inset-0 border-2 border-primary/30 rounded-sm"
+                initial={{ scale: 1, opacity: 0.8 }}
+                animate={{
+                  scale: [1, 1.8, 2.5],
+                  opacity: [0.8, 0.3, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  delay: i * 0.6,
+                  repeat: Infinity,
+                  ease: "easeOut"
+                }}
+              />
+            ))}
+
+            <service.icon size={32} className="text-primary relative z-10 drop-shadow-[0_0_15px_rgba(var(--primary),0.6)]" />
           </motion.div>
 
           {/* Title */}
@@ -126,8 +205,11 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
                 key={cap}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.3, delay: index * 0.1 + 0.3 + i * 0.05 }}
-                className="text-[10px] px-2.5 py-1 bg-secondary/50 text-text-secondary tracking-wide border border-border/50 group-hover:border-primary/20 transition-colors"
+                transition={{ duration: 0.3, delay: index * 0.15 + 0.3 + i * 0.05 }}
+                className={`text-[10px] px-3 py-1.5 bg-secondary/50 text-text-secondary tracking-wide border transition-all sheen-metallic ${
+                  i === 0 ? "border-metallic-gold" : "border-border/50 group-hover:border-primary/20"
+                }`}
+                whileHover={{ scale: 1.05 }}
               >
                 {cap}
               </motion.span>
@@ -136,9 +218,9 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
           {/* Price & Link */}
           <div className="flex items-center justify-between pt-5 border-t border-border/50 group-hover:border-primary/20 transition-colors">
-            <div>
+            <div className="sheen-metallic">
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Starting at</span>
-              <div className="font-serif text-2xl text-foreground">{service.price}</div>
+              <div className="font-serif text-3xl font-bold text-foreground group-hover:animate-number-flip">{service.price}</div>
             </div>
             <motion.a
               href="#contact"
@@ -150,15 +232,15 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
             </motion.a>
           </div>
         </div>
-      </div>
+      </LuxuryCard>
 
       {/* Connection lines between cards */}
       {index < services.length - 1 && index % 3 !== 2 && (
         <motion.div
-          className="absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/30 to-transparent hidden lg:block"
+          className="absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary/50 via-primary/30 to-transparent hidden lg:block group-hover:from-primary group-hover:via-primary/50 transition-all duration-500 animate-pulse-subtle"
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
+          transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
         />
       )}
     </motion.div>
@@ -203,7 +285,7 @@ export function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-1000">
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}

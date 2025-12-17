@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { LuxuryCard } from "@/components/ui/luxury-card";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 import { ArrowRight, Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 
 export function Contact() {
@@ -70,12 +72,15 @@ export function Contact() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group flex items-start gap-5"
                 >
-                  <motion.div 
-                    className="w-14 h-14 glass flex items-center justify-center shrink-0 group-hover:border-primary/30 transition-all"
-                    whileHover={{ scale: 1.05 }}
+                  <LuxuryCard
+                    elevation={1}
+                    hoverLift={true}
+                    className="w-14 h-14 flex items-center justify-center shrink-0 p-0"
                   >
-                    <item.icon size={22} className="text-primary" />
-                  </motion.div>
+                    <motion.div whileHover={{ scale: 1.1, rotate: 5 }}>
+                      <item.icon size={22} className="text-primary" />
+                    </motion.div>
+                  </LuxuryCard>
                   <div>
                     <div className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">{item.label}</div>
                     {item.href ? (
@@ -99,7 +104,12 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
             className="relative"
           >
-            <div className="glass-strong p-8 lg:p-12 relative overflow-hidden">
+            <LuxuryCard
+              elevation={4}
+              borderStyle="metallic-platinum"
+              glassStrength="strong"
+              className="p-8 lg:p-12 inset-luxury"
+            >
               {/* Decorative corner */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent" />
               
@@ -113,14 +123,48 @@ export function Contact() {
                 >
                   <motion.div
                     initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                    className="w-20 h-20 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center"
+                    animate={{ scale: [0, 1.2, 1] }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 15,
+                      duration: 0.6
+                    }}
+                    className="w-20 h-20 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center glow-luxury-hover relative"
                   >
                     <CheckCircle size={40} className="text-primary" />
+                    {/* Pulse rings */}
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute inset-0 rounded-full border-2 border-primary/30"
+                        initial={{ scale: 1, opacity: 0.8 }}
+                        animate={{ scale: [1, 1.8, 2.2], opacity: [0.8, 0.3, 0] }}
+                        transition={{
+                          duration: 2,
+                          delay: i * 0.3,
+                          repeat: Infinity,
+                          ease: "easeOut"
+                        }}
+                      />
+                    ))}
                   </motion.div>
-                  <h4 className="font-serif text-2xl text-foreground mb-3">Thank You!</h4>
-                  <p className="text-muted-foreground">We'll be in touch within 24 hours.</p>
+                  <motion.h4
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                    className="font-serif text-2xl text-foreground mb-3"
+                  >
+                    Thank You!
+                  </motion.h4>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="text-muted-foreground"
+                  >
+                    We'll be in touch within 24 hours.
+                  </motion.p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6 relative">
@@ -136,7 +180,7 @@ export function Contact() {
                         <input
                           type="text"
                           required
-                          className="w-full bg-background/50 border border-border px-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:bg-background transition-all"
+                          className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
                           placeholder={field.placeholder}
                         />
                       </div>
@@ -151,7 +195,7 @@ export function Contact() {
                       <input
                         type="email"
                         required
-                        className="w-full bg-background/50 border border-border px-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:bg-background transition-all"
+                        className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
                         placeholder="john@company.com"
                       />
                     </div>
@@ -162,7 +206,7 @@ export function Contact() {
                       <input
                         type="tel"
                         required
-                        className="w-full bg-background/50 border border-border px-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:bg-background transition-all"
+                        className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
                         placeholder="(555) 123-4567"
                       />
                     </div>
@@ -172,9 +216,9 @@ export function Contact() {
                     <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
                       Service of Interest *
                     </label>
-                    <select 
+                    <select
                       required
-                      className="w-full bg-background/50 border border-border px-4 py-3.5 text-foreground focus:outline-none focus:border-primary/50 focus:bg-background transition-all appearance-none cursor-pointer"
+                      className="w-full bg-background/50 border border-border px-4 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300 appearance-none cursor-pointer"
                     >
                       <option value="" className="bg-background">Select a service</option>
                       <option value="web" className="bg-background">Web Development</option>
@@ -193,42 +237,44 @@ export function Contact() {
                     <textarea
                       rows={4}
                       required
-                      className="w-full bg-background/50 border border-border px-4 py-3.5 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 focus:bg-background transition-all resize-none"
+                      className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300 resize-none"
                       placeholder="Tell us about your project..."
                     />
                   </div>
 
-                  <Button 
-                    variant="primary" 
-                    size="lg" 
-                    className="w-full group relative overflow-hidden"
-                    disabled={isSubmitting}
-                  >
-                    <span className="relative z-10 flex items-center gap-2">
-                      {isSubmitting ? (
-                        <>
-                          <motion.div
-                            className="w-4 h-4 border-2 border-foreground/30 border-t-foreground rounded-full"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message
-                          <Send size={16} className="transition-transform group-hover:translate-x-1" />
-                        </>
-                      )}
-                    </span>
-                  </Button>
+                  <MagneticButton strength={35}>
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      className="w-full group relative overflow-hidden"
+                      disabled={isSubmitting}
+                    >
+                      <span className="relative z-10 flex items-center gap-2">
+                        {isSubmitting ? (
+                          <>
+                            <motion.div
+                              className="w-4 h-4 border-2 border-foreground/30 border-t-foreground rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <Send size={16} className="transition-transform group-hover:translate-x-1" />
+                          </>
+                        )}
+                      </span>
+                    </Button>
+                  </MagneticButton>
 
                   <p className="text-xs text-muted-foreground text-center">
                     ✓ 24-hour response • ✓ No commitment required • ✓ Free consultation
                   </p>
                 </form>
               )}
-            </div>
+            </LuxuryCard>
           </motion.div>
         </div>
       </div>
