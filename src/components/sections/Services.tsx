@@ -17,7 +17,8 @@ const services = [
     category: "WEB DEVELOPMENT",
     title: "Custom Website Development",
     description: "Professional, responsive websites built with modern technologies. From simple business sites to complex e-commerce platforms.",
-    price: "$2,500",
+    price: "$10,000",
+    priceNote: "Custom quotes available",
     capabilities: ["Enterprise Sites", "E-commerce", "API Architecture", "CMS Integration"],
     gradient: "from-blue-500/20 to-cyan-500/20",
   },
@@ -26,7 +27,8 @@ const services = [
     category: "MOBILE APPS",
     title: "Mobile & Web Applications",
     description: "Custom mobile apps and web applications that streamline business operations. Built for performance and scalability.",
-    price: "$5,000",
+    price: "Custom",
+    priceNote: "Tailored to your needs",
     capabilities: ["iOS & Android", "Web Applications", "Cross-Platform", "App Optimization"],
     gradient: "from-purple-500/20 to-pink-500/20",
   },
@@ -35,7 +37,8 @@ const services = [
     category: "SEO & ANALYTICS",
     title: "SEO & Analytics Services",
     description: "Comprehensive SEO optimization and analytics solutions that drive real results and qualified traffic.",
-    price: "$1,500",
+    price: "Custom",
+    priceNote: "Based on scope",
     capabilities: ["Technical SEO", "Schema Markup", "Analytics Setup", "Ranking Strategy"],
     gradient: "from-green-500/20 to-emerald-500/20",
   },
@@ -44,7 +47,8 @@ const services = [
     category: "DIGITAL MARKETING",
     title: "Digital Marketing Campaigns",
     description: "Strategic digital marketing campaigns that drive growth. From social media to email marketing with measurable results.",
-    price: "$2,000",
+    price: "Custom",
+    priceNote: "Performance-based",
     capabilities: ["PPC Advertising", "Social Media", "Email Marketing", "Content Strategy"],
     gradient: "from-orange-500/20 to-amber-500/20",
   },
@@ -53,7 +57,8 @@ const services = [
     category: "BRAND IDENTITY",
     title: "Brand Identity Design",
     description: "Complete brand identity solutions that make your business stand out. Cohesive visual identities that resonate.",
-    price: "$1,200",
+    price: "Custom",
+    priceNote: "Comprehensive packages",
     capabilities: ["Logo Design", "Brand Guidelines", "Visual Identity", "Print Collateral"],
     gradient: "from-rose-500/20 to-red-500/20",
   },
@@ -62,7 +67,8 @@ const services = [
     category: "UX/UI DESIGN",
     title: "UX/UI Experience Optimization",
     description: "User-centered design and interface optimization that creates exceptional digital experiences and drives conversions.",
-    price: "$1,800",
+    price: "Custom",
+    priceNote: "Project-based pricing",
     capabilities: ["User Research", "Interface Design", "Conversion Optimization", "A/B Testing"],
     gradient: "from-indigo-500/20 to-violet-500/20",
   },
@@ -219,7 +225,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
           {/* Price & Link */}
           <div className="flex items-center justify-between pt-5 border-t border-border/50 group-hover:border-primary/20 transition-colors">
             <div className="sheen-metallic">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Starting at</span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{service.priceNote}</span>
               <div className="font-serif text-3xl font-bold text-foreground group-hover:animate-number-flip">{service.price}</div>
             </div>
             <motion.a
