@@ -105,22 +105,24 @@ export function AdminProjects() {
       if (editingProject) {
         const { data, error } = await supabase
           .from('projects')
+          // @ts-ignore - Supabase types not fully configured
           .update(project)
           .eq('id', editingProject.id)
           .select()
           .single();
 
         if (error) throw error;
-        return data;
+        return data as Project;
       } else {
         const { data, error } = await supabase
           .from('projects')
+          // @ts-ignore - Supabase types not fully configured
           .insert([project])
           .select()
           .single();
 
         if (error) throw error;
-        return data;
+        return data as Project;
       }
     },
     onSuccess: () => {
@@ -562,7 +564,7 @@ export function AdminProjects() {
           <DialogHeader>
             <DialogTitle>Project Milestones</DialogTitle>
             <DialogDescription>
-              {selectedProject?.project_name} - {selectedProject?.clients.company_name}
+              {selectedProject?.project_name} - {(selectedProject as any)?.clients?.company_name}
             </DialogDescription>
           </DialogHeader>
 

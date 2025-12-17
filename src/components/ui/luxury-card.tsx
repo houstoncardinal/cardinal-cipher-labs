@@ -12,6 +12,7 @@ interface LuxuryCardProps {
   className?: string;
   children: React.ReactNode;
   onMouseMove?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 interface Ripple {
@@ -30,30 +31,33 @@ export function LuxuryCard({
   className = "",
   children,
   onMouseMove,
+  onClick,
 }: LuxuryCardProps) {
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const rippleIdRef = useRef(0);
 
   // Handle click ripple effect
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!rippleOnClick) return;
+    if (rippleOnClick) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+      const newRipple = {
+        x,
+        y,
+        id: rippleIdRef.current++,
+      };
 
-    const newRipple = {
-      x,
-      y,
-      id: rippleIdRef.current++,
-    };
+      setRipples((prev) => [...prev, newRipple]);
 
-    setRipples((prev) => [...prev, newRipple]);
-
-    // Remove ripple after animation
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-    }, 600);
+      // Remove ripple after animation
+      setTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
+      }, 600);
+    }
+    
+    onClick?.(e);
   };
 
   // Mouse tracking for card-enterprise effect
