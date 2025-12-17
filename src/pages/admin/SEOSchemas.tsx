@@ -211,8 +211,8 @@ export function AdminSEOSchemas() {
     const typeSpecificData: Record<string, any> = {
       Organization: {
         name: 'Cardinal Consulting',
-        url: 'https://cardinalconsulting.com',
-        logo: 'https://cardinalconsulting.com/logo.png',
+        url: 'https://visitcardinal.com',
+        logo: 'https://visitcardinal.com/logo.png',
         description: 'Enterprise software development and consulting',
         contactPoint: {
           '@type': 'ContactPoint',
@@ -223,9 +223,9 @@ export function AdminSEOSchemas() {
       LocalBusiness: {
         '@type': 'LocalBusiness',
         name: 'Cardinal Consulting',
-        image: 'https://cardinalconsulting.com/storefront.jpg',
-        '@id': 'https://cardinalconsulting.com',
-        url: 'https://cardinalconsulting.com',
+        image: 'https://visitcardinal.com/storefront.jpg',
+        '@id': 'https://visitcardinal.com',
+        url: 'https://visitcardinal.com',
         telephone: '+1-555-0100',
         address: {
           '@type': 'PostalAddress',
@@ -304,7 +304,7 @@ export function AdminSEOSchemas() {
         organizer: {
           '@type': 'Organization',
           name: 'Cardinal Consulting',
-          url: 'https://cardinalconsulting.com',
+          url: 'https://visitcardinal.com',
         },
       },
       FAQPage: {

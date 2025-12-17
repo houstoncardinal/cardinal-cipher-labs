@@ -51,8 +51,8 @@ export function Footer() {
             <div className="space-y-2 text-sm text-muted-foreground">
               <p>2100 West Loop S Fwy, Houston, TX 77027</p>
               <p>
-                <a href="mailto:hello@cardinalhtx.com" className="hover:text-foreground transition-colors">
-                  hello@cardinalhtx.com
+                <a href="mailto:hunain@visitcardinal.com" className="hover:text-foreground transition-colors">
+                  hunain@visitcardinal.com
                 </a>
               </p>
               <p>

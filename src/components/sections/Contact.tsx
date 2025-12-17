@@ -60,7 +60,7 @@ export function Contact() {
             {/* Contact Info */}
             <div className="space-y-6">
               {[
-                { icon: Mail, label: "Email", primary: "hello@cardinalhtx.com", secondary: "support@cardinalhtx.com", href: "mailto:hello@cardinalhtx.com" },
+                { icon: Mail, label: "Email", primary: "hunain@visitcardinal.com", secondary: "support@visitcardinal.com", href: "mailto:hunain@visitcardinal.com" },
                 { icon: Phone, label: "Phone", primary: "(281) 901-7016", secondary: "Available 24/7", href: "tel:281-901-7016" },
                 { icon: MapPin, label: "Office", primary: "2100 West Loop S Fwy", secondary: "Houston, TX 77027" },
                 { icon: Clock, label: "Hours", primary: "Mon-Fri: 9AM-6PM", secondary: "Sat-Sun: By appointment" },
