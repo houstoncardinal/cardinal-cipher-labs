@@ -66,22 +66,24 @@ export function AdminClients() {
       if (editingClient) {
         const { data, error } = await supabase
           .from('clients')
+          // @ts-ignore - Supabase types not fully configured
           .update(client)
           .eq('id', editingClient.id)
           .select()
           .single();
 
         if (error) throw error;
-        return data;
+        return data as Client;
       } else {
         const { data, error } = await supabase
           .from('clients')
+          // @ts-ignore - Supabase types not fully configured
           .insert([client])
           .select()
           .single();
 
         if (error) throw error;
-        return data;
+        return data as Client;
       }
     },
     onSuccess: () => {

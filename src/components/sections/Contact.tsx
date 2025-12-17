@@ -167,44 +167,71 @@ export function Contact() {
                   </motion.p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 relative">
+                <form 
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit} 
+                  className="space-y-6 relative"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden">
+                    <label>
+                      Don't fill this out if you're human: <input name="bot-field" />
+                    </label>
+                  </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {[
-                      { name: "firstName", label: "First Name", placeholder: "John" },
-                      { name: "lastName", label: "Last Name", placeholder: "Smith" },
-                    ].map((field) => (
-                      <div key={field.name} className="group">
-                        <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
-                          {field.label} *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
-                          placeholder={field.placeholder}
-                        />
-                      </div>
-                    ))}
+                    <div className="group">
+                      <label htmlFor="firstName" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
+                        placeholder="John"
+                      />
+                    </div>
+                    <div className="group">
+                      <label htmlFor="lastName" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                        Last Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
+                        placeholder="Smith"
+                      />
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="group">
-                      <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                      <label htmlFor="email" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
                         Email Address *
                       </label>
                       <input
                         type="email"
+                        id="email"
+                        name="email"
                         required
                         className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
                         placeholder="john@company.com"
                       />
                     </div>
                     <div className="group">
-                      <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                      <label htmlFor="phone" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
                         Phone Number *
                       </label>
                       <input
                         type="tel"
+                        id="phone"
+                        name="phone"
                         required
                         className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300"
                         placeholder="(555) 123-4567"
@@ -213,10 +240,12 @@ export function Contact() {
                   </div>
 
                   <div className="group">
-                    <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                    <label htmlFor="service" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
                       Service of Interest *
                     </label>
                     <select
+                      id="service"
+                      name="service"
                       required
                       className="w-full bg-background/50 border border-border px-4 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300 appearance-none cursor-pointer"
                     >
@@ -231,10 +260,12 @@ export function Contact() {
                   </div>
 
                   <div className="group">
-                    <label className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
+                    <label htmlFor="message" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block group-focus-within:text-primary transition-colors">
                       How can we help? *
                     </label>
                     <textarea
+                      id="message"
+                      name="message"
                       rows={4}
                       required
                       className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary focus:bg-background transition-all duration-300 resize-none"
