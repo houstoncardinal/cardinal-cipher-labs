@@ -43,6 +43,7 @@ const App = () => (
                   </ProtectedRoute>
                 }
               >
+                <Route index element={<AdminDashboard />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="clients" element={<AdminClients />} />
                 <Route path="projects" element={<AdminProjects />} />
