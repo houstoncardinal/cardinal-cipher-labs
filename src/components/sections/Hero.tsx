@@ -192,8 +192,8 @@ export function Hero() {
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gradient-primary leading-[1.05]">
               <TextReveal
                 text="That Convert Visitors"
-                mode="chars"
-                animation="char-reveal"
+                mode="words"
+                animation="slide-up"
                 delay={0.8}
                 duration={0.6}
               />
