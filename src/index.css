@@ -5,8 +5,63 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light Mode - Clean, Professional */
   :root {
-    /* Cardinal Consulting - Trillion Dollar Enterprise Palette */
+    --background: 0 0% 100%;
+    --foreground: 220 15% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 10%;
+
+    /* Crimson Accent - Deep Red */
+    --primary: 0 72% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 96%;
+    --secondary-foreground: 220 15% 10%;
+
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 0 72% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 0 72% 35%;
+
+    --radius: 0.125rem;
+
+    /* Enhanced Custom tokens */
+    --surface-elevated: 220 15% 98%;
+    --text-secondary: 220 10% 40%;
+    --text-tertiary: 220 10% 60%;
+    --divider: 220 15% 92%;
+    --glow-primary: 0 72% 35% / 0.15;
+    --glow-soft: 0 72% 40% / 0.05;
+    
+    /* Glass effects */
+    --glass-bg: 0 0% 100% / 0.8;
+    --glass-border: 220 15% 85% / 0.5;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 72% 35%), hsl(0 72% 25%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 15% 98%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(0 72% 35% / 0.08), transparent 70%);
+    
+    /* Clients section specific */
+    --clients-bg: 0 0% 100%;
+    --clients-text: 220 15% 25%;
+  }
+
+  /* Dark Mode - Premium Enterprise Palette */
+  .dark {
     --background: 220 15% 5%;
     --foreground: 40 10% 96%;
 
@@ -36,8 +91,6 @@
     --input: 220 15% 15%;
     --ring: 0 72% 30%;
 
-    --radius: 0.125rem;
-
     /* Enhanced Custom tokens */
     --surface-elevated: 220 15% 9%;
     --text-secondary: 220 10% 65%;
@@ -54,11 +107,10 @@
     --gradient-primary: linear-gradient(135deg, hsl(0 72% 30%), hsl(0 72% 20%));
     --gradient-dark: linear-gradient(180deg, hsl(220 15% 5%), hsl(220 15% 3%));
     --gradient-radial: radial-gradient(ellipse at center, hsl(0 72% 30% / 0.15), transparent 70%);
-  }
-
-  .dark {
-    --background: 220 15% 5%;
-    --foreground: 40 10% 96%;
+    
+    /* Clients section specific */
+    --clients-bg: 0 0% 100%;
+    --clients-text: 220 15% 10%;
   }
 }
 
