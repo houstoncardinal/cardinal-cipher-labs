@@ -8,7 +8,6 @@ const clients = [
   { name: "ClearLedger", logo: "/clients/clearledger.png", url: "https://www.yourclearledger.com/" },
   { name: "HougenPros", logo: "/clients/hougenpros.png", url: "https://www.hougenpros.com/" },
   { name: "IAC Centers", logo: "/clients/iac.png", url: "https://www.injuryassistancecenters.com/" },
-  { name: "Reactivate Dallas", logo: "/clients/reactivate.png", url: "https://www.reactivatedallas.com/" },
   { name: "HOU Inc", logo: "/clients/houinc.png", url: "https://www.houinc.com/" },
 ];
 
@@ -17,38 +16,32 @@ export function Clients() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-20 lg:py-28 relative overflow-hidden bg-white">
-      {/* Subtle pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
+    <section ref={ref} className="py-16 lg:py-20 relative overflow-hidden bg-gradient-to-b from-white via-neutral-50/50 to-white">
+      {/* Elegant top border */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
       
       <div className="container mx-auto px-6 lg:px-12 relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-center mb-12"
         >
-          <span className="text-xs tracking-[0.3em] uppercase text-neutral-500 font-medium">
+          <span className="text-[11px] tracking-[0.35em] uppercase text-neutral-400 font-light">
             Trusted By Industry Leaders
           </span>
         </motion.div>
 
         {/* Infinite scroll container */}
         <div className="relative">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          {/* Refined fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
           
           <motion.div
-            className="flex gap-20 items-center"
-            animate={{ x: [0, -1200] }}
-            transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            className="flex gap-24 items-center"
+            animate={{ x: [0, -1050] }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
           >
             {/* Double the logos for seamless loop */}
             {[...clients, ...clients].map((client, index) => (
@@ -58,24 +51,22 @@ export function Clients() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 group relative"
-                whileHover={{ scale: 1.08 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <img
                   src={client.logo}
                   alt={`${client.name} logo`}
-                  className="h-12 md:h-14 w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300"
-                />
-                
-                {/* Subtle shadow on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-primary/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                  className="h-10 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-500 ease-out"
                 />
               </motion.a>
             ))}
           </motion.div>
         </div>
       </div>
+      
+      {/* Elegant bottom border */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
     </section>
   );
 }
