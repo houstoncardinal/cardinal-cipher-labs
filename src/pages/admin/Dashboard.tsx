@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { LuxuryCard } from '@/components/ui/luxury-card';
 import {
   Users,
   FolderKanban,
   FileText,
-  TrendingUp,
-  Clock,
   CheckCircle2,
-  AlertCircle,
+  Clock,
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 

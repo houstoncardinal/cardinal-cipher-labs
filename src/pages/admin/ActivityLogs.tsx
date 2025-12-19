@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { LuxuryCard } from '@/components/ui/luxury-card';
 import { Input } from '@/components/ui/input';
 import {
@@ -14,43 +14,36 @@ import {
 import {
   Users,
   FolderKanban,
-  Target,
   FileText,
   Plus,
   Edit,
   Trash2,
-  CheckCircle2,
-  Upload,
   Clock,
   Filter,
   Search,
+  Activity,
 } from 'lucide-react';
-import type { Database } from '@/lib/database.types';
+import type { Tables } from '@/integrations/supabase/types';
 import { format, formatDistanceToNow } from 'date-fns';
 
-type ActivityLog = Database['public']['Tables']['activity_logs']['Row'];
+type ActivityLog = Tables<'activity_logs'>;
 
-const actionIcons = {
+const actionIcons: Record<string, any> = {
   created: Plus,
   updated: Edit,
   deleted: Trash2,
-  completed: CheckCircle2,
-  uploaded: Upload,
 };
 
-const entityIcons = {
+const entityIcons: Record<string, any> = {
   client: Users,
   project: FolderKanban,
-  milestone: Target,
   document: FileText,
 };
 
-const actionColors = {
+const actionColors: Record<string, string> = {
   created: 'text-green-500 bg-green-500/10',
   updated: 'text-blue-500 bg-blue-500/10',
   deleted: 'text-red-500 bg-red-500/10',
-  completed: 'text-purple-500 bg-purple-500/10',
-  uploaded: 'text-orange-500 bg-orange-500/10',
 };
 
 export function AdminActivityLogs() {
@@ -69,14 +62,12 @@ export function AdminActivityLogs() {
         .limit(100);
 
       if (error) throw error;
-      return data as ActivityLog[];
+      return data;
     },
   });
 
   const filteredLogs = logs?.filter((log) => {
-    const matchesSearch =
-      log.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      log.user_email?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = log.action.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesEntity = entityFilter === 'all' || log.entity_type === entityFilter;
     const matchesAction = actionFilter === 'all' || log.action === actionFilter;
     return matchesSearch && matchesEntity && matchesAction;
@@ -126,7 +117,6 @@ export function AdminActivityLogs() {
             <SelectItem value="all">All Entities</SelectItem>
             <SelectItem value="client">Clients</SelectItem>
             <SelectItem value="project">Projects</SelectItem>
-            <SelectItem value="milestone">Milestones</SelectItem>
             <SelectItem value="document">Documents</SelectItem>
           </SelectContent>
         </Select>
@@ -141,8 +131,6 @@ export function AdminActivityLogs() {
             <SelectItem value="created">Created</SelectItem>
             <SelectItem value="updated">Updated</SelectItem>
             <SelectItem value="deleted">Deleted</SelectItem>
-            <SelectItem value="completed">Completed</SelectItem>
-            <SelectItem value="uploaded">Uploaded</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -152,9 +140,9 @@ export function AdminActivityLogs() {
         <div className="space-y-4">
           {filteredLogs && filteredLogs.length > 0 ? (
             filteredLogs.map((log, index) => {
-              const ActionIcon = actionIcons[log.action];
-              const EntityIcon = entityIcons[log.entity_type];
-              const actionColor = actionColors[log.action];
+              const ActionIcon = actionIcons[log.action] || Activity;
+              const EntityIcon = entityIcons[log.entity_type || ''] || Activity;
+              const actionColor = actionColors[log.action] || 'text-gray-500 bg-gray-500/10';
 
               return (
                 <motion.div
@@ -177,7 +165,7 @@ export function AdminActivityLogs() {
                       <div className="flex items-center gap-2">
                         <EntityIcon size={16} className="text-primary" />
                         <span className="text-sm font-medium text-foreground capitalize">
-                          {log.entity_type}
+                          {log.entity_type || 'Unknown'}
                         </span>
                         <span className="text-sm text-muted-foreground">•</span>
                         <span className="text-sm text-muted-foreground capitalize">
@@ -192,21 +180,13 @@ export function AdminActivityLogs() {
                       </div>
                     </div>
 
-                    <p className="text-sm text-foreground mb-1">{log.description}</p>
-
-                    {log.user_email && (
-                      <p className="text-xs text-muted-foreground">
-                        by {log.user_email}
-                      </p>
-                    )}
-
-                    {log.metadata && (
+                    {log.details && (
                       <details className="mt-2">
                         <summary className="text-xs text-muted-foreground cursor-pointer hover:text-primary">
-                          View metadata
+                          View details
                         </summary>
                         <pre className="mt-2 text-xs bg-secondary/50 p-2 rounded overflow-x-auto">
-                          {JSON.stringify(log.metadata, null, 2)}
+                          {JSON.stringify(log.details, null, 2)}
                         </pre>
                       </details>
                     )}
@@ -240,10 +220,10 @@ export function AdminActivityLogs() {
       </LuxuryCard>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {Object.entries(actionColors).map(([action, color]) => {
           const count = logs?.filter((log) => log.action === action).length || 0;
-          const Icon = actionIcons[action as keyof typeof actionIcons];
+          const Icon = actionIcons[action] || Activity;
 
           return (
             <LuxuryCard key={action} elevation={1} className="p-4">
