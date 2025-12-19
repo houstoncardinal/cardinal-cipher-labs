@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X, Phone } from "lucide-react";
 
 const navItems = [
@@ -19,13 +20,13 @@ export function Header() {
   const headerBg = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(10, 12, 16, 0)", "rgba(10, 12, 16, 0.95)"]
+    ["hsl(var(--background) / 0)", "hsl(var(--background) / 0.95)"]
   );
   
   const headerBorder = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.1)"]
+    ["hsl(var(--border) / 0)", "hsl(var(--border) / 0.5)"]
   );
 
   useEffect(() => {
@@ -98,8 +99,8 @@ export function Header() {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-5">
+          {/* CTA & Theme Toggle */}
+          <div className="hidden lg:flex items-center gap-4">
             <motion.a 
               href="tel:281-901-7016" 
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
@@ -108,6 +109,7 @@ export function Header() {
               <Phone size={14} className="group-hover:text-primary transition-colors" />
               <span>(281) 901-7016</span>
             </motion.a>
+            <ThemeToggle />
             <Button variant="executive" size="sm" className="relative overflow-hidden group" asChild>
               <a href="#contact">
                 <span className="relative z-10">Free Consultation</span>
