@@ -2,12 +2,11 @@ import { useState, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { LuxuryCard } from '@/components/ui/luxury-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -21,7 +20,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -34,19 +32,17 @@ import {
   Search,
   Filter,
 } from 'lucide-react';
-import type { Database } from '@/lib/database.types';
+import type { Tables, TablesInsert } from '@/integrations/supabase/types';
 import { format } from 'date-fns';
 
-type Document = Database['public']['Tables']['documents']['Row'];
-type DocumentInsert = Database['public']['Tables']['documents']['Insert'];
-type Client = Database['public']['Tables']['clients']['Row'];
-type Project = Database['public']['Tables']['projects']['Row'];
+type Document = Tables<'documents'>;
+type DocumentInsert = TablesInsert<'documents'>;
 
 export function AdminDocuments() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [uploadingFile, setUploadingFile] = useState<File | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -58,13 +54,13 @@ export function AdminDocuments() {
         .from('documents')
         .select(`
           *,
-          clients:client_id (company_name),
-          projects:project_id (project_name)
+          clients:client_id (name),
+          projects:project_id (name)
         `)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as (Document & { clients: { company_name: string } | null; projects: { project_name: string } | null })[];
+      return data as (Document & { clients: { name: string } | null; projects: { name: string } | null })[];
     },
   });
 
@@ -74,10 +70,10 @@ export function AdminDocuments() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('clients')
-        .select('id, company_name')
-        .order('company_name');
+        .select('id, name')
+        .order('name');
       if (error) throw error;
-      return data as Pick<Client, 'id' | 'company_name'>[];
+      return data;
     },
   });
 
@@ -87,36 +83,23 @@ export function AdminDocuments() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('projects')
-        .select('id, project_name')
-        .order('project_name');
+        .select('id, name')
+        .order('name');
       if (error) throw error;
-      return data as Pick<Project, 'id' | 'project_name'>[];
+      return data;
     },
   });
 
   // Upload document mutation
   const uploadMutation = useMutation({
     mutationFn: async (data: { file: File; documentData: DocumentInsert }) => {
-      // Upload file to Supabase Storage
-      const filePath = `${data.file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-      const { error: uploadError } = await supabase.storage
-        .from('documents')
-        .upload(filePath, data.file);
-
-      if (uploadError) throw uploadError;
-
-      // Get public URL
-      const { data: urlData } = supabase.storage
-        .from('documents')
-        .getPublicUrl(filePath);
-
-      // Insert document record
+      // For now, we'll just save the document record without actual file storage
+      // File storage would require setting up a storage bucket
       const { data: document, error: insertError } = await supabase
         .from('documents')
-        // @ts-ignore - Supabase types not fully configured
         .insert([{
           ...data.documentData,
-          file_path: urlData.publicUrl,
+          file_path: data.file.name,
         }])
         .select()
         .single();
@@ -127,15 +110,15 @@ export function AdminDocuments() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['documents'] });
       toast({
-        title: 'Document Uploaded',
-        description: 'File successfully uploaded and saved',
+        title: 'Document Created',
+        description: 'Document record saved successfully',
       });
       setIsDialogOpen(false);
       setUploadingFile(null);
     },
     onError: (error: any) => {
       toast({
-        title: 'Upload Failed',
+        title: 'Error',
         description: error.message,
         variant: 'destructive',
       });
@@ -145,13 +128,6 @@ export function AdminDocuments() {
   // Delete document mutation
   const deleteMutation = useMutation({
     mutationFn: async (doc: Document) => {
-      // Delete from storage
-      const fileName = doc.file_path.split('/').pop();
-      if (fileName) {
-        await supabase.storage.from('documents').remove([fileName]);
-      }
-
-      // Delete record
       const { error } = await supabase.from('documents').delete().eq('id', doc.id);
       if (error) throw error;
     },
@@ -159,7 +135,7 @@ export function AdminDocuments() {
       queryClient.invalidateQueries({ queryKey: ['documents'] });
       toast({
         title: 'Document Deleted',
-        description: 'File successfully deleted',
+        description: 'Document deleted successfully',
       });
     },
   });
@@ -186,30 +162,28 @@ export function AdminDocuments() {
     const documentData: DocumentInsert = {
       client_id: formData.get('client_id') as string || null,
       project_id: formData.get('project_id') as string || null,
-      file_name: uploadingFile.name,
+      name: uploadingFile.name,
       file_path: '', // Will be set after upload
       file_size: uploadingFile.size,
       file_type: uploadingFile.type,
-      category: formData.get('category') as any || 'other',
-      description: formData.get('description') as string || null,
     };
 
     uploadMutation.mutate({ file: uploadingFile, documentData });
   };
 
   const filteredDocuments = documents?.filter((doc) => {
-    const matchesSearch = doc.file_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      doc.description?.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = categoryFilter === 'all' || doc.category === categoryFilter;
-    return matchesSearch && matchesCategory;
+    const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesType = typeFilter === 'all' || doc.file_type?.startsWith(typeFilter);
+    return matchesSearch && matchesType;
   });
 
-  const getFileIcon = (fileType: string) => {
-    if (fileType.startsWith('image/')) return Image;
+  const getFileIcon = (fileType: string | null) => {
+    if (fileType?.startsWith('image/')) return Image;
     return FileText;
   };
 
-  const formatFileSize = (bytes: number) => {
+  const formatFileSize = (bytes: number | null) => {
+    if (!bytes) return '0 B';
     if (bytes < 1024) return bytes + ' B';
     if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
     return (bytes / 1048576).toFixed(1) + ' MB';
@@ -269,19 +243,16 @@ export function AdminDocuments() {
           />
         </div>
 
-        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+        <Select value={typeFilter} onValueChange={setTypeFilter}>
           <SelectTrigger className="w-[200px]">
             <Filter size={16} className="mr-2" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="contract">Contracts</SelectItem>
-            <SelectItem value="proposal">Proposals</SelectItem>
-            <SelectItem value="invoice">Invoices</SelectItem>
-            <SelectItem value="design">Designs</SelectItem>
-            <SelectItem value="report">Reports</SelectItem>
-            <SelectItem value="other">Other</SelectItem>
+            <SelectItem value="all">All Types</SelectItem>
+            <SelectItem value="image">Images</SelectItem>
+            <SelectItem value="application/pdf">PDFs</SelectItem>
+            <SelectItem value="application">Documents</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -310,14 +281,14 @@ export function AdminDocuments() {
                   </div>
 
                   {/* File Name */}
-                  <h3 className="font-medium text-foreground mb-1 truncate" title={doc.file_name}>
-                    {doc.file_name}
+                  <h3 className="font-medium text-foreground mb-1 truncate" title={doc.name}>
+                    {doc.name}
                   </h3>
 
-                  {/* Category & Size */}
+                  {/* Type & Size */}
                   <div className="flex gap-2 mb-2">
                     <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">
-                      {doc.category}
+                      {doc.file_type?.split('/')[1] || 'file'}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       {formatFileSize(doc.file_size)}
@@ -327,7 +298,7 @@ export function AdminDocuments() {
                   {/* Client/Project */}
                   {(doc.clients || doc.projects) && (
                     <p className="text-xs text-muted-foreground mb-3 truncate">
-                      {doc.clients?.company_name || doc.projects?.project_name}
+                      {doc.clients?.name || doc.projects?.name}
                     </p>
                   )}
 
@@ -344,7 +315,7 @@ export function AdminDocuments() {
                       className="flex-1"
                       asChild
                     >
-                      <a href={doc.file_path} download target="_blank" rel="noopener noreferrer">
+                      <a href={doc.file_path || '#'} download target="_blank" rel="noopener noreferrer">
                         <Download size={14} className="mr-2" />
                         Download
                       </a>
@@ -381,7 +352,7 @@ export function AdminDocuments() {
             No documents found
           </h3>
           <p className="text-muted-foreground">
-            {searchQuery || categoryFilter !== 'all'
+            {searchQuery || typeFilter !== 'all'
               ? 'Try adjusting your filters'
               : 'Upload your first document to get started'}
           </p>
@@ -408,7 +379,7 @@ export function AdminDocuments() {
                 <SelectContent>
                   {clients?.map((client) => (
                     <SelectItem key={client.id} value={client.id}>
-                      {client.company_name}
+                      {client.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -424,38 +395,11 @@ export function AdminDocuments() {
                 <SelectContent>
                   {projects?.map((project) => (
                     <SelectItem key={project.id} value={project.id}>
-                      {project.project_name}
+                      {project.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="category">Category</Label>
-              <Select name="category" defaultValue="other">
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="contract">Contract</SelectItem>
-                  <SelectItem value="proposal">Proposal</SelectItem>
-                  <SelectItem value="invoice">Invoice</SelectItem>
-                  <SelectItem value="design">Design</SelectItem>
-                  <SelectItem value="report">Report</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
-              <Textarea
-                id="description"
-                name="description"
-                rows={3}
-                placeholder="Add notes about this document..."
-              />
             </div>
 
             <div className="flex justify-end gap-3">

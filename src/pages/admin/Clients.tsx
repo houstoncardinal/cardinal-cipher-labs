@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { LuxuryCard } from '@/components/ui/luxury-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -30,14 +30,12 @@ import {
   Trash2,
   Mail,
   Phone,
-  Globe,
-  MapPin,
   Building2,
 } from 'lucide-react';
-import type { Database } from '@/lib/database.types';
+import type { Tables, TablesInsert } from '@/integrations/supabase/types';
 
-type Client = Database['public']['Tables']['clients']['Row'];
-type ClientInsert = Database['public']['Tables']['clients']['Insert'];
+type Client = Tables<'clients'>;
+type ClientInsert = TablesInsert<'clients'>;
 
 export function AdminClients() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -56,7 +54,7 @@ export function AdminClients() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      return data as Client[];
+      return data;
     },
   });
 
@@ -66,24 +64,22 @@ export function AdminClients() {
       if (editingClient) {
         const { data, error } = await supabase
           .from('clients')
-          // @ts-ignore - Supabase types not fully configured
           .update(client)
           .eq('id', editingClient.id)
           .select()
           .single();
 
         if (error) throw error;
-        return data as Client;
+        return data;
       } else {
         const { data, error } = await supabase
           .from('clients')
-          // @ts-ignore - Supabase types not fully configured
           .insert([client])
           .select()
           .single();
 
         if (error) throw error;
-        return data as Client;
+        return data;
       }
     },
     onSuccess: () => {
@@ -124,18 +120,11 @@ export function AdminClients() {
     const formData = new FormData(e.currentTarget);
 
     const clientData: ClientInsert = {
-      company_name: formData.get('company_name') as string,
-      contact_name: formData.get('contact_name') as string,
-      email: formData.get('email') as string,
+      name: formData.get('name') as string,
+      company: formData.get('company') as string || null,
+      email: formData.get('email') as string || null,
       phone: formData.get('phone') as string || null,
-      address: formData.get('address') as string || null,
-      city: formData.get('city') as string || null,
-      state: formData.get('state') as string || null,
-      zip: formData.get('zip') as string || null,
-      country: formData.get('country') as string || null,
-      website: formData.get('website') as string || null,
-      industry: formData.get('industry') as string || null,
-      status: formData.get('status') as any || 'active',
+      status: formData.get('status') as string || 'active',
       notes: formData.get('notes') as string || null,
     };
 
@@ -143,12 +132,12 @@ export function AdminClients() {
   };
 
   const filteredClients = clients?.filter((client) =>
-    client.company_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    client.contact_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchQuery.toLowerCase())
+    client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    client.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    client.email?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string | null) => {
     switch (status) {
       case 'active':
         return 'bg-green-500/10 text-green-500 border-green-500/20';
@@ -208,33 +197,31 @@ export function AdminClients() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 space-y-2">
-                  <Label htmlFor="company_name">Company Name *</Label>
+                  <Label htmlFor="name">Client Name *</Label>
                   <Input
-                    id="company_name"
-                    name="company_name"
-                    defaultValue={editingClient?.company_name}
+                    id="name"
+                    name="name"
+                    defaultValue={editingClient?.name}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="contact_name">Contact Name *</Label>
+                  <Label htmlFor="company">Company</Label>
                   <Input
-                    id="contact_name"
-                    name="contact_name"
-                    defaultValue={editingClient?.contact_name}
-                    required
+                    id="company"
+                    name="company"
+                    defaultValue={editingClient?.company || ''}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    defaultValue={editingClient?.email}
-                    required
+                    defaultValue={editingClient?.email || ''}
                   />
                 </div>
 
@@ -245,25 +232,6 @@ export function AdminClients() {
                     name="phone"
                     type="tel"
                     defaultValue={editingClient?.phone || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <Input
-                    id="industry"
-                    name="industry"
-                    defaultValue={editingClient?.industry || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="website">Website</Label>
-                  <Input
-                    id="website"
-                    name="website"
-                    type="url"
-                    defaultValue={editingClient?.website || ''}
                   />
                 </div>
 
@@ -280,51 +248,6 @@ export function AdminClients() {
                       <SelectItem value="archived">Archived</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
-
-                <div className="col-span-2 space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input
-                    id="address"
-                    name="address"
-                    defaultValue={editingClient?.address || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    name="city"
-                    defaultValue={editingClient?.city || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
-                  <Input
-                    id="state"
-                    name="state"
-                    defaultValue={editingClient?.state || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="zip">ZIP Code</Label>
-                  <Input
-                    id="zip"
-                    name="zip"
-                    defaultValue={editingClient?.zip || ''}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="country">Country</Label>
-                  <Input
-                    id="country"
-                    name="country"
-                    defaultValue={editingClient?.country || ''}
-                  />
                 </div>
 
                 <div className="col-span-2 space-y-2">
@@ -389,12 +312,14 @@ export function AdminClients() {
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <h3 className="font-serif text-xl text-foreground mb-1">
-                      {client.company_name}
+                      {client.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Building2 size={14} />
-                      {client.industry || 'No industry'}
-                    </div>
+                    {client.company && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Building2 size={14} />
+                        {client.company}
+                      </div>
+                    )}
                   </div>
                   <span
                     className={`text-xs px-3 py-1 rounded-full border ${getStatusColor(
@@ -407,40 +332,21 @@ export function AdminClients() {
 
                 {/* Contact Info */}
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Mail size={14} className="text-primary" />
-                    <a
-                      href={`mailto:${client.email}`}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {client.email}
-                    </a>
-                  </div>
+                  {client.email && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Mail size={14} className="text-primary" />
+                      <a
+                        href={`mailto:${client.email}`}
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {client.email}
+                      </a>
+                    </div>
+                  )}
                   {client.phone && (
                     <div className="flex items-center gap-2 text-sm">
                       <Phone size={14} className="text-primary" />
                       <span className="text-muted-foreground">{client.phone}</span>
-                    </div>
-                  )}
-                  {client.website && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <Globe size={14} className="text-primary" />
-                      <a
-                        href={client.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        Website
-                      </a>
-                    </div>
-                  )}
-                  {(client.city || client.state) && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <MapPin size={14} className="text-primary" />
-                      <span className="text-muted-foreground">
-                        {[client.city, client.state].filter(Boolean).join(', ')}
-                      </span>
                     </div>
                   )}
                 </div>
