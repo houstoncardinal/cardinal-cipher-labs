@@ -160,13 +160,16 @@ export function Header() {
             </motion.a>
           ))}
           <div className="pt-6 space-y-4">
-            <a 
-              href="tel:281-901-7016" 
-              className="flex items-center gap-2 text-sm text-foreground"
-            >
-              <Phone size={14} className="text-primary" />
-              <span>(281) 901-7016</span>
-            </a>
+            <div className="flex items-center justify-between">
+              <a 
+                href="tel:281-901-7016" 
+                className="flex items-center gap-2 text-sm text-foreground"
+              >
+                <Phone size={14} className="text-primary" />
+                <span>(281) 901-7016</span>
+              </a>
+              <ThemeToggle />
+            </div>
             <Button variant="primary" size="sm" className="w-full" asChild>
               <a href="#contact">Free Consultation</a>
             </Button>

@@ -1,19 +1,101 @@
 // Schema.org JSON-LD Generators for Google E-E-A-T Compliance
-import { siteConfig, services, faqs } from './seo-config';
+// Comprehensive Schema Markup for Maximum SEO Impact
+import { siteConfig, services, faqs, industries } from './seo-config';
 
+// Generate LocalBusiness Schema - Critical for Local SEO
+export function generateLocalBusinessSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${siteConfig.url}#localbusiness`,
+    name: siteConfig.name,
+    legalName: siteConfig.legalName,
+    url: siteConfig.url,
+    telephone: siteConfig.contact.phone,
+    email: siteConfig.contact.email,
+    description: siteConfig.description,
+    slogan: siteConfig.business.slogan,
+    logo: {
+      '@type': 'ImageObject',
+      url: siteConfig.logo,
+      width: 200,
+      height: 200,
+    },
+    image: siteConfig.ogImage,
+    priceRange: siteConfig.business.priceRange,
+    currenciesAccepted: siteConfig.business.currenciesAccepted.join(', '),
+    paymentAccepted: siteConfig.business.paymentAccepted.join(', '),
+    
+    // Address
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.contact.address.streetAddress,
+      addressLocality: siteConfig.contact.address.addressLocality,
+      addressRegion: siteConfig.contact.address.addressRegion,
+      postalCode: siteConfig.contact.address.postalCode,
+      addressCountry: siteConfig.contact.address.addressCountry,
+    },
+    
+    // Geo Coordinates for Maps
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: siteConfig.contact.geo.latitude,
+      longitude: siteConfig.contact.geo.longitude,
+    },
+    
+    // Opening Hours
+    openingHoursSpecification: siteConfig.business.openingHours.map((hours) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: hours.dayOfWeek,
+      opens: hours.opens,
+      closes: hours.closes,
+    })),
+    
+    // Area Served
+    areaServed: siteConfig.business.areaServed.map((area) => ({
+      '@type': area.type,
+      name: area.name,
+      ...(area.region && { containedInPlace: { '@type': 'State', name: area.region } }),
+    })),
+    
+    // Aggregate Rating
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: siteConfig.aggregateRating.ratingValue,
+      ratingCount: siteConfig.aggregateRating.ratingCount,
+      reviewCount: siteConfig.aggregateRating.reviewCount,
+      bestRating: siteConfig.aggregateRating.bestRating,
+      worstRating: siteConfig.aggregateRating.worstRating,
+    },
+    
+    // Social Profiles
+    sameAs: siteConfig.socialProfiles,
+    
+    // Expertise
+    knowsAbout: siteConfig.expertise.specialties,
+    hasCredential: siteConfig.expertise.certifications.map((cert) => ({
+      '@type': 'EducationalOccupationalCredential',
+      name: cert,
+    })),
+  };
+}
+
+// Generate Organization Schema with Enhanced E-E-A-T Signals
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${siteConfig.url}#organization`,
     name: siteConfig.name,
+    legalName: siteConfig.legalName,
     url: siteConfig.url,
     logo: {
       '@type': 'ImageObject',
-      url: `${siteConfig.url}/logo.png`,
+      url: siteConfig.logo,
       width: 200,
       height: 200,
     },
+    image: siteConfig.ogImage,
     description: siteConfig.description,
     foundingDate: siteConfig.business.foundingDate,
     slogan: siteConfig.business.slogan,
@@ -21,6 +103,7 @@ export function generateOrganizationSchema() {
     // E-E-A-T: Contact Information
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
+    faxNumber: siteConfig.contact.fax,
 
     // E-E-A-T: Physical Address (Trustworthiness)
     address: {
@@ -35,15 +118,15 @@ export function generateOrganizationSchema() {
     // E-E-A-T: Social Proof & Authority
     sameAs: siteConfig.socialProfiles,
 
-    // Contact Points
+    // Multiple Contact Points
     contactPoint: [
       {
         '@type': 'ContactPoint',
         telephone: siteConfig.contact.phone,
         contactType: 'customer service',
-        email: siteConfig.contact.email,
+        email: siteConfig.contact.supportEmail,
         areaServed: 'Worldwide',
-        availableLanguage: ['English'],
+        availableLanguage: siteConfig.expertise.languages,
       },
       {
         '@type': 'ContactPoint',
@@ -51,12 +134,27 @@ export function generateOrganizationSchema() {
         contactType: 'sales',
         email: siteConfig.contact.email,
         areaServed: 'Worldwide',
-        availableLanguage: ['English'],
+        availableLanguage: siteConfig.expertise.languages,
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: siteConfig.contact.phone,
+        contactType: 'technical support',
+        email: siteConfig.contact.supportEmail,
+        areaServed: 'Worldwide',
+        availableLanguage: siteConfig.expertise.languages,
       },
     ],
 
     // E-E-A-T: Expertise Areas
     knowsAbout: siteConfig.expertise.specialties,
+
+    // E-E-A-T: Certifications
+    hasCredential: siteConfig.expertise.certifications.map((cert) => ({
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Professional Certification',
+      name: cert,
+    })),
 
     // E-E-A-T: Awards & Recognition (Authoritativeness)
     award: siteConfig.expertise.awardsRecognition,
@@ -66,9 +164,27 @@ export function generateOrganizationSchema() {
       '@type': 'QuantitativeValue',
       value: siteConfig.business.numberOfEmployees,
     },
+    
+    // Founder
+    founder: {
+      '@type': 'Person',
+      name: siteConfig.team[0].name,
+      jobTitle: siteConfig.team[0].role,
+    },
+    
+    // Aggregate Rating
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: siteConfig.aggregateRating.ratingValue,
+      ratingCount: siteConfig.aggregateRating.ratingCount,
+      reviewCount: siteConfig.aggregateRating.reviewCount,
+      bestRating: siteConfig.aggregateRating.bestRating,
+      worstRating: siteConfig.aggregateRating.worstRating,
+    },
   };
 }
 
+// Generate Website Schema with Sitelinks Search Box
 export function generateWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
@@ -77,6 +193,7 @@ export function generateWebSiteSchema() {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
+    inLanguage: 'en-US',
     publisher: {
       '@id': `${siteConfig.url}#organization`,
     },
@@ -91,6 +208,7 @@ export function generateWebSiteSchema() {
   };
 }
 
+// Generate Individual Service Schemas with Enhanced Data
 export function generateServiceSchemas() {
   return services.map((service, index) => ({
     '@context': 'https://schema.org',
@@ -99,6 +217,7 @@ export function generateServiceSchemas() {
     name: service.name,
     description: service.description,
     serviceType: service.serviceType,
+    category: service.category,
     provider: {
       '@id': `${siteConfig.url}#organization`,
     },
@@ -110,20 +229,43 @@ export function generateServiceSchemas() {
       '@type': 'Offer',
       priceCurrency: service.offers.priceCurrency,
       price: service.offers.price,
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: service.offers.priceCurrency,
+        price: service.offers.price,
+      },
       availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString().split('T')[0],
     },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: `${service.name} Features`,
+      itemListElement: service.features.map((feature, i) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: feature,
+        },
+        position: i + 1,
+      })),
+    },
+    termsOfService: `${siteConfig.url}/terms`,
+    providerMobility: 'dynamic',
   }));
 }
 
+// Generate Person Schemas for Team Members
 export function generatePersonSchemas() {
   return siteConfig.team.map((person) => ({
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${siteConfig.url}#person-${person.name.toLowerCase().replace(/\s+/g, '-')}`,
     name: person.name,
     jobTitle: person.role,
     email: person.email,
     image: `${siteConfig.url}${person.image}`,
     url: person.linkedin,
+    description: person.description,
 
     // E-E-A-T: Expertise & Credentials
     knowsAbout: person.expertise,
@@ -143,6 +285,7 @@ export function generatePersonSchemas() {
   }));
 }
 
+// Generate FAQPage Schema
 export function generateFAQPageSchema() {
   return {
     '@context': 'https://schema.org',
@@ -159,10 +302,44 @@ export function generateFAQPageSchema() {
   };
 }
 
+// Generate Review Schemas
+export function generateReviewSchemas() {
+  return siteConfig.reviews.map((review, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    '@id': `${siteConfig.url}#review-${index}`,
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: review.reviewRating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    author: {
+      '@type': 'Person',
+      name: review.author,
+      jobTitle: review.authorTitle,
+      worksFor: {
+        '@type': 'Organization',
+        name: review.authorCompany,
+      },
+    },
+    reviewBody: review.reviewBody,
+    datePublished: review.datePublished,
+    itemReviewed: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+    publisher: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  }));
+}
+
+// Generate Breadcrumb Schema
 export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${siteConfig.url}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -172,6 +349,7 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
   };
 }
 
+// Generate Article Schema
 export function generateArticleSchema(article: {
   title: string;
   description: string;
@@ -184,6 +362,7 @@ export function generateArticleSchema(article: {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': article.url,
     headline: article.title,
     description: article.description,
     image: article.image,
@@ -192,6 +371,7 @@ export function generateArticleSchema(article: {
     author: {
       '@type': 'Person',
       name: article.author || siteConfig.team[0].name,
+      url: siteConfig.team[0].linkedin,
     },
     publisher: {
       '@id': `${siteConfig.url}#organization`,
@@ -201,13 +381,19 @@ export function generateArticleSchema(article: {
       '@type': 'WebPage',
       '@id': article.url,
     },
+    isPartOf: {
+      '@id': `${siteConfig.url}#website`,
+    },
   };
 }
 
+// Generate WebPage Schema
 export function generateWebPageSchema(page: {
   name: string;
   description: string;
   url: string;
+  datePublished?: string;
+  dateModified?: string;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -216,6 +402,9 @@ export function generateWebPageSchema(page: {
     name: page.name,
     description: page.description,
     url: page.url,
+    datePublished: page.datePublished || siteConfig.business.foundingDate,
+    dateModified: page.dateModified || new Date().toISOString().split('T')[0],
+    inLanguage: 'en-US',
     isPartOf: {
       '@id': `${siteConfig.url}#website`,
     },
@@ -225,9 +414,141 @@ export function generateWebPageSchema(page: {
     publisher: {
       '@id': `${siteConfig.url}#organization`,
     },
+    breadcrumb: {
+      '@id': `${siteConfig.url}#breadcrumb`,
+    },
+    potentialAction: {
+      '@type': 'ReadAction',
+      target: page.url,
+    },
   };
 }
 
+// Generate SiteNavigationElement Schema
+export function generateNavigationSchema() {
+  const navItems = [
+    { name: 'Services', url: `${siteConfig.url}#services` },
+    { name: 'Portfolio', url: `${siteConfig.url}#portfolio` },
+    { name: 'Process', url: `${siteConfig.url}#process` },
+    { name: 'Industries', url: `${siteConfig.url}#industries` },
+    { name: 'Contact', url: `${siteConfig.url}#contact` },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    '@id': `${siteConfig.url}#navigation`,
+    name: 'Main Navigation',
+    hasPart: navItems.map((item, index) => ({
+      '@type': 'WebPage',
+      name: item.name,
+      url: item.url,
+      position: index + 1,
+    })),
+  };
+}
+
+// Generate ItemList Schema for Services/Portfolio
+export function generateServiceListSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${siteConfig.url}#servicelist`,
+    name: 'Our Services',
+    description: 'Digital solutions that grow your business',
+    numberOfItems: services.length,
+    itemListElement: services.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.name,
+        description: service.description,
+        provider: {
+          '@id': `${siteConfig.url}#organization`,
+        },
+      },
+    })),
+  };
+}
+
+// Generate Portfolio/CreativeWork Schema
+export function generatePortfolioSchemas() {
+  return siteConfig.portfolio.map((project, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `${siteConfig.url}#portfolio-${index}`,
+    name: project.name,
+    description: project.description,
+    url: project.url,
+    image: `${siteConfig.url}${project.image}`,
+    creator: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+    genre: project.category,
+    keywords: project.technologies.join(', '),
+    dateCreated: siteConfig.business.foundingDate,
+  }));
+}
+
+// Generate HowTo Schema for Process Section
+export function generateProcessSchema() {
+  const steps = [
+    {
+      name: 'Discovery & Analysis',
+      text: 'We analyze your current situation, identify opportunities, and define clear objectives for your digital transformation.',
+    },
+    {
+      name: 'Strategy & Planning',
+      text: 'Our team develops a comprehensive roadmap with timelines, milestones, and resource allocation.',
+    },
+    {
+      name: 'Design & Development',
+      text: 'We bring your vision to life with cutting-edge design and robust development practices.',
+    },
+    {
+      name: 'Launch & Optimization',
+      text: 'We deploy your solution and continuously monitor and optimize for peak performance.',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    '@id': `${siteConfig.url}#process`,
+    name: 'Our Development Process',
+    description: 'How Cardinal Consulting delivers enterprise-grade digital solutions',
+    totalTime: 'P12W',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'USD',
+      value: 'Contact for Quote',
+    },
+    step: steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
+// Generate ContactPage Schema
+export function generateContactPageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${siteConfig.url}#contact`,
+    name: 'Contact Cardinal Consulting',
+    description: 'Get in touch with Cardinal Consulting for your digital transformation needs.',
+    url: `${siteConfig.url}#contact`,
+    mainEntity: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  };
+}
+
+// Generate Aggregate Rating Schema (standalone)
 export function generateAggregateRatingSchema(rating: {
   ratingValue: number;
   reviewCount: number;
@@ -241,6 +562,30 @@ export function generateAggregateRatingSchema(rating: {
     bestRating: rating.bestRating || 5,
     worstRating: rating.worstRating || 1,
   };
+}
+
+// Generate All Schemas for Homepage
+export function generateAllHomePageSchemas() {
+  return [
+    generateLocalBusinessSchema(),
+    generateOrganizationSchema(),
+    generateWebSiteSchema(),
+    generateWebPageSchema({
+      name: 'Cardinal Consulting - Enterprise Software Development & Consulting',
+      description: siteConfig.description,
+      url: siteConfig.url,
+    }),
+    generateNavigationSchema(),
+    ...generateServiceSchemas(),
+    generateServiceListSchema(),
+    ...generatePersonSchemas(),
+    generateFAQPageSchema(),
+    ...generateReviewSchemas(),
+    ...generatePortfolioSchemas(),
+    generateProcessSchema(),
+    generateContactPageSchema(),
+    generateBreadcrumbSchema([{ name: 'Home', url: siteConfig.url }]),
+  ];
 }
 
 // Helper function to inject schema into page
