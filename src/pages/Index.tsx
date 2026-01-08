@@ -10,28 +10,11 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
-import {
-  generateOrganizationSchema,
-  generateWebSiteSchema,
-  generateServiceSchemas,
-  generatePersonSchemas,
-  generateFAQPageSchema,
-  generateBreadcrumbSchema,
-} from "@/lib/schema-generators";
-import { siteConfig } from "@/lib/seo-config";
+import { generateAllHomePageSchemas } from "@/lib/schema-generators";
 
 const Index = () => {
-  // Generate all E-E-A-T compliant schemas
-  const schemas = [
-    generateOrganizationSchema(),
-    generateWebSiteSchema(),
-    ...generateServiceSchemas(),
-    ...generatePersonSchemas(),
-    generateFAQPageSchema(),
-    generateBreadcrumbSchema([
-      { name: 'Home', url: siteConfig.url },
-    ]),
-  ];
+  // Generate all comprehensive E-E-A-T compliant schemas
+  const schemas = generateAllHomePageSchemas();
 
   return (
     <>
