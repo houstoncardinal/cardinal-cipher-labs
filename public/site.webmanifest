@@ -1,0 +1,17 @@
+{
+  "name": "Cardinal Consulting",
+  "short_name": "Cardinal",
+  "description": "Enterprise Digital Consulting - Web Development, AI Integration, SEO & Digital Operations",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#DC2626",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
