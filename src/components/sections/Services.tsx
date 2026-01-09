@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Globe,
   Smartphone,
@@ -21,6 +22,7 @@ const services = [
     priceNote: "Custom quotes available",
     capabilities: ["Enterprise Sites", "E-commerce", "API Architecture", "CMS Integration"],
     gradient: "from-blue-500/20 to-cyan-500/20",
+    link: "/services/web-development"
   },
   {
     icon: Smartphone,
@@ -31,6 +33,7 @@ const services = [
     priceNote: "Tailored to your needs",
     capabilities: ["iOS & Android", "Web Applications", "Cross-Platform", "App Optimization"],
     gradient: "from-purple-500/20 to-pink-500/20",
+    link: "/services/mobile-apps"
   },
   {
     icon: Search,
@@ -41,6 +44,7 @@ const services = [
     priceNote: "Based on scope",
     capabilities: ["Technical SEO", "Schema Markup", "Analytics Setup", "Ranking Strategy"],
     gradient: "from-green-500/20 to-emerald-500/20",
+    link: "/services/seo-analytics"
   },
   {
     icon: Megaphone,
@@ -51,6 +55,7 @@ const services = [
     priceNote: "Performance-based",
     capabilities: ["PPC Advertising", "Social Media", "Email Marketing", "Content Strategy"],
     gradient: "from-orange-500/20 to-amber-500/20",
+    link: "/services/digital-marketing"
   },
   {
     icon: Palette,
@@ -61,6 +66,7 @@ const services = [
     priceNote: "Comprehensive packages",
     capabilities: ["Logo Design", "Brand Guidelines", "Visual Identity", "Print Collateral"],
     gradient: "from-rose-500/20 to-red-500/20",
+    link: "/services/brand-identity"
   },
   {
     icon: MousePointer,
@@ -71,6 +77,7 @@ const services = [
     priceNote: "Project-based pricing",
     capabilities: ["User Research", "Interface Design", "Conversion Optimization", "A/B Testing"],
     gradient: "from-indigo-500/20 to-violet-500/20",
+    link: "/services/ux-ui"
   },
 ];
 
@@ -228,14 +235,15 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{service.priceNote}</span>
               <div className="font-serif text-3xl font-bold text-foreground group-hover:animate-number-flip">{service.price}</div>
             </div>
-            <motion.a
-              href="#contact"
+            <motion.div
               className="inline-flex items-center gap-1.5 text-xs text-foreground hover:text-primary transition-colors group/link tracking-wide uppercase"
               whileHover={{ x: 4 }}
             >
-              <span>Learn More</span>
-              <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-            </motion.a>
+              <Link to={service.link} className="flex items-center gap-1.5">
+                <span>Learn More</span>
+                <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </LuxuryCard>
