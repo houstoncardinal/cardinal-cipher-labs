@@ -564,6 +564,70 @@ export function generateAggregateRatingSchema(rating: {
   };
 }
 
+// Generate Industry Schema for vertical markets
+export function generateIndustrySchemas() {
+  return industries.map((industry, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'SpecialAnnouncement',
+    '@id': `${siteConfig.url}#industry-${index}`,
+    name: `${industry.name} Solutions`,
+    text: industry.description,
+    category: 'https://schema.org/BusinessSupport',
+    announcementLocation: {
+      '@type': 'Place',
+      name: industry.name,
+    },
+    provider: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  }));
+}
+
+// Generate Offer Catalog Schema
+export function generateOfferCatalogSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    '@id': `${siteConfig.url}#offercatalog`,
+    name: 'Cardinal Consulting Service Catalog',
+    description: 'Complete digital solutions for enterprise transformation',
+    provider: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+    numberOfItems: services.length,
+    itemListElement: services.map((service, index) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: service.name,
+        description: service.description,
+        serviceType: service.serviceType,
+      },
+      position: index + 1,
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'USD',
+        price: service.offers.price,
+      },
+    })),
+  };
+}
+
+// Generate Knowledge Graph Entity Schema
+export function generateKnowledgeGraphSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Thing',
+    '@id': `${siteConfig.url}#entity`,
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    image: siteConfig.ogImage,
+    sameAs: siteConfig.socialProfiles,
+    mainEntityOfPage: siteConfig.url,
+  };
+}
+
 // Generate All Schemas for Homepage
 export function generateAllHomePageSchemas() {
   return [
@@ -576,6 +640,8 @@ export function generateAllHomePageSchemas() {
       url: siteConfig.url,
     }),
     generateNavigationSchema(),
+    generateKnowledgeGraphSchema(),
+    generateOfferCatalogSchema(),
     ...generateServiceSchemas(),
     generateServiceListSchema(),
     ...generatePersonSchemas(),
@@ -584,6 +650,7 @@ export function generateAllHomePageSchemas() {
     ...generatePortfolioSchemas(),
     generateProcessSchema(),
     generateContactPageSchema(),
+    ...generateIndustrySchemas(),
     generateBreadcrumbSchema([{ name: 'Home', url: siteConfig.url }]),
   ];
 }
