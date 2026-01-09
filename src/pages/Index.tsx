@@ -1,4 +1,6 @@
 import { Header } from "@/components/layout/Header";
+import { VerticalNav } from "@/components/layout/VerticalNav";
+import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Hero } from "@/components/sections/Hero";
 import { Clients } from "@/components/sections/Clients";
 import { Services } from "@/components/sections/Services";
@@ -36,16 +38,18 @@ const Index = () => {
 
       <div className="min-h-screen bg-background">
         <Header />
+        <VerticalNav />
+        <MobileToolbar />
         <main>
-          <Hero />
-          <Clients />
-          <Services />
-          <Advantage />
-          <Portfolio />
-          <Process />
-          <Industries />
-          <FAQ />
-          <Contact />
+          <section id="hero"><Hero /></section>
+          <section id="clients"><Clients /></section>
+          <section id="services"><Services /></section>
+          <section id="advantage"><Advantage /></section>
+          <section id="portfolio"><Portfolio /></section>
+          <section id="process"><Process /></section>
+          <section id="industries"><Industries /></section>
+          <section id="faq"><FAQ /></section>
+          <section id="contact"><Contact /></section>
         </main>
         <Footer />
       </div>

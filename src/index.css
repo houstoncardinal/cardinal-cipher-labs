@@ -144,6 +144,24 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    /* Safe area padding for iOS notch/home indicator */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Safe area utilities for mobile toolbar */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .h-safe {
+    height: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Hide scrollbar on mobile toolbar area */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: 100px;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
