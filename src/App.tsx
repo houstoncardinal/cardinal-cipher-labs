@@ -17,6 +17,12 @@ import { AdminProjects } from "./pages/admin/Projects";
 import { AdminDocuments } from "./pages/admin/Documents";
 import { AdminActivityLogs } from "./pages/admin/ActivityLogs";
 import { AdminSEOSchemas } from "./pages/admin/SEOSchemas";
+import WebDevelopment from "./pages/services/WebDevelopment";
+import MobileApps from "./pages/services/MobileApps";
+import SEOAnalytics from "./pages/services/SEOAnalytics";
+import DigitalMarketing from "./pages/services/DigitalMarketing";
+import BrandIdentity from "./pages/services/BrandIdentity";
+import UXUI from "./pages/services/UXUI";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +38,12 @@ const App = () => (
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Index />} />
+              <Route path="/services/web-development" element={<WebDevelopment />} />
+              <Route path="/services/mobile-apps" element={<MobileApps />} />
+              <Route path="/services/seo-analytics" element={<SEOAnalytics />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+              <Route path="/services/brand-identity" element={<BrandIdentity />} />
+              <Route path="/services/ux-ui" element={<UXUI />} />
               <Route path="/admin/login" element={<AdminLogin />} />
 
               {/* Protected Admin Routes */}
