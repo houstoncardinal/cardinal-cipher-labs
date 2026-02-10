@@ -5,11 +5,13 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X, Phone } from "lucide-react";
 
 const navItems = [
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Process", href: "#process" },
-  { label: "Industries", href: "#industries" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Careers", href: "/careers" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -83,6 +85,15 @@ export function Header() {
               <motion.a
                 key={item.label}
                 href={item.href}
+                onClick={(e) => {
+                  if (item.href.startsWith('/#')) {
+                    const hash = item.href.substring(1);
+                    if (window.location.pathname === '/') {
+                      e.preventDefault();
+                      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
                 className="relative text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-wide uppercase group"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -111,7 +122,7 @@ export function Header() {
             </motion.a>
             <ThemeToggle />
             <Button variant="executive" size="sm" className="relative overflow-hidden group" asChild>
-              <a href="#contact">
+              <a href="/contact">
                 <span className="relative z-10">Free Consultation</span>
                 <motion.div
                   className="absolute inset-0 bg-foreground"
@@ -171,7 +182,7 @@ export function Header() {
               <ThemeToggle />
             </div>
             <Button variant="primary" size="sm" className="w-full" asChild>
-              <a href="#contact">Free Consultation</a>
+              <a href="/contact">Free Consultation</a>
             </Button>
           </div>
         </nav>
