@@ -23,6 +23,12 @@ import SEOAnalytics from "./pages/services/SEOAnalytics";
 import DigitalMarketing from "./pages/services/DigitalMarketing";
 import BrandIdentity from "./pages/services/BrandIdentity";
 import UXUI from "./pages/services/UXUI";
+import About from "./pages/About";
+import PortfolioPage from "./pages/PortfolioPage";
+import ContactPage from "./pages/ContactPage";
+import Blog from "./pages/Blog";
+import Careers from "./pages/Careers";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +50,12 @@ const App = () => (
               <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
               <Route path="/services/brand-identity" element={<BrandIdentity />} />
               <Route path="/services/ux-ui" element={<UXUI />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/admin/login" element={<AdminLogin />} />
 
               {/* Protected Admin Routes */}

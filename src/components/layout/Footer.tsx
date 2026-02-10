@@ -2,25 +2,27 @@ import { motion } from "framer-motion";
 
 const footerLinks = {
   services: [
-    { label: "Web Development", href: "#services" },
-    { label: "Mobile Applications", href: "#services" },
-    { label: "SEO & Analytics", href: "#services" },
-    { label: "Digital Marketing", href: "#services" },
-    { label: "Brand Identity", href: "#services" },
-    { label: "UX/UI Design", href: "#services" },
-  ],
-  industries: [
-    { label: "Healthcare", href: "#industries" },
-    { label: "Legal", href: "#industries" },
-    { label: "Financial", href: "#industries" },
-    { label: "Technology", href: "#industries" },
-    { label: "Construction", href: "#industries" },
+    { label: "Web Development", href: "/services/web-development" },
+    { label: "Mobile Applications", href: "/services/mobile-apps" },
+    { label: "SEO & Analytics", href: "/services/seo-analytics" },
+    { label: "Digital Marketing", href: "/services/digital-marketing" },
+    { label: "Brand Identity", href: "/services/brand-identity" },
+    { label: "UX/UI Design", href: "/services/ux-ui" },
   ],
   company: [
-    { label: "About Us", href: "#" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Process", href: "#process" },
-    { label: "Contact", href: "#contact" },
+    { label: "About Us", href: "/about" },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "Blog", href: "/blog" },
+    { label: "Careers", href: "/careers" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Contact", href: "/contact" },
+  ],
+  industries: [
+    { label: "Healthcare", href: "/#industries" },
+    { label: "Legal", href: "/#industries" },
+    { label: "Financial", href: "/#industries" },
+    { label: "Technology", href: "/#industries" },
+    { label: "Construction", href: "/#industries" },
   ],
 };
 
