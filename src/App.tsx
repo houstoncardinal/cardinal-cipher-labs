@@ -36,6 +36,7 @@ import { TechnologyIndustry } from "./pages/industry/Technology";
 import { AIAutomationIndustry } from "./pages/industry/AIAutomation";
 import { ConstructionIndustry } from "./pages/industry/Construction";
 import { HoustonSEOPage } from "./pages/HoustonSEO";
+import CitySEOPage from "./pages/CitySEO";
 import RapidDelivery from "./pages/RapidDelivery";
 import RushPrototyping from "./pages/RushPrototyping";
 import EnterpriseSecurity from "./pages/EnterpriseSecurity";
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/industry/ai-automation" element={<AIAutomationIndustry />} />
               <Route path="/industry/construction" element={<ConstructionIndustry />} />
               <Route path="/houston-seo" element={<HoustonSEOPage />} />
+              <Route path="/:city-seo" element={<CitySEOPage />} />
               <Route path="/rapid-delivery" element={<RapidDelivery />} />
               <Route path="/rush-prototyping" element={<RushPrototyping />} />
               <Route path="/enterprise-security" element={<EnterpriseSecurity />} />
