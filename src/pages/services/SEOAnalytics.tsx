@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/seo-config";
 import {
   Search, BarChart3, Target, TrendingUp, FileCode, Globe, ArrowRight,
   Check, Eye, Quote, Star, ChevronDown, Link2, FileSearch, Gauge,
-  Languages, MapPin
+  Languages, MapPin, CheckCircle, XCircle, Shield
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -98,6 +98,29 @@ const faqs = [
   { question: "Can SEO work alongside paid advertising?", answer: "Absolutely — they complement each other perfectly. SEO builds long-term organic visibility while PPC provides immediate traffic. We coordinate both channels to maximize total search visibility and ensure consistent messaging across paid and organic results." },
 ];
 
+const comparisons = [
+  { cardinal: "250% average traffic increase with data-backed strategies", typical: "Vague promises with no measurable benchmarks" },
+  { cardinal: "Advanced schema markup & structured data implementation", typical: "Basic meta tags and title optimization only" },
+  { cardinal: "Custom Looker Studio dashboards with real-time data", typical: "Generic screenshots and PDF reports" },
+  { cardinal: "White-hat only — fully Google-compliant tactics", typical: "Gray-hat tactics that risk penalties" },
+  { cardinal: "Dedicated SEO manager for your account", typical: "Automated tools only with no human oversight" },
+];
+
+const certifications = [
+  "Google Analytics Certified",
+  "Google Ads Certified",
+  "SEMrush Certified",
+  "Ahrefs Certified",
+  "HubSpot SEO Certified",
+  "Schema.org Expert",
+];
+
+const relatedServices = [
+  { title: "Web Development", href: "/services/web-development", description: "SEO-optimized websites built for performance" },
+  { title: "Digital Marketing", href: "/services/digital-marketing", description: "Amplify organic reach with paid campaigns" },
+  { title: "UX/UI Design", href: "/services/ux-ui", description: "User experiences that boost engagement metrics" },
+];
+
 const serviceUrl = `${siteConfig.url}/services/seo-analytics`;
 
 const schemas = generateServicePageSchemas({
@@ -117,6 +140,8 @@ const schemas = generateServicePageSchemas({
   reviews: testimonials.map(t => ({ author: t.author, authorTitle: t.title.split(",")[0], company: t.title.split(",").slice(1).join(",").trim(), rating: t.rating, body: t.body, date: "2025-03-01" })),
   aggregateRating: { ratingValue: 4.9, reviewCount: 67 },
   duration: "P1M",
+  techStack,
+  features: features.map(f => ({ title: f.title, description: f.description })),
 });
 
 export default function SEOAnalytics() {
@@ -124,7 +149,7 @@ export default function SEOAnalytics() {
 
   return (
     <>
-      <SEOHead title="SEO & Analytics Services" description="Drive 250% more organic traffic with expert SEO. Technical audits, schema markup, link building & analytics. 85% of clients reach page 1. Free SEO audit." keywords={["SEO services", "search engine optimization", "technical SEO", "schema markup", "link building", "SEO analytics", "Houston SEO company", "local SEO"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="SEO & Analytics Services" description="Drive 250% more organic traffic with expert SEO. Technical audits, schema markup, link building & analytics. 85% of clients reach page 1. Free SEO audit." keywords={["SEO services", "search engine optimization", "technical SEO", "schema markup", "link building", "SEO analytics", "Houston SEO company", "local SEO", "Houston SEO company", "technical SEO audit services", "enterprise SEO agency", "schema markup implementation", "Google Business Profile optimization"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav /><MobileToolbar />
         <main>
@@ -168,6 +193,69 @@ export default function SEOAnalytics() {
 
           {/* FAQs */}
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h2></motion.div><div className="max-w-3xl mx-auto space-y-4">{faqs.map((faq, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}><LuxuryCard className="overflow-hidden"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-6 text-left"><h3 className="font-serif text-lg text-foreground pr-4">{faq.question}</h3><ChevronDown className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} /></button>{openFaq === i && <div className="px-6 pb-6"><p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p></div>}</LuxuryCard></motion.div>))}</div></div></section>
+
+          {/* Trust & Certifications */}
+          <section className="py-16 border-b border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="text-center mb-8"><span className="text-xs tracking-[0.3em] uppercase text-muted-foreground">Trusted & Certified</span></div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+                {certifications.map((cert, i) => (
+                  <motion.div key={cert} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{cert}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Why Choose Cardinal */}
+          <section className="py-24 lg:py-32 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Choose Cardinal</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">See the difference a world-class team makes.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                {comparisons.map((c, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                    <LuxuryCard className="p-6 h-full">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div className="font-medium text-foreground text-sm mb-1">{c.cardinal}</div>
+                          <div className="text-xs text-muted-foreground flex items-center gap-1"><XCircle className="w-3 h-3" /> {c.typical}</div>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Related Services */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Related Services</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Explore complementary services to maximize your digital impact.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {relatedServices.map((s, i) => (
+                  <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <Link to={s.href}>
+                      <LuxuryCard className="p-6 h-full hover:border-primary transition-colors">
+                        <h3 className="font-serif text-xl text-foreground mb-2">{s.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-4">{s.description}</p>
+                        <span className="text-primary text-sm flex items-center gap-1">Learn more <ArrowRight className="w-3 h-3" /></span>
+                      </LuxuryCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* CTA */}
           <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Dominate Search Results?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free SEO audit and discover your untapped organic growth potential.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Claim Free SEO Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>

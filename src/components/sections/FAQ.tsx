@@ -15,12 +15,9 @@ export function FAQ() {
 
   return (
     <section id="faq" className="py-32 lg:py-40 relative overflow-hidden">
-      {/* Background elements */}
-      <motion.div
-        className="absolute right-0 top-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
+      {/* Vertical red accent lines */}
+      <div className="absolute left-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
+      <div className="absolute right-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
 
       <div ref={ref} className="container mx-auto px-6 lg:px-12 relative">
         {/* Section Header */}

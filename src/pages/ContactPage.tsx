@@ -6,7 +6,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-import { ArrowRight, Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Globe } from "lucide-react";
+import { ArrowRight, Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, Globe, Check, Sparkles, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { siteConfig } from "@/lib/seo-config";
 import { generateContactPageSchema, generateBreadcrumbSchema, generateWebPageSchema, generateLocalBusinessSchema } from "@/lib/schema-generators";
@@ -19,15 +19,22 @@ const contactMethods = [
 ];
 
 const faqs = [
-  { q: "How quickly can you start on my project?", a: "We typically begin within 1-2 weeks of signing the agreement, depending on current capacity and project complexity." },
+  { q: "How quickly can you start on my project?", a: "We typically begin within 1-2 weeks of signing the agreement, depending on current capacity and project complexity. We also offer our Rapid Prototyping service with 72-hour delivery for urgent projects, or standard deliveries between 72 hours and 2 weeks depending on project scope." },
   { q: "Do you offer free consultations?", a: "Yes! We offer a no-obligation 30-minute consultation to understand your needs and provide an initial assessment." },
-  { q: "What's your typical project timeline?", a: "Timelines vary: simple websites take 4-6 weeks, complex applications 3-6 months. We provide detailed timelines during discovery." },
+  { q: "What's your typical project timeline?", a: "We offer flexible delivery options to match your needs. Our Rapid Prototyping service delivers in as little as 72 hours for urgent projects. Standard delivery ranges from 72 hours to 2 weeks depending on project scope. More complex applications may take 3-6 months. We provide detailed timelines during discovery." },
   { q: "Do you work with clients outside of Houston?", a: "Absolutely. We serve clients across North America, Europe, and Asia Pacific with seamless remote collaboration." },
 ];
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  const toggleService = (value: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,84 +108,121 @@ export default function ContactPage() {
           </section>
 
           {/* Form + FAQ */}
-          <section className="py-24 lg:py-32">
+          <section className="py-24 lg:py-32 bg-[#FAFAFA]">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid lg:grid-cols-2 gap-16">
-                {/* Form */}
+                {/* Form - Light Theme Advanced */}
                 <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                  <LuxuryCard elevation={4} borderStyle="metallic-platinum" glassStrength="strong" className="p-8 lg:p-12">
-                    <h2 className="font-serif text-2xl text-foreground mb-8">Get Started Today</h2>
+                  <div className="bg-white rounded-2xl border border-gray-200/70 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_20px_-4px_rgba(0,0,0,0.06)] p-8 lg:p-12">
+                    <h3 className="font-serif text-2xl text-gray-900 mb-2">Get Started Today</h3>
+                    <p className="text-sm text-gray-400 mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
                     {isSubmitted ? (
                       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-16">
-                        <CheckCircle size={48} className="text-primary mx-auto mb-4" />
-                        <h3 className="font-serif text-2xl text-foreground mb-2">Thank You!</h3>
-                        <p className="text-muted-foreground">We'll be in touch within 24 hours.</p>
+                        <CheckCircle size={48} className="text-red-500 mx-auto mb-4" />
+                        <h3 className="font-serif text-2xl text-gray-900 mb-2">Thank You!</h3>
+                        <p className="text-gray-500">We'll be in touch within 24 hours.</p>
                       </motion.div>
                     ) : (
-                      <form name="contact-page" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit} className="space-y-6">
+                      <form name="contact-page" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit} className="space-y-5">
                         <input type="hidden" name="form-name" value="contact-page" />
                         <p className="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Name fields */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           <div className="group">
-                            <label htmlFor="cp-firstName" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">First Name *</label>
-                            <input type="text" id="cp-firstName" name="firstName" required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="John" />
+                            <label htmlFor="cp-firstName" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">First Name *</label>
+                            <input type="text" id="cp-firstName" name="firstName" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="John" />
                           </div>
                           <div className="group">
-                            <label htmlFor="cp-lastName" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Last Name *</label>
-                            <input type="text" id="cp-lastName" name="lastName" required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="Smith" />
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="group">
-                            <label htmlFor="cp-email" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Email *</label>
-                            <input type="email" id="cp-email" name="email" required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="john@company.com" />
-                          </div>
-                          <div className="group">
-                            <label htmlFor="cp-phone" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Phone *</label>
-                            <input type="tel" id="cp-phone" name="phone" required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="(555) 123-4567" />
+                            <label htmlFor="cp-lastName" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Last Name *</label>
+                            <input type="text" id="cp-lastName" name="lastName" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="Smith" />
                           </div>
                         </div>
+                        {/* Contact fields */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                          <div className="group">
+                            <label htmlFor="cp-email" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Email Address *</label>
+                            <input type="email" id="cp-email" name="email" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="john@company.com" />
+                          </div>
+                          <div className="group">
+                            <label htmlFor="cp-phone" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Phone Number *</label>
+                            <input type="tel" id="cp-phone" name="phone" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="(555) 123-4567" />
+                          </div>
+                        </div>
+                        {/* Company + Website */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                          <div className="group">
+                            <label htmlFor="cp-company" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Company</label>
+                            <input type="text" id="cp-company" name="company" className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="Your Company" />
+                          </div>
+                          <div className="group">
+                            <label htmlFor="cp-website" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Existing Website</label>
+                            <input type="url" id="cp-website" name="website" className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium" placeholder="https://yoursite.com" />
+                          </div>
+                        </div>
+                        {/* Services multi-select */}
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Services of Interest *</label>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            {[
+                              { value: "web", label: "Web Development" },
+                              { value: "mobile", label: "Mobile Apps" },
+                              { value: "seo", label: "SEO & Analytics" },
+                              { value: "marketing", label: "Digital Marketing" },
+                              { value: "branding", label: "Brand Identity" },
+                              { value: "ux", label: "UX/UI Design" },
+                            ].map((service) => {
+                              const isSelected = selectedServices.includes(service.value);
+                              return (
+                                <button
+                                  key={service.value}
+                                  type="button"
+                                  onClick={() => toggleService(service.value)}
+                                  className={`relative flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border text-[12px] font-medium transition-all duration-200 ${
+                                    isSelected
+                                      ? "bg-red-50 border-red-300 text-red-700"
+                                      : "bg-white border-gray-200 text-gray-600 hover:border-gray-300 hover:bg-gray-50"
+                                  }`}
+                                >
+                                  <div
+                                    className={`w-4 h-4 rounded flex items-center justify-center shrink-0 transition-colors ${
+                                      isSelected
+                                        ? "bg-red-500"
+                                        : "border border-gray-300"
+                                    }`}
+                                  >
+                                    {isSelected && <Check size={10} className="text-white" />}
+                                  </div>
+                                  <span>{service.label}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        {/* Budget */}
                         <div className="group">
-                          <label htmlFor="cp-company" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Company</label>
-                          <input type="text" id="cp-company" name="company" className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="Your Company" />
-                        </div>
-                        <div className="group">
-                          <label htmlFor="cp-service" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Service of Interest *</label>
-                          <select id="cp-service" name="service" required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none">
-                            <option value="" className="bg-background">Select a service</option>
-                            <option value="web" className="bg-background">Web Development</option>
-                            <option value="mobile" className="bg-background">Mobile App Development</option>
-                            <option value="seo" className="bg-background">SEO & Analytics</option>
-                            <option value="marketing" className="bg-background">Digital Marketing</option>
-                            <option value="branding" className="bg-background">Brand Identity</option>
-                            <option value="ux" className="bg-background">UX/UI Design</option>
+                          <label htmlFor="cp-budget" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Project Budget *</label>
+                          <select id="cp-budget" name="budget" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium appearance-none">
+                            <option value="">Select budget range</option>
+                            <option value="under-5k">Under $5,000</option>
+                            <option value="5k-10k">$5,000 – $10,000</option>
+                            <option value="10k-25k">$10,000 – $25,000</option>
+                            <option value="25k-50k">$25,000 – $50,000</option>
+                            <option value="50k-plus">$50,000+</option>
                           </select>
                         </div>
+                        {/* Message */}
                         <div className="group">
-                          <label htmlFor="cp-budget" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">Budget Range</label>
-                          <select id="cp-budget" name="budget" className="w-full bg-background/50 border border-border px-4 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none">
-                            <option value="" className="bg-background">Select budget range</option>
-                            <option value="5k-10k" className="bg-background">$5,000 - $10,000</option>
-                            <option value="10k-25k" className="bg-background">$10,000 - $25,000</option>
-                            <option value="25k-50k" className="bg-background">$25,000 - $50,000</option>
-                            <option value="50k+" className="bg-background">$50,000+</option>
-                          </select>
+                          <label htmlFor="cp-message" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">How can we help? *</label>
+                          <textarea id="cp-message" name="message" rows={4} required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium resize-none" placeholder="Tell us about your project, goals, and timeline..." />
                         </div>
-                        <div className="group">
-                          <label htmlFor="cp-message" className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 block">How can we help? *</label>
-                          <textarea id="cp-message" name="message" rows={4} required className="w-full bg-background/50 border border-border px-4 py-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none" placeholder="Tell us about your project..." />
-                        </div>
-                        <MagneticButton strength={35}>
-                          <Button variant="primary" size="lg" className="w-full" disabled={isSubmitting}>
-                            <span className="flex items-center gap-2">
-                              {isSubmitting ? "Sending..." : <><span>Send Message</span><Send size={16} /></>}
-                            </span>
-                          </Button>
-                        </MagneticButton>
-                        <p className="text-xs text-muted-foreground text-center">✓ 24-hour response • ✓ No commitment required • ✓ Free consultation</p>
+                        {/* Submit */}
+                        <button type="submit" disabled={isSubmitting} className="w-full inline-flex items-center justify-center gap-2 bg-gray-900 text-white text-[13px] font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] disabled:opacity-60 disabled:cursor-not-allowed group">
+                          {isSubmitting ? "Sending..." : <>Send Message <Send size={16} className="transition-transform group-hover:translate-x-1" /></>}
+                        </button>
+                        <p className="text-xs text-gray-400 text-center">24-hour response • No commitment required • Free consultation</p>
                       </form>
                     )}
-                  </LuxuryCard>
+                  </div>
                 </motion.div>
 
                 {/* FAQ */}

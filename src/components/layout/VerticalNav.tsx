@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Home, 
-  Users, 
-  Briefcase, 
-  Award, 
-  FolderOpen, 
-  Layers, 
-  Building2, 
-  HelpCircle, 
+import {
+  Home,
+  Users,
+  Briefcase,
+  Award,
+  FolderOpen,
+  Layers,
+  Building2,
+  HelpCircle,
   Mail,
-  ChevronRight 
+  ChevronRight
 } from "lucide-react";
 
 const navItems = [
   { id: "hero", label: "Home", icon: Home },
-  { id: "clients", label: "Clients", icon: Users },
   { id: "services", label: "Services", icon: Briefcase },
   { id: "advantage", label: "Why Us", icon: Award },
   { id: "portfolio", label: "Portfolio", icon: FolderOpen },
@@ -74,13 +73,13 @@ export const VerticalNav = () => {
       <motion.div
         animate={{ width: isExpanded ? 180 : 56 }}
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-        className="glass-strong rounded-r-xl overflow-hidden shadow-executive-3"
+        className="bg-white rounded-r-xl overflow-hidden border border-l-0 border-gray-200/70 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.06),0_4px_20px_-4px_rgba(0,0,0,0.04)]"
       >
-        {/* Premium Header */}
-        <div className="px-3 py-4 border-b border-border/50">
+        {/* Header */}
+        <div className="px-3 py-4 border-b border-gray-100">
           <motion.div
             animate={{ opacity: isExpanded ? 1 : 0 }}
-            className="text-xs font-medium text-muted-foreground uppercase tracking-widest"
+            className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]"
           >
             {isExpanded && "Navigate"}
           </motion.div>
@@ -102,9 +101,9 @@ export const VerticalNav = () => {
                 className={`
                   w-full flex items-center gap-3 px-4 py-3 text-left
                   transition-all duration-300 relative group
-                  ${isActive 
-                    ? "text-primary bg-primary/10" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  ${isActive
+                    ? "text-red-600 bg-red-50/80"
+                    : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"
                   }
                 `}
               >
@@ -116,20 +115,17 @@ export const VerticalNav = () => {
                       initial={{ opacity: 0, scaleY: 0 }}
                       animate={{ opacity: 1, scaleY: 1 }}
                       exit={{ opacity: 0, scaleY: 0 }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-primary rounded-r-full"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-red-500 rounded-r-full"
                     />
                   )}
                 </AnimatePresence>
 
-                {/* Icon with Glow Effect */}
+                {/* Icon */}
                 <div className={`
                   relative transition-transform duration-300
                   ${isActive ? "scale-110" : "group-hover:scale-105"}
                 `}>
                   <Icon className="w-5 h-5" />
-                  {isActive && (
-                    <div className="absolute inset-0 blur-md bg-primary/50 -z-10" />
-                  )}
                 </div>
 
                 {/* Label */}
@@ -139,7 +135,9 @@ export const VerticalNav = () => {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
-                      className="text-sm font-medium whitespace-nowrap flex-1"
+                      className={`text-[13px] font-medium whitespace-nowrap flex-1 ${
+                        isActive ? "text-red-600" : "text-gray-600 group-hover:text-gray-900"
+                      }`}
                     >
                       {item.label}
                     </motion.span>
@@ -151,7 +149,7 @@ export const VerticalNav = () => {
                   <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-primary"
+                    className="text-red-500"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </motion.div>
@@ -162,10 +160,10 @@ export const VerticalNav = () => {
         </div>
 
         {/* Progress Indicator */}
-        <div className="px-3 pb-4 pt-2 border-t border-border/50">
-          <div className="relative h-1 bg-muted rounded-full overflow-hidden">
+        <div className="px-3 pb-4 pt-2 border-t border-gray-100">
+          <div className="relative h-1 bg-gray-100 rounded-full overflow-hidden">
             <motion.div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-primary/60 rounded-full"
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full"
               style={{
                 width: `${((navItems.findIndex(i => i.id === activeSection) + 1) / navItems.length) * 100}%`
               }}
@@ -176,7 +174,7 @@ export const VerticalNav = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-[10px] text-muted-foreground mt-2 text-center"
+              className="text-[10px] text-gray-400 mt-2 text-center font-medium"
             >
               {navItems.findIndex(i => i.id === activeSection) + 1} of {navItems.length}
             </motion.p>

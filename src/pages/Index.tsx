@@ -21,18 +21,25 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="Enterprise Software Development & Consulting"
-        description="Transform your business with enterprise-grade software solutions. Expert cloud architecture, AI integration, and digital transformation services from certified professionals."
+        title="Web Design & Digital Marketing Agency Houston TX"
+        description="Cardinal Consulting is Houston's top-rated web design and digital marketing agency. We build custom websites, mobile apps, and SEO strategies that grow your business. Serving Houston and nationwide. Call (281) 901-7016."
         schemas={schemas}
         keywords={[
-          'enterprise software development',
-          'cloud architecture consulting',
-          'AI machine learning integration',
-          'digital transformation services',
-          'DevOps infrastructure',
-          'cybersecurity solutions',
-          'AWS consulting partner',
-          'software engineering excellence',
+          'web design Houston',
+          'web design agency Houston',
+          'digital marketing agency Houston',
+          'Houston web developer',
+          'website development Houston TX',
+          'SEO company Houston',
+          'mobile app development Houston',
+          'custom website design',
+          'web development company',
+          'digital marketing services',
+          'SEO services Houston TX',
+          'app development Houston',
+          'brand identity design',
+          'UX UI design agency',
+          'Houston digital agency',
         ]}
       />
 

@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/seo-config";
 import {
   MousePointer, Users, BarChart3, Layers, Smartphone, TestTube, ArrowRight,
   Check, Eye, Zap, Quote, Star, ChevronDown, Accessibility, Figma, Gauge,
-  ScanLine, PenTool
+  ScanLine, PenTool, CheckCircle, XCircle, Shield
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -98,6 +98,29 @@ const faqs = [
   { question: "How do you handle developer handoff?", answer: "We use Figma with detailed specs, design tokens, and component documentation. We provide responsive behavior annotations, interaction specifications, edge case designs, and error states. We stay involved during development for QA reviews and design support." },
 ];
 
+const comparisons = [
+  { cardinal: "Research-driven design backed by user data", typical: "Aesthetics-only with no user validation" },
+  { cardinal: "40% average conversion lift with measured results", typical: "No metrics or success tracking" },
+  { cardinal: "Usability testing included in every engagement", typical: "Testing is an extra cost add-on" },
+  { cardinal: "Complete design system delivery with documentation", typical: "One-off mockups with no system" },
+  { cardinal: "Accessibility (WCAG 2.1) baked into every design", typical: "Accessibility not considered at all" },
+];
+
+const certifications = [
+  "Nielsen Norman Group Certified",
+  "Google UX Design Certified",
+  "IAAP CPACC Certified",
+  "Figma Certified Partner",
+  "UXPA Member",
+  "W3C WCAG Contributor",
+];
+
+const relatedServices = [
+  { title: "Web Development", href: "/services/web-development", description: "Pixel-perfect implementation of your designs" },
+  { title: "Mobile Apps", href: "/services/mobile-apps", description: "Native app experiences with great UX" },
+  { title: "Brand Identity", href: "/services/brand-identity", description: "Visual identity that your UI reflects" },
+];
+
 const serviceUrl = `${siteConfig.url}/services/ux-ui`;
 
 const schemas = generateServicePageSchemas({
@@ -117,6 +140,8 @@ const schemas = generateServicePageSchemas({
   reviews: testimonials.map(t => ({ author: t.author, authorTitle: t.title.split(",")[0], company: t.title.split(",").slice(1).join(",").trim(), rating: t.rating, body: t.body, date: "2025-01-28" })),
   aggregateRating: { ratingValue: 4.8, reviewCount: 61 },
   duration: "P4W",
+  techStack,
+  features: services.map(s => ({ title: s.title, description: s.description })),
 });
 
 export default function UXUI() {
@@ -124,7 +149,7 @@ export default function UXUI() {
 
   return (
     <>
-      <SEOHead title="UX/UI Design & Experience Optimization" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers results." keywords={["UX design", "UI design", "user experience", "interface design", "conversion optimization", "A/B testing", "design system", "accessibility audit"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="UX/UI Design & Experience Optimization" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers results." keywords={["UX design", "UI design", "user experience", "interface design", "conversion optimization", "A/B testing", "design system", "accessibility audit", "UX design agency Houston", "UI design services", "user experience consulting", "conversion rate optimization agency", "design system development"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav /><MobileToolbar />
         <main>
@@ -160,6 +185,69 @@ export default function UXUI() {
           <section className="py-24 lg:py-32 bg-card/50"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">UX/UI Packages</h2></motion.div><div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">{packages.map((pkg, i) => (<motion.div key={pkg.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><LuxuryCard className={`p-8 h-full relative ${pkg.popular ? "border-primary" : ""}`} borderStyle={pkg.popular ? "metallic-crimson" : "metallic-platinum"}>{pkg.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-medium">Recommended</div>}<div className="text-center mb-6"><h3 className="font-serif text-2xl text-foreground mb-2">{pkg.name}</h3><div className="font-serif text-4xl text-primary mb-2">{pkg.price}</div><p className="text-sm text-muted-foreground">{pkg.description}</p></div><ul className="space-y-3 mb-8">{pkg.features.map(f => (<li key={f} className="flex items-start gap-3 text-sm"><Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>))}</ul><Button className={`w-full ${pkg.popular ? "bg-primary hover:bg-primary/90" : ""}`} variant={pkg.popular ? "default" : "outline"} asChild><Link to="/contact">Get Started</Link></Button></LuxuryCard></motion.div>))}</div></div></section>
 
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h2></motion.div><div className="max-w-3xl mx-auto space-y-4">{faqs.map((faq, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}><LuxuryCard className="overflow-hidden"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-6 text-left"><h3 className="font-serif text-lg text-foreground pr-4">{faq.question}</h3><ChevronDown className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} /></button>{openFaq === i && <div className="px-6 pb-6"><p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p></div>}</LuxuryCard></motion.div>))}</div></div></section>
+
+          {/* Trust & Certifications */}
+          <section className="py-16 border-b border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="text-center mb-8"><span className="text-xs tracking-[0.3em] uppercase text-muted-foreground">Trusted & Certified</span></div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+                {certifications.map((cert, i) => (
+                  <motion.div key={cert} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{cert}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Why Choose Cardinal */}
+          <section className="py-24 lg:py-32 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Choose Cardinal</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">See the difference a world-class team makes.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                {comparisons.map((c, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                    <LuxuryCard className="p-6 h-full">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div className="font-medium text-foreground text-sm mb-1">{c.cardinal}</div>
+                          <div className="text-xs text-muted-foreground flex items-center gap-1"><XCircle className="w-3 h-3" /> {c.typical}</div>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Related Services */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Related Services</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Explore complementary services to maximize your digital impact.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {relatedServices.map((s, i) => (
+                  <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <Link to={s.href}>
+                      <LuxuryCard className="p-6 h-full hover:border-primary transition-colors">
+                        <h3 className="font-serif text-xl text-foreground mb-2">{s.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-4">{s.description}</p>
+                        <span className="text-primary text-sm flex items-center gap-1">Learn more <ArrowRight className="w-3 h-3" /></span>
+                      </LuxuryCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><Eye className="w-12 h-12 text-primary mx-auto mb-6" /><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Elevate Your User Experience?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free UX audit and discover opportunities to increase conversions and delight users.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Request Free Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
         </main>

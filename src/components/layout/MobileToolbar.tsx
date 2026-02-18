@@ -193,47 +193,6 @@ export const MobileToolbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating Scroll to Top Button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            onClick={scrollToTop}
-            whileTap={{ scale: 0.9 }}
-            className="fixed bottom-24 right-4 z-50 lg:bottom-8 p-3 rounded-full bg-primary text-primary-foreground shadow-executive-3 glass-strong"
-          >
-            <ArrowUp className="w-5 h-5" />
-            <motion.div
-              initial={{ scale: 1, opacity: 0.4 }}
-              animate={{ scale: 1.5, opacity: 0 }}
-              transition={{ duration: 1.2, repeat: Infinity }}
-              className="absolute inset-0 bg-primary rounded-full -z-10"
-            />
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      {/* Quick Consultation FAB (Desktop Only) */}
-      <motion.a
-        href="#contact"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-8 right-8 z-50 hidden lg:flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground shadow-executive-4 group"
-      >
-        <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
-        <span className="text-sm font-medium">Get Started</span>
-        <motion.div
-          initial={{ scale: 1, opacity: 0.3 }}
-          animate={{ scale: 1.3, opacity: 0 }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute inset-0 bg-primary rounded-full -z-10"
-        />
-      </motion.a>
     </>
   );
 };

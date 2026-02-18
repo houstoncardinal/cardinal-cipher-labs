@@ -17,7 +17,7 @@ const tiers = [
     priceSuffix: "starting at",
     description: "Perfect for small businesses and startups looking to establish a professional digital presence.",
     features: [
-      "Up to 5-page responsive website",
+      "Up to 10-page responsive website",
       "Mobile-first design",
       "Basic SEO setup & meta tags",
       "Contact form integration",
@@ -36,7 +36,7 @@ const tiers = [
     priceSuffix: "starting at",
     description: "Ideal for growing businesses that need a comprehensive digital solution with advanced features.",
     features: [
-      "Up to 15 pages",
+      "Up to 30 pages",
       "Custom design & animations",
       "Advanced SEO optimization",
       "Schema markup implementation",
@@ -55,7 +55,7 @@ const tiers = [
     name: "Enterprise",
     price: "Custom",
     priceSuffix: "tailored quote",
-    description: "For large organizations requiring custom solutions, complex integrations, and ongoing strategic partnership.",
+    description: "Fully customizable solutions tailored to your specific business needs, with no limits on scope or complexity.",
     features: [
       "Unlimited pages & sections",
       "Custom functionality & APIs",
@@ -84,7 +84,7 @@ const addons = [
 
 const faqs = [
   { q: "Why is your base price $10,000?", a: "Our base price reflects the enterprise-grade quality we deliver. Every project includes custom design, advanced SEO, performance optimization, and ongoing support. We invest heavily in each project to ensure measurable business results." },
-  { q: "Do you offer payment plans?", a: "Yes. We typically split payments into milestones: 40% upfront, 30% at design approval, and 30% at launch. For larger projects, we can customize the payment schedule." },
+  { q: "Do you offer payment plans?", a: "Yes! We offer flexible 50/50 payment plans. We take a 50% deposit when we start the project, and the remaining 50% is due when we launch the project on a live domain or make it publicly available. This ensures both parties are committed to delivering excellence throughout the project lifecycle." },
   { q: "What's included in post-launch support?", a: "Post-launch support includes bug fixes, minor content updates, performance monitoring, and technical assistance. Extended support plans include feature additions and strategic consulting." },
   { q: "Can I upgrade my package later?", a: "Absolutely. We design all our solutions to be scalable. You can add features, pages, or upgrade to a higher tier as your business grows." },
   { q: "Do you offer discounts for nonprofits?", a: "Yes, we offer special pricing for qualified nonprofit organizations. Contact us to discuss your project and budget." },

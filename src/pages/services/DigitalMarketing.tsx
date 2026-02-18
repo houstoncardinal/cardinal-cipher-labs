@@ -11,7 +11,8 @@ import { generateServicePageSchemas } from "@/lib/service-schema-generators";
 import { siteConfig } from "@/lib/seo-config";
 import {
   Megaphone, Target, Users, Mail, BarChart3, Video, ArrowRight, Check,
-  TrendingUp, Quote, Star, ChevronDown, Share2, PenTool, Zap, Radio, MousePointer
+  TrendingUp, Quote, Star, ChevronDown, Share2, PenTool, Zap, Radio, MousePointer,
+  CheckCircle, XCircle, Shield
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -97,6 +98,29 @@ const faqs = [
   { question: "Can you work with our existing marketing team?", answer: "Absolutely. We frequently augment in-house teams, providing specialized expertise in areas like PPC, content strategy, or analytics. We integrate into your workflows and complement your team's strengths." },
 ];
 
+const comparisons = [
+  { cardinal: "Multi-touch attribution modeling across all channels", typical: "Last-click only attribution that misses the full picture" },
+  { cardinal: "Custom creative team designing original assets", typical: "Stock templates and generic ad copy" },
+  { cardinal: "350% average ROI with transparent tracking", typical: "No ROI tracking or accountability" },
+  { cardinal: "All channels managed under one unified strategy", typical: "Single channel focus with siloed execution" },
+  { cardinal: "Transparent reporting with real revenue metrics", typical: "Vanity metrics like impressions and likes" },
+];
+
+const certifications = [
+  "Google Partner",
+  "Meta Business Partner",
+  "HubSpot Certified",
+  "Google Analytics Certified",
+  "LinkedIn Marketing Certified",
+  "Klaviyo Partner",
+];
+
+const relatedServices = [
+  { title: "SEO & Analytics", href: "/services/seo-analytics", description: "Organic growth to complement paid campaigns" },
+  { title: "Web Development", href: "/services/web-development", description: "High-converting landing pages and websites" },
+  { title: "Brand Identity", href: "/services/brand-identity", description: "Consistent brand across all marketing channels" },
+];
+
 const serviceUrl = `${siteConfig.url}/services/digital-marketing`;
 
 const schemas = generateServicePageSchemas({
@@ -116,6 +140,8 @@ const schemas = generateServicePageSchemas({
   reviews: testimonials.map(t => ({ author: t.author, authorTitle: t.title.split(",")[0], company: t.title.split(",").slice(1).join(",").trim(), rating: t.rating, body: t.body, date: "2025-01-20" })),
   aggregateRating: { ratingValue: 4.9, reviewCount: 73 },
   duration: "P1M",
+  techStack,
+  features: services.map(s => ({ title: s.title, description: s.description })),
 });
 
 export default function DigitalMarketing() {
@@ -123,7 +149,7 @@ export default function DigitalMarketing() {
 
   return (
     <>
-      <SEOHead title="Digital Marketing Services" description="350% average ROI digital marketing. PPC, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing", "PPC advertising", "social media marketing", "email marketing", "content strategy", "Google Ads management", "Houston digital marketing"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="Digital Marketing Services" description="350% average ROI digital marketing. PPC, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing", "PPC advertising", "social media marketing", "email marketing", "content strategy", "Google Ads management", "Houston digital marketing", "Houston digital marketing agency", "PPC management services", "social media marketing company", "email marketing automation", "B2B digital marketing"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav /><MobileToolbar />
         <main>
@@ -158,6 +184,69 @@ export default function DigitalMarketing() {
           <section className="py-24 lg:py-32 bg-card/50"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Marketing Packages</h2></motion.div><div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">{packages.map((pkg, i) => (<motion.div key={pkg.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><LuxuryCard className={`p-8 h-full relative ${pkg.popular ? "border-primary" : ""}`} borderStyle={pkg.popular ? "metallic-crimson" : "metallic-platinum"}>{pkg.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-medium">Best Value</div>}<div className="text-center mb-6"><h3 className="font-serif text-2xl text-foreground mb-2">{pkg.name}</h3><div className="font-serif text-4xl text-primary mb-2">{pkg.price}</div><p className="text-sm text-muted-foreground">{pkg.description}</p></div><ul className="space-y-3 mb-8">{pkg.features.map(f => (<li key={f} className="flex items-start gap-3 text-sm"><Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>))}</ul><Button className={`w-full ${pkg.popular ? "bg-primary hover:bg-primary/90" : ""}`} variant={pkg.popular ? "default" : "outline"} asChild><Link to="/contact">Get Started</Link></Button></LuxuryCard></motion.div>))}</div></div></section>
 
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h2></motion.div><div className="max-w-3xl mx-auto space-y-4">{faqs.map((faq, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}><LuxuryCard className="overflow-hidden"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-6 text-left"><h3 className="font-serif text-lg text-foreground pr-4">{faq.question}</h3><ChevronDown className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} /></button>{openFaq === i && <div className="px-6 pb-6"><p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p></div>}</LuxuryCard></motion.div>))}</div></div></section>
+
+          {/* Trust & Certifications */}
+          <section className="py-16 border-b border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="text-center mb-8"><span className="text-xs tracking-[0.3em] uppercase text-muted-foreground">Trusted & Certified</span></div>
+              <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+                {certifications.map((cert, i) => (
+                  <motion.div key={cert} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg">
+                    <Shield className="w-4 h-4 text-primary" />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{cert}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Why Choose Cardinal */}
+          <section className="py-24 lg:py-32 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Choose Cardinal</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">See the difference a world-class team makes.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                {comparisons.map((c, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
+                    <LuxuryCard className="p-6 h-full">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <div>
+                          <div className="font-medium text-foreground text-sm mb-1">{c.cardinal}</div>
+                          <div className="text-xs text-muted-foreground flex items-center gap-1"><XCircle className="w-3 h-3" /> {c.typical}</div>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Related Services */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Related Services</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Explore complementary services to maximize your digital impact.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {relatedServices.map((s, i) => (
+                  <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <Link to={s.href}>
+                      <LuxuryCard className="p-6 h-full hover:border-primary transition-colors">
+                        <h3 className="font-serif text-xl text-foreground mb-2">{s.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-4">{s.description}</p>
+                        <span className="text-primary text-sm flex items-center gap-1">Learn more <ArrowRight className="w-3 h-3" /></span>
+                      </LuxuryCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Grow Your Business?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free marketing audit and discover untapped growth opportunities.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Get Free Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
         </main>

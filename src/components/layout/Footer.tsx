@@ -18,11 +18,16 @@ const footerLinks = {
     { label: "Contact", href: "/contact" },
   ],
   industries: [
-    { label: "Healthcare", href: "/#industries" },
-    { label: "Legal", href: "/#industries" },
-    { label: "Financial", href: "/#industries" },
-    { label: "Technology", href: "/#industries" },
-    { label: "Construction", href: "/#industries" },
+    { label: "Healthcare", href: "/industry/healthcare" },
+    { label: "Legal", href: "/industry/legal" },
+    { label: "Financial", href: "/industry/financial" },
+    { label: "Technology", href: "/industry/technology" },
+    { label: "AI & Automation", href: "/industry/ai-automation" },
+    { label: "Construction", href: "/industry/construction" },
+  ],
+  local: [
+    { label: "Houston SEO", href: "/houston-seo" },
+    { label: "Web Design Houston", href: "/houston-seo" },
   ],
 };
 
@@ -30,7 +35,7 @@ export function Footer() {
   return (
     <footer className="bg-background border-t border-border py-16 lg:py-20">
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
@@ -110,6 +115,25 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-text-secondary hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Local SEO */}
+          <div>
+            <h4 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">
+              Local SEO
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.local.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

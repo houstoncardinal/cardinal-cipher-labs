@@ -16,15 +16,19 @@ export function Clients() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-20 lg:py-24 relative overflow-hidden bg-[hsl(var(--clients-bg))]">
+    <section ref={ref} className="py-6 lg:py-8 relative overflow-hidden bg-white">
+      {/* Vertical red accent lines */}
+      <div className="absolute left-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/10 to-transparent" />
+      <div className="absolute right-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/10 to-transparent" />
+
       <div className="container mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-10"
         >
-          <h3 className="text-sm tracking-[0.2em] uppercase text-[hsl(var(--clients-text))] font-medium">
+          <h3 className="text-lg md:text-xl tracking-[0.15em] uppercase text-gray-900 font-bold">
             Trusted By Industry Leaders
           </h3>
         </motion.div>
@@ -32,9 +36,9 @@ export function Clients() {
         {/* Infinite scroll container */}
         <div className="relative">
           {/* Clean fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[hsl(var(--clients-bg))] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[hsl(var(--clients-bg))] to-transparent z-10 pointer-events-none" />
-          
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
           <motion.div
             className="flex gap-16 md:gap-20 items-center"
             animate={{ x: [0, -1050] }}

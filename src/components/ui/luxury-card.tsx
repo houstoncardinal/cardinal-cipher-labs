@@ -119,13 +119,6 @@ export function LuxuryCard({
       {/* Corner Accents */}
       <div className="corner-accents" />
 
-      {/* Digital Data Streams */}
-      <div className="data-stream" style={{ left: '20%' }} />
-      <div className="data-stream" style={{ left: '50%', animationDelay: '0.4s' }} />
-      <div className="data-stream" style={{ left: '80%', animationDelay: '0.8s' }} />
-
-      {/* Neon Pulse Border */}
-      <div className="neon-pulse" />
 
       {/* Original Corner Decorations (Enhanced) */}
       {cornerDecorations && (

@@ -3,14 +3,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Check for saved preference or system preference
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     
-    const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark;
+    // Default to light mode if no preference saved
+    const shouldBeDark = savedTheme ? savedTheme === "dark" : false;
     setIsDark(shouldBeDark);
     
     if (shouldBeDark) {
@@ -19,6 +22,15 @@ export function ThemeToggle() {
       document.documentElement.classList.remove("dark");
     }
   }, []);
+
+  // Prevent flash by not rendering until mounted
+  if (!mounted) {
+    return (
+      <div className="relative w-10 h-10 flex items-center justify-center rounded-full border border-border/50 bg-background/50 backdrop-blur-sm">
+        <Sun size={18} className="text-foreground" />
+      </div>
+    );
+  }
 
   const toggleTheme = () => {
     const newIsDark = !isDark;

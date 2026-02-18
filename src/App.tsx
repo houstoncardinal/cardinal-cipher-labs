@@ -29,6 +29,20 @@ import ContactPage from "./pages/ContactPage";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import Pricing from "./pages/Pricing";
+import { HealthcareIndustry } from "./pages/industry/Healthcare";
+import { LegalIndustry } from "./pages/industry/Legal";
+import { FinancialIndustry } from "./pages/industry/Financial";
+import { TechnologyIndustry } from "./pages/industry/Technology";
+import { AIAutomationIndustry } from "./pages/industry/AIAutomation";
+import { ConstructionIndustry } from "./pages/industry/Construction";
+import { HoustonSEOPage } from "./pages/HoustonSEO";
+import RapidDelivery from "./pages/RapidDelivery";
+import RushPrototyping from "./pages/RushPrototyping";
+import EnterpriseSecurity from "./pages/EnterpriseSecurity";
+import SameDaySupport from "./pages/SameDaySupport";
+import CustomDesign from "./pages/CustomDesign";
+import ModernTechStack from "./pages/ModernTechStack";
+import ServicesPage from "./pages/ServicesPage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +70,20 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/industry/healthcare" element={<HealthcareIndustry />} />
+              <Route path="/industry/legal" element={<LegalIndustry />} />
+              <Route path="/industry/financial" element={<FinancialIndustry />} />
+              <Route path="/industry/technology" element={<TechnologyIndustry />} />
+              <Route path="/industry/ai-automation" element={<AIAutomationIndustry />} />
+              <Route path="/industry/construction" element={<ConstructionIndustry />} />
+              <Route path="/houston-seo" element={<HoustonSEOPage />} />
+              <Route path="/rapid-delivery" element={<RapidDelivery />} />
+              <Route path="/rush-prototyping" element={<RushPrototyping />} />
+              <Route path="/enterprise-security" element={<EnterpriseSecurity />} />
+              <Route path="/same-day-support" element={<SameDaySupport />} />
+              <Route path="/custom-design" element={<CustomDesign />} />
+              <Route path="/modern-tech-stack" element={<ModernTechStack />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />
 
               {/* Protected Admin Routes */}

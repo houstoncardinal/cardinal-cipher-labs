@@ -12,7 +12,9 @@ import { siteConfig } from "@/lib/seo-config";
 import {
   Globe, Code2, Zap, Shield, Layers, Database, ArrowRight, Check,
   Server, Gauge, Search, Lock, Smartphone, RefreshCw, Quote, Star,
-  MonitorSmartphone, Rocket, Clock, Users, ChevronDown
+  MonitorSmartphone, Rocket, Clock, Users, ChevronDown, Award,
+  CheckCircle, XCircle, ShieldCheck, Building2,
+  Stethoscope, Scale, Cpu, HardHat
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -83,13 +85,41 @@ const testimonials = [
 ];
 
 const faqs = [
-  { question: "How long does it take to build a custom website?", answer: "Timeline depends on complexity. A 5-page business website typically takes 3-4 weeks, while complex e-commerce or enterprise platforms take 8-16 weeks. We provide detailed timelines during the discovery phase and maintain transparent communication throughout." },
+  { question: "How long does it take to build a custom website?", answer: "Timeline depends on complexity and chosen delivery option. With our Rapid Prototyping service, we can deliver in as little as 72 hours for urgent projects. Standard delivery ranges from 72 hours to 2 weeks depending on project scope. More complex e-commerce or enterprise platforms may take 4-8 weeks. We provide detailed timelines during the discovery phase and maintain transparent communication throughout." },
   { question: "What technologies do you use for web development?", answer: "We primarily build with React, Next.js, and TypeScript for the frontend, paired with Node.js, Python, or Go for backend services. We use PostgreSQL, MongoDB, or Supabase for databases, and deploy on AWS, Vercel, or Cloudflare depending on your needs." },
   { question: "Do you provide ongoing website maintenance?", answer: "Yes, all packages include post-launch support (30 days to 12 months depending on the package). We also offer monthly maintenance retainers that include security updates, performance monitoring, content updates, and technical support." },
   { question: "Will my website be optimized for search engines?", answer: "Absolutely. Every website we build includes comprehensive SEO optimization: server-side rendering for crawlability, JSON-LD schema markup, optimized meta tags, semantic HTML, Core Web Vitals optimization, XML sitemaps, and structured data. We follow Google's E-E-A-T guidelines." },
   { question: "Can you integrate my website with existing business systems?", answer: "Yes, we specialize in integrating websites with CRMs (Salesforce, HubSpot), ERPs, payment gateways (Stripe, PayPal), marketing automation tools, inventory management systems, and custom APIs. We've integrated with over 200 different third-party services." },
   { question: "Do you build e-commerce websites?", answer: "Yes, we build custom e-commerce solutions using headless commerce architectures with Shopify, WooCommerce, or fully custom solutions. Our e-commerce sites include product management, secure checkout, inventory tracking, and analytics dashboards." },
 ];
+
+const certifications = [
+  { name: "AWS Advanced Consulting Partner", icon: ShieldCheck },
+  { name: "Microsoft Gold Partner", icon: Award },
+  { name: "Google Cloud Partner", icon: ShieldCheck },
+  { name: "ISO 27001 Certified", icon: Shield },
+  { name: "SOC 2 Type II Compliant", icon: ShieldCheck },
+  { name: "PCI DSS Compliant", icon: Lock },
+];
+
+const comparisonItems = [
+  { category: "Tech Stack", cardinal: "Modern React/Next.js stack", typical: "WordPress templates" },
+  { category: "Build Quality", cardinal: "Custom-built, hand-coded", typical: "Drag-and-drop builders" },
+  { category: "Uptime", cardinal: "99.9% uptime SLA", typical: "No guarantee" },
+  { category: "Security", cardinal: "Enterprise security included", typical: "Basic SSL only" },
+  { category: "Project Management", cardinal: "Dedicated project manager", typical: "Shared resources" },
+  { category: "SEO", cardinal: "Full schema markup & SEO", typical: "Basic meta tags" },
+];
+
+const caseStudy = {
+  client: "Healthcare Systems Group",
+  result: "HIPAA-compliant patient portal handling 50,000+ monthly users with zero downtime",
+  metrics: [
+    { value: "340%", label: "Increase in Online Engagement" },
+    { value: "98", label: "Lighthouse Score" },
+    { value: "0", label: "Security Incidents" },
+  ],
+};
 
 const serviceUrl = `${siteConfig.url}/services/web-development`;
 
@@ -105,6 +135,8 @@ const schemas = generateServicePageSchemas({
     { name: "Web Development", url: serviceUrl },
   ],
   faqs,
+  techStack,
+  features: features.map(f => ({ title: f.title, description: f.description })),
   offers: packages.map(p => ({
     name: p.name,
     price: p.price,
@@ -132,7 +164,22 @@ export default function WebDevelopment() {
       <SEOHead
         title="Custom Website Development Services"
         description="Professional custom website development with React, Next.js & TypeScript. Responsive, fast, SEO-optimized websites with 99.9% uptime. Get a free consultation."
-        keywords={["custom website development", "web development services", "responsive web design", "enterprise websites", "React development", "Next.js development", "SEO optimized websites", "e-commerce development", "Houston web developer"]}
+        keywords={[
+          "custom website development",
+          "web development services",
+          "responsive web design",
+          "enterprise websites",
+          "React development",
+          "Next.js development",
+          "SEO optimized websites",
+          "e-commerce development",
+          "Houston web developer",
+          "custom website development Houston",
+          "enterprise web application development",
+          "React Next.js development agency",
+          "HIPAA compliant web development",
+          "e-commerce website development",
+        ]}
         schemas={schemas}
         url={serviceUrl}
       />
@@ -164,11 +211,18 @@ export default function WebDevelopment() {
           {/* Stats */}
           <section className="py-16 border-y border-border/50">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {stats.map((stat, i) => (
-                  <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                    <div className="font-serif text-4xl lg:text-5xl text-primary mb-2">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="text-center"
+                  >
+                    <div className="font-serif text-4xl md:text-5xl text-primary mb-2">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground tracking-wide uppercase">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -196,8 +250,34 @@ export default function WebDevelopment() {
             </div>
           </section>
 
+          {/* Trust & Certifications */}
+          <section className="py-20 lg:py-24 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Trust & Certifications</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">We maintain the highest industry certifications and partnerships to deliver enterprise-grade solutions you can trust.</p>
+              </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {certifications.map((cert, i) => (
+                  <motion.div
+                    key={cert.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                  >
+                    <LuxuryCard className="p-5 h-full text-center">
+                      <cert.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+                      <p className="text-xs text-muted-foreground font-medium leading-tight">{cert.name}</p>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Tech Stack */}
-          <section className="py-24 lg:py-32 bg-card/50">
+          <section className="py-24 lg:py-32">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Technology Stack</h2>
@@ -224,7 +304,7 @@ export default function WebDevelopment() {
           </section>
 
           {/* Process */}
-          <section className="py-24 lg:py-32">
+          <section className="py-24 lg:py-32 bg-card/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Development Process</h2>
@@ -243,7 +323,7 @@ export default function WebDevelopment() {
           </section>
 
           {/* Testimonials */}
-          <section className="py-24 lg:py-32 bg-card/50">
+          <section className="py-24 lg:py-32">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">What Our Clients Say</h2>
@@ -265,8 +345,100 @@ export default function WebDevelopment() {
             </div>
           </section>
 
-          {/* Pricing */}
+          {/* Case Study Spotlight */}
+          <section className="py-24 lg:py-32 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Case Study Spotlight</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">A closer look at how we deliver measurable results for our clients.</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="max-w-4xl mx-auto"
+              >
+                <LuxuryCard className="p-8 md:p-12" borderStyle="metallic-crimson">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 bg-primary/10 flex items-center justify-center">
+                      <Stethoscope className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="text-xs tracking-[0.2em] uppercase text-primary font-medium">Featured Case Study</div>
+                      <h3 className="font-serif text-2xl text-foreground">{caseStudy.client}</h3>
+                    </div>
+                  </div>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-8">{caseStudy.result}</p>
+                  <div className="grid grid-cols-3 gap-6 mb-8">
+                    {caseStudy.metrics.map((metric, i) => (
+                      <motion.div
+                        key={metric.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.1 }}
+                        className="text-center"
+                      >
+                        <div className="font-serif text-3xl md:text-4xl text-primary mb-1">{metric.value}</div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wide">{metric.label}</div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="flex justify-center">
+                    <Button variant="outline" asChild>
+                      <Link to="/portfolio">View Full Portfolio <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    </Button>
+                  </div>
+                </LuxuryCard>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Why Cardinal vs. Typical Agencies */}
           <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Cardinal vs. Typical Agencies</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">See the difference between a premium, engineering-first approach and commodity web development.</p>
+              </motion.div>
+              <div className="max-w-4xl mx-auto space-y-4">
+                {/* Header Row */}
+                <div className="grid grid-cols-3 gap-4 px-4 pb-2">
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider"></div>
+                  <div className="text-sm font-medium text-primary uppercase tracking-wider text-center">Cardinal Cipher Labs</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider text-center">Typical Agency</div>
+                </div>
+                {comparisonItems.map((item, i) => (
+                  <motion.div
+                    key={item.category}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                  >
+                    <LuxuryCard className="p-0 overflow-hidden">
+                      <div className="grid grid-cols-3 gap-4 items-center">
+                        <div className="p-4 md:p-5">
+                          <span className="text-sm font-medium text-foreground">{item.category}</span>
+                        </div>
+                        <div className="p-4 md:p-5 bg-primary/5 flex items-center gap-2 justify-center">
+                          <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="text-sm text-foreground font-medium">{item.cardinal}</span>
+                        </div>
+                        <div className="p-4 md:p-5 flex items-center gap-2 justify-center">
+                          <XCircle className="w-4 h-4 text-muted-foreground/50 flex-shrink-0" />
+                          <span className="text-sm text-muted-foreground">{item.typical}</span>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Pricing */}
+          <section className="py-24 lg:py-32 bg-card/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Investment Options</h2>
@@ -298,7 +470,7 @@ export default function WebDevelopment() {
           </section>
 
           {/* FAQs */}
-          <section className="py-24 lg:py-32 bg-card/50">
+          <section className="py-24 lg:py-32">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h2>
@@ -321,13 +493,13 @@ export default function WebDevelopment() {
           </section>
 
           {/* Related Services */}
-          <section className="py-24 lg:py-32">
+          <section className="py-24 lg:py-32 bg-card/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Related Services</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">Complement your website with these powerful services.</p>
               </motion.div>
-              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
                 {[
                   { title: "SEO & Analytics", desc: "Maximize your website's visibility with comprehensive SEO optimization.", href: "/services/seo-analytics", icon: Search },
                   { title: "UX/UI Design", desc: "Create exceptional user experiences that convert visitors into customers.", href: "/services/ux-ui", icon: Layers },
@@ -339,6 +511,31 @@ export default function WebDevelopment() {
                         <s.icon className="w-8 h-8 text-primary mb-3" />
                         <h3 className="font-serif text-lg text-foreground mb-2">{s.title}</h3>
                         <p className="text-sm text-muted-foreground">{s.desc}</p>
+                      </LuxuryCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Industry Pages */}
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-8">
+                <h3 className="font-serif text-2xl text-foreground mb-2">Industries We Serve</h3>
+                <p className="text-muted-foreground max-w-xl mx-auto text-sm">Specialized web development expertise across key industries.</p>
+              </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+                {[
+                  { title: "Healthcare", href: "/industry/healthcare", icon: Stethoscope },
+                  { title: "Legal", href: "/industry/legal", icon: Scale },
+                  { title: "Financial", href: "/industry/financial", icon: Building2 },
+                  { title: "Technology", href: "/industry/technology", icon: Cpu },
+                  { title: "AI & Automation", href: "/industry/ai-automation", icon: Rocket },
+                  { title: "Construction", href: "/industry/construction", icon: HardHat },
+                ].map((ind, i) => (
+                  <motion.div key={ind.title} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+                    <Link to={ind.href}>
+                      <LuxuryCard className="p-4 h-full text-center hover:border-primary/50 transition-colors">
+                        <ind.icon className="w-6 h-6 text-primary mx-auto mb-2" />
+                        <span className="text-xs font-medium text-muted-foreground">{ind.title}</span>
                       </LuxuryCard>
                     </Link>
                   </motion.div>

@@ -12,7 +12,8 @@ import { siteConfig } from "@/lib/seo-config";
 import {
   Smartphone, Cpu, Cloud, Lock, Zap, RefreshCw, ArrowRight, Check,
   Apple, Monitor, Quote, Star, ChevronDown, Wifi, BatteryCharging,
-  Fingerprint, Bell, MapPin, Camera
+  Fingerprint, Bell, MapPin, Camera, Shield, CheckCircle,
+  XCircle, ArrowUpRight, Sparkles, TrendingUp, Globe, Palette, Megaphone
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -110,6 +111,8 @@ const schemas = generateServicePageSchemas({
     { name: "Services", url: `${siteConfig.url}/#services` },
     { name: "Mobile Apps", url: serviceUrl },
   ],
+  techStack,
+  features: features.map(f => ({ title: f.title, description: f.description })),
   faqs,
   offers: packages.map(p => ({ name: p.name, price: p.price, description: p.description, features: p.features })),
   process: process.map(p => ({ name: p.title, description: p.description })),
@@ -123,7 +126,7 @@ export default function MobileApps() {
 
   return (
     <>
-      <SEOHead title="Mobile & Web App Development" description="Custom mobile app development for iOS & Android. React Native, Flutter & native development with enterprise security. 50+ apps, 2M+ downloads. Free consultation." keywords={["mobile app development", "iOS app development", "Android app development", "React Native", "Flutter", "cross-platform apps", "app development Houston"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="Mobile & Web App Development" description="Custom mobile app development for iOS & Android. React Native, Flutter & native development with enterprise security. 50+ apps, 2M+ downloads. Free consultation." keywords={["mobile app development Houston", "iOS app development company", "Android app development agency", "React Native development services", "enterprise mobile app development", "fintech app development", "cross-platform apps", "Flutter"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header />
         <VerticalNav />
@@ -150,7 +153,18 @@ export default function MobileApps() {
           </section>
 
           {/* Stats */}
-          <section className="py-16 border-y border-border/50"><div className="container mx-auto px-6 lg:px-12"><div className="grid grid-cols-2 md:grid-cols-4 gap-8">{stats.map((stat, i) => (<motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center"><div className="font-serif text-4xl lg:text-5xl text-primary mb-2">{stat.value}</div><div className="text-sm text-muted-foreground">{stat.label}</div></motion.div>))}</div></div></section>
+          <section className="py-16 border-y border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {stats.map((stat, i) => (
+                  <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
+                    <div className="font-serif text-4xl md:text-5xl text-primary mb-2">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground tracking-wide uppercase">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* Platforms */}
           <section className="py-24 lg:py-32">
@@ -172,20 +186,145 @@ export default function MobileApps() {
           {/* Features */}
           <section className="py-24 lg:py-32 bg-card/50"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">What Sets Our Apps Apart</h2><p className="text-muted-foreground max-w-2xl mx-auto">Built with the latest technologies, best practices, and deep platform expertise.</p></motion.div><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">{features.map((f, i) => (<motion.div key={f.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}><LuxuryCard className="p-6 h-full"><f.icon className="w-10 h-10 text-primary mb-4" /><h3 className="font-serif text-xl text-foreground mb-2">{f.title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p></LuxuryCard></motion.div>))}</div></div></section>
 
+          {/* Trust & Certifications */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Trust & Certifications</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Industry-recognized partnerships and compliance standards that ensure quality and security.</p>
+              </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                {[
+                  { name: "AWS Advanced Consulting Partner", icon: Shield },
+                  { name: "Google Cloud Partner", icon: Shield },
+                  { name: "SOC 2 Type II Compliant", icon: Shield },
+                  { name: "Apple Developer Program", icon: Shield },
+                  { name: "Google Play Console Partner", icon: Shield },
+                ].map((cert, i) => (
+                  <motion.div key={cert.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <LuxuryCard className="p-6 text-center h-full flex flex-col items-center justify-center">
+                      <cert.icon className="w-10 h-10 text-primary mb-3" />
+                      <p className="text-sm font-medium text-foreground leading-tight">{cert.name}</p>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Tech Stack */}
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Technology Stack</h2><p className="text-muted-foreground max-w-2xl mx-auto">Industry-leading technologies for every platform and use case.</p></motion.div><div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">{techStack.map((s, i) => (<motion.div key={s.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><LuxuryCard className="p-6 h-full"><h3 className="font-serif text-lg text-primary mb-4">{s.category}</h3><ul className="space-y-2">{s.items.map(item => (<li key={item} className="flex items-center gap-2 text-sm text-muted-foreground"><div className="w-1.5 h-1.5 bg-primary/60 rounded-full" />{item}</li>))}</ul></LuxuryCard></motion.div>))}</div></div></section>
 
           {/* Process */}
           <section className="py-24 lg:py-32 bg-card/50"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our App Development Process</h2><p className="text-muted-foreground max-w-2xl mx-auto">Agile methodology with transparent communication and bi-weekly demos.</p></motion.div><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">{process.map((item, i) => (<motion.div key={item.step} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><div className="text-6xl font-serif text-primary/20 mb-2">{item.step}</div><h3 className="font-serif text-xl text-foreground mb-2">{item.title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p></motion.div>))}</div></div></section>
 
+          {/* App Success Metrics */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">App Success Metrics</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Real before-and-after results from our client app launches.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                {[
+                  { metric: "Downloads", before: "0", after: "200K+", icon: TrendingUp },
+                  { metric: "Store Rating", before: "N/A", after: "4.8\u2605", icon: Star },
+                  { metric: "User Retention", before: "Industry 25%", after: "Our 65%", icon: Sparkles },
+                  { metric: "Crash Rate", before: "Industry 2%", after: "Our 0.1%", icon: Shield },
+                ].map((item, i) => (
+                  <motion.div key={item.metric} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <LuxuryCard className="p-6 h-full text-center">
+                      <item.icon className="w-10 h-10 text-primary mx-auto mb-4" />
+                      <h3 className="font-serif text-lg text-foreground mb-4">{item.metric}</h3>
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-center gap-2 text-sm">
+                          <span className="text-muted-foreground line-through">{item.before}</span>
+                          <ArrowRight className="w-4 h-4 text-primary" />
+                          <span className="text-primary font-semibold">{item.after}</span>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Testimonials */}
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Client Success Stories</h2><p className="text-muted-foreground max-w-2xl mx-auto">Real results from real app launches.</p></motion.div><div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">{testimonials.map((t, i) => (<motion.div key={t.author} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><LuxuryCard className="p-8 h-full"><Quote className="w-8 h-8 text-primary/30 mb-4" /><p className="text-sm text-muted-foreground leading-relaxed mb-6">"{t.body}"</p><div className="flex items-center gap-1 mb-2">{Array.from({ length: t.rating }).map((_, j) => <Star key={j} className="w-4 h-4 text-primary fill-primary" />)}</div><div className="font-medium text-foreground text-sm">{t.author}</div><div className="text-xs text-muted-foreground">{t.title}</div></LuxuryCard></motion.div>))}</div></div></section>
+
+          {/* Why Cardinal for Mobile */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Cardinal for Mobile</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">See how our mobile development approach compares to the competition.</p>
+              </motion.div>
+              <div className="max-w-4xl mx-auto">
+                <div className="grid grid-cols-3 gap-4 mb-4">
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Category</div>
+                  <div className="text-sm font-medium text-primary uppercase tracking-wider text-center">Cardinal</div>
+                  <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider text-center">Others</div>
+                </div>
+                {[
+                  { category: "Platform Expertise", cardinal: "Native + Cross-Platform expertise", others: "Only cross-platform" },
+                  { category: "Security", cardinal: "Enterprise security (biometric, encryption)", others: "Basic auth only" },
+                  { category: "App Store Optimization", cardinal: "App Store optimization included", others: "Extra cost" },
+                  { category: "Post-Launch Support", cardinal: "12-month support & updates", others: "30-day warranty" },
+                  { category: "Architecture", cardinal: "Offline-first architecture", others: "Online only" },
+                ].map((row, i) => (
+                  <motion.div key={row.category} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+                    <LuxuryCard className="p-4 mb-3">
+                      <div className="grid grid-cols-3 gap-4 items-center">
+                        <div className="font-medium text-sm text-foreground">{row.category}</div>
+                        <div className="flex items-center justify-center gap-2 text-sm">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                          <span className="text-foreground">{row.cardinal}</span>
+                        </div>
+                        <div className="flex items-center justify-center gap-2 text-sm">
+                          <XCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
+                          <span className="text-muted-foreground">{row.others}</span>
+                        </div>
+                      </div>
+                    </LuxuryCard>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* Pricing */}
           <section className="py-24 lg:py-32 bg-card/50"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Investment Options</h2><p className="text-muted-foreground max-w-2xl mx-auto">Flexible packages designed for different project scopes and budgets.</p></motion.div><div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">{packages.map((pkg, i) => (<motion.div key={pkg.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><LuxuryCard className={`p-8 h-full relative ${pkg.popular ? "border-primary" : ""}`} borderStyle={pkg.popular ? "metallic-crimson" : "metallic-platinum"}>{pkg.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-medium">Recommended</div>}<div className="text-center mb-6"><h3 className="font-serif text-2xl text-foreground mb-2">{pkg.name}</h3><div className="font-serif text-4xl text-primary mb-2">{pkg.price}</div><p className="text-sm text-muted-foreground">{pkg.description}</p></div><ul className="space-y-3 mb-8">{pkg.features.map(f => (<li key={f} className="flex items-start gap-3 text-sm"><Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>))}</ul><Button className={`w-full ${pkg.popular ? "bg-primary hover:bg-primary/90" : ""}`} variant={pkg.popular ? "default" : "outline"} asChild><Link to="/contact">Get Quote</Link></Button></LuxuryCard></motion.div>))}</div></div></section>
 
           {/* FAQs */}
           <section className="py-24 lg:py-32"><div className="container mx-auto px-6 lg:px-12"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16"><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h2><p className="text-muted-foreground max-w-2xl mx-auto">Common questions about our app development services.</p></motion.div><div className="max-w-3xl mx-auto space-y-4">{faqs.map((faq, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}><LuxuryCard className="overflow-hidden"><button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-6 text-left"><h3 className="font-serif text-lg text-foreground pr-4">{faq.question}</h3><ChevronDown className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} /></button>{openFaq === i && <div className="px-6 pb-6"><p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p></div>}</LuxuryCard></motion.div>))}</div></div></section>
+
+          {/* Related Services */}
+          <section className="py-24 lg:py-32 bg-card/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Related Services</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Complement your mobile app with our other expert services.</p>
+              </motion.div>
+              <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                {[
+                  { title: "Web Development", description: "Full-stack web applications that complement your mobile experience with shared backend and consistent branding.", icon: Globe, href: "/services/web-development" },
+                  { title: "UX/UI Design", description: "Research-driven interface design that maximizes user engagement, retention, and conversion across all platforms.", icon: Palette, href: "/services/web-development" },
+                  { title: "Digital Marketing", description: "App Store optimization, user acquisition campaigns, and growth strategies to maximize your app's reach.", icon: Megaphone, href: "/contact" },
+                ].map((service, i) => (
+                  <motion.div key={service.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                    <Link to={service.href}>
+                      <LuxuryCard className="p-8 h-full group hover:border-primary/50 transition-colors">
+                        <service.icon className="w-10 h-10 text-primary mb-4" />
+                        <h3 className="font-serif text-xl text-foreground mb-2 flex items-center gap-2">{service.title} <ArrowUpRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" /></h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                      </LuxuryCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           {/* CTA */}
           <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Build Your App?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's turn your idea into a powerful mobile experience. Free consultation, no obligations.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Start Your Project <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>

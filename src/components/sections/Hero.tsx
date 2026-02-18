@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense, lazy } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-import { TextReveal } from "@/components/ui/text-reveal";
-import { LuxuryCard } from "@/components/ui/luxury-card";
-import { FloatingParticles } from "@/components/ui/floating-particles";
-import { ArrowRight, Shield, Check } from "lucide-react";
+import { ArrowRight, Check, Star } from "lucide-react";
+import { BackgroundPaths } from "@/components/ui/BackgroundPaths";
+
+const Dithering = lazy(() => 
+  import("@paper-design/shaders-react").then((mod) => ({ default: mod.Dithering }))
+)
 
 function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: string }) {
   const ref = useRef(null);
@@ -19,7 +20,7 @@ function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: strin
       const steps = 60;
       const increment = numericValue / steps;
       let current = 0;
-      
+
       const timer = setInterval(() => {
         current += increment;
         if (current >= numericValue) {
@@ -37,64 +38,80 @@ function AnimatedCounter({ value, suffix = "" }: { value: string; suffix?: strin
   return <span ref={ref}>{displayValue}{suffix}</span>;
 }
 
-function MorphingBlob({ delay = "0s", size = 400, x = 0, y = 0 }: { delay?: string; size?: number; x?: number; y?: number }) {
+// Word configurations with their matching subheadlines and prefixes
+const wordConfigs = [
+  { word: "Websites", prefix: "Build", tagline: "That Grow Your Business" },
+  { word: "Applications", prefix: "Build", tagline: "That Scale Your Business" },
+  { word: "Strategies", prefix: "Build", tagline: "That Drive Results" },
+  { word: "Advertisements", prefix: "Build", tagline: "That Generate Leads" },
+  { word: "Content", prefix: "Write", tagline: "That Reaches Your Target Market" },
+  { word: "Branding", prefix: "Create", tagline: "That Builds Trust" },
+];
+
+function RotatingWord({ onIndexChange }: { onIndexChange?: (index: number) => void }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => {
+        const newIndex = (prev + 1) % wordConfigs.length;
+        onIndexChange?.(newIndex);
+        return newIndex;
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [onIndexChange]);
+
+  useEffect(() => {
+    onIndexChange?.(0);
+  }, [onIndexChange]);
+
   return (
-    <div
-      className="absolute pointer-events-none animate-morph-blob"
-      style={{
-        width: size,
-        height: size,
-        left: `${x}%`,
-        top: `${y}%`,
-        background: `radial-gradient(circle, hsl(var(--primary) / 0.12) 0%, transparent 70%)`,
-        filter: "blur(80px)",
-        animationDelay: delay,
-      }}
-    />
+    <span className="inline-block min-w-[200px] md:min-w-[280px] leading-[1.2]">
+      <motion.span
+        key={currentIndex}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="text-red-600"
+      >
+        {wordConfigs[currentIndex].word}
+      </motion.span>
+    </span>
   );
 }
 
-function GridBackground() {
+function RotatingPrefix({ currentIndex }: { currentIndex: number }) {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Animated grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--foreground) / 0.5) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground) / 0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-        }}
-      />
-      
-      {/* Grid nodes */}
-      {[...Array(12)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-primary/30 rounded-full"
-          style={{
-            left: `${(i % 4) * 33 + 10}%`,
-            top: `${Math.floor(i / 4) * 40 + 20}%`,
-          }}
-          animate={{
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: 3,
-            delay: i * 0.3,
-            repeat: Infinity,
-          }}
-        />
-      ))}
-    </div>
+    <motion.span
+      key={currentIndex}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      {wordConfigs[currentIndex].prefix}
+    </motion.span>
+  );
+}
+
+function RotatingTagline({ currentIndex }: { currentIndex: number }) {
+  return (
+    <motion.span
+      key={currentIndex}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
+      {wordConfigs[currentIndex].tagline}
+    </motion.span>
   );
 }
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -103,148 +120,124 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  
+
   const springY = useSpring(y, { stiffness: 100, damping: 30 });
   const springOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
   const springScale = useSpring(scale, { stiffness: 100, damping: 30 });
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden animated-gradient"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Premium background effects */}
-      <GridBackground />
-      <FloatingParticles count={30} speed="slow" size="medium" />
-      <MorphingBlob delay="0s" size={600} x={20} y={20} />
-      <MorphingBlob delay="7s" size={500} x={70} y={60} />
-      <MorphingBlob delay="14s" size={550} x={80} y={10} />
+      {/* Animated background paths - behind everything */}
+      <div className="absolute inset-0 z-0">
+        <BackgroundPaths />
+      </div>
 
-      {/* Floating 3D Geometric Elements */}
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute pointer-events-none float-3d"
-          style={{
-            left: `${20 + i * 18}%`,
-            top: `${30 + (i % 3) * 20}%`,
-            width: 40 + i * 15,
-            height: 40 + i * 15,
-          }}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.15, scale: 1 }}
-          transition={{ duration: 1, delay: i * 0.2 }}
-        >
-          <div
-            className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent border border-primary/30 backdrop-blur-sm"
-            style={{
-              transform: `rotate(${i * 45}deg)`,
-              borderRadius: i % 2 === 0 ? "30%" : "0%",
-            }}
-          />
-        </motion.div>
-      ))}
-      
-      {/* Radial gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
-      
-      {/* Noise texture */}
-      <div className="noise-overlay absolute inset-0" />
+      {/* Dithering shader background */}
+      <div className="absolute inset-0 -z-10">
+        <Suspense fallback={<div className="absolute inset-0 bg-gray-100" />}>
+          <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply">
+            <Dithering
+              colorBack="#00000000"
+              colorFront="#DC2626"
+              shape="warp"
+              type="4x4"
+              speed={isHovered ? 0.6 : 0.2}
+              className="size-full"
+              minPixelRatio={1}
+            />
+          </div>
+        </Suspense>
+      </div>
 
-      <motion.div 
-        className="container mx-auto px-6 lg:px-12 relative z-10 pt-20"
+      <motion.div
+        className="container mx-auto px-6 lg:px-12 relative z-10 pt-44"
         style={{ y: springY, opacity: springOpacity, scale: springScale }}
       >
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0, rotate: -180 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 glass sheen-metallic mb-10 float-3d"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex items-center gap-3 px-5 py-2.5 bg-white rounded-full border border-gray-200/80 shadow-[0_1px_4px_rgba(0,0,0,0.04)] mb-8"
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <Shield size={16} className="text-primary" />
-            </motion.div>
-            <span className="text-xs tracking-[0.25em] uppercase text-foreground/80">
-              Premier Digital Agency
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={11} className="text-amber-400 fill-amber-400" />
+              ))}
+            </div>
+            <div className="w-px h-3.5 bg-gray-200" />
+            <span className="text-[11px] tracking-[0.2em] uppercase text-gray-500 font-semibold">
+              A Top-Rated Digital Marketing Agency
             </span>
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse-subtle" />
           </motion.div>
 
           {/* Headline */}
-          <div className="overflow-hidden mb-8">
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground leading-[1.05] tracking-tight">
-              <TextReveal
-                text="Custom Websites & Apps"
-                mode="words"
-                animation="slide-up"
-                delay={0.1}
-                duration={0.8}
-              />
+          <div className="overflow-hidden mb-3">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 leading-[1.2] tracking-tight">
+              We <RotatingPrefix currentIndex={currentIndex} /> <RotatingWord onIndexChange={setCurrentIndex} />
             </h1>
           </div>
 
-          <div className="overflow-hidden mb-8">
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gradient-primary leading-[1.05]">
-              <TextReveal
-                text="That Convert Visitors"
-                mode="words"
-                animation="slide-up"
-                delay={0.8}
-                duration={0.6}
-              />
+          <div className="overflow-hidden mb-5">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] text-gray-900">
+              <RotatingTagline currentIndex={currentIndex} />
             </h2>
+            {/* Red underline accent on second line */}
+            <motion.div
+              className="w-48 md:w-64 h-[3px] bg-gradient-to-r from-red-500 via-red-400 to-transparent rounded-full mx-auto mt-2"
+              initial={{ scaleX: 0, originX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            />
           </div>
 
           {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="font-sans text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            Transform your business into a digital powerhouse with custom websites, 
-            mobile applications, and AI-powered solutions that deliver measurable ROI.
+            Custom web design, mobile apps, SEO, and digital marketing for businesses
+            ready to dominate online. Based in Houston, serving clients nationwide.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
           >
             <MagneticButton strength={30}>
-              <Button variant="primary" size="lg" className="group relative overflow-hidden" asChild>
-                <a href="#contact">
-                  <span className="relative z-10">Start Your Project</span>
-                  <ArrowRight size={16} className="relative z-10 transition-transform group-hover:translate-x-1" />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </a>
-              </Button>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-gray-900 text-white text-[13px] font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 group"
+              >
+                <span>Start Your Project</span>
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </a>
             </MagneticButton>
             <MagneticButton strength={20}>
-              <Button variant="outline" size="lg" className="group glass" asChild>
-                <a href="#services">
-                  <span>View Services</span>
-                  <motion.span
-                    className="inline-block ml-2"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
-                </a>
-              </Button>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 text-[13px] font-bold tracking-wider uppercase px-8 py-4 rounded-xl border border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 group"
+              >
+                <span>View Services</span>
+                <motion.span
+                  className="inline-block"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  →
+                </motion.span>
+              </a>
             </MagneticButton>
           </motion.div>
 
@@ -253,82 +246,65 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex items-center justify-center gap-8 text-sm text-muted-foreground"
+            className="flex items-center justify-center gap-8 text-sm text-gray-500"
           >
             {["No obligation", "Free consultation", "100% custom"].map((text, i) => (
-              <motion.div 
+              <motion.div
                 key={text}
                 className="flex items-center gap-2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
               >
-                <Check size={14} className="text-primary" />
+                <Check size={14} className="text-red-500" />
                 <span>{text}</span>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Metrics bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9, ease: [0.23, 1, 0.32, 1] }}
-            className="mt-24 pt-12 border-t border-border/50"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { value: "500", suffix: "+", label: "Projects Completed" },
-                { value: "72", suffix: "hrs", label: "Expedited Delivery" },
-                { value: "24", suffix: "/7", label: "Support Available" },
-                { value: "98", suffix: "%", label: "Client Satisfaction" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0, rotate: -90 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 1.2 + index * 0.1,
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 12
-                  }}
-                >
-                  <LuxuryCard
-                    elevation={2}
-                    hoverLift={true}
-                    borderStyle={index === 3 ? "metallic-crimson" : "none"}
-                    className="p-6 text-center group ultra-hover-lift card-3d-flip"
-                  >
-                  <div className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-2 tabular-nums group-hover:animate-number-flip">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <div className="text-xs text-muted-foreground tracking-[0.15em] uppercase group-hover:text-primary transition-colors">
-                    {stat.label}
-                  </div>
-                  </LuxuryCard>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Metrics bar — outside parallax container so it stays visible */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.9, ease: [0.23, 1, 0.32, 1] }}
+        className="container mx-auto px-6 lg:px-12 relative z-10 mt-12 pb-6"
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Scroll</span>
-        <motion.div
-          className="w-px h-12 bg-gradient-to-b from-primary/50 to-transparent"
-          animate={{ scaleY: [1, 0.5, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
+        <div className="max-w-5xl mx-auto pt-12 border-t border-gray-200/60">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { value: "500", suffix: "+", label: "Projects Completed" },
+              { value: "72", suffix: "hrs", label: "Expedited Delivery" },
+              { value: "24", suffix: "/7", label: "Support Available" },
+              { value: "98", suffix: "%", label: "Client Satisfaction" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 1.2 + index * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="text-center group"
+              >
+                <div className="bg-white rounded-2xl border border-gray-200/70 p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_-8px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500">
+                  <div className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-2 tabular-nums">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-xs text-gray-400 tracking-[0.15em] uppercase group-hover:text-red-500 transition-colors">
+                    {stat.label}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </motion.div>
+
     </section>
   );
 }

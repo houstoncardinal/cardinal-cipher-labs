@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Globe,
@@ -8,309 +8,373 @@ import {
   Megaphone,
   Palette,
   MousePointer,
-  ArrowUpRight
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Star,
+  Zap,
+  Shield,
 } from "lucide-react";
-import { LuxuryCard } from "@/components/ui/luxury-card";
 
 const services = [
   {
     icon: Globe,
     category: "WEB DEVELOPMENT",
     title: "Custom Website Development",
-    description: "Professional, responsive websites built with modern technologies. From simple business sites to complex e-commerce platforms.",
+    description: "Enterprise-grade websites engineered with cutting-edge frameworks. Blazing-fast performance, bulletproof security, and pixel-perfect design that converts.",
     price: "$10,000",
-    priceNote: "Custom quotes available",
+    priceLabel: "Starting at",
     capabilities: ["Enterprise Sites", "E-commerce", "API Architecture", "CMS Integration"],
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    link: "/services/web-development"
+    highlights: ["99.9% Uptime", "90+ Lighthouse", "WCAG 2.1 AA"],
+    gradient: "from-blue-600 to-cyan-500",
+    lightGradient: "from-blue-500/5 to-cyan-500/5",
+    iconBg: "bg-blue-600",
+    tagBg: "bg-blue-50 text-blue-700 border-blue-100",
+    link: "/services/web-development",
   },
   {
     icon: Smartphone,
     category: "MOBILE APPS",
     title: "Mobile & Web Applications",
-    description: "Custom mobile apps and web applications that streamline business operations. Built for performance and scalability.",
+    description: "Native and cross-platform applications that deliver seamless experiences. Built for millions of users with offline-first architecture and real-time sync.",
     price: "Custom",
-    priceNote: "Tailored to your needs",
+    priceLabel: "Tailored pricing",
     capabilities: ["iOS & Android", "Web Applications", "Cross-Platform", "App Optimization"],
-    gradient: "from-purple-500/20 to-pink-500/20",
-    link: "/services/mobile-apps"
+    highlights: ["60fps Native", "2M+ Downloads", "4.8 App Rating"],
+    gradient: "from-violet-600 to-purple-500",
+    lightGradient: "from-violet-500/5 to-purple-500/5",
+    iconBg: "bg-violet-600",
+    tagBg: "bg-violet-50 text-violet-700 border-violet-100",
+    link: "/services/mobile-apps",
   },
   {
     icon: Search,
     category: "SEO & ANALYTICS",
     title: "SEO & Analytics Services",
-    description: "Comprehensive SEO optimization and analytics solutions that drive real results and qualified traffic.",
+    description: "Data-driven SEO strategies that dominate search rankings. Technical audits, content optimization, and advanced analytics that move the needle.",
     price: "Custom",
-    priceNote: "Based on scope",
+    priceLabel: "Based on scope",
     capabilities: ["Technical SEO", "Schema Markup", "Analytics Setup", "Ranking Strategy"],
-    gradient: "from-green-500/20 to-emerald-500/20",
-    link: "/services/seo-analytics"
+    highlights: ["250% Avg Traffic", "Page 1 Rankings", "180+ #1 Keywords"],
+    gradient: "from-emerald-600 to-teal-500",
+    lightGradient: "from-emerald-500/5 to-teal-500/5",
+    iconBg: "bg-emerald-600",
+    tagBg: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    link: "/services/seo-analytics",
   },
   {
     icon: Megaphone,
     category: "DIGITAL MARKETING",
     title: "Digital Marketing Campaigns",
-    description: "Strategic digital marketing campaigns that drive growth. From social media to email marketing with measurable results.",
+    description: "Multi-channel campaigns engineered for ROI. Precision targeting, creative excellence, and transparent attribution across every touchpoint.",
     price: "Custom",
-    priceNote: "Performance-based",
+    priceLabel: "Performance-based",
     capabilities: ["PPC Advertising", "Social Media", "Email Marketing", "Content Strategy"],
-    gradient: "from-orange-500/20 to-amber-500/20",
-    link: "/services/digital-marketing"
+    highlights: ["350% Avg ROI", "$2M+ Revenue", "45% Cost Cut"],
+    gradient: "from-orange-600 to-amber-500",
+    lightGradient: "from-orange-500/5 to-amber-500/5",
+    iconBg: "bg-orange-600",
+    tagBg: "bg-orange-50 text-orange-700 border-orange-100",
+    link: "/services/digital-marketing",
   },
   {
     icon: Palette,
     category: "BRAND IDENTITY",
     title: "Brand Identity Design",
-    description: "Complete brand identity solutions that make your business stand out. Cohesive visual identities that resonate.",
+    description: "Strategic brand systems that command attention and build trust. From logo conception to comprehensive guidelines that scale across every medium.",
     price: "Custom",
-    priceNote: "Comprehensive packages",
+    priceLabel: "Comprehensive packages",
     capabilities: ["Logo Design", "Brand Guidelines", "Visual Identity", "Print Collateral"],
-    gradient: "from-rose-500/20 to-red-500/20",
-    link: "/services/brand-identity"
+    highlights: ["200+ Brands", "50+ Awards", "98% Satisfaction"],
+    gradient: "from-rose-600 to-pink-500",
+    lightGradient: "from-rose-500/5 to-pink-500/5",
+    iconBg: "bg-rose-600",
+    tagBg: "bg-rose-50 text-rose-700 border-rose-100",
+    link: "/services/brand-identity",
   },
   {
     icon: MousePointer,
     category: "UX/UI DESIGN",
     title: "UX/UI Experience Optimization",
-    description: "User-centered design and interface optimization that creates exceptional digital experiences and drives conversions.",
+    description: "Research-driven design that converts. User testing, information architecture, and interface systems that delight users and drive business outcomes.",
     price: "Custom",
-    priceNote: "Project-based pricing",
+    priceLabel: "Project-based pricing",
     capabilities: ["User Research", "Interface Design", "Conversion Optimization", "A/B Testing"],
-    gradient: "from-indigo-500/20 to-violet-500/20",
-    link: "/services/ux-ui"
+    highlights: ["40% Conv. Lift", "60% Task Success", "35% Less Bounce"],
+    gradient: "from-indigo-600 to-blue-500",
+    lightGradient: "from-indigo-500/5 to-blue-500/5",
+    iconBg: "bg-indigo-600",
+    tagBg: "bg-indigo-50 text-indigo-700 border-indigo-100",
+    link: "/services/ux-ui",
   },
 ];
 
 function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const animations = ["animate-explosive-entrance", "animate-mega-bounce", "animate-spiral-in", "animate-zoom-blast", "animate-explosive-entrance", "animate-mega-bounce"];
-  const animationClass = isInView ? animations[index % animations.length] : "";
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    cardRef.current.style.setProperty("--mouse-x", `${x}%`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}%`);
+  };
 
   return (
     <motion.div
       ref={ref}
-      className={`group relative card-3d-flip ultra-hover-lift color-shift-glow ${animationClass}`}
-      style={{
-        animationDelay: `${index * 0.1}s`,
-        animationFillMode: "both"
-      }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative"
     >
-      <LuxuryCard
-        elevation={3}
-        borderStyle="metallic-platinum"
-        hoverLift={true}
-        cornerDecorations={true}
-        rippleOnClick={true}
-        className="h-full p-8 transition-all duration-500 hover:border-primary/30"
-      >
-        {/* Gradient background on hover */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
-        
-        <div className="relative flex flex-col h-full">
-          {/* Category */}
-          <motion.span 
-            className="text-[10px] tracking-[0.25em] text-primary mb-4 inline-block"
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-          >
-            {service.category}
-          </motion.span>
+      <Link to={service.link} className="block h-full">
+        <div
+          ref={cardRef}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onMouseMove={handleMouseMove}
+          className="relative h-full rounded-[20px] bg-white p-8 lg:p-10 transition-all duration-700 overflow-hidden
+            border border-gray-200/70
+            shadow-[0_1px_2px_rgba(0,0,0,0.04),0_2px_8px_rgba(0,0,0,0.03)]
+            hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),0_10px_30px_-10px_rgba(0,0,0,0.05)]
+            hover:border-gray-300/60
+            hover:-translate-y-3
+          "
+        >
+          {/* Mouse-follow radial glow */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[20px]"
+            style={{
+              background: 'radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,0,0,0.015), transparent 40%)',
+            }}
+          />
 
-          {/* EXPLOSIVE Icon with Particle Ring */}
+          {/* Gradient wash on hover */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${service.lightGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[20px]`} />
+
+          {/* Left accent bar — always visible, expands on hover */}
           <motion.div
-            className="relative w-20 h-20 bg-secondary/50 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-all duration-500 glow-luxury-hover"
-            whileHover={{
-              rotateY: 360,
-              scale: 1.3,
-              rotateZ: 10
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 15,
-              rotateY: { duration: 0.8 }
-            }}
-          >
-            {/* Explosive glow background */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-2xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
+            className={`absolute left-0 top-8 bottom-8 w-[3px] bg-gradient-to-b ${service.gradient} rounded-full`}
+            initial={{ scaleY: 0.35, opacity: 0.4, originY: 0 }}
+            animate={isHovered
+              ? { scaleY: 1, opacity: 1, originY: 0 }
+              : { scaleY: 0.35, opacity: 0.4, originY: 0 }
+            }
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          />
 
-            {/* Rotating particle ring */}
-            {[...Array(8)].map((_, i) => {
-              const angle = (i / 8) * 360;
-              return (
+          <div className="relative flex flex-col h-full">
+            {/* Top row: Icon + Category + Index */}
+            <div className="flex items-start justify-between mb-8">
+              <div className="flex items-center gap-4">
                 <motion.div
-                  key={i}
-                  className="absolute w-1.5 h-1.5 bg-primary/50 rounded-full"
-                  style={{
-                    top: '50%',
-                    left: '50%',
-                  }}
-                  animate={{
-                    x: [
-                      Math.cos((angle * Math.PI) / 180) * 35,
-                      Math.cos((angle * Math.PI) / 180) * 45,
-                      Math.cos((angle * Math.PI) / 180) * 35
-                    ],
-                    y: [
-                      Math.sin((angle * Math.PI) / 180) * 35,
-                      Math.sin((angle * Math.PI) / 180) * 45,
-                      Math.sin((angle * Math.PI) / 180) * 35
-                    ],
-                    opacity: [0.3, 1, 0.3],
-                    scale: [1, 1.5, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    delay: i * 0.1,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-              );
-            })}
-
-            {/* Pulsing rings */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0 border-2 border-primary/30 rounded-sm"
-                initial={{ scale: 1, opacity: 0.8 }}
-                animate={{
-                  scale: [1, 1.8, 2.5],
-                  opacity: [0.8, 0.3, 0]
-                }}
-                transition={{
-                  duration: 3,
-                  delay: i * 0.6,
-                  repeat: Infinity,
-                  ease: "easeOut"
-                }}
-              />
-            ))}
-
-            <service.icon size={32} className="text-primary relative z-10 drop-shadow-[0_0_15px_rgba(var(--primary),0.6)]" />
-          </motion.div>
-
-          {/* Title */}
-          <h3 className="font-serif text-xl lg:text-2xl text-foreground mb-3 group-hover:text-gradient-primary transition-all">
-            {service.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">
-            {service.description}
-          </p>
-
-          {/* Capabilities */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {service.capabilities.map((cap, i) => (
-              <motion.span
-                key={cap}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.3, delay: index * 0.15 + 0.3 + i * 0.05 }}
-                className={`text-[10px] px-3 py-1.5 bg-secondary/50 text-text-secondary tracking-wide border transition-all sheen-metallic ${
-                  i === 0 ? "border-metallic-gold" : "border-border/50 group-hover:border-primary/20"
-                }`}
-                whileHover={{ scale: 1.05 }}
-              >
-                {cap}
-              </motion.span>
-            ))}
-          </div>
-
-          {/* Price & Link */}
-          <div className="flex items-center justify-between pt-5 border-t border-border/50 group-hover:border-primary/20 transition-colors">
-            <div className="sheen-metallic">
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{service.priceNote}</span>
-              <div className="font-serif text-3xl font-bold text-foreground group-hover:animate-number-flip">{service.price}</div>
+                  className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center shadow-lg`}
+                  animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <service.icon size={22} className="text-white" strokeWidth={1.8} />
+                </motion.div>
+                <div>
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-gray-400 block">
+                    {service.category}
+                  </span>
+                </div>
+              </div>
+              <span className="text-sm font-mono text-gray-200 font-semibold mt-1">
+                0{index + 1}
+              </span>
             </div>
-            <motion.div
-              className="inline-flex items-center gap-1.5 text-xs text-foreground hover:text-primary transition-colors group/link tracking-wide uppercase"
-              whileHover={{ x: 4 }}
-            >
-              <Link to={service.link} className="flex items-center gap-1.5">
-                <span>Learn More</span>
-                <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-              </Link>
-            </motion.div>
+
+            {/* Title */}
+            <h3 className="font-serif text-[22px] lg:text-[26px] text-gray-900 mb-4 leading-[1.2] tracking-tight group-hover:text-gray-800 transition-colors">
+              {service.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-[14px] text-gray-500 leading-[1.7] mb-7 flex-grow">
+              {service.description}
+            </p>
+
+            {/* Highlight metrics row */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-7">
+              {service.highlights.map((highlight, i) => (
+                <motion.div
+                  key={highlight}
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.1 + 0.4 + i * 0.08 }}
+                  className="flex items-center gap-1.5"
+                >
+                  <CheckCircle2 size={12} className="text-emerald-500 flex-shrink-0" />
+                  <span className="text-[11px] font-semibold text-gray-600">{highlight}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Capability tags */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {service.capabilities.map((cap, i) => (
+                <motion.span
+                  key={cap}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.3, delay: index * 0.1 + 0.3 + i * 0.04 }}
+                  className={`text-[10px] font-semibold px-3 py-1.5 rounded-md border tracking-wide transition-all duration-300 ${service.tagBg}`}
+                >
+                  {cap}
+                </motion.span>
+              ))}
+            </div>
+
+            {/* Bottom: Price + CTA */}
+            <div className="flex items-end justify-between pt-7 border-t border-gray-100 group-hover:border-gray-200 transition-colors">
+              <div>
+                <span className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-semibold block">{service.priceLabel}</span>
+                <div className="font-serif text-[30px] font-bold text-gray-900 leading-none mt-1">{service.price}</div>
+              </div>
+              <motion.div
+                className={`inline-flex items-center gap-2 text-[11px] font-bold tracking-wider uppercase px-5 py-3 rounded-xl bg-gradient-to-r ${service.gradient} text-white shadow-md`}
+                animate={isHovered ? { x: 3, scale: 1.02 } : { x: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <span>Explore</span>
+                <ArrowUpRight size={13} />
+              </motion.div>
+            </div>
           </div>
         </div>
-      </LuxuryCard>
-
-      {/* Connection lines between cards */}
-      {index < services.length - 1 && index % 3 !== 2 && (
-        <motion.div
-          className="absolute top-1/2 -right-3 w-6 h-0.5 bg-gradient-to-r from-primary/50 via-primary/30 to-transparent hidden lg:block group-hover:from-primary group-hover:via-primary/50 transition-all duration-500 animate-pulse-subtle"
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
-        />
-      )}
+      </Link>
     </motion.div>
   );
 }
+
+const trustSignals = [
+  { icon: Star, label: "4.9/5 Average Rating" },
+  { icon: Shield, label: "SOC 2 & ISO 27001" },
+  { icon: Zap, label: "72-Hour Rush Available" },
+];
 
 export function Services() {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section id="services" className="py-32 lg:py-40 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
-      
+    <section id="services" className="py-24 lg:py-32 relative overflow-hidden bg-[#FAFAFA]">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.35]" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+      {/* Vertical red accent lines */}
+      <div className="absolute left-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/15 to-transparent" />
+      <div className="absolute right-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/15 to-transparent" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/8 to-transparent" />
+
+      {/* Ambient orbs */}
+      <motion.div
+        className="absolute -left-40 top-20 w-[500px] h-[500px] bg-red-100/20 rounded-full blur-[120px]"
+        animate={{ opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -right-40 bottom-20 w-[500px] h-[500px] bg-blue-100/15 rounded-full blur-[120px]"
+        animate={{ opacity: [0.2, 0.4, 0.2] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       <div className="container mx-auto px-6 lg:px-12 relative">
         {/* Section Header */}
         <motion.div
           ref={headerRef}
           initial={{ opacity: 0, y: 40 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          className="mb-20"
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-4xl mx-auto mb-6"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <motion.div 
-              className="w-16 h-px bg-gradient-to-r from-primary to-primary/30"
+          {/* Top accent line */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <motion.div
+              className="w-16 h-px bg-gradient-to-r from-transparent via-red-500 to-red-300"
               initial={{ scaleX: 0 }}
               animate={isHeaderInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             />
-            <span className="text-xs tracking-[0.3em] uppercase text-primary">
-              Our Services
+            <span className="text-[11px] tracking-[0.3em] uppercase text-red-500 font-semibold">
+              What We Build
             </span>
+            <motion.div
+              className="w-16 h-px bg-gradient-to-l from-transparent via-red-500 to-red-300"
+              initial={{ scaleX: 0 }}
+              animate={isHeaderInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
           </div>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground max-w-4xl leading-[1.1]">
-            Digital solutions that grow your business
+
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-[3.75rem] text-gray-900 leading-[1.08] tracking-tight mb-5">
+            Websites, Apps &{" "}
+            <span className="relative inline-block">
+              Marketing
+              <motion.div
+                className="absolute -bottom-1.5 left-0 right-0 h-[3px] bg-gradient-to-r from-red-500 via-red-400 to-transparent rounded-full"
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={isHeaderInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              />
+            </span>
+            <br />
+            <span className="text-gray-400">That Drive Real Results</span>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
-            End-to-end digital solutions designed to transform businesses. From custom websites to comprehensive digital marketing.
+
+          <p className="text-base lg:text-[17px] text-gray-500 max-w-2xl mx-auto leading-relaxed mt-8">
+            From custom websites and mobile apps to SEO and digital marketing — we build the digital infrastructure that turns visitors into customers and clicks into revenue.
           </p>
         </motion.div>
 
+        {/* Trust signals */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex items-center justify-center gap-8 mb-16"
+        >
+          {trustSignals.map((signal, i) => (
+            <div key={signal.label} className="flex items-center gap-2">
+              <signal.icon size={14} className="text-red-500" />
+              <span className="text-[12px] text-gray-500 font-medium">{signal.label}</span>
+              {i < trustSignals.length - 1 && (
+                <div className="w-px h-4 bg-gray-200 ml-6" />
+              )}
+            </div>
+          ))}
+        </motion.div>
+
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-1000">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
 
-        {/* Decorative elements */}
+        {/* Bottom CTA */}
         <motion.div
-          className="absolute -right-20 top-1/3 w-40 h-40 bg-primary/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-20 text-center"
+        >
+          <p className="text-sm text-gray-400 mb-6">Not sure which service is right for you?</p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white text-sm font-semibold tracking-wide rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
+          >
+            Schedule a Free Consultation
+            <ArrowRight size={16} />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
