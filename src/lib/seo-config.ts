@@ -6,9 +6,9 @@ export const siteConfig = {
   name: 'Cardinal Consulting',
   legalName: 'Cardinal Consulting LLC',
   description: 'Enterprise-grade software development and consulting services. We deliver innovative solutions with proven expertise in cloud architecture, AI integration, and digital transformation.',
-  url: 'https://visitcardinal.com',
-  ogImage: 'https://visitcardinal.com/og-image.jpg',
-  logo: 'https://visitcardinal.com/logo.png',
+  url: 'https://www.visitcardinal.com',
+  ogImage: 'https://www.visitcardinal.com/og-image.jpg',
+  logo: 'https://www.visitcardinal.com/logo.png',
   
   links: {
     twitter: 'https://twitter.com/cardinalconsult',

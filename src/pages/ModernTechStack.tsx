@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Code2, ArrowRight, CheckCircle2, Zap, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const technologies = [
   { name: "React", description: "Modern UI library for dynamic interfaces" },
@@ -22,12 +24,27 @@ const benefits = [
 ];
 
 export default function ModernTechStack() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Modern Tech Stack Development | React, Next.js, TypeScript",
+      description: "We build with React, Next.js, and TypeScript for fast, scalable, future-proof websites. Modern technology that grows with your business.",
+      url: `${siteConfig.url}/modern-tech-stack`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Modern Tech Stack", url: `${siteConfig.url}/modern-tech-stack` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Modern Tech Stack Development | React, Next.js, TypeScript"
-        description="We build with React, Next.js, and TypeScript for fast, scalable, future-proof websites. Modern technology that grows with your business."
-        keywords={["React development", "Next.js development", "TypeScript development", "modern web development", "future proof website", "scalable web development"]}
+        title="Modern Tech Stack Web Development | React, Next.js, TypeScript | Cardinal Consulting"
+        description="We build with React, Next.js, TypeScript, and Tailwind CSS for fast, scalable, future-proof websites and apps. Modern technology that grows with your business. Houston & nationwide."
+        keywords={["React web development", "Next.js development agency", "TypeScript web development", "modern web development stack", "future proof website", "scalable web development", "Tailwind CSS development", "Vite web development", "JAMstack development", "headless CMS development", "performance web development", "fast loading website", "modern JavaScript framework", "React agency Houston", "full stack web development"]}
+        url={`${siteConfig.url}/modern-tech-stack`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

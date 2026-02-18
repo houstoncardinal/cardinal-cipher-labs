@@ -39,14 +39,18 @@ export function SEOHead({
   const pageUrl = url || siteConfig.url;
 
   const defaultKeywords = [
+    'web development Houston',
+    'app development Houston',
+    'custom website development',
+    'mobile app development',
+    'web development agency',
+    'iOS app development',
+    'Android app development',
+    'React development agency',
+    'Next.js development',
     'enterprise software development',
-    'cloud architecture',
-    'AI integration',
     'digital transformation',
-    'DevOps consulting',
-    'cybersecurity solutions',
-    'software consulting',
-    'enterprise solutions',
+    'software consulting Houston',
   ];
 
   const allKeywords = [...defaultKeywords, ...keywords].join(', ');

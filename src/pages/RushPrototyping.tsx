@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Zap, Rocket, Clock, ArrowRight, Star, CheckCircle2, Lightbulb, Target, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const features = [
   { icon: Rocket, title: "MVP in Days", description: "Get your minimum viable product built in days, not months. Validate your idea fast." },
@@ -22,12 +24,27 @@ const useCases = [
 ];
 
 export default function RushPrototyping() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Rush MVP & Prototype Development | Fast App Prototyping Services",
+      description: "Get your MVP or prototype built in record time. Our rush prototyping service helps startups and businesses validate ideas fast.",
+      url: `${siteConfig.url}/rush-prototyping`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Rush Prototyping", url: `${siteConfig.url}/rush-prototyping` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Rush MVP & Prototype Development | Fast App Prototyping Services"
-        description="Get your MVP or prototype built in record time. Our rush prototyping service helps startups and businesses validate ideas fast. Launch in days, not months."
-        keywords={["rush MVP development", "prototype development", "fast prototyping", "MVP in days", "app prototyping", "startup MVP", "rapid prototype"]}
+        title="Rush MVP & App Prototype Development | Fast Prototyping Services Houston"
+        description="Get your MVP or app prototype built in record time. Our rush prototyping service helps startups and businesses validate ideas fast. Launch in days, not months. Houston & nationwide."
+        keywords={["rush MVP development", "app prototype development", "fast prototyping service", "MVP in days", "app prototyping agency", "startup MVP development", "rapid prototype", "minimum viable product", "MVP development Houston", "startup app development", "product prototype", "investor demo app", "fast app development", "prototype to product", "agile MVP development"]}
+        url={`${siteConfig.url}/rush-prototyping`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

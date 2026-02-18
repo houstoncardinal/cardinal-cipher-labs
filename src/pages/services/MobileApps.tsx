@@ -125,7 +125,34 @@ export default function MobileApps() {
 
   return (
     <>
-      <SEOHead title="Mobile & Web App Development" description="Custom mobile app development for iOS & Android. React Native, Flutter & native development with enterprise security. 50+ apps, 2M+ downloads. Free consultation." keywords={["mobile app development Houston", "iOS app development company", "Android app development agency", "React Native development services", "enterprise mobile app development", "fintech app development", "cross-platform apps", "Flutter"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead
+        title="App Development Houston | iOS & Android Mobile App Development Agency"
+        description="Cardinal Consulting — Houston's top app development agency. Custom iOS & Android apps with React Native & Flutter. 50+ apps, 2M+ downloads, 4.8★ store rating. Free consultation."
+        keywords={[
+          "app development Houston",
+          "mobile app development Houston",
+          "iOS app development Houston",
+          "Android app development Houston",
+          "app development agency Houston",
+          "mobile app development agency",
+          "React Native development Houston",
+          "Flutter app development",
+          "custom app development",
+          "enterprise mobile app development",
+          "fintech app development",
+          "healthcare app development",
+          "cross-platform app development",
+          "iPhone app development Houston",
+          "Android app developer Houston",
+          "mobile app development company",
+          "best app development company Houston",
+          "startup app development",
+          "MVP app development",
+          "app development services Texas",
+        ]}
+        schemas={schemas}
+        url={serviceUrl}
+      />
       <div className="min-h-screen bg-background">
         <Header />
         <VerticalNav />

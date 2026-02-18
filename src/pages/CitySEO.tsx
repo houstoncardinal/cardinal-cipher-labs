@@ -4,7 +4,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link, useParams } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 // City data - easily extensible
 const citiesData: Record<string, {
@@ -22,7 +22,7 @@ const citiesData: Record<string, {
     slug: "new-york",
     coordinates: { lat: 40.7128, lng: -74.0060 },
     areas: ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island", "Hudson Valley", "Long Island", "Jersey City", "Newark", "White Plains"],
-    phone: "(212) 555-0123",
+    phone: "(281) 901-7016",
     address: "350 5th Ave, New York, NY 10118"
   },
   "los-angeles": {
@@ -31,7 +31,7 @@ const citiesData: Record<string, {
     slug: "los-angeles",
     coordinates: { lat: 34.0522, lng: -118.2437 },
     areas: ["Hollywood", "Beverly Hills", "Santa Monica", "Pasadena", "Glendale", "Long Beach", "Burbank", "West Hollywood", "Culver City", "Venice"],
-    phone: "(310) 555-0123",
+    phone: "(281) 901-7016",
     address: "6801 Hollywood Blvd, Los Angeles, CA 90028"
   },
   "chicago": {
@@ -40,7 +40,7 @@ const citiesData: Record<string, {
     slug: "chicago",
     coordinates: { lat: 41.8781, lng: -87.6298 },
     areas: ["Loop", "Lincoln Park", "Wicker Park", "River North", "West Loop", "Gold Coast", "Hyde Park", "Pilsen", "Wrigleyville", "Oak Park"],
-    phone: "(312) 555-0123",
+    phone: "(281) 901-7016",
     address: "233 S Wacker Dr, Chicago, IL 60606"
   },
   "phoenix": {
@@ -49,7 +49,7 @@ const citiesData: Record<string, {
     slug: "phoenix",
     coordinates: { lat: 33.4484, lng: -112.0740 },
     areas: ["Scottsdale", "Tempe", "Mesa", "Chandler", "Glendale", "Peoria", "Gilbert", "Surprise", "Prescott", "Flagstaff"],
-    phone: "(602) 555-0123",
+    phone: "(281) 901-7016",
     address: "200 E Washington St, Phoenix, AZ 85004"
   },
   "philadelphia": {
@@ -58,7 +58,7 @@ const citiesData: Record<string, {
     slug: "philadelphia",
     coordinates: { lat: 39.9526, lng: -75.1652 },
     areas: ["Center City", "Fishtown", "Northern Liberties", "South Street", "University City", "Manayunk", "Chestnut Hill", "Bala Cynwyd", "Cherry Hill", "King of Prussia"],
-    phone: "(215) 555-0123",
+    phone: "(281) 901-7016",
     address: "1500 Market St, Philadelphia, PA 19102"
   },
   "san-antonio": {
@@ -67,7 +67,7 @@ const citiesData: Record<string, {
     slug: "san-antonio",
     coordinates: { lat: 29.4241, lng: -98.4936 },
     areas: ["Downtown", "River Walk", "Alamo Heights", "Pearl District", "Southtown", "Stone Oak", "The Medical Center", "West Side", "East Side", "New Braunfels"],
-    phone: "(210) 555-0123",
+    phone: "(281) 901-7016",
     address: "203 S St Mary's St, San Antonio, TX 78205"
   },
   "san-diego": {
@@ -76,7 +76,7 @@ const citiesData: Record<string, {
     slug: "san-diego",
     coordinates: { lat: 32.7157, lng: -117.1611 },
     areas: ["Gaslamp Quarter", "La Jolla", "North Park", "Hillcrest", "Pacific Beach", "Mission Valley", "Coronado", "Encinitas", "Carlsbad", "Del Mar"],
-    phone: "(619) 555-0123",
+    phone: "(281) 901-7016",
     address: "600 B St, San Diego, CA 92101"
   },
   "dallas": {
@@ -85,7 +85,7 @@ const citiesData: Record<string, {
     slug: "dallas",
     coordinates: { lat: 32.7767, lng: -96.7970 },
     areas: ["Downtown", "Uptown", "Deep Ellum", "Bishop Arts", "Katy Trail", "Lakewood", "Highland Park", "Addison", "Plano", "Richardson"],
-    phone: "(214) 555-0123",
+    phone: "(281) 901-7016",
     address: "1900 Commerce St, Dallas, TX 75201"
   },
   "austin": {
@@ -94,7 +94,7 @@ const citiesData: Record<string, {
     slug: "austin",
     coordinates: { lat: 30.2672, lng: -97.7431 },
     areas: ["Downtown", "South Congress", "East Austin", "West Austin", "Domain", "Riverside", "Hyde Park", "Tarrytown", "Cedar Park", "Round Rock"],
-    phone: "(512) 555-0123",
+    phone: "(281) 901-7016",
     address: "1100 Congress Ave, Austin, TX 78701"
   },
   "san-jose": {
@@ -103,7 +103,7 @@ const citiesData: Record<string, {
     slug: "san-jose",
     coordinates: { lat: 37.3382, lng: -121.8863 },
     areas: ["Downtown", "Silicon Valley", "Palo Alto", "Mountain View", "Sunnyvale", "Santa Clara", "Campbell", "Cupertino", "San Mateo", "Fremont"],
-    phone: "(408) 555-0123",
+    phone: "(281) 901-7016",
     address: "200 E Santa Clara St, San Jose, CA 95113"
   },
   "jacksonville": {
@@ -112,7 +112,7 @@ const citiesData: Record<string, {
     slug: "jacksonville",
     coordinates: { lat: 30.3322, lng: -81.6557 },
     areas: ["Downtown", "Riverside", "Avondale", "San Marco", "Jacksonville Beach", "Atlantic Beach", "Ponte Vedra", "St. Augustine", "Orange Park", " Fleming Island"],
-    phone: "(904) 555-0123",
+    phone: "(281) 901-7016",
     address: "117 W Duval St, Jacksonville, FL 32202"
   },
   "fort-worth": {
@@ -121,7 +121,7 @@ const citiesData: Record<string, {
     slug: "fort-worth",
     coordinates: { lat: 32.7555, lng: -97.3308 },
     areas: ["Downtown", "Fort Worth Stockyards", "Cultural District", "Sundance Square", "West 7th", "Magnolia Green", "Arlington", "Keller", "Southlake", "Colleyville"],
-    phone: "(817) 555-0123",
+    phone: "(281) 901-7016",
     address: "1000 Summit Ave, Fort Worth, TX 76102"
   },
   "columbus": {
@@ -130,7 +130,7 @@ const citiesData: Record<string, {
     slug: "columbus",
     coordinates: { lat: 39.9612, lng: -82.9988 },
     areas: ["Downtown", "Short North", "German Village", "Clintonville", "Worthington", "Westerville", "Dublin", "Upper Arlington", "Grandview Heights", "Bexley"],
-    phone: "(614) 555-0123",
+    phone: "(281) 901-7016",
     address: "90 E Broad St, Columbus, OH 43215"
   },
   "charlotte": {
@@ -139,7 +139,7 @@ const citiesData: Record<string, {
     slug: "charlotte",
     coordinates: { lat: 35.2271, lng: -80.8431 },
     areas: ["Uptown", "South End", "NoDa", "Myers Park", "Dilworth", "Cotswold", "East Charlotte", "SouthPark", "Ballantyne", "Concord"],
-    phone: "(704) 555-0123",
+    phone: "(281) 901-7016",
     address: "600 E Trade St, Charlotte, NC 28202"
   },
   "san-francisco": {
@@ -148,7 +148,7 @@ const citiesData: Record<string, {
     slug: "san-francisco",
     coordinates: { lat: 37.7749, lng: -122.4194 },
     areas: ["Financial District", "SOMA", "Mission District", "Nob Hill", "Marina", "Pacific Heights", "Sunset", "Richmond", "Oakland", "Berkeley"],
-    phone: "(415) 555-0123",
+    phone: "(281) 901-7016",
     address: "1 City Hall, San Francisco, CA 94102"
   },
   "indianapolis": {
@@ -157,7 +157,7 @@ const citiesData: Record<string, {
     slug: "indianapolis",
     coordinates: { lat: 39.7684, lng: -86.1581 },
     areas: ["Downtown", "Mass Ave", "Fountain Square", "Broad Ripple", "Carmel", "Fishers", "Greenwood", "Zionsville", "Brownsburg", "Avon"],
-    phone: "(317) 555-0123",
+    phone: "(281) 901-7016",
     address: "200 E Washington St, Indianapolis, IN 46204"
   },
   "seattle": {
@@ -166,7 +166,7 @@ const citiesData: Record<string, {
     slug: "seattle",
     coordinates: { lat: 47.6062, lng: -122.3321 },
     areas: ["Downtown", "Capitol Hill", "Belltown", "South Lake Union", "University District", "Ballard", "West Seattle", "Bellevue", "Redmond", "Kirkland"],
-    phone: "(206) 555-0123",
+    phone: "(281) 901-7016",
     address: "600 4th Ave, Seattle, WA 98104"
   },
   "denver": {
@@ -175,7 +175,7 @@ const citiesData: Record<string, {
     slug: "denver",
     coordinates: { lat: 39.7392, lng: -104.9903 },
     areas: ["Downtown", "LoDo", "Capitol Hill", "Highlands", "RiNo", "Washington Park", "Cherry Creek", "Boulder", "Aurora", "Lakewood"],
-    phone: "(720) 555-0123",
+    phone: "(281) 901-7016",
     address: "1437 Bannock St, Denver, CO 80202"
   },
   "washington-dc": {
@@ -184,7 +184,7 @@ const citiesData: Record<string, {
     slug: "washington-dc",
     coordinates: { lat: 38.9072, lng: -77.0369 },
     areas: ["Downtown", "Georgetown", "Capitol Hill", "Dupont Circle", "Adams Morgan", "U Street", "Alexandria", "Arlington", "Bethesda", "Silver Spring"],
-    phone: "(202) 555-0123",
+    phone: "(281) 901-7016",
     address: "1350 Pennsylvania Ave NW, Washington, DC 20004"
   },
   "boston": {
@@ -193,7 +193,7 @@ const citiesData: Record<string, {
     slug: "boston",
     coordinates: { lat: 42.3601, lng: -71.0589 },
     areas: ["Downtown", "Back Bay", "North End", "South End", "Cambridge", "Somerville", "Brookline", "Newton", "Quincy", "Salem"],
-    phone: "(617) 555-0123",
+    phone: "(281) 901-7016",
     address: "City Hall Plaza, Boston, MA 02201"
   },
   "nashville": {
@@ -202,7 +202,7 @@ const citiesData: Record<string, {
     slug: "nashville",
     coordinates: { lat: 36.1627, lng: -86.7816 },
     areas: ["Downtown", "Music Row", "Germantown", "East Nashville", "The Gulch", "12 South", "Green Hills", "Bellevue", "Franklin", "Murfreesboro"],
-    phone: "(615) 555-0123",
+    phone: "(281) 901-7016",
     address: "100 1st Ave N, Nashville, TN 37201"
   },
   "baltimore": {
@@ -211,7 +211,7 @@ const citiesData: Record<string, {
     slug: "baltimore",
     coordinates: { lat: 39.2904, lng: -76.6122 },
     areas: ["Inner Harbor", "Fells Point", "Mount Vernon", "Hampden", "Canton", "Locust Point", "Columbia", "Towson", "Annapolis", "Bethesda"],
-    phone: "(410) 555-0123",
+    phone: "(281) 901-7016",
     address: "100 N Holliday St, Baltimore, MD 21202"
   },
   "portland": {
@@ -220,7 +220,7 @@ const citiesData: Record<string, {
     slug: "portland",
     coordinates: { lat: 45.5152, lng: -122.6784 },
     areas: ["Downtown", "Pearl District", "NW 23rd", "Sellwood", "Alberta Arts", "Hawthorne", "Brooklyn", "Beaverton", "Lake Oswego", "Vancouver"],
-    phone: "(503) 555-0123",
+    phone: "(281) 901-7016",
     address: "1221 SW 4th Ave, Portland, OR 97204"
   },
   "las-vegas": {
@@ -229,7 +229,7 @@ const citiesData: Record<string, {
     slug: "las-vegas",
     coordinates: { lat: 36.1699, lng: -115.1398 },
     areas: ["Strip", "Downtown", "Summerlin", "Henderson", "Enterprise", "Paradise", "North Las Vegas", "Spring Valley", "Blue Diamond", "Laughlin"],
-    phone: "(702) 555-0123",
+    phone: "(281) 901-7016",
     address: "495 S Main St, Las Vegas, NV 89101"
   },
   "miami": {
@@ -238,7 +238,7 @@ const citiesData: Record<string, {
     slug: "miami",
     coordinates: { lat: 25.7617, lng: -80.1918 },
     areas: ["Downtown", "Brickell", "Wynwood", "Design District", "Coral Gables", "South Beach", "Key Biscayne", "Coconut Grove", "Aventura", "Fort Lauderdale"],
-    phone: "(305) 555-0123",
+    phone: "(281) 901-7016",
     address: "3500 Pan American Dr, Miami, FL 33133"
   },
   "atlanta": {
@@ -247,19 +247,19 @@ const citiesData: Record<string, {
     slug: "atlanta",
     coordinates: { lat: 33.7490, lng: -84.3880 },
     areas: ["Downtown", "Midtown", "Buckhead", "Virginia Highland", "Inman Park", "Old Fourth Ward", "Poncey-Highland", "Decatur", "Sandy Springs", "Alpharetta"],
-    phone: "(404) 555-0123",
+    phone: "(281) 901-7016",
     address: "55 Trinity Ave SW, Atlanta, GA 30303"
   }
 };
 
 // Services - same for all cities
 const services = [
-  { icon: Globe, title: "Web Design", key: "webDesign", features: ["Custom Website Design", "Responsive Mobile Design", "UX/UI Optimization", "Conversion Rate Optimization"] },
-  { icon: Search, title: "SEO Services", key: "seo", features: ["Local SEO", "Google Business Profile", "On-Page SEO", "Citation Building"] },
-  { icon: TrendingUp, title: "Digital Marketing", key: "marketing", features: ["PPC Advertising", "Social Media Marketing", "Email Marketing", "Content Marketing"] },
-  { icon: Zap, title: "App Development", key: "app", features: ["iOS Development", "Android Development", "React Native", "App Store Optimization"] },
-  { icon: Award, title: "Brand Identity", key: "brand", features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Brand Strategy"] },
-  { icon: Target, title: "Analytics & ROI", key: "analytics", features: ["Analytics Setup", "ROI Tracking", "Performance Reports", "A/B Testing"] }
+  { icon: Globe, title: "Web Design", key: "webDesign", link: "/services/web-development", features: ["Custom Website Design", "Responsive Mobile Design", "UX/UI Optimization", "Conversion Rate Optimization"] },
+  { icon: Search, title: "SEO Services", key: "seo", link: "/services/seo-analytics", features: ["Local SEO", "Google Business Profile", "On-Page SEO", "Citation Building"] },
+  { icon: TrendingUp, title: "Digital Marketing", key: "marketing", link: "/services/digital-marketing", features: ["PPC Advertising", "Social Media Marketing", "Email Marketing", "Content Marketing"] },
+  { icon: Zap, title: "App Development", key: "app", link: "/services/mobile-apps", features: ["iOS Development", "Android Development", "React Native", "App Store Optimization"] },
+  { icon: Award, title: "Brand Identity", key: "brand", link: "/services/brand-identity", features: ["Logo Design", "Brand Guidelines", "Visual Identity", "Brand Strategy"] },
+  { icon: Target, title: "Analytics & ROI", key: "analytics", link: "/services/seo-analytics", features: ["Analytics Setup", "ROI Tracking", "Performance Reports", "A/B Testing"] }
 ];
 
 const reasons = [
@@ -382,6 +382,11 @@ export function CitySEOPage() {
   const params = useParams<{ "city-seo": string }>();
   // Strip "-seo" suffix from URL param (e.g., "new-york-seo" -> "new-york")
   const cityKey = params["city-seo"]?.replace(/-seo$/, "") || "austin";
+  
+  // Scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [cityKey]);
   
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
@@ -561,7 +566,7 @@ export function CitySEOPage() {
                         </li>
                       ))}
                     </ul>
-                    <Link to="/contact" className="inline-flex items-center gap-1 text-red-600 font-medium text-sm group-hover:gap-2 transition-all">
+                    <Link to={service.link} className="inline-flex items-center gap-1 text-red-600 font-medium text-sm group-hover:gap-2 transition-all">
                       Learn More <ArrowRight className="w-4 h-4" />
                     </Link>
                   </motion.div>

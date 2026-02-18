@@ -419,9 +419,9 @@ export default function BrandIdentity() {
   return (
     <>
       <SEOHead 
-        title="Brand Identity Design Services | Cardinal" 
-        description="Transform your brand with Cardinal. Premium logos, guidelines, visual systems. 200+ brands transformed. Free consultation." 
-        keywords={["brand identity design", "logo design", "brand guidelines"]} 
+        title="Brand Identity & Logo Design Agency Houston | Cardinal Consulting" 
+        description="Transform your brand with Cardinal. Premium logos, brand guidelines, visual systems, and complete brand identity packages. 200+ brands transformed. Free consultation." 
+        keywords={["brand identity design", "logo design agency", "brand guidelines", "visual identity design", "brand strategy", "Houston branding agency", "logo design Houston", "brand identity package", "corporate branding", "startup branding", "rebranding agency", "brand book design", "color palette design", "typography design", "brand system design", "packaging design", "business card design", "brand consulting", "brand positioning", "premium branding agency"]} 
         schemas={schemas} 
         url={serviceUrl} 
       />

@@ -153,10 +153,10 @@ export function Footer() {
             © {new Date().getFullYear()} Cardinal Consulting. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/privacy-policy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <a href="/terms-of-service" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Terms of Service
             </a>
           </div>

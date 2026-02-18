@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function LegalIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Law Firm Website Design & Legal Digital Marketing | Cardinal Consulting",
+      description: "Professional law firm websites and digital marketing for attorneys. Convert more clients with a powerful online presence.",
+      url: `${siteConfig.url}/industry/legal`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "Legal", url: `${siteConfig.url}/industry/legal` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Legal Website Design & Marketing | Cardinal Consulting"
-        description="Professional law firm websites and digital marketing for attorneys. Convert more clients with a powerful online presence."
-        keywords={["law firm website design", "attorney website", "legal marketing", "lawyer SEO", "personal injury lawyer website"]}
+        title="Law Firm Website Design & Legal Digital Marketing | Cardinal Consulting"
+        description="Professional law firm websites and attorney digital marketing that convert visitors into clients. Expert legal SEO, case intake forms, and reputation management. Houston & nationwide."
+        keywords={["law firm website design", "attorney website design", "legal marketing agency", "lawyer SEO", "personal injury lawyer website", "law firm digital marketing", "attorney SEO services", "legal content marketing", "law firm web development", "criminal defense lawyer website", "family law website", "immigration attorney website", "Houston law firm website", "legal lead generation", "bar compliant website"]}
+        url={`${siteConfig.url}/industry/legal`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

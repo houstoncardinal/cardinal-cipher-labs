@@ -148,7 +148,7 @@ export default function DigitalMarketing() {
 
   return (
     <>
-      <SEOHead title="Digital Marketing Services" description="350% average ROI digital marketing. PPC, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing", "PPC advertising", "social media marketing", "email marketing", "content strategy", "Google Ads management", "Houston digital marketing", "Houston digital marketing agency", "PPC management services", "social media marketing company", "email marketing automation", "B2B digital marketing"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="Digital Marketing & Paid Advertising Agency Houston | Cardinal Consulting" description="350% average ROI digital marketing. PPC, Google Ads, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing agency", "PPC advertising agency", "Google Ads management", "social media marketing", "email marketing automation", "content marketing strategy", "Houston digital marketing agency", "paid advertising agency Houston", "Facebook Ads management", "LinkedIn advertising", "B2B digital marketing", "e-commerce marketing", "marketing ROI tracking", "multi-channel marketing", "performance marketing agency", "Houston PPC agency", "paid search management", "social media advertising", "conversion rate optimization", "marketing analytics"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav />
         <main>

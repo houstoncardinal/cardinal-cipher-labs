@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function HealthcareIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Healthcare Website Design & Digital Marketing | Cardinal Consulting",
+      description: "Specialized healthcare web design and digital marketing services for medical practices, clinics, and healthcare providers. HIPAA-compliant websites that attract patients.",
+      url: `${siteConfig.url}/industry/healthcare`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "Healthcare", url: `${siteConfig.url}/industry/healthcare` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
         title="Healthcare Website Design & Digital Marketing | Cardinal Consulting"
-        description="Specialized healthcare web design and digital marketing services for medical practices, clinics, and healthcare providers. HIPAA-compliant websites that attract patients."
-        keywords={["healthcare website design", "medical website", "doctor website design", "clinic website", "HIPAA compliant website", "healthcare marketing", "medical SEO"]}
+        description="HIPAA-compliant healthcare websites that attract more patients. Expert medical web design, patient portal integration, medical SEO, and healthcare digital marketing. Houston & nationwide."
+        keywords={["healthcare website design", "medical website design", "doctor website design", "clinic website", "HIPAA compliant website", "healthcare digital marketing", "medical SEO", "patient portal development", "healthcare web development Houston", "medical practice website", "hospital website design", "telehealth website", "healthcare app development", "medical content marketing", "physician website design"]}
+        url={`${siteConfig.url}/industry/healthcare`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

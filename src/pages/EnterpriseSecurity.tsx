@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Shield, Lock, CheckCircle2, ArrowRight, Server, FileKey, Eye, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const features = [
   { icon: Lock, title: "SSL/TLS Encryption", description: "Enterprise-grade encryption for all data in transit." },
@@ -17,12 +19,27 @@ const features = [
 const certifications = ["HIPAA", "SOC 2", "PCI DSS", "GDPR", "ISO 27001"];
 
 export default function EnterpriseSecurity() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Enterprise Security & Compliance | Secure Web Development",
+      description: "Bank-level security for your website. SSL, HIPAA, SOC 2 compliant web development. Protect your business and customer data with enterprise-grade security.",
+      url: `${siteConfig.url}/enterprise-security`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Enterprise Security", url: `${siteConfig.url}/enterprise-security` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Enterprise Security & Compliance | Secure Web Development"
-        description="Bank-level security for your website. SSL, HIPAA, SOC 2 compliant web development. Protect your business and customer data with enterprise-grade security."
-        keywords={["enterprise security", "HIPAA compliant web development", "SOC 2 security", "SSL encryption", "secure web development", "data protection"]}
+        title="Enterprise Security & Compliance Web Development | Cardinal Consulting"
+        description="Bank-level security for your website and applications. HIPAA, SOC 2, PCI DSS, and GDPR compliant web development. Protect your business and customer data with enterprise-grade security."
+        keywords={["enterprise security web development", "HIPAA compliant web development", "SOC 2 compliant website", "SSL encryption", "secure web development", "data protection website", "PCI DSS compliant website", "GDPR compliant website", "cybersecurity web development", "secure app development", "enterprise compliance", "ISO 27001 website", "secure Houston web developer", "data security website", "enterprise web security"]}
+        url={`${siteConfig.url}/enterprise-security`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

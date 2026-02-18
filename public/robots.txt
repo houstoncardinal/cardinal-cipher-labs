@@ -26,4 +26,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin/*
 
-Sitemap: https://visitcardinal.com/sitemap.xml
+Sitemap: https://www.visitcardinal.com/sitemap.xml

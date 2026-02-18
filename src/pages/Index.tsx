@@ -12,6 +12,7 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { generateAllHomePageSchemas } from "@/lib/schema-generators";
+import { siteConfig } from "@/lib/seo-config";
 
 const Index = () => {
   // Generate all comprehensive E-E-A-T compliant schemas
@@ -20,8 +21,9 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="Web Design & Digital Marketing Agency Houston TX"
-        description="Cardinal Consulting is Houston's top-rated web design and digital marketing agency. We build custom websites, mobile apps, and SEO strategies that grow your business. Serving Houston and nationwide. Call (281) 901-7016."
+        title="Web Design & App Development Agency Houston TX | Cardinal Consulting"
+        description="Cardinal Consulting is Houston's top-rated web design, app development, and digital marketing agency. We build custom websites, mobile apps, SEO strategies, and brand identities that grow your business. Serving Houston and nationwide. Call (281) 901-7016."
+        url={siteConfig.url}
         schemas={schemas}
         keywords={[
           'web design Houston',
@@ -39,6 +41,11 @@ const Index = () => {
           'brand identity design',
           'UX UI design agency',
           'Houston digital agency',
+          'web development agency',
+          'app development agency Houston',
+          'paid advertising agency Houston',
+          'branding agency Houston',
+          'Houston SEO agency',
         ]}
       />
 

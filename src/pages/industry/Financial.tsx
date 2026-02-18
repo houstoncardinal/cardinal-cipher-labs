@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function FinancialIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Financial Services Website Design & Marketing | Cardinal Consulting",
+      description: "Professional websites for financial advisors, accountants, and fintech companies. Attract more clients with a trusted online presence.",
+      url: `${siteConfig.url}/industry/financial`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "Financial", url: `${siteConfig.url}/industry/financial` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Financial Services Website Design & Marketing | Cardinal Consulting"
-        description="Professional websites for financial advisors, accountants, and fintech companies. Attract more clients with a trusted online presence."
-        keywords={["financial website design", "accountant website", "advisor marketing", "fintech web development", "bookkeeping firm website"]}
+        title="Financial Services Website Design & Digital Marketing | Cardinal Consulting"
+        description="Professional websites for financial advisors, accountants, CPAs, and fintech companies. Build trust, attract clients, and grow your financial practice with expert web design and SEO."
+        keywords={["financial services website design", "financial advisor website", "accountant website design", "CPA firm website", "fintech web development", "financial marketing agency", "wealth management website", "investment firm website", "bookkeeping firm website", "financial SEO services", "Houston financial website", "SEC compliant website", "financial content marketing", "financial lead generation", "banking website design"]}
+        url={`${siteConfig.url}/industry/financial`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

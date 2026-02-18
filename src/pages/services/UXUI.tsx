@@ -148,7 +148,7 @@ export default function UXUI() {
 
   return (
     <>
-      <SEOHead title="UX/UI Design & Experience Optimization" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers results." keywords={["UX design", "UI design", "user experience", "interface design", "conversion optimization", "A/B testing", "design system", "accessibility audit", "UX design agency Houston", "UI design services", "user experience consulting", "conversion rate optimization agency", "design system development"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="UX/UI Design Agency Houston | User Experience & Interface Design | Cardinal Consulting" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers measurable results." keywords={["UX design agency", "UI design services", "user experience design", "interface design", "conversion rate optimization", "A/B testing services", "design system development", "accessibility audit WCAG", "UX design agency Houston", "user experience consulting", "Figma design agency", "product design agency", "mobile UX design", "web UX design", "usability testing", "user research services", "prototype design", "UX audit services", "information architecture", "interaction design"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav />
         <main>

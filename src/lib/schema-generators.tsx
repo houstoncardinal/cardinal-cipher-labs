@@ -249,7 +249,7 @@ export function generateServiceSchemas() {
         position: i + 1,
       })),
     },
-    termsOfService: `${siteConfig.url}/terms`,
+    termsOfService: `${siteConfig.url}/terms-of-service`,
     providerMobility: 'dynamic',
   }));
 }

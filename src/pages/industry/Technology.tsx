@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function TechnologyIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Technology Company Website Design & Marketing | Cardinal Consulting",
+      description: "Modern websites for technology companies, SaaS, and IT services. Stand out in the tech industry with cutting-edge digital presence.",
+      url: `${siteConfig.url}/industry/technology`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "Technology", url: `${siteConfig.url}/industry/technology` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Technology Company Website Design & Marketing | Cardinal Consulting"
-        description="Modern websites for technology companies, SaaS, and IT services. Stand out in the tech industry with cutting-edge digital presence."
-        keywords={["technology website design", "SaaS web development", "IT company website", "tech startup marketing", "software company website"]}
+        title="Technology Company Website Design & SaaS Marketing | Cardinal Consulting"
+        description="Modern websites for technology companies, SaaS products, and IT services. Showcase your innovation, generate demo requests, and grow your tech business with expert web design and digital marketing."
+        keywords={["technology company website design", "SaaS website design", "IT company website", "tech startup marketing", "software company website", "SaaS marketing agency", "tech SEO services", "developer documentation website", "product demo website", "IT services marketing", "Houston tech company website", "startup web design", "B2B tech marketing", "software product website", "cloud services website"]}
+        url={`${siteConfig.url}/industry/technology`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

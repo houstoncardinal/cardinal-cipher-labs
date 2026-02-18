@@ -3,171 +3,272 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Homepage -->
+  <!-- ===================== HOMEPAGE ===================== -->
   <url>
-    <loc>https://visitcardinal.com/</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Main Pages -->
+  <!-- ===================== MAIN PAGES ===================== -->
   <url>
-    <loc>https://visitcardinal.com/about</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/about</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/portfolio</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/portfolio</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/contact</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/contact</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/blog</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/services</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/pricing</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/blog</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/careers</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/careers</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+
+  <!-- ===================== LEGAL PAGES ===================== -->
   <url>
-    <loc>https://visitcardinal.com/pricing</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/privacy-policy</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/terms-of-service</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- ===================== SERVICE PAGES ===================== -->
+  <url>
+    <loc>https://www.visitcardinal.com/services/web-development</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/services/mobile-apps</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/services/seo-analytics</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/services/digital-marketing</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/services/brand-identity</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/services/ux-ui</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ===================== INDUSTRY PAGES ===================== -->
+  <url>
+    <loc>https://www.visitcardinal.com/industry/healthcare</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/industry/legal</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/industry/financial</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/industry/technology</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/industry/ai-automation</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/industry/construction</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ===================== FEATURE / ADVANTAGE PAGES ===================== -->
+  <url>
+    <loc>https://www.visitcardinal.com/rapid-delivery</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/rush-prototyping</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/enterprise-security</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/same-day-support</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/custom-design</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/modern-tech-stack</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- SEO Landing Pages -->
+  <!-- ===================== SEO LANDING PAGES ===================== -->
   <url>
-    <loc>https://visitcardinal.com/houston-seo</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/houston-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Service Pages (High Priority) -->
   <url>
-    <loc>https://visitcardinal.com/services/web-development</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/services/mobile-apps</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/services/seo-analytics</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/services/digital-marketing</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/services/brand-identity</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/services/ux-ui</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Industry Pages -->
-  <url>
-    <loc>https://visitcardinal.com/industry/healthcare</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/industry/legal</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/industry/financial</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/industry/technology</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/industry/ai-automation</loc>
-    <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://visitcardinal.com/industry/construction</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/houston-services</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Feature/Benefit Pages -->
+  <!-- ===================== CITY SEO PAGES ===================== -->
   <url>
-    <loc>https://visitcardinal.com/rapid-delivery</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/dallas-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/austin-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/san-antonio-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/fort-worth-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/rush-prototyping</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/new-york-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/enterprise-security</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/los-angeles-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/same-day-support</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/chicago-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/custom-design</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/miami-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://visitcardinal.com/modern-tech-stack</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://www.visitcardinal.com/phoenix-seo</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.visitcardinal.com/denver-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/seattle-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.visitcardinal.com/atlanta-seo</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

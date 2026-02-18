@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Palette, Sparkles, ArrowRight, CheckCircle2, Layers, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const features = [
   { title: "100% Custom", description: "No templates. Every pixel designed for your brand." },
@@ -15,12 +17,27 @@ const features = [
 ];
 
 export default function CustomDesign() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Custom Web Design | 100% Bespoke Website Design",
+      description: "100% custom website design tailored to your brand. No templates, no cookie-cutter solutions. Get a unique, professional design that stands out.",
+      url: `${siteConfig.url}/custom-design`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Custom Design", url: `${siteConfig.url}/custom-design` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Custom Web Design | 100% Bespoke Website Design"
-        description="100% custom website design tailored to your brand. No templates, no cookie-cutter solutions. Get a unique, professional design that stands out."
-        keywords={["custom web design", "bespoke design", "unique website design", "custom branding", "non-template design", "Houston web design"]}
+        title="100% Custom Web Design Agency | Bespoke Website Design Houston"
+        description="100% custom website design tailored to your brand. No templates, no cookie-cutter solutions. Every pixel crafted from scratch for a unique, professional design that converts visitors into clients."
+        keywords={["custom web design agency", "bespoke website design", "unique website design", "custom brand design", "no template web design", "Houston custom web design", "custom website development", "luxury web design", "premium web design agency", "custom UI design", "brand identity web design", "custom landing page design", "high-end web design", "custom e-commerce design", "tailored website design"]}
+        url={`${siteConfig.url}/custom-design`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

@@ -11,6 +11,8 @@ import {
   TrendingUp, Award, CheckCircle2
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const benefits = [
   "Launch faster than your competition",
@@ -34,12 +36,27 @@ const testimonials = [
 ];
 
 export default function RapidDelivery() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Fast Website Delivery in 72 Hours | Rapid Web Development Services",
+      description: "Get your website delivered in as little as 72 hours. Our rapid web development services help you launch faster, compete sooner, and start generating results.",
+      url: `${siteConfig.url}/rapid-delivery`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Rapid Delivery", url: `${siteConfig.url}/rapid-delivery` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Fast Website Delivery in 72 Hours | Rapid Web Development Services"
-        description="Get your website delivered in as little as 72 hours. Our rapid web development services help you launch faster, compete sooner, and start generating results. Based in Houston, serving nationwide."
-        keywords={["rapid web development", "fast website delivery", "72 hour website", "quick web design", "expedited web development", "fast launch website", "Houston web developer"]}
+        title="Fast Website Delivery in 72 Hours | Rapid Web Development Houston"
+        description="Get your website delivered in as little as 72 hours. Our rapid web development services help you launch faster, compete sooner, and start generating results. Houston & nationwide."
+        keywords={["rapid web development", "fast website delivery", "72 hour website", "quick web design", "expedited web development", "fast launch website", "Houston web developer", "rush website design", "quick turnaround web design", "fast website build", "website in a week", "emergency web development", "same week website", "rapid website launch", "fast web agency Houston"]}
+        url={`${siteConfig.url}/rapid-delivery`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

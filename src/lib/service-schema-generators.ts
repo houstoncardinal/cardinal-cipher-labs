@@ -189,7 +189,7 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
     })),
     ...(config.duration && { estimatedDuration: config.duration }),
     ...(config.keywords && { keywords: config.keywords.join(', ') }),
-    termsOfService: `${siteConfig.url}/terms`,
+    termsOfService: `${siteConfig.url}/terms-of-service`,
     providerMobility: 'dynamic',
     broker: {
       '@type': 'Organization',
@@ -314,7 +314,39 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
     },
   });
 
-  // 8. ProfessionalService Schema (local SEO boost)
+  // 8. SoftwareApplication Schema (for app/web dev pages - boosts rich results)
+  if (config.serviceType === 'SoftwareDevelopment' || config.serviceType === 'WebDevelopment') {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      '@id': `${config.serviceUrl}#software`,
+      name: config.serviceName,
+      description: config.serviceDescription,
+      applicationCategory: config.serviceType === 'SoftwareDevelopment' ? 'MobileApplication' : 'WebApplication',
+      operatingSystem: config.serviceType === 'SoftwareDevelopment' ? 'iOS, Android' : 'Web Browser',
+      offers: {
+        '@type': 'Offer',
+        price: config.offers[0]?.price.replace(/[^0-9.]/g, '') || '0',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: config.aggregateRating.ratingValue,
+        reviewCount: config.aggregateRating.reviewCount,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      author: {
+        '@type': 'Organization',
+        '@id': `${siteConfig.url}#organization`,
+        name: siteConfig.name,
+      },
+      url: config.serviceUrl,
+    });
+  }
+
+  // 9. ProfessionalService Schema (local SEO boost)
   schemas.push({
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',

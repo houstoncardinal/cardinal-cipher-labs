@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function AIAutomationIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "AI & Automation Website Design | Cardinal Consulting",
+      description: "Modern websites for AI companies, automation services, and tech startups. Showcase your innovation with cutting-edge digital presence.",
+      url: `${siteConfig.url}/industry/ai-automation`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "AI & Automation", url: `${siteConfig.url}/industry/ai-automation` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="AI & Automation Website Design | Cardinal Consulting"
-        description="Modern websites for AI companies, automation services, and tech startups. Showcase your innovation with cutting-edge digital presence."
-        keywords={["AI website design", "automation company website", "machine learning web development", "AI startup marketing", "chatbot development website"]}
+        title="AI & Automation Company Website Design | Cardinal Consulting"
+        description="Cutting-edge websites for AI companies, machine learning startups, and automation services. Showcase your technology, attract investors, and generate leads with expert web design and digital marketing."
+        keywords={["AI company website design", "automation company website", "machine learning web development", "AI startup marketing", "chatbot development website", "artificial intelligence marketing", "AI SaaS website", "automation platform website", "AI product launch", "ML company branding", "Houston AI company website", "AI lead generation", "automation SEO", "AI content marketing", "robotics company website"]}
+        url={`${siteConfig.url}/industry/ai-automation`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

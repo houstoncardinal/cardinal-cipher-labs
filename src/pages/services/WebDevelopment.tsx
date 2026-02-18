@@ -161,23 +161,29 @@ export default function WebDevelopment() {
   return (
     <>
       <SEOHead
-        title="Custom Website Development Services"
-        description="Professional custom website development with React, Next.js & TypeScript. Responsive, fast, SEO-optimized websites with 99.9% uptime. Get a free consultation."
+        title="Web Development Services Houston | Custom Website Development Agency"
+        description="Cardinal Consulting — Houston's #1 web development agency. Custom websites built with React & Next.js. 150+ sites launched, 99.9% uptime, 98 Lighthouse score. Free consultation."
         keywords={[
-          "custom website development",
-          "web development services",
-          "responsive web design",
-          "enterprise websites",
-          "React development",
-          "Next.js development",
-          "SEO optimized websites",
-          "e-commerce development",
-          "Houston web developer",
+          "web development Houston",
+          "web development agency Houston",
           "custom website development Houston",
-          "enterprise web application development",
-          "React Next.js development agency",
+          "Houston web developer",
+          "web development services",
+          "custom website development",
+          "React web development agency",
+          "Next.js development agency",
+          "enterprise web development",
+          "responsive web design Houston",
+          "e-commerce website development Houston",
           "HIPAA compliant web development",
-          "e-commerce website development",
+          "enterprise web application development",
+          "professional website development",
+          "small business website development",
+          "website redesign Houston",
+          "web design and development agency",
+          "full stack web development",
+          "affordable web development Houston",
+          "best web development company Houston",
         ]}
         schemas={schemas}
         url={serviceUrl}

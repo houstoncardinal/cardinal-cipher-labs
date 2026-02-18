@@ -44,6 +44,8 @@ import SameDaySupport from "./pages/SameDaySupport";
 import CustomDesign from "./pages/CustomDesign";
 import ModernTechStack from "./pages/ModernTechStack";
 import ServicesPage from "./pages/ServicesPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 const queryClient = new QueryClient();
 
@@ -77,8 +79,8 @@ const App = () => (
               <Route path="/industry/technology" element={<TechnologyIndustry />} />
               <Route path="/industry/ai-automation" element={<AIAutomationIndustry />} />
               <Route path="/industry/construction" element={<ConstructionIndustry />} />
-              <Route path="/houston-seo" element={<HoustonSEOPage />} />
               <Route path="/:city-seo" element={<CitySEOPage />} />
+              <Route path="/houston-seo" element={<HoustonSEOPage />} />
               <Route path="/rapid-delivery" element={<RapidDelivery />} />
               <Route path="/rush-prototyping" element={<RushPrototyping />} />
               <Route path="/enterprise-security" element={<EnterpriseSecurity />} />
@@ -86,6 +88,8 @@ const App = () => (
               <Route path="/custom-design" element={<CustomDesign />} />
               <Route path="/modern-tech-stack" element={<ModernTechStack />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/admin/login" element={<AdminLogin />} />
 
               {/* Protected Admin Routes */}

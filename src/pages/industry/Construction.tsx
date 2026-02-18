@@ -3,14 +3,32 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 export function ConstructionIndustry() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Construction Company Website Design | Cardinal Consulting",
+      description: "Professional websites for construction companies, contractors, and builders. Showcase your projects with a powerful online presence.",
+      url: `${siteConfig.url}/industry/construction`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Industries", url: `${siteConfig.url}/#industries` },
+      { name: "Construction", url: `${siteConfig.url}/industry/construction` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Construction Company Website Design | Cardinal Consulting"
-        description="Professional websites for construction companies, contractors, and builders. Showcase your projects with a powerful online presence."
-        keywords={["construction website design", "contractor website", "builder marketing", "construction company website", "renovation company website"]}
+        title="Construction Company Website Design & Contractor Marketing | Cardinal Consulting"
+        description="Professional websites for construction companies, general contractors, and builders. Showcase your projects, win more bids, and dominate local search with expert web design and contractor SEO."
+        keywords={["construction company website design", "contractor website design", "builder marketing agency", "general contractor website", "renovation company website", "construction SEO services", "construction digital marketing", "project portfolio website", "construction lead generation", "home builder website", "commercial contractor website", "Houston construction website", "roofing company website", "HVAC company website", "plumbing company website"]}
+        url={`${siteConfig.url}/industry/construction`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />

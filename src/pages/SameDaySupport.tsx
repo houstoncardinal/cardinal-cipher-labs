@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Clock, Headphones, MessageCircle, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/seo-config";
+import { generateOrganizationSchema, generateWebPageSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 const benefits = [
   { title: "Same-Day Response", description: "Get answers within hours, not days." },
@@ -15,12 +17,27 @@ const benefits = [
 ];
 
 export default function SameDaySupport() {
+  const schemas = [
+    generateOrganizationSchema(),
+    generateWebPageSchema({
+      name: "Same-Day Support & Fast Response | 24/7 Customer Service",
+      description: "Get same-day support responses from our dedicated team. Fast, responsive web development support when you need it.",
+      url: `${siteConfig.url}/same-day-support`,
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Same-Day Support", url: `${siteConfig.url}/same-day-support` },
+    ]),
+  ];
+
   return (
     <>
       <SEOHead
-        title="Same-Day Support & Fast Response | 24/7 Customer Service"
-        description="Get same-day support responses from our dedicated team. Fast, responsive web development support when you need it. No waiting, no frustration."
-        keywords={["same day support", "fast customer service", "web development support", "responsive support", "quick help", "Houston web developer support"]}
+        title="Same-Day Web Development Support | Fast Response Team | Cardinal Consulting"
+        description="Get same-day support responses from our dedicated web development team. Fast, responsive support when you need it most. No ticket queues, no automated responses—real help from real people."
+        keywords={["same day web support", "fast web development support", "web development customer service", "responsive web agency", "quick website help", "Houston web developer support", "website maintenance support", "emergency website fix", "website down support", "dedicated web team", "priority web support", "web agency support Houston", "fast website updates", "website bug fix", "web development help"]}
+        url={`${siteConfig.url}/same-day-support`}
+        schemas={schemas}
       />
       <div className="min-h-screen bg-white">
         <Header />
