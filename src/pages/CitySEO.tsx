@@ -380,7 +380,8 @@ interface CitySEOProps {
 
 export function CitySEOPage() {
   const params = useParams<{ "city-seo": string }>();
-  const cityKey = params["city-seo"] || "austin";
+  // Strip "-seo" suffix from URL param (e.g., "new-york-seo" -> "new-york")
+  const cityKey = params["city-seo"]?.replace(/-seo$/, "") || "austin";
   
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
