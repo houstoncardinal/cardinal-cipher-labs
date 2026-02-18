@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -430,7 +429,7 @@ export default function BrandIdentity() {
       <div className="min-h-screen bg-[#FAFAFA]">
         <Header />
         <VerticalNav />
-        <MobileToolbar />
+        
         
         <main>
           {/* Hero - Conversion Focused */}

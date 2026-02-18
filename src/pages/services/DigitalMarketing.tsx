@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -151,7 +150,7 @@ export default function DigitalMarketing() {
     <>
       <SEOHead title="Digital Marketing Services" description="350% average ROI digital marketing. PPC, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing", "PPC advertising", "social media marketing", "email marketing", "content strategy", "Google Ads management", "Houston digital marketing", "Houston digital marketing agency", "PPC management services", "social media marketing company", "email marketing automation", "B2B digital marketing"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
-        <Header /><VerticalNav /><MobileToolbar />
+        <Header /><VerticalNav />
         <main>
           <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />

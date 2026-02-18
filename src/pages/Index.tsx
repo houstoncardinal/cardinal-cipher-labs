@@ -1,6 +1,5 @@
 import { Header } from "@/components/layout/Header";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Hero } from "@/components/sections/Hero";
 import { Clients } from "@/components/sections/Clients";
 import { Services } from "@/components/sections/Services";
@@ -46,7 +45,6 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <VerticalNav />
-        <MobileToolbar />
         <main>
           <section id="hero"><Hero /></section>
           <section id="clients"><Clients /></section>

@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -130,7 +129,7 @@ export default function MobileApps() {
       <div className="min-h-screen bg-background">
         <Header />
         <VerticalNav />
-        <MobileToolbar />
+        
         <main>
           {/* Hero */}
           <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">

@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
@@ -304,7 +303,7 @@ export default function Financial() {
 
       <Header />
       <VerticalNav />
-      <MobileToolbar />
+      
 
       <main className="min-h-screen bg-white text-gray-900">
         {/* ── Hero ─────────────────────────────────────────────── */}

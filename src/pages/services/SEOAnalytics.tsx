@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -151,7 +150,7 @@ export default function SEOAnalytics() {
     <>
       <SEOHead title="SEO & Analytics Services" description="Drive 250% more organic traffic with expert SEO. Technical audits, schema markup, link building & analytics. 85% of clients reach page 1. Free SEO audit." keywords={["SEO services", "search engine optimization", "technical SEO", "schema markup", "link building", "SEO analytics", "Houston SEO company", "local SEO", "Houston SEO company", "technical SEO audit services", "enterprise SEO agency", "schema markup implementation", "Google Business Profile optimization"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
-        <Header /><VerticalNav /><MobileToolbar />
+        <Header /><VerticalNav />
         <main>
           {/* Hero */}
           <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">

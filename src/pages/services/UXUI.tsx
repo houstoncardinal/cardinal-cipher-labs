@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -151,7 +150,7 @@ export default function UXUI() {
     <>
       <SEOHead title="UX/UI Design & Experience Optimization" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers results." keywords={["UX design", "UI design", "user experience", "interface design", "conversion optimization", "A/B testing", "design system", "accessibility audit", "UX design agency Houston", "UI design services", "user experience consulting", "conversion rate optimization agency", "design system development"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
-        <Header /><VerticalNav /><MobileToolbar />
+        <Header /><VerticalNav />
         <main>
           <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />

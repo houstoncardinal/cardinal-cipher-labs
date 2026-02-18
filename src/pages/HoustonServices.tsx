@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { VerticalNav } from "@/components/layout/VerticalNav";
-import { MobileToolbar } from "@/components/layout/MobileToolbar";
 import { SEOHead } from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -609,7 +608,6 @@ export default function HoustonServices() {
       <div className="min-h-screen bg-white">
         <Header />
         <VerticalNav />
-        <MobileToolbar />
 
         <main>
           {/* ========================================= */}
