@@ -25,7 +25,7 @@ export function generateLocalBusinessSchema() {
     priceRange: siteConfig.business.priceRange,
     currenciesAccepted: siteConfig.business.currenciesAccepted.join(', '),
     paymentAccepted: siteConfig.business.paymentAccepted.join(', '),
-    
+
     // Address
     address: {
       '@type': 'PostalAddress',
@@ -35,14 +35,14 @@ export function generateLocalBusinessSchema() {
       postalCode: siteConfig.contact.address.postalCode,
       addressCountry: siteConfig.contact.address.addressCountry,
     },
-    
+
     // Geo Coordinates for Maps
     geo: {
       '@type': 'GeoCoordinates',
       latitude: siteConfig.contact.geo.latitude,
       longitude: siteConfig.contact.geo.longitude,
     },
-    
+
     // Opening Hours
     openingHoursSpecification: siteConfig.business.openingHours.map((hours) => ({
       '@type': 'OpeningHoursSpecification',
@@ -50,14 +50,14 @@ export function generateLocalBusinessSchema() {
       opens: hours.opens,
       closes: hours.closes,
     })),
-    
+
     // Area Served
     areaServed: siteConfig.business.areaServed.map((area) => ({
       '@type': area.type,
       name: area.name,
       ...(area.region && { containedInPlace: { '@type': 'State', name: area.region } }),
     })),
-    
+
     // Aggregate Rating
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -67,10 +67,10 @@ export function generateLocalBusinessSchema() {
       bestRating: siteConfig.aggregateRating.bestRating,
       worstRating: siteConfig.aggregateRating.worstRating,
     },
-    
+
     // Social Profiles
     sameAs: siteConfig.socialProfiles,
-    
+
     // Expertise
     knowsAbout: siteConfig.expertise.specialties,
     hasCredential: siteConfig.expertise.certifications.map((cert) => ({
@@ -164,14 +164,14 @@ export function generateOrganizationSchema() {
       '@type': 'QuantitativeValue',
       value: siteConfig.business.numberOfEmployees,
     },
-    
+
     // Founder
     founder: {
       '@type': 'Person',
       name: siteConfig.team[0].name,
       jobTitle: siteConfig.team[0].role,
     },
-    
+
     // Aggregate Rating
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -785,4 +785,1032 @@ export function injectSchema(schemas: any | any[]) {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   ));
+}
+
+// NEW SCHEMA TYPES - Advanced Implementation
+
+// Generate Product Schema for Services
+export function generateProductSchemas() {
+  return services.map((service, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${siteConfig.url}#product-${index}`,
+    name: service.name,
+    description: service.description,
+    brand: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+    category: service.category,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: service.offers.priceCurrency,
+      price: service.offers.price,
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: service.offers.priceCurrency,
+        price: service.offers.price,
+      },
+      availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString().split('T')[0],
+    },
+    review: {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: siteConfig.aggregateRating.ratingValue,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      author: {
+        '@type': 'Person',
+        name: siteConfig.reviews[0].author,
+      },
+      reviewBody: siteConfig.reviews[0].reviewBody,
+      datePublished: siteConfig.reviews[0].datePublished,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: siteConfig.aggregateRating.ratingValue,
+      reviewCount: siteConfig.aggregateRating.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  }));
+}
+
+// Generate Event Schema for Webinars/Workshops
+export function generateEventSchemas() {
+  const events = [
+    {
+      name: 'Enterprise Cloud Migration Workshop',
+      description: 'Hands-on workshop for enterprise cloud migration strategies',
+      startDate: '2024-03-15T10:00:00-06:00',
+      endDate: '2024-03-15T16:00:00-06:00',
+      location: {
+        '@type': 'Place',
+        name: 'Cardinal Consulting Office',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.contact.address.streetAddress,
+          addressLocality: siteConfig.contact.address.addressLocality,
+          addressRegion: siteConfig.contact.address.addressRegion,
+          postalCode: siteConfig.contact.address.postalCode,
+          addressCountry: siteConfig.contact.address.addressCountry,
+        },
+      },
+      organizer: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      offers: {
+        '@type': 'Offer',
+        price: 'Free',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+    {
+      name: 'AI/ML Integration Strategy Session',
+      description: 'Learn how to integrate AI/ML into your business processes',
+      startDate: '2024-04-20T14:00:00-06:00',
+      endDate: '2024-04-20T16:00:00-06:00',
+      location: {
+        '@type': 'VirtualLocation',
+        url: 'https://zoom.us/j/123456789',
+      },
+      organizer: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      offers: {
+        '@type': 'Offer',
+        price: 'Free',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    },
+  ];
+
+  return events.map((event, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    '@id': `${siteConfig.url}#event-${index}`,
+    name: event.name,
+    description: event.description,
+    startDate: event.startDate,
+    endDate: event.endDate,
+    location: event.location,
+    organizer: event.organizer,
+    offers: event.offers,
+    performer: {
+      '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+    },
+    image: siteConfig.ogImage,
+    isAccessibleForFree: true,
+  }));
+}
+
+// Generate Course Schema for Training Programs
+export function generateCourseSchemas() {
+  const courses = [
+    {
+      name: 'Enterprise Software Development Bootcamp',
+      description: 'Comprehensive training in enterprise software development',
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      educationalLevel: 'Professional Development',
+      timeRequired: 'P8W',
+      inLanguage: 'en-US',
+      hasCourseInstance: [
+        {
+          '@type': 'CourseInstance',
+          name: 'Spring 2024 Cohort',
+          startDate: '2024-03-01',
+          endDate: '2024-04-30',
+          courseMode: 'Full-time',
+          instructor: {
+            '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+          },
+          location: {
+            '@type': 'Place',
+            name: 'Cardinal Consulting Training Center',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: siteConfig.contact.address.streetAddress,
+              addressLocality: siteConfig.contact.address.addressLocality,
+              addressRegion: siteConfig.contact.address.addressRegion,
+              postalCode: siteConfig.contact.address.postalCode,
+              addressCountry: siteConfig.contact.address.addressCountry,
+            },
+          },
+        },
+      ],
+    },
+    {
+      name: 'Cloud Architecture Certification Program',
+      description: 'Prepare for AWS/Azure cloud architecture certifications',
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      educationalLevel: 'Professional Development',
+      timeRequired: 'P12W',
+      inLanguage: 'en-US',
+      hasCourseInstance: [
+        {
+          '@type': 'CourseInstance',
+          name: 'Summer 2024 Cohort',
+          startDate: '2024-06-01',
+          endDate: '2024-08-31',
+          courseMode: 'Part-time',
+          instructor: {
+            '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+          },
+          location: {
+            '@type': 'VirtualLocation',
+            url: 'https://cardinalconsulting.zoom.us/j/123456789',
+          },
+        },
+      ],
+    },
+  ];
+
+  return courses.map((course, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    '@id': `${siteConfig.url}#course-${index}`,
+    name: course.name,
+    description: course.description,
+    provider: course.provider,
+    educationalLevel: course.educationalLevel,
+    timeRequired: course.timeRequired,
+    inLanguage: course.inLanguage,
+    hasCourseInstance: course.hasCourseInstance,
+  }));
+}
+
+// Generate JobPosting Schema for Career Opportunities
+export function generateJobPostingSchemas() {
+  const jobPostings = [
+    {
+      title: 'Senior Software Engineer',
+      description: 'Design and develop enterprise software solutions',
+      employmentType: 'Full-time',
+      hiringOrganization: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      jobLocation: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.contact.address.streetAddress,
+          addressLocality: siteConfig.contact.address.addressLocality,
+          addressRegion: siteConfig.contact.address.addressRegion,
+          postalCode: siteConfig.contact.address.postalCode,
+          addressCountry: siteConfig.contact.address.addressCountry,
+        },
+      },
+      baseSalary: {
+        '@type': 'MonetaryAmount',
+        currency: 'USD',
+        value: {
+          '@type': 'QuantitativeValue',
+          minValue: 120000,
+          maxValue: 160000,
+          unitText: 'YEAR',
+        },
+      },
+      datePosted: '2024-02-15',
+      validThrough: '2024-03-31',
+      experienceRequirements: '5+ years',
+      qualifications: 'Bachelor\'s degree in Computer Science or related field',
+      responsibilities: 'Design, develop, and maintain enterprise software applications',
+      skills: ['React', 'Node.js', 'AWS', 'TypeScript'],
+    },
+    {
+      title: 'Cloud Solutions Architect',
+      description: 'Design and implement cloud infrastructure solutions',
+      employmentType: 'Full-time',
+      hiringOrganization: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      jobLocation: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.contact.address.streetAddress,
+          addressLocality: siteConfig.contact.address.addressLocality,
+          addressRegion: siteConfig.contact.address.addressRegion,
+          postalCode: siteConfig.contact.address.postalCode,
+          addressCountry: siteConfig.contact.address.addressCountry,
+        },
+      },
+      baseSalary: {
+        '@type': 'MonetaryAmount',
+        currency: 'USD',
+        value: {
+          '@type': 'QuantitativeValue',
+          minValue: 140000,
+          maxValue: 180000,
+          unitText: 'YEAR',
+        },
+      },
+      datePosted: '2024-02-15',
+      validThrough: '2024-03-31',
+      experienceRequirements: '7+ years',
+      qualifications: 'Bachelor\'s degree in Computer Science or related field',
+      responsibilities: 'Design and implement cloud infrastructure solutions',
+      skills: ['AWS', 'Azure', 'Kubernetes', 'Terraform'],
+    },
+  ];
+
+  return jobPostings.map((job, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    '@id': `${siteConfig.url}#job-${index}`,
+    title: job.title,
+    description: job.description,
+    employmentType: job.employmentType,
+    hiringOrganization: job.hiringOrganization,
+    jobLocation: job.jobLocation,
+    baseSalary: job.baseSalary,
+    datePosted: job.datePosted,
+    validThrough: job.validThrough,
+    experienceRequirements: job.experienceRequirements,
+    qualifications: job.qualifications,
+    responsibilities: job.responsibilities,
+    skills: job.skills,
+  }));
+}
+
+// Generate SoftwareApplication Schema for Products
+export function generateSoftwareApplicationSchemas() {
+  const applications = [
+    {
+      name: 'Cardinal Cloud Manager',
+      description: 'Enterprise cloud management platform',
+      operatingSystem: 'Web Browser',
+      applicationCategory: 'BusinessApplication',
+      softwareVersion: '2.1.0',
+      releaseNotes: 'Improved performance and new features',
+      offers: {
+        '@type': 'Offer',
+        price: 'Contact for Quote',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      featureList: [
+        'Multi-cloud management',
+        'Cost optimization',
+        'Security monitoring',
+        'Automated deployment',
+      ],
+      screenshot: [
+        {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/screenshots/cloud-manager-1.png`,
+          caption: 'Dashboard view',
+        },
+        {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/screenshots/cloud-manager-2.png`,
+          caption: 'Cost analysis',
+        },
+      ],
+    },
+    {
+      name: 'AI Analytics Platform',
+      description: 'Advanced AI-powered analytics solution',
+      operatingSystem: 'Web Browser',
+      applicationCategory: 'AnalyticsApplication',
+      softwareVersion: '1.5.0',
+      releaseNotes: 'Enhanced machine learning models',
+      offers: {
+        '@type': 'Offer',
+        price: 'Contact for Quote',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      featureList: [
+        'Predictive analytics',
+        'Natural language processing',
+        'Real-time dashboards',
+        'Custom model training',
+      ],
+      screenshot: [
+        {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/screenshots/ai-analytics-1.png`,
+          caption: 'Main dashboard',
+        },
+        {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/screenshots/ai-analytics-2.png`,
+          caption: 'Model training',
+        },
+      ],
+    },
+  ];
+
+  return applications.map((app, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': `${siteConfig.url}#software-${index}`,
+    name: app.name,
+    description: app.description,
+    operatingSystem: app.operatingSystem,
+    applicationCategory: app.applicationCategory,
+    softwareVersion: app.softwareVersion,
+    releaseNotes: app.releaseNotes,
+    offers: app.offers,
+    featureList: app.featureList,
+    screenshot: app.screenshot,
+    creator: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  }));
+}
+
+// Generate Dataset Schema for AI/ML Work
+export function generateDatasetSchemas() {
+  const datasets = [
+    {
+      name: 'Enterprise Customer Behavior Dataset',
+      description: 'Comprehensive dataset for customer behavior analysis',
+      datasetTimeInterval: 'P1Y',
+      variableMeasured: ['Customer Engagement', 'Purchase Behavior', 'Churn Prediction'],
+      measurementTechnique: 'Machine Learning',
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      includedInDataCatalog: {
+        '@type': 'DataCatalog',
+        name: 'Cardinal Consulting Data Catalog',
+        url: `${siteConfig.url}/data-catalog`,
+      },
+      distribution: [
+        {
+          '@type': 'DataDownload',
+          contentUrl: `${siteConfig.url}/datasets/customer-behavior.csv`,
+          encodingFormat: 'text/csv',
+        },
+      ],
+    },
+    {
+      name: 'Financial Market Analysis Dataset',
+      description: 'Historical financial market data for analysis',
+      datasetTimeInterval: 'P5Y',
+      variableMeasured: ['Stock Prices', 'Market Trends', 'Economic Indicators'],
+      measurementTechnique: 'Statistical Analysis',
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      includedInDataCatalog: {
+        '@type': 'DataCatalog',
+        name: 'Cardinal Consulting Data Catalog',
+        url: `${siteConfig.url}/data-catalog`,
+      },
+      distribution: [
+        {
+          '@type': 'DataDownload',
+          contentUrl: `${siteConfig.url}/datasets/financial-market.json`,
+          encodingFormat: 'application/json',
+        },
+      ],
+    },
+  ];
+
+  return datasets.map((dataset, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    '@id': `${siteConfig.url}#dataset-${index}`,
+    name: dataset.name,
+    description: dataset.description,
+    datasetTimeInterval: dataset.datasetTimeInterval,
+    variableMeasured: dataset.variableMeasured,
+    measurementTechnique: dataset.measurementTechnique,
+    creator: dataset.creator,
+    includedInDataCatalog: dataset.includedInDataCatalog,
+    distribution: dataset.distribution,
+  }));
+}
+
+// Generate ResearchProject Schema for R&D Initiatives
+export function generateResearchProjectSchemas() {
+  const projects = [
+    {
+      name: 'AI-Powered Predictive Maintenance System',
+      description: 'Research project for predictive maintenance using AI',
+      funder: {
+        '@type': 'Organization',
+        name: 'Cardinal Consulting R&D',
+      },
+      investigator: {
+        '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+      },
+      sponsor: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      keywords: ['Predictive Maintenance', 'AI', 'Machine Learning', 'IoT'],
+      temporalCoverage: '2024-01/2024-12',
+      funding: {
+        '@type': 'MonetaryGrant',
+        funder: {
+          '@id': `${siteConfig.url}#organization`,
+        },
+        amount: {
+          '@type': 'MonetaryAmount',
+          currency: 'USD',
+          value: '500000',
+        },
+      },
+    },
+    {
+      name: 'Blockchain for Supply Chain Transparency',
+      description: 'Research project on blockchain for supply chain',
+      funder: {
+        '@type': 'Organization',
+        name: 'Cardinal Consulting R&D',
+      },
+      investigator: {
+        '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+      },
+      sponsor: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      keywords: ['Blockchain', 'Supply Chain', 'Transparency', 'Smart Contracts'],
+      temporalCoverage: '2024-01/2024-12',
+      funding: {
+        '@type': 'MonetaryGrant',
+        funder: {
+          '@id': `${siteConfig.url}#organization`,
+        },
+        amount: {
+          '@type': 'MonetaryAmount',
+          currency: 'USD',
+          value: '300000',
+        },
+      },
+    },
+  ];
+
+  return projects.map((project, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'ResearchProject',
+    '@id': `${siteConfig.url}#research-${index}`,
+    name: project.name,
+    description: project.description,
+    funder: project.funder,
+    investigator: project.investigator,
+    sponsor: project.sponsor,
+    keywords: project.keywords,
+    temporalCoverage: project.temporalCoverage,
+    funding: project.funding,
+  }));
+}
+
+// Generate PressRelease Schema for Announcements
+export function generatePressReleaseSchemas() {
+  const pressReleases = [
+    {
+      name: 'Cardinal Consulting Launches AI-Powered Analytics Platform',
+      headline: 'Cardinal Consulting Launches AI-Powered Analytics Platform',
+      description: 'New platform brings advanced AI capabilities to enterprise analytics',
+      datePublished: '2024-02-15',
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      image: siteConfig.ogImage,
+      articleBody: 'Cardinal Consulting today announced the launch of its new AI-powered analytics platform, bringing advanced machine learning capabilities to enterprise data analysis.',
+      keywords: ['AI', 'Analytics', 'Enterprise', 'Platform'],
+    },
+    {
+      name: 'Cardinal Consulting Achieves SOC 2 Type II Compliance',
+      headline: 'Cardinal Consulting Achieves SOC 2 Type II Compliance',
+      description: 'Major security milestone demonstrates commitment to data protection',
+      datePublished: '2024-01-20',
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      image: siteConfig.ogImage,
+      articleBody: 'Cardinal Consulting has successfully completed its SOC 2 Type II audit, demonstrating its commitment to maintaining the highest standards of security and data protection.',
+      keywords: ['Security', 'Compliance', 'SOC 2', 'Data Protection'],
+    },
+  ];
+
+  return pressReleases.map((press, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'PressRelease',
+    '@id': `${siteConfig.url}#press-${index}`,
+    name: press.name,
+    headline: press.headline,
+    description: press.description,
+    datePublished: press.datePublished,
+    provider: press.provider,
+    image: press.image,
+    articleBody: press.articleBody,
+    keywords: press.keywords,
+  }));
+}
+
+// Generate BlogPosting Schema for Content
+export function generateBlogPostingSchemas() {
+  const blogPosts = [
+    {
+      name: 'The Future of Enterprise Software Development',
+      headline: 'The Future of Enterprise Software Development',
+      description: 'Exploring emerging trends in enterprise software',
+      datePublished: '2024-02-10',
+      dateModified: '2024-02-12',
+      author: {
+        '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+      },
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      image: `${siteConfig.url}/blog/future-enterprise-software.jpg`,
+      articleBody: 'The enterprise software landscape is rapidly evolving with new technologies and methodologies...',
+      keywords: ['Enterprise Software', 'Development', 'Future Trends', 'Technology'],
+    },
+    {
+      name: 'AI Integration Strategies for Business Success',
+      headline: 'AI Integration Strategies for Business Success',
+      description: 'Practical strategies for implementing AI in business',
+      datePublished: '2024-01-25',
+      dateModified: '2024-01-28',
+      author: {
+        '@id': `${siteConfig.url}#person-${siteConfig.team[0].name.toLowerCase().replace(/\s+/g, '-')}`,
+      },
+      provider: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      image: `${siteConfig.url}/blog/ai-integration-strategies.jpg`,
+      articleBody: 'Artificial Intelligence is transforming businesses across industries...',
+      keywords: ['AI', 'Integration', 'Business Strategy', 'Machine Learning'],
+    },
+  ];
+
+  return blogPosts.map((blog, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${siteConfig.url}#blog-${index}`,
+    name: blog.name,
+    headline: blog.headline,
+    description: blog.description,
+    datePublished: blog.datePublished,
+    dateModified: blog.dateModified,
+    author: blog.author,
+    provider: blog.provider,
+    image: blog.image,
+    articleBody: blog.articleBody,
+    keywords: blog.keywords,
+  }));
+}
+
+// Generate VideoObject Schema for Video Content
+export function generateVideoObjectSchemas() {
+  const videos = [
+    {
+      name: 'Enterprise Cloud Migration Guide',
+      description: 'Complete guide to enterprise cloud migration',
+      contentUrl: 'https://www.youtube.com/watch?v=cloud-migration-guide',
+      thumbnailUrl: `${siteConfig.url}/videos/cloud-migration-thumbnail.jpg`,
+      duration: 'PT45M',
+      uploadDate: '2024-02-01',
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      embedUrl: 'https://www.youtube.com/embed/cloud-migration-guide',
+      interactionCount: {
+        '@type': 'InteractionCounter',
+        interactionType: 'https://schema.org/WatchAction',
+        userInteractionCount: 1250,
+      },
+    },
+    {
+      name: 'AI/ML Integration Best Practices',
+      description: 'Best practices for AI/ML integration',
+      contentUrl: 'https://www.youtube.com/watch?v=ai-ml-best-practices',
+      thumbnailUrl: `${siteConfig.url}/videos/ai-ml-best-practices-thumbnail.jpg`,
+      duration: 'PT30M',
+      uploadDate: '2024-01-15',
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      embedUrl: 'https://www.youtube.com/embed/ai-ml-best-practices',
+      interactionCount: {
+        '@type': 'InteractionCounter',
+        interactionType: 'https://schema.org/WatchAction',
+        userInteractionCount: 875,
+      },
+    },
+  ];
+
+  return videos.map((video, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${siteConfig.url}#video-${index}`,
+    name: video.name,
+    description: video.description,
+    contentUrl: video.contentUrl,
+    thumbnailUrl: video.thumbnailUrl,
+    duration: video.duration,
+    uploadDate: video.uploadDate,
+    creator: video.creator,
+    embedUrl: video.embedUrl,
+    interactionCount: video.interactionCount,
+  }));
+}
+
+// Generate ImageObject Schema for Visual Content
+export function generateImageObjectSchemas() {
+  const images = [
+    {
+      name: 'Enterprise Architecture Diagram',
+      description: 'Enterprise architecture diagram',
+      contentUrl: `${siteConfig.url}/images/enterprise-architecture.jpg`,
+      thumbnailUrl: `${siteConfig.url}/images/enterprise-architecture-thumbnail.jpg`,
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      license: 'https://creativecommons.org/licenses/by/4.0/',
+      representativeOfPage: true,
+    },
+    {
+      name: 'AI/ML Workflow Diagram',
+      description: 'AI/ML workflow diagram',
+      contentUrl: `${siteConfig.url}/images/ai-ml-workflow.jpg`,
+      thumbnailUrl: `${siteConfig.url}/images/ai-ml-workflow-thumbnail.jpg`,
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      license: 'https://creativecommons.org/licenses/by/4.0/',
+      representativeOfPage: true,
+    },
+  ];
+
+  return images.map((image, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    '@id': `${siteConfig.url}#image-${index}`,
+    name: image.name,
+    description: image.description,
+    contentUrl: image.contentUrl,
+    thumbnailUrl: image.thumbnailUrl,
+    creator: image.creator,
+    license: image.license,
+    representativeOfPage: image.representativeOfPage,
+  }));
+}
+
+// Generate FAQ Schema for Specific Pages
+export function generateFAQSchemas(questions: { question: string; answer: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${siteConfig.url}#faqpage`,
+    mainEntity: questions.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+// Generate Speakable Schema for Voice Search
+export function generateSpeakableSchemas() {
+  const speakableContent = [
+    {
+      name: 'Cardinal Consulting Overview',
+      description: 'Cardinal Consulting is an enterprise software development and consulting firm...',
+      url: siteConfig.url,
+      xpath: '/html/head/title',
+    },
+    {
+      name: 'Services Overview',
+      description: 'We offer custom website development, mobile applications, SEO services...',
+      url: `${siteConfig.url}/services`,
+      xpath: '//*[@id="services"]',
+    },
+  ];
+
+  return speakableContent.map((content, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'SpeakableSpecification',
+    '@id': `${siteConfig.url}#speakable-${index}`,
+    name: content.name,
+    description: content.description,
+    url: content.url,
+    xpath: content.xpath,
+  }));
+}
+
+// Generate CollectionPage Schema for Content Collections
+export function generateCollectionPageSchemas() {
+  const collections = [
+    {
+      name: 'Blog Collection',
+      description: 'Collection of Cardinal Consulting blog posts',
+      url: `${siteConfig.url}/blog`,
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      about: 'Enterprise Software Development',
+      inLanguage: 'en-US',
+      isPartOf: {
+        '@id': `${siteConfig.url}#website`,
+      },
+    },
+    {
+      name: 'Portfolio Collection',
+      description: 'Collection of Cardinal Consulting projects',
+      url: `${siteConfig.url}/portfolio`,
+      creator: {
+        '@id': `${siteConfig.url}#organization`,
+      },
+      about: 'Software Development Projects',
+      inLanguage: 'en-US',
+      isPartOf: {
+        '@id': `${siteConfig.url}#website`,
+      },
+    },
+  ];
+
+  return collections.map((collection, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${siteConfig.url}#collection-${index}`,
+    name: collection.name,
+    description: collection.description,
+    url: collection.url,
+    creator: collection.creator,
+    about: collection.about,
+    inLanguage: collection.inLanguage,
+    isPartOf: collection.isPartOf,
+  }));
+}
+
+// Generate SitelinksSearchBox Schema
+export function generateSitelinksSearchBoxSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteConfig.url}#website`,
+    url: siteConfig.url,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+// Generate MedicalEntity Schema for Healthcare Clients
+export function generateMedicalEntitySchemas() {
+  const medicalEntities = [
+    {
+      name: 'HIPAA Compliance Solutions',
+      description: 'HIPAA-compliant software solutions for healthcare providers',
+      code: 'HIPAA-001',
+      relevantSpecialty: 'Health Informatics',
+      study: {
+        '@type': 'MedicalStudy',
+        name: 'Healthcare Data Security Study',
+        studySubject: 'Data Security',
+        healthCondition: 'Data Breach Prevention',
+      },
+    },
+    {
+      name: 'Electronic Health Records (EHR) Systems',
+      description: 'Custom EHR systems for medical practices',
+      code: 'EHR-001',
+      relevantSpecialty: 'Medical Informatics',
+      study: {
+        '@type': 'MedicalStudy',
+        name: 'EHR Implementation Study',
+        studySubject: 'Electronic Health Records',
+        healthCondition: 'Healthcare Efficiency',
+      },
+    },
+  ];
+
+  return medicalEntities.map((entity, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'MedicalEntity',
+    '@id': `${siteConfig.url}#medical-${index}`,
+    name: entity.name,
+    description: entity.description,
+    code: entity.code,
+    relevantSpecialty: entity.relevantSpecialty,
+    study: entity.study,
+  }));
+}
+
+// Generate FinancialProduct Schema for Banking/Finance Clients
+export function generateFinancialProductSchemas() {
+  const financialProducts = [
+    {
+      name: 'Payment Processing System',
+      description: 'Secure payment processing solutions',
+      category: 'Payment Processing',
+      serviceType: 'FinancialService',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Payment Processing Features',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Credit Card Processing',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'ACH Processing',
+            },
+          },
+        ],
+      },
+    },
+    {
+      name: 'Financial Analytics Platform',
+      description: 'Advanced financial analytics and reporting',
+      category: 'Financial Analytics',
+      serviceType: 'FinancialService',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Analytics Features',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Real-time Analytics',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Custom Reporting',
+            },
+          },
+        ],
+      },
+    },
+  ];
+
+  return financialProducts.map((product, index) => ({
+    '@context': 'https://schema.org',
+    '@type': 'FinancialProduct',
+    '@id': `${siteConfig.url}#financial-${index}`,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    serviceType: product.serviceType,
+    hasOfferCatalog: product.hasOfferCatalog,
+  }));
+}
+
+// Generate EducationalOrganization Schema for Learning Content
+export function generateEducationalOrganizationSchemas() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    '@id': `${siteConfig.url}#education`,
+    name: `${siteConfig.name} Training Division`,
+    description: 'Professional training and certification programs',
+    url: `${siteConfig.url}/training`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.contact.address.streetAddress,
+      addressLocality: siteConfig.contact.address.addressLocality,
+      addressRegion: siteConfig.contact.address.addressRegion,
+      postalCode: siteConfig.contact.address.postalCode,
+      addressCountry: siteConfig.contact.address.addressCountry,
+    },
+    areaServed: siteConfig.business.areaServed.map((area) => ({
+      '@type': area.type,
+      name: area.name,
+    })),
+    makesOffer: siteConfig.services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Course',
+        name: service.name,
+        description: service.description,
+      },
+    })),
+  };
+}
+
+// Generate All Advanced Schemas for Homepage
+export function generateAllAdvancedHomePageSchemas() {
+  return [
+    ...generateProductSchemas(),
+    ...generateEventSchemas(),
+    ...generateCourseSchemas(),
+    ...generateJobPostingSchemas(),
+    ...generateSoftwareApplicationSchemas(),
+    ...generateDatasetSchemas(),
+    ...generateResearchProjectSchemas(),
+    ...generatePressReleaseSchemas(),
+    ...generateBlogPostingSchemas(),
+    ...generateVideoObjectSchemas(),
+    ...generateImageObjectSchemas(),
+    ...generateSpeakableSchemas(),
+    ...generateCollectionPageSchemas(),
+    generateSitelinksSearchBoxSchema(),
+    ...generateMedicalEntitySchemas(),
+    ...generateFinancialProductSchemas(),
+    generateEducationalOrganizationSchemas(),
+  ];
+}
+
+// Helper function to get appropriate schemas for page type
+export function getSchemasForPage(pageType: string) {
+  switch (pageType) {
+    case 'homepage':
+      return generateAllHomePageSchemas();
+    case 'services':
+      return [
+        ...generateServiceSchemas(),
+        ...generateProductSchemas(),
+        ...generateOfferCatalogSchema(),
+      ];
+case 'portfolio':
+      return [
+        ...generatePortfolioSchemas(),
+        ...generatePortfolioSchemas(),
+      ];
+    case 'blog':
+      return [
+        ...generateBlogPostingSchemas(),
+        ...generateCollectionPageSchemas(),
+      ];
+    case 'contact':
+      return [
+        generateContactPageSchema(),
+        generateLocalBusinessSchema(),
+      ];
+    case 'careers':
+      return [
+        ...generateJobPostingSchemas(),
+        ...generateOrganizationSchema(),
+      ];
+    case 'training':
+      return [
+        ...generateCourseSchemas(),
+        generateEducationalOrganizationSchemas(),
+      ];
+    default:
+      return generateAllAdvancedHomePageSchemas();
+  }
 }
