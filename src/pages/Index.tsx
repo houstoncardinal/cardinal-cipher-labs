@@ -11,12 +11,22 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
-import { generateAllHomePageSchemas } from "@/lib/schema-generators";
+import { generateAllHomePageSchemas, generateVideoObjectSchema } from "@/lib/schema-generators";
 import { siteConfig } from "@/lib/seo-config";
 
 const Index = () => {
   // Generate all comprehensive E-E-A-T compliant schemas
-  const schemas = generateAllHomePageSchemas();
+  const schemas = [
+    ...generateAllHomePageSchemas(),
+    generateVideoObjectSchema({
+      name: 'Cardinal Consulting — Web Design & App Development Agency Houston',
+      description: 'See how Cardinal Consulting builds custom websites, mobile apps, and SEO strategies that grow Houston businesses.',
+      thumbnailUrl: 'https://www.visitcardinal.com/og-image.jpg',
+      uploadDate: '2024-01-01',
+      duration: 'PT3M',
+      url: 'https://www.visitcardinal.com',
+    }),
+  ];
 
   return (
     <>
