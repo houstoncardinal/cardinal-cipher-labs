@@ -628,6 +628,123 @@ export function generateKnowledgeGraphSchema() {
   };
 }
 
+// Generate VideoObject Schema (for tutorial/demo content)
+export function generateVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  duration?: string;
+  url?: string;
+  embedUrl?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${siteConfig.url}#video-${video.name.toLowerCase().replace(/\s+/g, '-')}`,
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration || 'PT5M',
+    contentUrl: video.url || siteConfig.url,
+    embedUrl: video.embedUrl,
+    publisher: {
+      '@type': 'Organization',
+      '@id': `${siteConfig.url}#organization`,
+      name: siteConfig.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteConfig.logo,
+      },
+    },
+    author: {
+      '@type': 'Organization',
+      '@id': `${siteConfig.url}#organization`,
+    },
+    inLanguage: 'en-US',
+    isFamilyFriendly: true,
+  };
+}
+
+// Generate Product Schema (for pricing packages — boosts rich snippets)
+export function generateProductSchemas() {
+  const packages = [
+    {
+      name: 'Starter Website Package',
+      description: 'Professional small business website with responsive design, SEO optimization, and CMS integration. Perfect for startups and growing businesses.',
+      price: '3000',
+      sku: 'CARD-WEB-STARTER',
+    },
+    {
+      name: 'Professional Website Package',
+      description: 'Advanced custom website with e-commerce, custom integrations, advanced SEO, and priority support. For established businesses scaling online.',
+      price: '8000',
+      sku: 'CARD-WEB-PRO',
+    },
+    {
+      name: 'Enterprise Digital Platform',
+      description: 'Full enterprise-grade digital platform including web app, mobile app, SEO strategy, and dedicated account management.',
+      price: '25000',
+      sku: 'CARD-ENT-FULL',
+    },
+  ];
+
+  return packages.map((pkg, i) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${siteConfig.url}#product-${i}`,
+    name: pkg.name,
+    description: pkg.description,
+    sku: pkg.sku,
+    brand: {
+      '@type': 'Brand',
+      name: siteConfig.name,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: pkg.price,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      seller: {
+        '@type': 'Organization',
+        '@id': `${siteConfig.url}#organization`,
+        name: siteConfig.name,
+      },
+      url: `${siteConfig.url}/pricing`,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: siteConfig.aggregateRating.ratingValue,
+      reviewCount: siteConfig.aggregateRating.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    category: 'Digital Services',
+    provider: {
+      '@id': `${siteConfig.url}#organization`,
+    },
+  }));
+}
+
+// Generate SpeakableSpecification for voice search optimization
+export function generateSpeakableSchema(url: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    url,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2', '.service-description', '.page-summary', 'meta[name="description"]'],
+      xpath: [
+        '/html/head/title',
+        '/html/head/meta[@name="description"]/@content',
+      ],
+    },
+  };
+}
+
 // Generate All Schemas for Homepage
 export function generateAllHomePageSchemas() {
   return [
@@ -635,7 +752,7 @@ export function generateAllHomePageSchemas() {
     generateOrganizationSchema(),
     generateWebSiteSchema(),
     generateWebPageSchema({
-      name: 'Cardinal Consulting - Enterprise Software Development & Consulting',
+      name: 'Cardinal Consulting - Web Design & App Development Houston TX',
       description: siteConfig.description,
       url: siteConfig.url,
     }),
@@ -652,6 +769,8 @@ export function generateAllHomePageSchemas() {
     generateContactPageSchema(),
     ...generateIndustrySchemas(),
     generateBreadcrumbSchema([{ name: 'Home', url: siteConfig.url }]),
+    ...generateProductSchemas(),
+    generateSpeakableSchema(siteConfig.url),
   ];
 }
 
