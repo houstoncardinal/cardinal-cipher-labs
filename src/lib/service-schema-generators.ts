@@ -124,10 +124,17 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
         addressCountry: siteConfig.contact.address.addressCountry,
       },
     },
-    areaServed: siteConfig.business.areaServed.map(a => ({
-      '@type': a.type,
-      name: a.name,
-    })),
+    areaServed: [
+      { '@type': 'City', name: 'Houston', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'The Woodlands', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Sugar Land', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Katy', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Pearland', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Cypress', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Spring', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'State', name: 'Texas' },
+      { '@type': 'Country', name: 'United States' },
+    ],
     serviceOutput: {
       '@type': 'Thing',
       name: `${config.category} deliverables`,
@@ -448,10 +455,17 @@ export function generateIndustryPageSchemas(config: {
       '@id': `${siteConfig.url}#organization`,
       name: siteConfig.name,
     },
-    areaServed: siteConfig.business.areaServed.map(a => ({
-      '@type': a.type,
-      name: a.name,
-    })),
+    areaServed: [
+      { '@type': 'City', name: 'Houston', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'The Woodlands', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Sugar Land', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Katy', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Pearland', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Cypress', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'City', name: 'Spring', containedInPlace: { '@type': 'State', name: 'Texas' } },
+      { '@type': 'State', name: 'Texas' },
+      { '@type': 'Country', name: 'United States' },
+    ],
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: siteConfig.aggregateRating.ratingValue,

@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { CursorTrail } from "@/components/ui/cursor-trail";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -36,6 +37,10 @@ import { TechnologyIndustry } from "./pages/industry/Technology";
 import { AIAutomationIndustry } from "./pages/industry/AIAutomation";
 import { ConstructionIndustry } from "./pages/industry/Construction";
 import { HoustonSEOPage } from "./pages/HoustonSEO";
+import { HoustonWebDesignPage } from "./pages/HoustonWebDesign";
+import { HoustonAppDevelopmentPage } from "./pages/HoustonAppDevelopment";
+import { HoustonWebDeveloperPage } from "./pages/HoustonWebDeveloper";
+import { HoustonSEOCompanyPage } from "./pages/HoustonSEOCompany";
 import CitySEOPage from "./pages/CitySEO";
 import RapidDelivery from "./pages/RapidDelivery";
 import RushPrototyping from "./pages/RushPrototyping";
@@ -58,6 +63,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Index />} />
@@ -81,6 +87,10 @@ const App = () => (
               <Route path="/industry/construction" element={<ConstructionIndustry />} />
               <Route path="/:city-seo" element={<CitySEOPage />} />
               <Route path="/houston-seo" element={<HoustonSEOPage />} />
+              <Route path="/houston-web-design" element={<HoustonWebDesignPage />} />
+              <Route path="/houston-app-development" element={<HoustonAppDevelopmentPage />} />
+              <Route path="/houston-web-developer" element={<HoustonWebDeveloperPage />} />
+              <Route path="/houston-seo-company" element={<HoustonSEOCompanyPage />} />
               <Route path="/rapid-delivery" element={<RapidDelivery />} />
               <Route path="/rush-prototyping" element={<RushPrototyping />} />
               <Route path="/enterprise-security" element={<EnterpriseSecurity />} />

@@ -26,8 +26,18 @@ const footerLinks = {
     { label: "Construction", href: "/industry/construction" },
   ],
   local: [
-    { label: "Houston SEO", href: "/houston-seo" },
-    { label: "Web Design Houston", href: "/houston-seo" },
+    { label: "Houston SEO Company", href: "/houston-seo-company" },
+    { label: "Web Design Houston", href: "/houston-web-design" },
+    { label: "App Development Houston", href: "/houston-app-development" },
+    { label: "Web Developer Houston", href: "/houston-web-developer" },
+    { label: "Houston SEO Services", href: "/houston-seo" },
+    { label: "Law Firm Web Design", href: "/houston-law-firm-website-design" },
+    { label: "Medical Web Design", href: "/houston-medical-website-design" },
+    { label: "Restaurant Web Design", href: "/houston-restaurant-website-design" },
+    { label: "eCommerce Web Design", href: "/houston-ecommerce-website-design" },
+    { label: "Real Estate Web Design", href: "/houston-real-estate-website-design" },
+    { label: "Construction Web Design", href: "/houston-construction-website-design" },
+    { label: "Startup Web Design", href: "/houston-startup-website-design" },
   ],
 };
 
@@ -52,14 +62,13 @@ export function Footer() {
               </div>
             </div>
             <p className="text-muted-foreground leading-relaxed max-w-sm mb-6">
-              Premier digital agency specializing in web development, app development, 
-              and digital marketing for businesses worldwide.
+              Houston's #1 web design, app development &amp; SEO agency. 500+ projects delivered across Houston, TX and nationwide. Call (281) 901-7016.
             </p>
             <div className="space-y-2 text-sm text-muted-foreground">
               <p>2100 West Loop S Fwy, Houston, TX 77027</p>
               <p>
-                <a href="mailto:hunain@visitcardinal.com" className="hover:text-foreground transition-colors">
-                  hunain@visitcardinal.com
+                <a href="mailto:hello@visitcardinal.com" className="hover:text-foreground transition-colors">
+                  hello@visitcardinal.com
                 </a>
               </p>
               <p>

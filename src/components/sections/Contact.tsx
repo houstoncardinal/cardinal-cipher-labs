@@ -13,11 +13,10 @@ const serviceOptions = [
 ];
 
 const budgetOptions = [
-  { value: "under-5k", label: "Under $5,000", desc: "Quick projects" },
-  { value: "5k-10k", label: "$5,000 – $10,000", desc: "Standard website" },
-  { value: "10k-25k", label: "$10,000 – $25,000", desc: "Complex web app" },
-  { value: "25k-50k", label: "$25,000 – $50,000", desc: "Full platform" },
-  { value: "50k-plus", label: "$50,000+", desc: "Enterprise solution" },
+  { value: "3k-8k", label: "$3,000 – $8,000", desc: "SMB website" },
+  { value: "8k-25k", label: "$8,000 – $25,000", desc: "Growth website / web app" },
+  { value: "25k-50k", label: "$25,000 – $50,000", desc: "Enterprise solution" },
+  { value: "50k-plus", label: "$50,000+", desc: "Large-scale platform" },
   { value: "not-sure", label: "Not sure yet", desc: "Need guidance" },
 ];
 
@@ -97,9 +96,9 @@ export function Contact() {
                 {
                   icon: Mail,
                   label: "Email",
-                  primary: "hunain@visitcardinal.com",
+                  primary: "hello@visitcardinal.com",
                   secondary: "support@visitcardinal.com",
-                  href: "mailto:hunain@visitcardinal.com",
+                  href: "mailto:hello@visitcardinal.com",
                 },
                 {
                   icon: Phone,

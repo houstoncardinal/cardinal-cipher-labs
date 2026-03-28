@@ -17,7 +17,7 @@ const megaMenuServices = [
     title: "Design",
     items: [
       { label: "Brand Identity", href: "/services/brand-identity", description: "Logos, brand guidelines & visual systems" },
-      { label: "UI/UX Design", href: "/services/uxui", description: "User-centered design for web & mobile" },
+      { label: "UX/UI Design", href: "/services/uxui", description: "User-centered design for web & mobile" },
     ]
   },
   {
@@ -70,10 +70,10 @@ export function Header() {
               </a>
               <div className="w-px h-3 bg-gray-200" />
               <a
-                href="mailto:hunain@visitcardinal.com"
+                href="mailto:hello@visitcardinal.com"
                 className="text-[11px] text-gray-900 hover:text-red-600 transition-colors font-semibold uppercase tracking-wide"
               >
-                hunain@visitcardinal.com
+                hello@visitcardinal.com
               </a>
             </div>
             <div className="hidden md:flex items-center gap-5">

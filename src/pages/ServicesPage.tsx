@@ -89,7 +89,7 @@ const services = [
   {
     icon: MousePointer,
     category: "UX/UI DESIGN",
-    title: "UX/UI Experience Optimization",
+    title: "UX/UI Design",
     description: "Research-driven design that converts. User testing, information architecture, and interface systems that delight users and drive business outcomes.",
     price: "Custom",
     priceLabel: "Project-based pricing",

@@ -21,7 +21,7 @@ const advantages = [
   {
     icon: Shield,
     title: "Enterprise Security",
-    description: "Bank-level security with SSL, HIPAA compliance, and SOC 2 ready infrastructure. Your data stays protected always.",
+    description: "Bank-level security with SSL/TLS encryption, HIPAA compliance, and hardened infrastructure. Your data stays protected always.",
     highlight: "100% Secure",
     link: "/enterprise-security"
   },
@@ -52,7 +52,7 @@ const stats = [
   { value: "98%", label: "Client Retention" },
   { value: "500+", label: "Projects Delivered" },
   { value: "10+", label: "Years Experience" },
-  { value: "25+", label: "Team Members" }
+  { value: "200+", label: "Happy Clients" }
 ];
 
 export function Advantage() {

@@ -148,7 +148,7 @@ export default function UXUI() {
 
   return (
     <>
-      <SEOHead title="UX/UI Design Agency Houston | User Experience & Interface Design | Cardinal Consulting" description="40% average conversion lift from expert UX/UI design. User research, prototyping, design systems & accessibility. Research-driven design that delivers measurable results." keywords={["UX design agency", "UI design services", "user experience design", "interface design", "conversion rate optimization", "A/B testing services", "design system development", "accessibility audit WCAG", "UX design agency Houston", "user experience consulting", "Figma design agency", "product design agency", "mobile UX design", "web UX design", "usability testing", "user research services", "prototype design", "UX audit services", "information architecture", "interaction design"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="UX/UI Design Agency Houston TX | User Experience & Interface Design" description="Houston's top UX/UI design agency. User research, wireframes, Figma prototypes, and design systems for Houston businesses. 40% avg conversion lift. Free consultation (281) 901-7016." keywords={["UX design agency Houston", "UI design Houston TX", "user experience design Houston", "UX designer Houston", "Houston UX UI agency", "web design UX Houston", "app UX design Houston", "Figma designer Houston", "UX research Houston", "interface design Houston", "conversion optimization Houston", "product design Houston TX", "UX audit Houston", "usability testing Houston", "design system Houston", "Houston UX consultant", "wireframe design Houston", "mobile UX design Houston", "web UX design Houston", "UX UI company Houston"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav />
         <main>
@@ -158,7 +158,7 @@ export default function UXUI() {
               <Breadcrumbs items={[{ label: "Services", href: "/#services" }, { label: "UX/UI Design" }]} />
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
                 <div className="flex items-center gap-3 mb-6"><div className="w-14 h-14 bg-primary/10 flex items-center justify-center"><MousePointer className="w-7 h-7 text-primary" /></div><span className="text-xs tracking-[0.3em] uppercase text-primary font-medium">UX/UI Design</span></div>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">UX/UI Experience Optimization</h1>
+                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">UX/UI Design</h1>
                 <p className="service-description text-xl text-muted-foreground max-w-2xl mb-8">User-centered design and interface optimization that creates exceptional digital experiences. Research-backed, data-driven design that converts visitors into customers.</p>
                 <div className="flex flex-wrap gap-4">
                   <Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Get UX Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button>

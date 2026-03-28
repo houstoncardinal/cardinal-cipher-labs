@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const stats = [
-  { value: "50+", label: "Healthcare Clients" },
+  { value: "200+", label: "Healthcare Clients" },
   { value: "100%", label: "HIPAA Compliant" },
   { value: "99.9%", label: "Uptime Guarantee" },
   { value: "4.9/5", label: "Client Satisfaction" },

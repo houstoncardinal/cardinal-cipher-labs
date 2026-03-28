@@ -95,7 +95,7 @@ const services = [
   {
     icon: MousePointer,
     category: "UX/UI DESIGN",
-    title: "UX/UI Experience Optimization",
+    title: "UX/UI Design",
     description: "Research-driven design that converts. User testing, information architecture, and interface systems that delight users and drive business outcomes.",
     price: "Custom",
     priceLabel: "Project-based pricing",
@@ -255,7 +255,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 const trustSignals = [
   { icon: Star, label: "4.9/5 Average Rating" },
-  { icon: Shield, label: "SOC 2 & ISO 27001" },
+  { icon: Shield, label: "HIPAA & WCAG 2.1 AA" },
   { icon: Zap, label: "72-Hour Rush Available" },
 ];
 

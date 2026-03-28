@@ -30,27 +30,30 @@ export function SEOHead({
   keywords = [],
   noindex = false,
 }: SEOProps) {
+  // Prevent double brand name: only append if not already present
+  const brandSuffix = ` | ${siteConfig.name}`;
   const pageTitle = title
-    ? `${title} | ${siteConfig.name}`
+    ? title.includes(siteConfig.name)
+      ? title
+      : `${title}${brandSuffix}`
     : `${siteConfig.name} - ${siteConfig.business.slogan}`;
 
   const pageDescription = description || siteConfig.description;
   const pageImage = image || siteConfig.ogImage;
   const pageUrl = url || siteConfig.url;
+  const pageImageAlt = `${siteConfig.name} - Web Design, App Development & SEO Agency Houston TX`;
 
   const defaultKeywords = [
-    'web development Houston',
-    'app development Houston',
-    'custom website development',
-    'mobile app development',
-    'web development agency',
-    'iOS app development',
-    'Android app development',
-    'React development agency',
-    'Next.js development',
-    'enterprise software development',
-    'digital transformation',
-    'software consulting Houston',
+    'web design company Houston',
+    'best web design company Houston',
+    'app development company Houston',
+    'web developer Houston',
+    'SEO company Houston',
+    'web development Houston TX',
+    'mobile app development Houston',
+    'Houston web design agency',
+    'custom website development Houston',
+    'digital marketing Houston',
   ];
 
   const allKeywords = [...defaultKeywords, ...keywords].join(', ');
@@ -63,13 +66,16 @@ export function SEOHead({
       <meta name="keywords" content={allKeywords} />
 
       {/* E-E-A-T: Author Attribution */}
-      {author && <meta name="author" content={author} />}
+      <meta name="author" content={author || siteConfig.name} />
 
-      {/* Robots */}
+      {/* Robots — full snippet allowances for rich results */}
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
-        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      )}
+      {!noindex && (
+        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       )}
 
       {/* Canonical URL */}
@@ -83,6 +89,8 @@ export function SEOHead({
       <meta property="og:image" content={pageImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={pageImageAlt} />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:site_name" content={siteConfig.name} />
       <meta property="og:locale" content="en_US" />
 
@@ -92,6 +100,9 @@ export function SEOHead({
       )}
       {type === 'article' && modifiedTime && (
         <meta property="article:modified_time" content={modifiedTime} />
+      )}
+      {type === 'article' && (
+        <meta property="article:publisher" content="https://www.facebook.com/cardinalconsulting" />
       )}
       {type === 'article' && author && (
         <meta property="article:author" content={author} />
@@ -103,12 +114,20 @@ export function SEOHead({
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />
+      <meta name="twitter:image:alt" content={pageImageAlt} />
       <meta name="twitter:site" content="@cardinalconsult" />
       <meta name="twitter:creator" content="@cardinalconsult" />
 
+      {/* Local Business & Geo Tags */}
+      <meta name="geo.region" content="US-TX" />
+      <meta name="geo.placename" content="Houston" />
+      <meta name="geo.position" content="29.7399;-95.4617" />
+      <meta name="ICBM" content="29.7399, -95.4617" />
+
       {/* Additional SEO Tags */}
       <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#000000" />
+      <meta name="theme-color" content="#DC2626" />
+      <meta name="msapplication-TileColor" content="#DC2626" />
 
       {/* Schema.org JSON-LD */}
       {schemas.map((schema, index) => (

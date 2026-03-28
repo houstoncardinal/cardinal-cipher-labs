@@ -28,8 +28,8 @@ const articles = [
     category: "AI Automation",
     pillar: "ai-automation",
     priority: 1,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-03-10",
     readTime: "15 min read",
     image: "/portfolio/axiomio.png",
     featured: true,
@@ -42,8 +42,8 @@ const articles = [
     category: "AI Automation",
     pillar: "ai-automation",
     priority: 2,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-02-18",
     readTime: "12 min read",
     image: "/portfolio/houinc.png",
     keywords: ["ai automation cost savings", "ai roi calculator", "automation savings business", "ai efficiency gains"],
@@ -55,8 +55,8 @@ const articles = [
     category: "AI Automation",
     pillar: "ai-automation",
     priority: 3,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-01-22",
     readTime: "10 min read",
     image: "/portfolio/hougenpros.png",
     keywords: ["ai workflows for service businesses", "automate client onboarding", "ai crm automation", "service business automation"],
@@ -70,8 +70,8 @@ const articles = [
     category: "Website Profit",
     pillar: "website-profit",
     priority: 1,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-02-04",
     readTime: "11 min read",
     image: "/portfolio/allhoustonproperty.png",
     featured: false,
@@ -84,8 +84,8 @@ const articles = [
     category: "Website Profit",
     pillar: "website-profit",
     priority: 2,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-12-09",
     readTime: "9 min read",
     image: "/portfolio/blutouch.png",
     keywords: ["why websites fail", "website design mistakes", "conversion vs design", "website not generating leads"],
@@ -97,8 +97,8 @@ const articles = [
     category: "Website Profit",
     pillar: "website-profit",
     priority: 3,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-11-14",
     readTime: "8 min read",
     image: "/portfolio/hitechlogic.png",
     keywords: ["website speed impact on revenue", "slow website cost", "page speed conversion rate", "site speed seo impact"],
@@ -112,8 +112,8 @@ const articles = [
     category: "SEO & AEO",
     pillar: "seo-aeo",
     priority: 1,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-02-25",
     readTime: "13 min read",
     image: "/portfolio/svrlawfirm.png",
     keywords: ["answer engine optimization", "what is aeo", "seo in 2026", "ai search optimization"],
@@ -125,8 +125,8 @@ const articles = [
     category: "SEO & AEO",
     pillar: "seo-aeo",
     priority: 2,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2026-01-07",
     readTime: "11 min read",
     image: "/portfolio/vargas.png",
     keywords: ["rank in chatgpt results", "ai search ranking", "optimize for ai answers", "chatgpt seo"],
@@ -138,8 +138,8 @@ const articles = [
     category: "SEO & AEO",
     pillar: "seo-aeo",
     priority: 3,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-10-21",
     readTime: "14 min read",
     image: "/portfolio/unitedccr.png",
     keywords: ["advanced schema markup", "technical seo schema", "structured data seo", "schema for rankings"],
@@ -153,8 +153,8 @@ const articles = [
     category: "Web Development",
     pillar: "web-development",
     priority: 1,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-09-03",
     readTime: "10 min read",
     image: "/portfolio/apnclinic.png",
     keywords: ["custom website vs template", "custom vs wordpress", "wix vs custom website", "website cost comparison"],
@@ -166,8 +166,8 @@ const articles = [
     category: "Web Development",
     pillar: "web-development",
     priority: 2,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-07-15",
     readTime: "9 min read",
     image: "/portfolio/clearledger.png",
     keywords: ["outgrow wix", "wix limitations", "squarespace vs custom", "when to upgrade website"],
@@ -179,8 +179,8 @@ const articles = [
     category: "Web Development",
     pillar: "web-development",
     priority: 3,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-05-28",
     readTime: "11 min read",
     image: "/portfolio/abqmri.png",
     keywords: ["no code vs custom development", "lovable vs custom", "bubble vs custom", "no code limitations"],
@@ -194,8 +194,8 @@ const articles = [
     category: "AI Lead Gen",
     pillar: "ai-lead-gen",
     priority: 1,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-12-30",
     readTime: "12 min read",
     image: "/portfolio/axiomio.png",
     keywords: ["ai lead generation system", "automated lead generation", "ai sales funnel", "ai marketing automation"],
@@ -207,8 +207,8 @@ const articles = [
     category: "AI Lead Gen",
     pillar: "ai-lead-gen",
     priority: 2,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-11-05",
     readTime: "10 min read",
     image: "/portfolio/houinc.png",
     keywords: ["ai chatbot conversions", "chatbot conversion rate", "website chatbot roi", "ai chat for leads"],
@@ -220,8 +220,8 @@ const articles = [
     category: "AI Lead Gen",
     pillar: "ai-lead-gen",
     priority: 3,
-    author: "Houston Cardinal",
-    date: "2026-02-17",
+    author: "Hunain Qureshi",
+    date: "2025-08-19",
     readTime: "13 min read",
     image: "/portfolio/hougenpros.png",
     keywords: ["automated sales funnel", "ai funnel automation", "lead nurture automation", "conversion funnel system"],
@@ -269,7 +269,7 @@ export default function Blog() {
       "@context": "https://schema.org",
       "@type": "Blog",
       "@id": `${siteConfig.url}/blog`,
-      name: "Houston Cardinal Blog",
+      name: "Cardinal Consulting Blog",
       description: "Expert insights on AI automation, website optimization, SEO, and lead generation for modern businesses.",
       url: `${siteConfig.url}/blog`,
       publisher: { "@id": `${siteConfig.url}#organization` },
@@ -282,7 +282,7 @@ export default function Blog() {
   return (
     <>
       <SEOHead
-        title="Blog | Houston Cardinal - AI Automation & Digital Growth Insights"
+        title="Blog | Cardinal Consulting — AI Automation & Digital Growth Insights"
         description="Expert insights on AI automation, website optimization, SEO, lead generation, and digital transformation. Practical guides for modern businesses."
         url={`${siteConfig.url}/blog`}
         schemas={schemas}
@@ -376,10 +376,10 @@ export default function Blog() {
             <section className="pb-16">
               <div className="container mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                  <LuxuryCard className="overflow-hidden group cursor-pointer">
+                  <LuxuryCard className="overflow-hidden">
                     <div className="grid lg:grid-cols-2 gap-0">
                       <div className="relative aspect-video lg:aspect-auto overflow-hidden">
-                        <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src={featured.image} alt={featured.title} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-transparent" />
                         <span className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase bg-red-600 text-white px-3 py-1 font-semibold">Featured</span>
                         {getPillarInfo(featured.pillar) && (
@@ -393,9 +393,9 @@ export default function Blog() {
                           <span className="flex items-center gap-1"><Calendar size={12} />{formatDate(featured.date)}</span>
                           <span className="flex items-center gap-1"><Clock size={12} />{featured.readTime}</span>
                         </div>
-                        <h2 className="font-serif text-3xl text-gray-900 mb-4 group-hover:text-red-600 transition-colors">{featured.title}</h2>
+                        <h2 className="font-serif text-3xl text-gray-900 mb-4">{featured.title}</h2>
                         <p className="text-gray-600 mb-6 leading-relaxed">{featured.excerpt}</p>
-                        <Button className="bg-gray-900 hover:bg-gray-800 w-fit">Read Article <ArrowRight className="ml-2 w-4 h-4" /></Button>
+                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-red-600 bg-red-50 px-4 py-2 rounded-full w-fit">Full Article Coming Soon</span>
                       </div>
                     </div>
                   </LuxuryCard>
@@ -424,27 +424,25 @@ export default function Blog() {
                       viewport={{ once: true }}
                       transition={{ delay: (i % 3) * 0.1 }}
                     >
-                      <LuxuryCard className="overflow-hidden h-full flex flex-col group cursor-pointer">
+                      <LuxuryCard className="overflow-hidden h-full flex flex-col">
                         <div className="relative aspect-video overflow-hidden">
-                          <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                          <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
                           {getPillarInfo(article.pillar) && (
                             <span className="absolute top-3 left-3 text-[10px] tracking-[0.15em] uppercase bg-white/95 text-gray-900 px-2 py-1 font-semibold">
                               {getPillarInfo(article.pillar)?.name}
                             </span>
                           )}
-                          {article.priority === 1 && (
-                            <span className="absolute top-3 right-3 text-[10px] tracking-[0.15em] uppercase bg-red-600 text-white px-2 py-1 font-semibold">Priority</span>
-                          )}
+                          <span className="absolute top-3 right-3 text-[10px] tracking-[0.15em] uppercase bg-gray-800/80 text-white px-2 py-1 font-semibold">Coming Soon</span>
                         </div>
                         <div className="p-6 flex flex-col flex-1">
                           <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
                             <span className="flex items-center gap-1"><Calendar size={11} />{formatDate(article.date)}</span>
                             <span className="flex items-center gap-1"><Clock size={11} />{article.readTime}</span>
                           </div>
-                          <h3 className="font-serif text-lg text-gray-900 mb-3 group-hover:text-red-600 transition-colors flex-1">{article.title}</h3>
+                          <h3 className="font-serif text-lg text-gray-900 mb-3 flex-1">{article.title}</h3>
                           <p className="text-sm text-gray-500 mb-4 line-clamp-2">{article.excerpt}</p>
-                          <span className="text-sm text-red-600 font-medium flex items-center gap-1 group-hover:gap-2 transition-all">Read More <ArrowRight size={14} /></span>
+                          <span className="text-xs text-gray-400 font-medium">Subscribe below to be notified when published</span>
                         </div>
                       </LuxuryCard>
                     </motion.div>
@@ -475,7 +473,7 @@ export default function Blog() {
                   Get Expert Insights Weekly
                 </h2>
                 <p className="text-gray-400 max-w-lg mx-auto mb-8">
-                  Join 2,000+ business leaders getting actionable strategies delivered to their inbox.
+                  Be the first to read our in-depth guides on AI automation, SEO, and digital growth. No spam — unsubscribe anytime.
                 </p>
                 <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                   <input 

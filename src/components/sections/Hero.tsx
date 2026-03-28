@@ -173,13 +173,14 @@ export function Hero() {
             </div>
             <div className="w-px h-3.5 bg-gray-200" />
             <span className="text-[11px] tracking-[0.2em] uppercase text-gray-500 font-semibold">
-              A Top-Rated Digital Marketing Agency
+              Houston's #1 Web Design &amp; App Development Agency
             </span>
           </motion.div>
 
           {/* Headline */}
           <div className="overflow-hidden mb-3">
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 leading-[1.2] tracking-tight">
+              <span className="sr-only">Houston's #1 Web Design &amp; App Development Agency — </span>
               We <RotatingPrefix currentIndex={currentIndex} /> <RotatingWord onIndexChange={setCurrentIndex} />
             </h1>
           </div>

@@ -148,7 +148,7 @@ const generateSchemas = () => {
     "description": "Houston's premier web design and SEO agency. Custom websites, local SEO, and digital marketing services for Houston businesses.",
     "url": "https://visitcardinal.com/houston-seo",
     "telephone": "+12819017016",
-    "email": "hunain@visitcardinal.com",
+    "email": "hello@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2100 West Loop S Fwy",
@@ -234,14 +234,17 @@ export function HoustonSEOPage() {
   return (
     <>
       <SEOHead
-        title="Houston Web Design & SEO Agency | #1 Rated Houston Digital Marketing | Cardinal Consulting"
-        description="Houston's #1 web design and SEO agency. Custom websites, local SEO, and digital marketing that drive real results. 500+ Houston clients. Call (281) 901-7016 for free consultation."
+        title="Houston Web Design & SEO Agency | #1 Rated Digital Marketing Houston"
+        description="Houston's #1 web design and SEO agency. Custom websites, local SEO, app development & digital marketing. 500+ Houston clients. Best web design company near me — call (281) 901-7016."
         keywords={[
           "web design Houston", "Houston SEO", "Houston website design", "Houston SEO company",
-          "Houston digital marketing", "Houston web developer", "Houston SEO services",
-          "Houston web design agency", "best SEO Houston", "Houston local SEO",
-          "Houston website developer", "Houston WordPress", "Houston e-commerce",
-          "Houston mobile app development", "Houston brand identity"
+          "best web design company Houston", "#1 web design company Houston",
+          "web design company near me Houston", "Houston digital marketing",
+          "Houston web developer", "Houston SEO services", "Houston web design agency",
+          "best SEO company Houston", "Houston local SEO", "app development company Houston",
+          "app development company near me Houston", "best app developer Houston",
+          "Houston website developer", "Houston web design and development",
+          "web developer near me Houston", "top web design company Houston"
         ]}
         schemas={generateSchemas()}
         url="https://visitcardinal.com/houston-seo"
@@ -642,13 +645,51 @@ export function HoustonSEOPage() {
                     <MapPin className="w-4 h-4" />2100 West Loop S, Houston, TX
                   </span>
                   <span className="flex items-center gap-2">
-                    <Mail className="w-4 h-4" />hunain@visitcardinal.com
+                    <Mail className="w-4 h-4" />hello@visitcardinal.com
                   </span>
                   <span className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />Mon-Fri 9AM-6PM
                   </span>
                 </div>
               </motion.div>
+            </div>
+          </section>
+          {/* From the Blog */}
+          <section className="py-16 bg-white border-t border-gray-100">
+            <div className="container mx-auto px-6 lg:px-12">
+              <p className="text-center text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-8">From Our SEO Blog</p>
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {[
+                  { title: "Schema Markup That Actually Moves Rankings", slug: "schema-markup-seo-guide", tag: "SEO & Schema" },
+                  { title: "How to Rank Inside ChatGPT and AI Search Results", slug: "ai-search-ranking", tag: "AEO & AI Search" },
+                  { title: "How to Choose a Web Design Agency in Houston", slug: "web-design-houston-agencies-guide", tag: "Houston Market" },
+                ].map((a) => (
+                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-red-200 hover:shadow-sm transition-all duration-200 group">
+                    <span className="text-xs font-semibold text-red-600 uppercase tracking-wider">{a.tag}</span>
+                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-red-600 transition-colors leading-snug">{a.title}</h3>
+                    <span className="text-sm text-gray-500 mt-2 inline-block">Read article →</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Related Services */}
+          <section className="py-16 bg-gray-50 border-t border-gray-100">
+            <div className="container mx-auto px-6 lg:px-12">
+              <p className="text-center text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-8">Related Services</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                {[
+                  { label: "Web Design Houston", href: "/houston-web-design" },
+                  { label: "App Development Houston", href: "/houston-app-development" },
+                  { label: "Houston Web Developer", href: "/houston-web-developer" },
+                  { label: "Houston SEO Company", href: "/houston-seo-company" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-red-600 transition-all duration-200">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         </main>

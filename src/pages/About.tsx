@@ -24,16 +24,16 @@ const values = [
 
 const milestones = [
   { year: "2020", title: "Founded in Houston", description: "Cardinal Consulting established with a mission to deliver enterprise-grade solutions to businesses of all sizes." },
-  { year: "2021", title: "First Enterprise Client", description: "Secured our first Fortune 500 engagement, delivering a cloud migration saving $2M annually." },
+  { year: "2021", title: "First Major Clients", description: "Began serving Houston's fastest-growing SMBs — healthcare practices, law firms, and real estate groups that needed real digital results, fast." },
   { year: "2022", title: "National Expansion", description: "Expanded operations coast-to-coast, serving clients across healthcare, finance, and technology sectors." },
-  { year: "2023", title: "Industry Recognition", description: "Named to Houston Business Journal Fast 100 and Inc. 5000 Fastest Growing Companies." },
+  { year: "2023", title: "500+ Projects Milestone", description: "Crossed 500+ projects delivered for Houston and national clients across healthcare, legal, finance, and technology." },
   { year: "2024", title: "AI Division Launch", description: "Launched dedicated AI & Machine Learning practice, helping enterprises leverage intelligent automation." },
   { year: "2025", title: "Global Reach", description: "Extended services internationally with clients across North America, Europe, and Asia Pacific." },
 ];
 
 const stats = [
-  { value: "150+", label: "Projects Delivered" },
-  { value: "50+", label: "Active Clients" },
+  { value: "500+", label: "Projects Delivered" },
+  { value: "200+", label: "Happy Clients" },
   { value: "99.9%", label: "Client Retention" },
   { value: "4.9★", label: "Average Rating" },
 ];
@@ -47,7 +47,7 @@ export default function About() {
     ...generateReviewSchemas(),
     generateWebPageSchema({
       name: "About Cardinal Consulting",
-      description: "Learn about Cardinal Consulting's mission, team, and commitment to delivering enterprise-grade digital solutions.",
+      description: "Learn about Cardinal Consulting — Houston's SMB-first web design, app development, and SEO agency. 500+ projects delivered. Founded by Hunain Qureshi.",
       url: `${siteConfig.url}/about`,
     }),
     generateBreadcrumbSchema([
@@ -59,7 +59,7 @@ export default function About() {
       "@type": "AboutPage",
       "@id": `${siteConfig.url}/about`,
       name: "About Cardinal Consulting",
-      description: "Our story, mission, and the team behind enterprise-grade digital transformation.",
+      description: "Our story, mission, and the team behind Houston's leading SMB digital agency.",
       url: `${siteConfig.url}/about`,
       mainEntity: { "@id": `${siteConfig.url}#organization` },
     },
@@ -68,11 +68,11 @@ export default function About() {
   return (
     <>
       <SEOHead
-        title="About Us"
-        description="Learn about Cardinal Consulting — a Houston-based enterprise software development and consulting firm delivering cutting-edge digital solutions since 2020."
+        title="About Cardinal Consulting | Houston's #1 Web Design & App Development Agency"
+        description="Cardinal Consulting is Houston's #1 web design, app development, and SEO agency. Founded by Hunain Qureshi in 2020, we've delivered 500+ projects for Houston businesses and clients nationwide. Learn our story."
         url={`${siteConfig.url}/about`}
         schemas={schemas}
-        keywords={["about cardinal consulting", "software consulting firm", "Houston tech company", "enterprise consulting"]}
+        keywords={["about cardinal consulting", "Houston web design agency", "Houston app development company", "best web design agency Houston", "Hunain Qureshi Cardinal Consulting", "Houston digital agency", "web design company Houston Texas", "top SEO company Houston"]}
       />
 
       <div className="min-h-screen bg-background">
@@ -128,9 +128,9 @@ export default function About() {
                   <span className="text-xs tracking-[0.3em] uppercase text-primary mb-4 block">Our Story</span>
                   <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Built from the ground up with a singular mission</h2>
                   <div className="space-y-4 text-muted-foreground leading-relaxed">
-                    <p>Cardinal Consulting was founded in 2020 by Hunain Qureshi with a clear vision: bring enterprise-grade engineering excellence to businesses of every size. What started as a one-person consultancy in Houston has grown into a full-service digital agency serving clients across multiple continents.</p>
-                    <p>We've helped healthcare providers build HIPAA-compliant platforms, enabled financial institutions to migrate to the cloud securely, and empowered startups to launch MVPs in record time. Every project teaches us something new, and every client relationship makes us stronger.</p>
-                    <p>Today, Cardinal Consulting stands as a trusted technology partner for organizations ready to make bold moves in their digital transformation journey.</p>
+                    <p>Cardinal Consulting was founded in 2020 by Hunain Qureshi with a simple mission: help Houston small businesses compete online and win. What started as a boutique consultancy has grown into a full-service digital agency that has delivered 500+ websites, apps, and SEO campaigns for clients across Houston and the country.</p>
+                    <p>We specialize in SMBs that are serious about growth — healthcare practices, law firms, real estate groups, contractors, and service businesses that need real leads, not just a pretty website. Every project is built to generate measurable revenue.</p>
+                    <p>For larger companies and enterprise projects, we bring the same results-driven approach with dedicated resources and white-glove service. Talk to us about your specific needs.</p>
                   </div>
                 </motion.div>
                 <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -218,12 +218,36 @@ export default function About() {
             </div>
           </section>
 
+          {/* Related Services */}
+          <section className="py-24 lg:py-32">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Services in Houston</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">Explore what Houston's #1 digital agency can do for your business.</p>
+              </motion.div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "Web Design", href: "/houston-web-design" },
+                  { label: "App Development", href: "/houston-app-development" },
+                  { label: "SEO Services", href: "/houston-seo-company" },
+                  { label: "Web Developer", href: "/houston-web-developer" },
+                  { label: "Digital Marketing", href: "/services/digital-marketing" },
+                  { label: "UX/UI Design", href: "/services/ux-ui" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-2 p-4 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
+                    {link.label} <ArrowRight className="w-3 h-3 text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* CTA */}
           <section className="py-24 lg:py-32 bg-primary/5">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Work Together?</h2>
-                <p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's discuss how Cardinal Consulting can accelerate your digital transformation.</p>
+                <p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's discuss how Cardinal Consulting can accelerate your digital transformation. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a> or schedule a free consultation.</p>
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                   <Link to="/contact">Schedule Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link>
                 </Button>

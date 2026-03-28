@@ -67,9 +67,9 @@ const packages = [
 ];
 
 const stats = [
-  { value: "50+", label: "Apps Delivered" },
-  { value: "2M+", label: "Total Downloads" },
-  { value: "4.8★", label: "Avg Store Rating" },
+  { value: "150+", label: "Apps Delivered" },
+  { value: "8 Wks", label: "Avg MVP Delivery" },
+  { value: "4.9★", label: "Client Rating" },
   { value: "98%", label: "Client Satisfaction" },
 ];
 
@@ -126,29 +126,29 @@ export default function MobileApps() {
   return (
     <>
       <SEOHead
-        title="App Development Houston | iOS & Android Mobile App Development Agency"
-        description="Cardinal Consulting — Houston's top app development agency. Custom iOS & Android apps with React Native & Flutter. 50+ apps, 2M+ downloads, 4.8★ store rating. Free consultation."
+        title="#1 App Development Company Houston TX | iOS & Android Mobile Apps"
+        description="Cardinal Consulting — Houston's #1 app development company. Custom iOS & Android apps, React Native, HIPAA-compliant. 150+ apps delivered. App development company near me in Houston. Call (281) 901-7016."
         keywords={[
-          "app development Houston",
+          "app development company Houston",
+          "app development company near me Houston",
           "mobile app development Houston",
+          "#1 app development company Houston",
+          "best app development company Houston",
           "iOS app development Houston",
           "Android app development Houston",
           "app development agency Houston",
-          "mobile app development agency",
           "React Native development Houston",
-          "Flutter app development",
-          "custom app development",
-          "enterprise mobile app development",
-          "fintech app development",
-          "healthcare app development",
-          "cross-platform app development",
-          "iPhone app development Houston",
+          "HIPAA compliant app development Houston",
+          "enterprise mobile app development Houston",
+          "cross-platform app development Houston",
+          "iPhone app developer Houston",
           "Android app developer Houston",
-          "mobile app development company",
-          "best app development company Houston",
-          "startup app development",
-          "MVP app development",
-          "app development services Texas",
+          "app developer near me Houston",
+          "startup app development Houston",
+          "MVP app development Houston",
+          "custom app development Houston TX",
+          "mobile app developer Houston Texas",
+          "app development services Houston",
         ]}
         schemas={schemas}
         url={serviceUrl}
@@ -223,7 +223,7 @@ export default function MobileApps() {
                 {[
                   { name: "AWS Advanced Consulting Partner", icon: Shield },
                   { name: "Google Cloud Partner", icon: Shield },
-                  { name: "SOC 2 Type II Compliant", icon: Shield },
+                  { name: "HIPAA Compliant Development", icon: Shield },
                   { name: "Apple Developer Program", icon: Shield },
                   { name: "Google Play Console Partner", icon: Shield },
                 ].map((cert, i) => (
@@ -352,8 +352,29 @@ export default function MobileApps() {
             </div>
           </section>
 
+          {/* Related Services */}
+          <section className="py-16 border-t border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <h2 className="font-serif text-2xl text-foreground mb-8 text-center">Related Houston Services</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "App Development Houston", href: "/houston-app-development" },
+                  { label: "Web Developer Houston", href: "/houston-web-developer" },
+                  { label: "Web Design Houston", href: "/houston-web-design" },
+                  { label: "Web Development", href: "/services/web-development" },
+                  { label: "Rush Prototyping", href: "/rush-prototyping" },
+                  { label: "UX/UI Design", href: "/services/ux-ui" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* CTA */}
-          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Build Your App?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's turn your idea into a powerful mobile experience. Free consultation, no obligations.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Start Your Project <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
+          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Build Your App?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's turn your idea into a powerful mobile experience. Free consultation. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a>.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Start Your Project <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
         </main>
         <Footer />
       </div>

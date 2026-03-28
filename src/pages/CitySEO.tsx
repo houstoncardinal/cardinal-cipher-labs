@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
 
 // City data - easily extensible
@@ -315,7 +315,7 @@ const generateSchemas = (cityKey: string) => {
     "description": `${city.name}, ${city.state}'s premier web design and SEO agency. Custom websites, local SEO, and digital marketing services for ${city.name} businesses.`,
     "url": `https://visitcardinal.com/${city.slug}-seo`,
     "telephone": city.phone,
-    "email": "hunain@visitcardinal.com",
+    "email": "hello@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": city.address,
@@ -394,18 +394,10 @@ export function CitySEOPage() {
   
   const schemas = useMemo(() => generateSchemas(cityKey), [cityKey]);
   
-  // Fallback to Austin if city not found
-  const displayCity = city || citiesData.austin;
+  const displayCity = city;
 
   if (!city) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">City Not Found</h1>
-          <Link to="/" className="text-red-600 hover:underline">Return Home</Link>
-        </div>
-      </div>
-    );
+    return <Navigate to="/not-found" replace />;
   }
 
   return (

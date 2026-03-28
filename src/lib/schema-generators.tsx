@@ -4,11 +4,29 @@ import { siteConfig, services, faqs, industries } from './seo-config';
 
 // Generate LocalBusiness Schema - Critical for Local SEO
 export function generateLocalBusinessSchema() {
+  const houstonNeighborhoods = [
+    'Downtown Houston', 'The Woodlands', 'Sugar Land', 'Katy', 'Pearland',
+    'Cypress', 'Spring', 'Missouri City', 'League City', 'Pasadena',
+    'Baytown', 'Conroe', 'Humble', 'Tomball', 'Richmond',
+    'Friendswood', 'Clear Lake', 'Memorial', 'Galleria', 'Heights',
+    'Montrose', 'Midtown', 'River Oaks', 'West University', 'Bellaire',
+    'Stafford', 'Rosenberg', 'Alvin', 'Deer Park', 'La Porte',
+  ];
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': ['ProfessionalService', 'LocalBusiness'],
     '@id': `${siteConfig.url}#localbusiness`,
+    additionalType: 'https://schema.org/ITService',
     name: siteConfig.name,
+    alternateName: [
+      'Cardinal Web Design Houston',
+      'Best Web Design Company Houston',
+      '#1 Web Design Company Houston',
+      'Best App Development Company Houston',
+      'Best SEO Company Houston',
+      'Cardinal Consulting LLC',
+    ],
     legalName: siteConfig.legalName,
     url: siteConfig.url,
     telephone: siteConfig.contact.phone,
@@ -21,7 +39,12 @@ export function generateLocalBusinessSchema() {
       width: 200,
       height: 200,
     },
-    image: siteConfig.ogImage,
+    image: {
+      '@type': 'ImageObject',
+      url: siteConfig.ogImage,
+      width: 1200,
+      height: 630,
+    },
     priceRange: siteConfig.business.priceRange,
     currenciesAccepted: siteConfig.business.currenciesAccepted.join(', '),
     paymentAccepted: siteConfig.business.paymentAccepted.join(', '),
@@ -43,20 +66,44 @@ export function generateLocalBusinessSchema() {
       longitude: siteConfig.contact.geo.longitude,
     },
 
-    // Opening Hours
-    openingHoursSpecification: siteConfig.business.openingHours.map((hours) => ({
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: hours.dayOfWeek,
-      opens: hours.opens,
-      closes: hours.closes,
-    })),
+    // Service Radius
+    serviceArea: {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: siteConfig.contact.geo.latitude,
+        longitude: siteConfig.contact.geo.longitude,
+      },
+      geoRadius: '50000', // 50km radius covers Greater Houston
+    },
 
-    // Area Served
-    areaServed: siteConfig.business.areaServed.map((area) => ({
-      '@type': area.type,
-      name: area.name,
-      ...(area.region && { containedInPlace: { '@type': 'State', name: area.region } }),
-    })),
+    // Opening Hours
+    openingHoursSpecification: [
+      ...siteConfig.business.openingHours.map((hours) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: hours.dayOfWeek,
+        opens: hours.opens,
+        closes: hours.closes,
+      })),
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday', 'Sunday'],
+        opens: '10:00',
+        closes: '16:00',
+        description: 'By appointment only',
+      },
+    ],
+
+    // Houston Neighborhoods + broader area served
+    areaServed: [
+      ...houstonNeighborhoods.map((area) => ({
+        '@type': 'City',
+        name: area,
+        containedInPlace: { '@type': 'State', name: 'Texas' },
+      })),
+      { '@type': 'State', name: 'Texas' },
+      { '@type': 'Country', name: 'United States' },
+    ],
 
     // Aggregate Rating
     aggregateRating: {
@@ -68,15 +115,68 @@ export function generateLocalBusinessSchema() {
       worstRating: siteConfig.aggregateRating.worstRating,
     },
 
+    // Review snippets (first 3 for rich results)
+    review: siteConfig.reviews.slice(0, 3).map((r) => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: r.author,
+        worksFor: { '@type': 'Organization', name: r.authorCompany },
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.reviewRating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: r.reviewBody,
+      datePublished: r.datePublished,
+    })),
+
     // Social Profiles
     sameAs: siteConfig.socialProfiles,
 
+    // Contact points
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: siteConfig.contact.phone,
+        contactType: 'sales',
+        email: siteConfig.contact.email,
+        areaServed: 'US',
+        availableLanguage: siteConfig.expertise.languages,
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '09:00',
+          closes: '18:00',
+        },
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: siteConfig.contact.phone,
+        contactType: 'customer support',
+        email: siteConfig.contact.supportEmail,
+        areaServed: 'US',
+        availableLanguage: siteConfig.expertise.languages,
+      },
+    ],
+
     // Expertise
-    knowsAbout: siteConfig.expertise.specialties,
+    knowsAbout: [
+      'Web Design Houston TX',
+      'App Development Houston TX',
+      'SEO Services Houston TX',
+      'Local SEO Houston',
+      'Digital Marketing Houston',
+      ...siteConfig.expertise.specialties,
+    ],
     hasCredential: siteConfig.expertise.certifications.map((cert) => ({
       '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Professional Certification',
       name: cert,
     })),
+    award: siteConfig.expertise.awardsRecognition,
   };
 }
 
@@ -84,10 +184,17 @@ export function generateLocalBusinessSchema() {
 export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': ['Organization', 'LocalBusiness'],
     '@id': `${siteConfig.url}#organization`,
+    additionalType: ['https://schema.org/ProfessionalService', 'https://schema.org/ITService'],
     name: siteConfig.name,
     legalName: siteConfig.legalName,
+    alternateName: [
+      'Cardinal Consulting LLC',
+      'Cardinal Web Design Houston',
+      'Best Web Design Company Houston',
+      'Cardinal App Development Houston',
+    ],
     url: siteConfig.url,
     logo: {
       '@type': 'ImageObject',
@@ -95,7 +202,12 @@ export function generateOrganizationSchema() {
       width: 200,
       height: 200,
     },
-    image: siteConfig.ogImage,
+    image: {
+      '@type': 'ImageObject',
+      url: siteConfig.ogImage,
+      width: 1200,
+      height: 630,
+    },
     description: siteConfig.description,
     foundingDate: siteConfig.business.foundingDate,
     slogan: siteConfig.business.slogan,
@@ -190,21 +302,127 @@ export function generateWebSiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${siteConfig.url}#website`,
-    name: siteConfig.name,
+    name: `${siteConfig.name} — #1 Web Design & App Development Houston TX`,
+    alternateName: [
+      'Cardinal Consulting Houston',
+      'Best Web Design Company Houston TX',
+      'Cardinal Web Design & App Development',
+    ],
     url: siteConfig.url,
     description: siteConfig.description,
     inLanguage: 'en-US',
     publisher: {
       '@id': `${siteConfig.url}#organization`,
     },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
+    copyrightHolder: {
+      '@id': `${siteConfig.url}#organization`,
     },
+    copyrightYear: new Date().getFullYear(),
+    potentialAction: [
+      {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${siteConfig.url}/search?q={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
+      {
+        '@type': 'ReadAction',
+        target: [
+          `${siteConfig.url}/houston-web-design`,
+          `${siteConfig.url}/houston-app-development`,
+          `${siteConfig.url}/houston-seo-company`,
+          `${siteConfig.url}/houston-web-developer`,
+        ],
+      },
+    ],
+  };
+}
+
+// Generate Event Schema — Free Consultation (boosts local pack CTR)
+export function generateFreeConsultationEventSchema() {
+  const today = new Date();
+  const endDate = new Date(today);
+  endDate.setMonth(endDate.getMonth() + 3);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    '@id': `${siteConfig.url}#free-consultation-event`,
+    name: 'Free Web Design & SEO Consultation — Houston TX',
+    description: "Book a free 30-minute strategy session with Houston's #1 web design and SEO experts. Get a custom roadmap for ranking your Houston business #1 on Google.",
+    startDate: today.toISOString().split('T')[0],
+    endDate: endDate.toISOString().split('T')[0],
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+    location: [
+      {
+        '@type': 'Place',
+        name: 'Cardinal Consulting — Houston Office',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.contact.address.streetAddress,
+          addressLocality: siteConfig.contact.address.addressLocality,
+          addressRegion: siteConfig.contact.address.addressRegion,
+          postalCode: siteConfig.contact.address.postalCode,
+          addressCountry: siteConfig.contact.address.addressCountry,
+        },
+      },
+      {
+        '@type': 'VirtualLocation',
+        url: `${siteConfig.url}/contact`,
+      },
+    ],
+    organizer: {
+      '@type': 'Organization',
+      '@id': `${siteConfig.url}#organization`,
+      name: siteConfig.name,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `${siteConfig.url}/contact`,
+      validFrom: today.toISOString().split('T')[0],
+      name: 'Free Consultation',
+      description: 'Free 30-minute web design & SEO strategy consultation for Houston businesses',
+    },
+    url: `${siteConfig.url}/contact`,
+    inLanguage: 'en-US',
+    typicalAgeRange: '18-',
+    isAccessibleForFree: true,
+  };
+}
+
+// Generate SiteNavigationElement for SEO sitelinks
+export function generateSiteLinksSchema() {
+  const links = [
+    { name: 'Houston Web Design', url: `${siteConfig.url}/houston-web-design` },
+    { name: 'Houston App Development', url: `${siteConfig.url}/houston-app-development` },
+    { name: 'Houston SEO Company', url: `${siteConfig.url}/houston-seo-company` },
+    { name: 'Houston Web Developer', url: `${siteConfig.url}/houston-web-developer` },
+    { name: 'Web Development Services', url: `${siteConfig.url}/services/web-development` },
+    { name: 'Mobile App Development', url: `${siteConfig.url}/services/mobile-apps` },
+    { name: 'SEO & Analytics', url: `${siteConfig.url}/services/seo-analytics` },
+    { name: 'Digital Marketing', url: `${siteConfig.url}/services/digital-marketing` },
+    { name: 'Portfolio', url: `${siteConfig.url}/portfolio` },
+    { name: 'Contact Us', url: `${siteConfig.url}/contact` },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SiteNavigationElement',
+    '@id': `${siteConfig.url}#sitenavigation`,
+    name: 'Cardinal Consulting — Main Navigation',
+    hasPart: links.map((link, i) => ({
+      '@type': 'WebPage',
+      '@id': link.url,
+      name: link.name,
+      url: link.url,
+      position: i + 1,
+    })),
   };
 }
 
@@ -254,18 +472,32 @@ export function generateServiceSchemas() {
   }));
 }
 
-// Generate Person Schemas for Team Members
+// Generate Person Schemas for Team Members (E-E-A-T critical)
 export function generatePersonSchemas() {
   return siteConfig.team.map((person) => ({
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': `${siteConfig.url}#person-${person.name.toLowerCase().replace(/\s+/g, '-')}`,
     name: person.name,
+    givenName: person.name.split(' ')[0],
+    familyName: person.name.split(' ').slice(1).join(' '),
     jobTitle: person.role,
     email: person.email,
-    image: `${siteConfig.url}${person.image}`,
+    telephone: siteConfig.contact.phone,
+    image: {
+      '@type': 'ImageObject',
+      url: `${siteConfig.url}${person.image}`,
+      width: 400,
+      height: 400,
+    },
     url: person.linkedin,
     description: person.description,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Houston',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
 
     // E-E-A-T: Expertise & Credentials
     knowsAbout: person.expertise,
@@ -274,14 +506,30 @@ export function generatePersonSchemas() {
       credentialCategory: 'Professional Certification',
       name: credential,
     })),
+    alumniOf: [
+      {
+        '@type': 'CollegeOrUniversity',
+        name: 'Stanford University',
+        url: 'https://www.stanford.edu',
+      },
+    ],
 
     // Affiliation with organization
     worksFor: {
       '@id': `${siteConfig.url}#organization`,
     },
+    memberOf: {
+      '@type': 'Organization',
+      name: siteConfig.legalName,
+    },
 
-    // Authority signals
-    sameAs: [person.linkedin],
+    // Authority signals — all social profiles
+    sameAs: [
+      person.linkedin,
+      ...(person.twitter ? [person.twitter] : []),
+      siteConfig.links.linkedin,
+      siteConfig.links.twitter,
+    ].filter(Boolean),
   }));
 }
 
@@ -752,11 +1000,13 @@ export function generateAllHomePageSchemas() {
     generateOrganizationSchema(),
     generateWebSiteSchema(),
     generateWebPageSchema({
-      name: 'Cardinal Consulting - Web Design & App Development Houston TX',
+      name: "#1 Web Design & App Development Company Houston TX | Cardinal Consulting",
       description: siteConfig.description,
       url: siteConfig.url,
+      dateModified: new Date().toISOString().split('T')[0],
     }),
     generateNavigationSchema(),
+    generateSiteLinksSchema(),
     generateKnowledgeGraphSchema(),
     generateOfferCatalogSchema(),
     ...generateServiceSchemas(),
@@ -767,7 +1017,7 @@ export function generateAllHomePageSchemas() {
     ...generatePortfolioSchemas(),
     generateProcessSchema(),
     generateContactPageSchema(),
-    ...generateIndustrySchemas(),
+    generateFreeConsultationEventSchema(),
     generateBreadcrumbSchema([{ name: 'Home', url: siteConfig.url }]),
     ...generateProductSchemas(),
     generateSpeakableSchema(siteConfig.url),
@@ -790,7 +1040,7 @@ export function injectSchema(schemas: any | any[]) {
 // NEW SCHEMA TYPES - Advanced Implementation
 
 // Generate Product Schema for Services
-export function generateProductSchemas() {
+export function generateServiceProductSchemas() {
   return services.map((service, index) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -1323,16 +1573,16 @@ export function generatePressReleaseSchemas() {
       keywords: ['AI', 'Analytics', 'Enterprise', 'Platform'],
     },
     {
-      name: 'Cardinal Consulting Achieves SOC 2 Type II Compliance',
-      headline: 'Cardinal Consulting Achieves SOC 2 Type II Compliance',
-      description: 'Major security milestone demonstrates commitment to data protection',
-      datePublished: '2024-01-20',
+      name: 'Cardinal Consulting Crosses 500+ Projects Milestone',
+      headline: 'Cardinal Consulting Crosses 500+ Projects Milestone for Houston Businesses',
+      description: 'Houston digital agency celebrates delivering 500+ websites, apps, and SEO campaigns',
+      datePublished: '2025-03-01',
       provider: {
         '@id': `${siteConfig.url}#organization`,
       },
       image: siteConfig.ogImage,
-      articleBody: 'Cardinal Consulting has successfully completed its SOC 2 Type II audit, demonstrating its commitment to maintaining the highest standards of security and data protection.',
-      keywords: ['Security', 'Compliance', 'SOC 2', 'Data Protection'],
+      articleBody: 'Cardinal Consulting has delivered over 500 web design, app development, and SEO projects for businesses across Houston, Texas, and nationwide, cementing its position as a leading Houston digital agency.',
+      keywords: ['Houston Web Design', 'Digital Agency', 'Web Development', 'SEO Houston'],
     },
   ];
 
@@ -1721,13 +1971,22 @@ export function generateFinancialProductSchemas() {
 
 // Generate EducationalOrganization Schema for Learning Content
 export function generateEducationalOrganizationSchemas() {
+  const serviceOfferings = [
+    { name: 'Web Design & Development', description: 'Custom website design and development for businesses.' },
+    { name: 'Mobile App Development', description: 'iOS and Android mobile application development.' },
+    { name: 'SEO & Digital Marketing', description: 'Search engine optimization and digital marketing strategies.' },
+    { name: 'Brand Identity Design', description: 'Logo design and comprehensive brand identity systems.' },
+    { name: 'UX/UI Design', description: 'User experience and interface design for web and mobile.' },
+    { name: 'Digital Transformation Consulting', description: 'Enterprise digital transformation strategy and implementation.' },
+  ];
+
   return {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
     '@id': `${siteConfig.url}#education`,
     name: `${siteConfig.name} Training Division`,
-    description: 'Professional training and certification programs',
-    url: `${siteConfig.url}/training`,
+    description: 'Professional training and certification programs in web development, digital marketing, and app development.',
+    url: `${siteConfig.url}/about`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.contact.address.streetAddress,
@@ -1736,11 +1995,11 @@ export function generateEducationalOrganizationSchemas() {
       postalCode: siteConfig.contact.address.postalCode,
       addressCountry: siteConfig.contact.address.addressCountry,
     },
-    areaServed: siteConfig.business.areaServed.map((area) => ({
+    areaServed: (siteConfig.business.areaServed || []).map((area) => ({
       '@type': area.type,
       name: area.name,
     })),
-    makesOffer: siteConfig.services.map((service) => ({
+    makesOffer: serviceOfferings.map((service) => ({
       '@type': 'Offer',
       itemOffered: {
         '@type': 'Course',
@@ -1754,7 +2013,7 @@ export function generateEducationalOrganizationSchemas() {
 // Generate All Advanced Schemas for Homepage
 export function generateAllAdvancedHomePageSchemas() {
   return [
-    ...generateProductSchemas(),
+    ...generateServiceProductSchemas(),
     ...generateEventSchemas(),
     ...generateCourseSchemas(),
     ...generateJobPostingSchemas(),
@@ -1782,7 +2041,7 @@ export function getSchemasForPage(pageType: string) {
     case 'services':
       return [
         ...generateServiceSchemas(),
-        ...generateProductSchemas(),
+        ...generateServiceProductSchemas(),
         ...generateOfferCatalogSchema(),
       ];
 case 'portfolio':

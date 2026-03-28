@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowUpRight, Trophy, Users, Star } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Trophy, Users, Star, TrendingUp, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import { siteConfig } from "@/lib/seo-config";
 import { generatePortfolioSchemas, generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
@@ -91,8 +91,8 @@ export default function PortfolioPage() {
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[
-                  { value: "50+", label: "Clients Served" },
-                  { value: "150+", label: "Projects Delivered" },
+                  { value: "200+", label: "Clients Served" },
+                  { value: "500+", label: "Projects Delivered" },
                   { value: "10+", label: "Industries" },
                   { value: "98%", label: "Client Satisfaction" },
                 ].map((stat, i) => (
@@ -101,6 +101,136 @@ export default function PortfolioPage() {
                     <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </motion.div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Deep Case Studies */}
+          <section className="py-24 lg:py-32 bg-card/30">
+            <div className="container mx-auto px-6 lg:px-12">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+                <span className="text-xs tracking-[0.3em] uppercase text-primary mb-4 block">Deep Dives</span>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Before &amp; After: Real Results</h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">We don't just build websites. We build revenue engines. Here's the proof.</p>
+              </motion.div>
+
+              <div className="space-y-16 max-w-5xl mx-auto">
+
+                {/* Case Study 1: BluTouch Pools */}
+                <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                  <LuxuryCard elevation={3} borderStyle="metallic-crimson" className="overflow-hidden">
+                    <div className="grid md:grid-cols-2 gap-0">
+                      <div className="relative aspect-video md:aspect-auto overflow-hidden">
+                        <img src="/portfolio/blutouch.png" alt="BluTouch Pools & Spas" className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/10" />
+                      </div>
+                      <div className="p-8 lg:p-10">
+                        <span className="text-[10px] tracking-[0.25em] uppercase text-primary mb-3 block">Luxury Pool Design · Houston, TX</span>
+                        <h3 className="font-serif text-2xl text-foreground mb-4">BluTouch Pools &amp; Spas</h3>
+                        <div className="grid grid-cols-3 gap-4 mb-6">
+                          {[
+                            { label: "Inbound Leads", before: "12/mo", after: "47/mo" },
+                            { label: "Google Rank", before: "Page 4", after: "#1" },
+                            { label: "Revenue", before: "Baseline", after: "+187%" },
+                          ].map((m) => (
+                            <div key={m.label} className="text-center p-3 bg-background/50 rounded-lg">
+                              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">{m.label}</p>
+                              <p className="text-xs text-muted-foreground line-through mb-0.5">{m.before}</p>
+                              <p className="font-serif text-lg text-primary font-bold">{m.after}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="bg-primary/5 rounded-xl p-4 mb-6 relative">
+                          <Quote className="w-5 h-5 text-primary/20 absolute top-3 left-3" />
+                          <p className="text-sm text-muted-foreground italic pl-6 leading-relaxed">"We went from page 5 to #1 on Google for 'custom pool builder Houston' in 74 days. Our phones haven't stopped ringing since. Cardinal paid for themselves in the first month."</p>
+                          <p className="text-xs text-foreground font-semibold mt-2 pl-6">— Owner, BluTouch Pools &amp; Spas</p>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {["Custom Web Design", "Local SEO", "Google Business Profile", "Schema Markup"].map(t => (
+                            <span key={t} className="text-xs px-3 py-1 bg-secondary/50 text-muted-foreground border border-border/50">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </LuxuryCard>
+                </motion.div>
+
+                {/* Case Study 2: SVR Law Firm */}
+                <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                  <LuxuryCard elevation={3} borderStyle="metallic-platinum" className="overflow-hidden">
+                    <div className="grid md:grid-cols-2 gap-0">
+                      <div className="p-8 lg:p-10 order-2 md:order-1">
+                        <span className="text-[10px] tracking-[0.25em] uppercase text-primary mb-3 block">Legal · Houston, TX</span>
+                        <h3 className="font-serif text-2xl text-foreground mb-4">SVR Law Firm</h3>
+                        <div className="grid grid-cols-3 gap-4 mb-6">
+                          {[
+                            { label: "Organic Traffic", before: "320/mo", after: "1,840/mo" },
+                            { label: "Consultations", before: "8/mo", after: "34/mo" },
+                            { label: "Time to Rank", before: "None", after: "90 days" },
+                          ].map((m) => (
+                            <div key={m.label} className="text-center p-3 bg-background/50 rounded-lg">
+                              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">{m.label}</p>
+                              <p className="text-xs text-muted-foreground line-through mb-0.5">{m.before}</p>
+                              <p className="font-serif text-lg text-primary font-bold">{m.after}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="bg-primary/5 rounded-xl p-4 mb-6 relative">
+                          <Quote className="w-5 h-5 text-primary/20 absolute top-3 left-3" />
+                          <p className="text-sm text-muted-foreground italic pl-6 leading-relaxed">"We were invisible online before Cardinal. Now we're getting 34 qualified consultation requests a month from organic search alone. The ROI is unbelievable for a law firm our size."</p>
+                          <p className="text-xs text-foreground font-semibold mt-2 pl-6">— Managing Partner, SVR Law Firm</p>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {["Legal Web Design", "SEO Retainer", "Content Strategy", "Local Citations"].map(t => (
+                            <span key={t} className="text-xs px-3 py-1 bg-secondary/50 text-muted-foreground border border-border/50">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="relative aspect-video md:aspect-auto overflow-hidden order-1 md:order-2">
+                        <img src="/portfolio/svrlawfirm.png" alt="SVR Law Firm" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  </LuxuryCard>
+                </motion.div>
+
+                {/* Case Study 3: HiTech Logic */}
+                <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                  <LuxuryCard elevation={3} borderStyle="metallic-crimson" className="overflow-hidden">
+                    <div className="grid md:grid-cols-2 gap-0">
+                      <div className="relative aspect-video md:aspect-auto overflow-hidden">
+                        <img src="/portfolio/hitechlogic.png" alt="HiTech Logic" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-8 lg:p-10">
+                        <span className="text-[10px] tracking-[0.25em] uppercase text-primary mb-3 block">IT & AI Automation · Houston, TX</span>
+                        <h3 className="font-serif text-2xl text-foreground mb-4">HiTech Logic</h3>
+                        <div className="grid grid-cols-3 gap-4 mb-6">
+                          {[
+                            { label: "Alert Volume", before: "2,400/mo", after: "360/mo" },
+                            { label: "Resolution Time", before: "4.2 hrs", after: "55 min" },
+                            { label: "Client Uptime", before: "98.1%", after: "99.98%" },
+                          ].map((m) => (
+                            <div key={m.label} className="text-center p-3 bg-background/50 rounded-lg">
+                              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">{m.label}</p>
+                              <p className="text-xs text-muted-foreground line-through mb-0.5">{m.before}</p>
+                              <p className="font-serif text-lg text-primary font-bold">{m.after}</p>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="bg-primary/5 rounded-xl p-4 mb-6 relative">
+                          <Quote className="w-5 h-5 text-primary/20 absolute top-3 left-3" />
+                          <p className="text-sm text-muted-foreground italic pl-6 leading-relaxed">"Cardinal built us a platform that showcases the complexity of what we do in a way that actually converts enterprise buyers. Our average deal size went up 40% because clients understand our value before they even call."</p>
+                          <p className="text-xs text-foreground font-semibold mt-2 pl-6">— CEO, HiTech Logic</p>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {["Enterprise Web App", "AI Automation Platform", "Custom Dashboard", "API Integration"].map(t => (
+                            <span key={t} className="text-xs px-3 py-1 bg-secondary/50 text-muted-foreground border border-border/50">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </LuxuryCard>
+                </motion.div>
+
               </div>
             </div>
           </section>

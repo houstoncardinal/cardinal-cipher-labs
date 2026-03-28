@@ -179,7 +179,7 @@ You are advised to review this privacy policy periodically for any changes. Chan
 2100 West Loop S Fwy
 Houston, TX 77027
 
-Email: hunain@visitcardinal.com
+Email: hello@visitcardinal.com
 Phone: (281) 901-7016
 
 We will respond to your inquiry as soon as possible.`
@@ -268,11 +268,11 @@ We will respond to your inquiry as soon as possible.`
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a 
-                    href="mailto:hunain@visitcardinal.com" 
+                    href="mailto:hello@visitcardinal.com" 
                     className="flex items-center gap-2 text-primary hover:underline"
                   >
                     <Mail className="w-4 h-4" />
-                    hunain@visitcardinal.com
+                    hello@visitcardinal.com
                   </a>
                   <span className="hidden sm:inline text-border">•</span>
                   <a 

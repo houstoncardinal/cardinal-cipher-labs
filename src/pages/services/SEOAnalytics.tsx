@@ -37,24 +37,24 @@ const techStack = [
 
 const packages = [
   {
-    name: "SEO Audit",
-    price: "$2,500",
-    description: "One-time comprehensive analysis with actionable roadmap",
-    features: ["100+ point technical SEO audit", "Keyword gap analysis (vs 3 competitors)", "Backlink profile analysis", "Content audit & recommendations", "Schema markup assessment", "60-page PDF report with prioritized actions", "1-hour strategy presentation", "30-day email support"],
+    name: "SEO Foundation",
+    price: "$1,500/mo",
+    description: "Local SEO to dominate your city and get consistent leads every month.",
+    features: ["Google Business Profile optimization", "On-page SEO (up to 10 pages/mo)", "Local citation building", "Monthly keyword rank tracking", "Technical SEO audits", "Monthly performance report"],
     popular: false,
   },
   {
-    name: "Growth",
-    price: "$3,500/mo",
-    description: "Ongoing optimization for sustainable organic growth",
-    features: ["Monthly technical SEO optimization", "Content strategy & optimization (4 pages)", "Link building (5-10 quality backlinks/mo)", "Schema markup implementation", "Monthly rank tracking (200 keywords)", "Google Business Profile management", "Custom analytics dashboard", "Bi-monthly strategy calls"],
+    name: "SEO Growth",
+    price: "$2,500/mo",
+    description: "Comprehensive SEO to outrank competitors and build lasting organic traffic.",
+    features: ["Everything in Foundation", "Content marketing (4 blogs/mo)", "Link building & authority growth", "Competitor gap analysis", "Schema markup expansion", "Bi-weekly strategy calls"],
     popular: true,
   },
   {
-    name: "Enterprise",
-    price: "$7,500/mo",
-    description: "Full-service SEO for aggressive market domination",
-    features: ["Dedicated SEO manager & team", "Content creation (8 optimized posts/mo)", "Aggressive link building (15-25/mo)", "International & multi-location SEO", "Advanced schema implementation", "Weekly rank tracking (500+ keywords)", "Custom Looker Studio dashboards", "Weekly strategy calls & reporting"],
+    name: "SEO Domination",
+    price: "$4,000/mo",
+    description: "Aggressive, full-scale SEO for businesses that want to own their market.",
+    features: ["Everything in Growth", "8 long-form blog articles/mo", "PR & digital outreach", "Core Web Vitals monitoring", "Multi-location SEO", "Weekly reporting & calls"],
     popular: false,
   },
 ];
@@ -148,7 +148,7 @@ export default function SEOAnalytics() {
 
   return (
     <>
-      <SEOHead title="SEO & Analytics Services | Houston SEO Company | Cardinal Consulting" description="Drive 250% more organic traffic with expert SEO. Technical audits, schema markup, link building & analytics. 85% of clients reach page 1. Free SEO audit." keywords={["SEO services", "search engine optimization", "technical SEO", "schema markup", "link building", "SEO analytics", "Houston SEO company", "local SEO", "technical SEO audit services", "enterprise SEO agency", "schema markup implementation", "Google Business Profile optimization", "SEO agency Houston TX", "organic traffic growth", "keyword research services", "on-page SEO optimization", "off-page SEO", "content SEO strategy", "SEO reporting dashboard", "rank tracking services"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="#1 SEO Company Houston TX | SEO Services & Analytics" description="Houston's #1 SEO company. Technical SEO audits, local SEO, link building & analytics that rank Houston businesses #1 on Google. 340% avg traffic increase. Free SEO audit — (281) 901-7016." keywords={["SEO company Houston", "best SEO company Houston", "#1 SEO company Houston", "Houston SEO company", "local SEO Houston", "SEO services Houston TX", "Houston SEO agency", "technical SEO Houston", "schema markup Houston", "link building Houston", "Google Business Profile Houston", "Houston SEO specialist", "SEO optimization Houston", "organic traffic Houston", "keyword research Houston", "on-page SEO Houston", "SEO audit Houston", "SEO services near me Houston", "search engine optimization Houston TX", "Houston local SEO company"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav />
         <main>
@@ -256,8 +256,29 @@ export default function SEOAnalytics() {
             </div>
           </section>
 
+          {/* Related Services */}
+          <section className="py-16 border-t border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <h2 className="font-serif text-2xl text-foreground mb-8 text-center">Related Houston SEO Services</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "SEO Company Houston", href: "/houston-seo-company" },
+                  { label: "Houston SEO Services", href: "/houston-seo" },
+                  { label: "Web Design Houston", href: "/houston-web-design" },
+                  { label: "Digital Marketing", href: "/services/digital-marketing" },
+                  { label: "Web Development", href: "/services/web-development" },
+                  { label: "Contact Us", href: "/contact" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* CTA */}
-          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Dominate Search Results?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free SEO audit and discover your untapped organic growth potential.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Claim Free SEO Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
+          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Dominate Search Results?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free SEO audit and discover your untapped organic growth potential. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a>.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Claim Free SEO Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
         </main>
         <Footer />
       </div>

@@ -124,7 +124,7 @@ const stats = [
   { value: "200+", label: "Brands Created" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "15+", label: "Years Experience" },
-  { value: "50+", label: "Awards Won" },
+  { value: "25+", label: "Awards Won" },
 ];
 
 const trustBadges = [
@@ -418,12 +418,12 @@ export default function BrandIdentity() {
 
   return (
     <>
-      <SEOHead 
-        title="Brand Identity & Logo Design Agency Houston | Cardinal Consulting" 
-        description="Transform your brand with Cardinal. Premium logos, brand guidelines, visual systems, and complete brand identity packages. 200+ brands transformed. Free consultation." 
-        keywords={["brand identity design", "logo design agency", "brand guidelines", "visual identity design", "brand strategy", "Houston branding agency", "logo design Houston", "brand identity package", "corporate branding", "startup branding", "rebranding agency", "brand book design", "color palette design", "typography design", "brand system design", "packaging design", "business card design", "brand consulting", "brand positioning", "premium branding agency"]} 
-        schemas={schemas} 
-        url={serviceUrl} 
+      <SEOHead
+        title="Brand Identity & Logo Design Agency Houston TX"
+        description="Houston's top brand identity and logo design agency. Premium logos, brand guidelines, and visual systems for Houston businesses. 200+ brands transformed. Free consultation (281) 901-7016."
+        keywords={["brand identity design Houston", "logo design Houston", "branding agency Houston TX", "Houston logo designer", "brand guidelines Houston", "visual identity Houston", "Houston branding company", "logo design company Houston", "brand strategy Houston", "startup branding Houston", "rebranding agency Houston", "corporate branding Houston", "best logo designer Houston", "brand design near me Houston", "brand consulting Houston TX", "brand identity package Houston", "Houston brand design agency", "professional logo design Houston", "brand positioning Houston", "brand book design Houston"]}
+        schemas={schemas}
+        url={serviceUrl}
       />
       
       <div className="min-h-screen bg-[#FAFAFA]">
@@ -731,6 +731,26 @@ export default function BrandIdentity() {
                   </Button>
                 </div>
               </motion.div>
+            </div>
+          </section>
+
+          <section className="py-16 bg-white border-t">
+            <div className="container mx-auto px-6 lg:px-12">
+              <h2 className="font-serif text-2xl text-gray-900 mb-8 text-center">Related Services</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "Web Design Houston", href: "/houston-web-design" },
+                  { label: "UX/UI Design", href: "/services/ux-ui" },
+                  { label: "Digital Marketing", href: "/services/digital-marketing" },
+                  { label: "Web Development", href: "/services/web-development" },
+                  { label: "App Development", href: "/houston-app-development" },
+                  { label: "View Portfolio", href: "/portfolio" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 text-sm font-medium text-gray-700 transition-all text-center">
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-red-600 flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </section>
         </main>

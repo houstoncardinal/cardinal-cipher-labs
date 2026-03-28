@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/seo-config";
 import { generateContactPageSchema, generateBreadcrumbSchema, generateWebPageSchema, generateLocalBusinessSchema } from "@/lib/schema-generators";
 
 const contactMethods = [
-  { icon: Mail, label: "Email", primary: "hunain@visitcardinal.com", secondary: "support@visitcardinal.com", href: "mailto:hunain@visitcardinal.com", description: "Send us an email anytime" },
+  { icon: Mail, label: "Email", primary: "hello@visitcardinal.com", secondary: "support@visitcardinal.com", href: "mailto:hello@visitcardinal.com", description: "Send us an email anytime" },
   { icon: Phone, label: "Phone", primary: "(281) 901-7016", secondary: "Available 24/7", href: "tel:281-901-7016", description: "Talk to our team directly" },
   { icon: MapPin, label: "Office", primary: "2100 West Loop S Fwy", secondary: "Houston, TX 77027", description: "Visit our headquarters" },
   { icon: Clock, label: "Hours", primary: "Mon-Fri: 9AM-6PM", secondary: "Sat-Sun: By appointment", description: "Business hours (CST)" },
@@ -203,11 +203,11 @@ export default function ContactPage() {
                           <label htmlFor="cp-budget" className="text-xs uppercase tracking-[0.12em] text-gray-500 mb-3 block font-bold">Project Budget *</label>
                           <select id="cp-budget" name="budget" required className="w-full bg-gray-50/50 border-2 border-gray-100 rounded-xl px-5 py-4 text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-500/20 focus:border-red-400 focus:bg-white transition-all duration-300 text-[15px] font-medium appearance-none">
                             <option value="">Select budget range</option>
-                            <option value="under-5k">Under $5,000</option>
-                            <option value="5k-10k">$5,000 – $10,000</option>
-                            <option value="10k-25k">$10,000 – $25,000</option>
-                            <option value="25k-50k">$25,000 – $50,000</option>
-                            <option value="50k-plus">$50,000+</option>
+                            <option value="3k-8k">$3,000 – $8,000 (SMB website)</option>
+                            <option value="8k-25k">$8,000 – $25,000 (Growth / web app)</option>
+                            <option value="25k-50k">$25,000 – $50,000 (Enterprise)</option>
+                            <option value="50k-plus">$50,000+ (Large-scale platform)</option>
+                            <option value="not-sure">Not sure yet</option>
                           </select>
                         </div>
                         {/* Message */}

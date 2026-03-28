@@ -60,10 +60,10 @@ const packages = [
 ];
 
 const stats = [
-  { value: "350%", label: "Avg ROI" },
-  { value: "$2M+", label: "Revenue Generated" },
-  { value: "45%", label: "Avg Cost Reduction" },
+  { value: "3x–5x", label: "Avg Client ROI" },
   { value: "100+", label: "Campaigns Managed" },
+  { value: "45%", label: "Avg Cost Per Lead Reduction" },
+  { value: "4.9★", label: "Client Satisfaction" },
 ];
 
 const caseStudies = [
@@ -148,7 +148,7 @@ export default function DigitalMarketing() {
 
   return (
     <>
-      <SEOHead title="Digital Marketing & Paid Advertising Agency Houston | Cardinal Consulting" description="350% average ROI digital marketing. PPC, Google Ads, social media, email & content marketing with transparent attribution. $2M+ revenue generated. Free marketing audit." keywords={["digital marketing agency", "PPC advertising agency", "Google Ads management", "social media marketing", "email marketing automation", "content marketing strategy", "Houston digital marketing agency", "paid advertising agency Houston", "Facebook Ads management", "LinkedIn advertising", "B2B digital marketing", "e-commerce marketing", "marketing ROI tracking", "multi-channel marketing", "performance marketing agency", "Houston PPC agency", "paid search management", "social media advertising", "conversion rate optimization", "marketing analytics"]} schemas={schemas} url={serviceUrl} />
+      <SEOHead title="Digital Marketing Agency Houston TX | PPC & Social Media Marketing" description="Houston's best digital marketing agency. PPC, Google Ads, social media, email & content marketing. 350% avg ROI. Serving all Houston businesses. Free audit — (281) 901-7016." keywords={["digital marketing agency Houston", "Houston digital marketing company", "PPC agency Houston", "Google Ads Houston", "social media marketing Houston", "email marketing Houston", "content marketing Houston", "paid advertising Houston TX", "digital marketing services Houston", "Houston marketing agency", "Facebook Ads Houston", "Instagram marketing Houston", "online marketing Houston", "digital marketing near me Houston", "best digital marketing agency Houston", "Houston PPC management", "performance marketing Houston", "digital advertising Houston", "inbound marketing Houston TX", "marketing ROI Houston"]} schemas={schemas} url={serviceUrl} />
       <div className="min-h-screen bg-background">
         <Header /><VerticalNav />
         <main>
@@ -247,7 +247,27 @@ export default function DigitalMarketing() {
             </div>
           </section>
 
-          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Grow Your Business?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free marketing audit and discover untapped growth opportunities.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Get Free Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
+          <section className="py-16 border-t border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <h2 className="font-serif text-2xl text-foreground mb-8 text-center">Related Houston Services</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "SEO Company Houston", href: "/houston-seo-company" },
+                  { label: "Houston SEO Services", href: "/houston-seo" },
+                  { label: "Web Design Houston", href: "/houston-web-design" },
+                  { label: "SEO & Analytics", href: "/services/seo-analytics" },
+                  { label: "Brand Identity", href: "/services/brand-identity" },
+                  { label: "Web Development", href: "/services/web-development" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-24 lg:py-32 bg-primary/5"><div className="container mx-auto px-6 lg:px-12 text-center"><motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}><h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Grow Your Business?</h2><p className="text-muted-foreground max-w-xl mx-auto mb-8">Get a free marketing audit and discover untapped growth opportunities. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a>.</p><Button size="lg" className="bg-primary hover:bg-primary/90" asChild><Link to="/contact">Get Free Audit <ArrowRight className="ml-2 w-4 h-4" /></Link></Button></motion.div></div></section>
         </main>
         <Footer />
       </div>

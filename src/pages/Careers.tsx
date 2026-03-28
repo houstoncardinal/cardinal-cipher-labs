@@ -113,7 +113,7 @@ export default function Careers() {
                   { value: "100%", label: "Remote-Friendly" },
                   { value: "$3K", label: "Learning Budget" },
                   { value: "Unlimited", label: "PTO Policy" },
-                  { value: "4.9★", label: "Glassdoor Rating" },
+                  { value: "4.9★", label: "Client Satisfaction" },
                 ].map((stat, i) => (
                   <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
                     <div className="font-serif text-4xl lg:text-5xl text-primary mb-2">{stat.value}</div>

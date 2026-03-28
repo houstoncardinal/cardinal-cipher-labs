@@ -71,7 +71,7 @@ const differentiators = [
   {
     icon: Shield,
     title: "Security-First Approach",
-    description: "SOC 2 awareness, OWASP best practices, CSP headers, dependency auditing, and secure authentication flows. We build with the same security standards your engineering team expects from production infrastructure.",
+    description: "OWASP Top 10 best practices, CSP headers, dependency auditing, and secure authentication flows. We build with the same security standards your engineering team expects from production infrastructure.",
   },
 ];
 

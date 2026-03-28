@@ -21,7 +21,7 @@ import { useState } from "react";
 const features = [
   { icon: Code2, title: "Modern Tech Stack", description: "Built with React, TypeScript, Next.js, and modern frameworks for peak performance, maintainability, and developer experience across your entire organization." },
   { icon: Zap, title: "Lightning Fast Performance", description: "Optimized for speed with lazy loading, code splitting, edge caching, image optimization, and Core Web Vitals scoring above 90 across all metrics." },
-  { icon: Shield, title: "Enterprise Security", description: "Bank-level security with SSL/TLS encryption, OWASP compliance, data encryption at rest and in transit, and compliance-ready infrastructure for HIPAA, SOC 2, and PCI DSS." },
+  { icon: Shield, title: "Enterprise Security", description: "Bank-level security with SSL/TLS encryption, OWASP Top 10 compliance, AES-256 data encryption at rest and in transit, and HIPAA-compliant architecture for regulated industries." },
   { icon: Layers, title: "Scalable Architecture", description: "Microservices and serverless architectures built to grow from startup to enterprise-level traffic handling millions of concurrent users." },
   { icon: Database, title: "CMS & Backend Integration", description: "Seamless content management with headless CMS solutions (Strapi, Contentful, Sanity) and custom admin dashboards for easy content updates." },
   { icon: Globe, title: "Global CDN Delivery", description: "Content delivered worldwide through Cloudflare, AWS CloudFront, and Vercel Edge Network with sub-second load times from any location on the planet." },
@@ -62,7 +62,7 @@ const packages = [
 ];
 
 const stats = [
-  { value: "150+", label: "Websites Launched" },
+  { value: "500+", label: "Projects Delivered" },
   { value: "99.9%", label: "Uptime Guarantee" },
   { value: "< 2s", label: "Avg Load Time" },
   { value: "4.9★", label: "Client Rating" },
@@ -96,9 +96,9 @@ const certifications = [
   { name: "AWS Advanced Consulting Partner", icon: ShieldCheck },
   { name: "Microsoft Gold Partner", icon: Award },
   { name: "Google Cloud Partner", icon: ShieldCheck },
-  { name: "ISO 27001 Certified", icon: Shield },
-  { name: "SOC 2 Type II Compliant", icon: ShieldCheck },
-  { name: "PCI DSS Compliant", icon: Lock },
+  { name: "HIPAA Compliant Development", icon: Shield },
+  { name: "WCAG 2.1 AA Accessible", icon: ShieldCheck },
+  { name: "OWASP Top 10 Hardened", icon: Lock },
 ];
 
 const comparisonItems = [
@@ -161,29 +161,29 @@ export default function WebDevelopment() {
   return (
     <>
       <SEOHead
-        title="Web Development Services Houston | Custom Website Development Agency"
-        description="Cardinal Consulting — Houston's #1 web development agency. Custom websites built with React & Next.js. 150+ sites launched, 99.9% uptime, 98 Lighthouse score. Free consultation."
+        title="Web Development Services Houston TX | Custom Website Development"
+        description="Cardinal Consulting — Houston's #1 web development agency. Custom websites built with React & Next.js. 500+ sites launched, 99.9% uptime, 98 Lighthouse score. Serving all Houston neighborhoods. Free consultation (281) 901-7016."
         keywords={[
-          "web development Houston",
+          "web development Houston TX",
           "web development agency Houston",
           "custom website development Houston",
           "Houston web developer",
-          "web development services",
-          "custom website development",
-          "React web development agency",
-          "Next.js development agency",
-          "enterprise web development",
+          "best web development company Houston",
+          "web design and development Houston",
+          "React web development Houston",
+          "Next.js development Houston",
+          "enterprise web development Houston",
           "responsive web design Houston",
           "e-commerce website development Houston",
-          "HIPAA compliant web development",
-          "enterprise web application development",
-          "professional website development",
-          "small business website development",
+          "HIPAA compliant web development Houston",
+          "full stack web development Houston",
           "website redesign Houston",
-          "web design and development agency",
-          "full stack web development",
           "affordable web development Houston",
-          "best web development company Houston",
+          "professional website development Houston",
+          "small business website Houston",
+          "web developer near me Houston",
+          "custom web application Houston",
+          "Houston website design and development",
         ]}
         schemas={schemas}
         url={serviceUrl}
@@ -549,12 +549,33 @@ export default function WebDevelopment() {
             </div>
           </section>
 
+          {/* Related Services */}
+          <section className="py-16 border-t border-border/50">
+            <div className="container mx-auto px-6 lg:px-12">
+              <h2 className="font-serif text-2xl text-foreground mb-8 text-center">Related Services in Houston</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  { label: "#1 Web Design Houston", href: "/houston-web-design" },
+                  { label: "App Development Houston", href: "/houston-app-development" },
+                  { label: "Web Developer Houston", href: "/houston-web-developer" },
+                  { label: "SEO Company Houston", href: "/houston-seo-company" },
+                  { label: "UX/UI Design", href: "/services/ux-ui" },
+                  { label: "Digital Marketing", href: "/services/digital-marketing" },
+                ].map((link) => (
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-primary flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* CTA */}
           <section className="py-24 lg:py-32 bg-primary/5">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Build Your Website?</h2>
-                <p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's discuss your project and create something exceptional together. Free consultation, no obligations.</p>
+                <p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's discuss your project and create something exceptional together. Free consultation, no obligations. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a>.</p>
                 <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
                   <Link to="/contact">Schedule Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link>
                 </Button>

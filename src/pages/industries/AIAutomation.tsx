@@ -64,7 +64,7 @@ const differentiators = [
   {
     icon: Shield,
     title: "Security & Compliance Ready",
-    description: "From SOC 2 to GDPR and AI-specific regulations, we build with compliance baked in. Role-based access control, audit trails, data anonymization layers, and encrypted state management come standard.",
+    description: "From GDPR to emerging AI-specific regulations, we build with compliance baked in. Role-based access control, audit trails, data anonymization layers, and encrypted state management come standard.",
   },
 ];
 
@@ -148,7 +148,7 @@ const faqs = [
   },
   {
     question: "What is your approach to data security for AI platforms?",
-    answer: "Security is foundational to every AI project we build. We implement end-to-end encryption, role-based access control (RBAC), audit logging, and data anonymization at the UI layer. We follow SOC 2 Type II controls, GDPR data handling requirements, and emerging AI-specific regulations. All sensitive data is handled through secure API gateways — never stored or cached on the client side.",
+    answer: "Security is foundational to every AI project we build. We implement end-to-end encryption, role-based access control (RBAC), audit logging, and data anonymization at the UI layer. We follow GDPR data handling requirements and emerging AI-specific regulations. All sensitive data is handled through secure API gateways — never stored or cached on the client side.",
   },
   {
     question: "How long does it take to build an AI company website or dashboard?",

@@ -16,7 +16,7 @@ import {
 
 const stats = [
   { value: "40+", label: "Financial Clients Served" },
-  { value: "PCI DSS", label: "Compliant Infrastructure" },
+  { value: "HIPAA", label: "Compliant Development" },
   { value: "99.99%", label: "Uptime Guarantee" },
   { value: "4.9/5", label: "Average Client Rating" },
 ];
@@ -44,7 +44,7 @@ const services = [
     icon: Lock,
     title: "Secure Payment Integration",
     description:
-      "PCI DSS Level 1 compliant payment gateways and processing systems. Stripe, Square, Plaid, and custom payment integrations with tokenization, encryption at rest, and fraud detection to protect every transaction.",
+      "Secure payment gateway integrations using certified processors like Stripe, Square, and Plaid. Tokenized payment flows, encryption at rest, no raw card data stored on your servers, and fraud detection to protect every transaction.",
   },
   {
     icon: Search,
@@ -65,13 +65,13 @@ const differentiators = [
     icon: Shield,
     title: "Security-First Architecture",
     description:
-      "Every line of code undergoes security review. SOC 2 Type II compliant development processes, AES-256 encryption, penetration testing, and continuous vulnerability scanning protect your clients' sensitive financial data around the clock.",
+      "Every line of code undergoes security review. AES-256 encryption, OWASP Top 10 hardening, penetration testing, and continuous vulnerability scanning protect your clients' sensitive financial data around the clock.",
   },
   {
     icon: Lock,
     title: "Regulatory Compliance Built In",
     description:
-      "We build to meet SEC, FINRA, PCI DSS, SOX, and state-level regulatory requirements from day one. Our compliance-aware development framework ensures your digital presence meets every audit requirement without costly rework.",
+      "We build with SEC, FINRA, SOX, and state-level regulatory awareness from day one. Our compliance-conscious development framework ensures your digital presence is designed to support your audit requirements without costly rework.",
   },
   {
     icon: Award,
@@ -116,7 +116,7 @@ const process = [
     step: "01",
     title: "Compliance & Discovery",
     description:
-      "We audit your regulatory landscape (SEC, FINRA, PCI DSS, state regulations), analyze competitors, and map your ideal client journey from first touchpoint to long-term retention.",
+      "We audit your regulatory landscape (SEC, FINRA, state regulations), analyze competitors, and map your ideal client journey from first touchpoint to long-term retention.",
   },
   {
     step: "02",
@@ -140,7 +140,7 @@ const process = [
     step: "05",
     title: "Security Testing & QA",
     description:
-      "OWASP Top 10 vulnerability scanning, PCI DSS compliance verification, WCAG accessibility testing, load testing under peak traffic conditions, and third-party security audits before launch.",
+      "OWASP Top 10 vulnerability scanning, WCAG accessibility testing, load testing under peak traffic conditions, and comprehensive security audits before launch.",
   },
   {
     step: "06",
@@ -152,9 +152,9 @@ const process = [
 
 const faqs = [
   {
-    question: "How do you ensure PCI DSS compliance for financial websites?",
+    question: "How do you secure payment processing for financial websites?",
     answer:
-      "We implement PCI DSS compliance at every layer: encrypted data transmission via TLS 1.3, tokenized payment processing through certified providers like Stripe and Braintree, no storage of raw card data on your servers, network segmentation, regular vulnerability scans, and comprehensive audit trails. We also provide documentation to support your annual PCI compliance assessments.",
+      "We implement payment security at every layer: encrypted data transmission via TLS 1.3, tokenized payment processing through certified providers like Stripe and Braintree, no storage of raw card data on your servers, network segmentation, and regular vulnerability scans. We use payment processors that handle PCI compliance on their end, so you're never storing raw card data.",
   },
   {
     question: "Can you build SEC and FINRA compliant websites for financial advisors?",
@@ -164,7 +164,7 @@ const faqs = [
   {
     question: "What security measures do you implement for fintech applications?",
     answer:
-      "Our fintech security stack includes AES-256 encryption at rest and in transit, OAuth 2.0 and multi-factor authentication, role-based access control, API rate limiting and DDoS protection, real-time fraud detection algorithms, SOC 2 Type II compliant infrastructure, automated penetration testing, and 24/7 security monitoring with incident response protocols.",
+      "Our fintech security stack includes AES-256 encryption at rest and in transit, OAuth 2.0 and multi-factor authentication, role-based access control, API rate limiting and DDoS protection, real-time fraud detection algorithms, automated penetration testing, and 24/7 security monitoring with incident response protocols.",
   },
   {
     question: "How long does a financial services website project typically take?",
@@ -206,7 +206,7 @@ const schemas = [
     "@type": "Service",
     name: "Financial Services Web Development & Digital Marketing",
     description:
-      "PCI DSS compliant website development, fintech application design, accounting firm marketing, and SEO services for financial services companies.",
+      "Secure website development, fintech application design, accounting firm marketing, and SEO services for financial services companies.",
     provider: {
       "@type": "Organization",
       name: "Cardinal Consulting",
@@ -287,14 +287,14 @@ export default function Financial() {
     <>
       <SEOHead
         title="Financial Services Website Development & Marketing | Houston TX"
-        description="Expert financial website design, accounting firm marketing, and fintech development in Houston TX. PCI DSS compliant, conversion-driven digital solutions for financial services companies."
+        description="Expert financial website design, accounting firm marketing, and fintech development in Houston TX. Security-first, conversion-driven digital solutions for financial services companies."
         url={pageUrl}
         keywords={[
           "financial website design",
           "accounting firm marketing",
           "fintech development Houston",
           "financial advisor website",
-          "PCI DSS compliant website",
+          "secure financial website",
           "tax preparation website design",
           "financial services SEO",
           "secure payment integration",

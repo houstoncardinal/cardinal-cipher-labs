@@ -117,7 +117,7 @@ const faqData = [
   {
     question: "How do I get started with Cardinal Consulting in Houston?",
     answer:
-      "Getting started with Cardinal Consulting in Houston is easy. You can call us at (281) 901-7016, email hunain@visitcardinal.com, or visit our contact page to schedule a free consultation. During your free Houston consultation, we'll discuss your business goals, evaluate your current online presence, and provide a customized strategy and quote. You can also visit our Houston office at 2100 West Loop S Fwy, Houston, TX 77027. We typically respond to all Houston inquiries within 2 business hours. Let's discuss how we can help your Houston business grow!",
+      "Getting started with Cardinal Consulting in Houston is easy. You can call us at (281) 901-7016, email hello@visitcardinal.com, or visit our contact page to schedule a free consultation. During your free Houston consultation, we'll discuss your business goals, evaluate your current online presence, and provide a customized strategy and quote. You can also visit our Houston office at 2100 West Loop S Fwy, Houston, TX 77027. We typically respond to all Houston inquiries within 2 business hours. Let's discuss how we can help your Houston business grow!",
   },
 ];
 
@@ -133,7 +133,7 @@ const schemas = [
       "Houston's top-rated web design and digital marketing agency. Custom websites, mobile apps, SEO, and digital marketing services for Houston businesses. Located at 2100 West Loop S Fwy, Houston, TX 77027.",
     url: "https://visitcardinal.com",
     telephone: "+12819017016",
-    email: "hunain@visitcardinal.com",
+    email: "hello@visitcardinal.com",
     image: "https://visitcardinal.com/og-image.png",
     logo: "https://visitcardinal.com/logo.png",
     priceRange: "$$-$$$",
@@ -1256,10 +1256,10 @@ export default function HoustonServices() {
                               Email
                             </div>
                             <a
-                              href="mailto:hunain@visitcardinal.com"
+                              href="mailto:hello@visitcardinal.com"
                               className="text-sm text-gray-500 hover:text-red-500 transition-colors"
                             >
-                              hunain@visitcardinal.com
+                              hello@visitcardinal.com
                             </a>
                           </div>
                         </div>
