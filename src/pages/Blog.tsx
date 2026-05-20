@@ -1,241 +1,25 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { LuxuryCard } from "@/components/ui/luxury-card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Clock, User, Tag, Search, Sparkles, TrendingUp, Globe, Code, Zap, Filter } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calendar, Clock, User, Tag, Search, Sparkles, TrendingUp, Globe, Code, Zap, Filter, MapPin, Star, Award, BarChart3, ArrowRight, BookOpen } from "lucide-react";
 import { siteConfig } from "@/lib/seo-config";
+import { articles, pillars } from "@/lib/blog-data";
+import { generateAllBlogAEOSchemas } from "@/lib/aeo-schemas";
 
-// Blog pillars configuration
-const pillars = [
-  { id: "ai-automation", name: "AI Automation", icon: Sparkles, color: "from-violet-600 to-purple-500" },
-  { id: "website-profit", name: "Website Profit", icon: TrendingUp, color: "from-emerald-600 to-teal-500" },
-  { id: "seo-aeo", name: "SEO & AEO", icon: Globe, color: "from-blue-600 to-cyan-500" },
-  { id: "web-development", name: "Web & App", icon: Code, color: "from-orange-600 to-amber-500" },
-  { id: "ai-lead-gen", name: "AI Lead Gen", icon: Zap, color: "from-red-600 to-rose-500" },
-];
-
-// All blog articles organized by pillar
-const articles = [
-  // PILLAR 1: AI AUTOMATION FOR BUSINESS
-  {
-    slug: "ai-automation-small-business-2026",
-    title: "AI Automation for Small Business: The Complete 2026 Implementation Guide",
-    excerpt: "Discover how small businesses are leveraging AI automation to reduce costs, streamline operations, and compete with enterprise-level companies. Complete implementation roadmap included.",
-    category: "AI Automation",
-    pillar: "ai-automation",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-03-10",
-    readTime: "15 min read",
-    image: "/portfolio/axiomio.png",
-    featured: true,
-    keywords: ["ai automation for small business", "business process automation", "ai workflow automation", "automate small business operations"],
-  },
-  {
-    slug: "ai-automation-cost-savings",
-    title: "How Much Money Can AI Automation Actually Save a Company? (Real Numbers)",
-    excerpt: "Get concrete data on AI ROI. We break down real cost savings from actual business implementations across industries with detailed breakdowns.",
-    category: "AI Automation",
-    pillar: "ai-automation",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-02-18",
-    readTime: "12 min read",
-    image: "/portfolio/houinc.png",
-    keywords: ["ai automation cost savings", "ai roi calculator", "automation savings business", "ai efficiency gains"],
-  },
-  {
-    slug: "ai-workflows-service-business-2026",
-    title: "Best AI Workflows Every Service Business Should Automate in 2026",
-    excerpt: "From client onboarding to follow-ups, discover the AI workflows that are saving service businesses hundreds of hours monthly. Implementation checklist included.",
-    category: "AI Automation",
-    pillar: "ai-automation",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-01-22",
-    readTime: "10 min read",
-    image: "/portfolio/hougenpros.png",
-    keywords: ["ai workflows for service businesses", "automate client onboarding", "ai crm automation", "service business automation"],
-  },
-
-  // PILLAR 2: WEBSITE PROFIT OPTIMIZATION
-  {
-    slug: "website-profit-leaks",
-    title: "12 Hidden Website Profit Leaks That Are Costing You Clients",
-    excerpt: "Is your website secretly losing you customers? We reveal the 12 most common profit leaks destroying your conversion rates—and how to fix them fast.",
-    category: "Website Profit",
-    pillar: "website-profit",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-02-04",
-    readTime: "11 min read",
-    image: "/portfolio/allhoustonproperty.png",
-    featured: false,
-    keywords: ["why my website is not converting", "website conversion problems", "low conversion rate website", "website losing customers"],
-  },
-  {
-    slug: "beautiful-websites-fail",
-    title: "Why Beautiful Websites Still Fail to Generate Leads",
-    excerpt: "The ugly truth about design-first websites. Learn why stunning visuals often equal zero leads—and what actually drives conversions.",
-    category: "Website Profit",
-    pillar: "website-profit",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2025-12-09",
-    readTime: "9 min read",
-    image: "/portfolio/blutouch.png",
-    keywords: ["why websites fail", "website design mistakes", "conversion vs design", "website not generating leads"],
-  },
-  {
-    slug: "website-speed-revenue-impact",
-    title: "Website Speed vs Revenue: The Data Every Business Owner Needs",
-    excerpt: "How slow loading times directly impact your revenue. Real data and case studies showing the exact cost of every second of delay.",
-    category: "Website Profit",
-    pillar: "website-profit",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2025-11-14",
-    readTime: "8 min read",
-    image: "/portfolio/hitechlogic.png",
-    keywords: ["website speed impact on revenue", "slow website cost", "page speed conversion rate", "site speed seo impact"],
-  },
-
-  // PILLAR 3: MODERN SEO & AEO
-  {
-    slug: "seo-vs-aeo-vs-geo",
-    title: "SEO vs AEO vs GEO: The Future of Search Explained",
-    excerpt: "Search is evolving beyond Google. Understand the differences between SEO, AEO (Answer Engine Optimization), and GEO (Generative Engine Optimization) to stay ahead.",
-    category: "SEO & AEO",
-    pillar: "seo-aeo",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-02-25",
-    readTime: "13 min read",
-    image: "/portfolio/svrlawfirm.png",
-    keywords: ["answer engine optimization", "what is aeo", "seo in 2026", "ai search optimization"],
-  },
-  {
-    slug: "rank-in-chatgpt-results",
-    title: "How to Rank Inside ChatGPT and AI Search Results",
-    excerpt: "With AI search growing rapidly, discover the strategies to get your business recommended by ChatGPT, Claude, and other AI assistants.",
-    category: "SEO & AEO",
-    pillar: "seo-aeo",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-01-07",
-    readTime: "11 min read",
-    image: "/portfolio/vargas.png",
-    keywords: ["rank in chatgpt results", "ai search ranking", "optimize for ai answers", "chatgpt seo"],
-  },
-  {
-    slug: "schema-markup-advanced-guide",
-    title: "Schema Markup That Actually Moves Rankings (Advanced Guide)",
-    excerpt: "Go beyond basic schema. Learn advanced structured data strategies that can significantly boost your visibility in search results.",
-    category: "SEO & AEO",
-    pillar: "seo-aeo",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2025-10-21",
-    readTime: "14 min read",
-    image: "/portfolio/unitedccr.png",
-    keywords: ["advanced schema markup", "technical seo schema", "structured data seo", "schema for rankings"],
-  },
-
-  // PILLAR 4: WEB & APP DEVELOPMENT
-  {
-    slug: "custom-vs-template-websites",
-    title: "Custom vs Template Websites: The Real Cost Breakdown",
-    excerpt: "Template or custom? We break down the true costs including development time, maintenance, scalability, and long-term ROI.",
-    category: "Web Development",
-    pillar: "web-development",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2025-09-03",
-    readTime: "10 min read",
-    image: "/portfolio/apnclinic.png",
-    keywords: ["custom website vs template", "custom vs wordpress", "wix vs custom website", "website cost comparison"],
-  },
-  {
-    slug: "outgrow-wix-squarespace",
-    title: "When Businesses Outgrow Wix or Squarespace",
-    excerpt: "Warning signs you're hitting the limits of website builders. Plus: when and how to make the jump to custom development.",
-    category: "Web Development",
-    pillar: "web-development",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2025-07-15",
-    readTime: "9 min read",
-    image: "/portfolio/clearledger.png",
-    keywords: ["outgrow wix", "wix limitations", "squarespace vs custom", "when to upgrade website"],
-  },
-  {
-    slug: "nocode-vs-custom-development-2026",
-    title: "No-Code vs Custom Development in 2026: What Smart Companies Choose",
-    excerpt: "No-code tools have evolved. We analyze when no-code makes sense vs when custom development is the smarter investment.",
-    category: "Web Development",
-    pillar: "web-development",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2025-05-28",
-    readTime: "11 min read",
-    image: "/portfolio/abqmri.png",
-    keywords: ["no code vs custom development", "lovable vs custom", "bubble vs custom", "no code limitations"],
-  },
-
-  // PILLAR 5: AI LEAD GENERATION
-  {
-    slug: "ai-lead-generation-systems",
-    title: "AI Lead Generation Systems: How Modern Businesses Fill Their Pipeline",
-    excerpt: "Stop chasing leads. Discover AI-powered systems that automatically attract, qualify, and nurture prospects 24/7.",
-    category: "AI Lead Gen",
-    pillar: "ai-lead-gen",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2025-12-30",
-    readTime: "12 min read",
-    image: "/portfolio/axiomio.png",
-    keywords: ["ai lead generation system", "automated lead generation", "ai sales funnel", "ai marketing automation"],
-  },
-  {
-    slug: "ai-chatbot-conversions-2026",
-    title: "How AI Chatbots Are Increasing Website Conversions in 2026",
-    excerpt: "AI chatbots are revolutionizing lead capture. See real conversion rate improvements and implementation strategies.",
-    category: "AI Lead Gen",
-    pillar: "ai-lead-gen",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2025-11-05",
-    readTime: "10 min read",
-    image: "/portfolio/houinc.png",
-    keywords: ["ai chatbot conversions", "chatbot conversion rate", "website chatbot roi", "ai chat for leads"],
-  },
-  {
-    slug: "automated-sales-funnel",
-    title: "From Click to Client: Building a Fully Automated Sales Funnel",
-    excerpt: "Map out your entire customer journey from first touch to closed deal. Complete automation blueprint included.",
-    category: "AI Lead Gen",
-    pillar: "ai-lead-gen",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2025-08-19",
-    readTime: "13 min read",
-    image: "/portfolio/hougenpros.png",
-    keywords: ["automated sales funnel", "ai funnel automation", "lead nurture automation", "conversion funnel system"],
-  },
-];
-
-// Sort by priority within each pillar
-const sortedArticles = [...articles].sort((a, b) => {
-  if (a.priority !== b.priority) return a.priority - b.priority;
-  return 0;
-});
+const pillarIcons: Record<string, React.ElementType> = {
+  "houston-web-design": Globe,
+  "web-design-comparisons": BarChart3,
+  "industry-web-design": MapPin,
+  "design-process": Code,
+  "business-roi": Award,
+};
 
 const featured = articles.find((a) => a.featured);
-const rest = articles.filter((a) => !a.featured);
 
 export default function Blog() {
   const [activePillar, setActivePillar] = useState<string | null>(null);
@@ -256,7 +40,6 @@ export default function Blog() {
     "@type": "BlogPosting",
     headline: a.title,
     description: a.excerpt,
-    image: `${siteConfig.url}${a.image}`,
     datePublished: a.date,
     author: { "@type": "Person", name: a.author },
     url: `${siteConfig.url}/blog/${a.slug}`,
@@ -269,12 +52,13 @@ export default function Blog() {
       "@context": "https://schema.org",
       "@type": "Blog",
       "@id": `${siteConfig.url}/blog`,
-      name: "Cardinal Consulting Blog",
-      description: "Expert insights on AI automation, website optimization, SEO, and lead generation for modern businesses.",
+      name: "Cardinal Consulting Blog — Houston Web Design Insights",
+      description: "Expert insights on Houston web design, local SEO, website optimization, and digital growth strategies for Houston businesses.",
       url: `${siteConfig.url}/blog`,
       publisher: { "@id": `${siteConfig.url}#organization` },
       blogPost: articleSchemas,
     },
+    ...generateAllBlogAEOSchemas(),
   ];
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
@@ -282,12 +66,11 @@ export default function Blog() {
   return (
     <>
       <SEOHead
-        title="Blog | Cardinal Consulting — AI Automation & Digital Growth Insights"
-        description="Expert insights on AI automation, website optimization, SEO, lead generation, and digital transformation. Practical guides for modern businesses."
+        title="Houston Web Design Blog | Cardinal Consulting"
+        description="Expert insights on Houston web design, local SEO, website optimization, and digital growth. Learn how to build a website that ranks, converts, and drives revenue for your Houston business."
         url={`${siteConfig.url}/blog`}
         schemas={schemas}
-        keywords={["ai automation blog", "seo guide", "website conversion optimization", "lead generation", "digital marketing"]
-        }
+        keywords={["houston web design blog", "web design houston tips", "houston website design guide", "houston seo blog", "houston digital marketing blog"]}
       />
 
       <div className="min-h-screen bg-[#FAFAFA]">
@@ -310,14 +93,14 @@ export default function Blog() {
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl">
                 <span className="text-xs tracking-[0.3em] uppercase text-red-600 font-semibold mb-4 block">Blog & Insights</span>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-5">
-                  Grow Your Business With{' '}
+                  Houston Web Design{' '}
                   <span className="relative">
-                    <span className="relative z-10">Data</span>
+                    <span className="relative z-10">Insights</span>
                     <span className="absolute bottom-1 left-0 right-0 h-3 bg-red-200/40 -z-10 rounded" />
                   </span>
                 </h1>
                 <p className="text-lg text-gray-500 max-w-xl mb-8 leading-relaxed">
-                  Practical insights on AI automation, website optimization, SEO, and lead generation. No fluff—just strategies that drive real results.
+                  Expert insights on Houston web design, local SEO, and digital growth. Practical strategies to build a website that ranks, converts, and drives real revenue.
                 </p>
                 
                 {/* Search */}
@@ -351,7 +134,7 @@ export default function Blog() {
                   All Articles
                 </button>
                 {pillars.map((pillar) => {
-                  const Icon = pillar.icon;
+                  const Icon = pillarIcons[pillar.id] || BookOpen;
                   return (
                     <button
                       key={pillar.id}
@@ -376,29 +159,46 @@ export default function Blog() {
             <section className="pb-16">
               <div className="container mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                  <LuxuryCard className="overflow-hidden">
-                    <div className="grid lg:grid-cols-2 gap-0">
-                      <div className="relative aspect-video lg:aspect-auto overflow-hidden">
-                        <img src={featured.image} alt={featured.title} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-transparent" />
-                        <span className="absolute top-4 left-4 text-[10px] tracking-[0.2em] uppercase bg-red-600 text-white px-3 py-1 font-semibold">Featured</span>
-                        {getPillarInfo(featured.pillar) && (
-                          <span className="absolute bottom-4 left-4 text-xs tracking-[0.15em] uppercase bg-white/90 text-gray-900 px-3 py-1">
-                            {getPillarInfo(featured.pillar)?.name}
+                  <Link to={`/blog/${featured.slug}`} className="block group">
+                    <LuxuryCard className="overflow-hidden">
+                      <div className="p-10 lg:p-14">
+                        <div className="max-w-3xl">
+                          {/* Category Tag */}
+                          <div className="flex items-center gap-3 mb-5">
+                            <span className="text-[10px] tracking-[0.2em] uppercase bg-red-600 text-white px-3 py-1.5 font-semibold rounded-full">Featured</span>
+                            {getPillarInfo(featured.pillar) && (
+                              <span className="text-xs tracking-[0.15em] uppercase text-red-600 font-semibold">
+                                {getPillarInfo(featured.pillar)?.name}
+                              </span>
+                            )}
+                          </div>
+                          
+                          {/* Meta */}
+                          <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+                            <span className="flex items-center gap-1"><Calendar size={12} />{formatDate(featured.date)}</span>
+                            <span className="flex items-center gap-1"><Clock size={12} />{featured.readTime}</span>
+                            <span className="flex items-center gap-1"><User size={12} />{featured.author}</span>
+                          </div>
+                          
+                          {/* Title */}
+                          <h2 className="font-serif text-3xl lg:text-4xl text-gray-900 mb-4 group-hover:text-red-600 transition-colors leading-tight">
+                            {featured.title}
+                          </h2>
+                          
+                          {/* Excerpt */}
+                          <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl">
+                            {featured.excerpt}
+                          </p>
+                          
+                          {/* Read More */}
+                          <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-red-600 group-hover:text-red-700 transition-colors">
+                            Read Full Article
+                            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                           </span>
-                        )}
-                      </div>
-                      <div className="p-10 lg:p-12 flex flex-col justify-center">
-                        <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
-                          <span className="flex items-center gap-1"><Calendar size={12} />{formatDate(featured.date)}</span>
-                          <span className="flex items-center gap-1"><Clock size={12} />{featured.readTime}</span>
                         </div>
-                        <h2 className="font-serif text-3xl text-gray-900 mb-4">{featured.title}</h2>
-                        <p className="text-gray-600 mb-6 leading-relaxed">{featured.excerpt}</p>
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-red-600 bg-red-50 px-4 py-2 rounded-full w-fit">Full Article Coming Soon</span>
                       </div>
-                    </div>
-                  </LuxuryCard>
+                    </LuxuryCard>
+                  </Link>
                 </motion.div>
               </div>
             </section>
@@ -424,27 +224,45 @@ export default function Blog() {
                       viewport={{ once: true }}
                       transition={{ delay: (i % 3) * 0.1 }}
                     >
-                      <LuxuryCard className="overflow-hidden h-full flex flex-col">
-                        <div className="relative aspect-video overflow-hidden">
-                          <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
-                          {getPillarInfo(article.pillar) && (
-                            <span className="absolute top-3 left-3 text-[10px] tracking-[0.15em] uppercase bg-white/95 text-gray-900 px-2 py-1 font-semibold">
-                              {getPillarInfo(article.pillar)?.name}
+                      <Link to={`/blog/${article.slug}`} className="block h-full group">
+                        <LuxuryCard className="overflow-hidden h-full flex flex-col hover:shadow-lg transition-all duration-300">
+                          {/* Top accent bar */}
+                          <div className="h-1 w-full bg-gradient-to-r from-red-500 to-red-400" />
+                          
+                          <div className="p-6 flex flex-col flex-1">
+                            {/* Category & Pillar */}
+                            <div className="flex items-center gap-2 mb-4">
+                              {getPillarInfo(article.pillar) && (
+                                <span className="text-[10px] font-bold tracking-[0.15em] uppercase text-red-600">
+                                  {getPillarInfo(article.pillar)?.name}
+                                </span>
+                              )}
+                            </div>
+                            
+                            {/* Date & Read time */}
+                            <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                              <span className="flex items-center gap-1"><Calendar size={11} />{formatDate(article.date)}</span>
+                              <span className="flex items-center gap-1"><Clock size={11} />{article.readTime}</span>
+                            </div>
+                            
+                            {/* Title */}
+                            <h3 className="font-serif text-lg text-gray-900 mb-3 flex-1 group-hover:text-red-600 transition-colors leading-snug">
+                              {article.title}
+                            </h3>
+                            
+                            {/* Excerpt */}
+                            <p className="text-sm text-gray-500 mb-4 line-clamp-3 leading-relaxed">
+                              {article.excerpt}
+                            </p>
+                            
+                            {/* Read More */}
+                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-red-600 group-hover:gap-2.5 transition-all">
+                              Read Article
+                              <ArrowRight size={12} />
                             </span>
-                          )}
-                          <span className="absolute top-3 right-3 text-[10px] tracking-[0.15em] uppercase bg-gray-800/80 text-white px-2 py-1 font-semibold">Coming Soon</span>
-                        </div>
-                        <div className="p-6 flex flex-col flex-1">
-                          <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                            <span className="flex items-center gap-1"><Calendar size={11} />{formatDate(article.date)}</span>
-                            <span className="flex items-center gap-1"><Clock size={11} />{article.readTime}</span>
                           </div>
-                          <h3 className="font-serif text-lg text-gray-900 mb-3 flex-1">{article.title}</h3>
-                          <p className="text-sm text-gray-500 mb-4 line-clamp-2">{article.excerpt}</p>
-                          <span className="text-xs text-gray-400 font-medium">Subscribe below to be notified when published</span>
-                        </div>
-                      </LuxuryCard>
+                        </LuxuryCard>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -468,21 +286,21 @@ export default function Blog() {
             />
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <Sparkles className="w-10 h-10 text-red-500 mx-auto mb-5" />
+                <Sparkles className="w-10 h-10 text-red-400 mx-auto mb-5" />
                 <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-                  Get Expert Insights Weekly
+                  Get Houston Web Design Insights
                 </h2>
                 <p className="text-gray-400 max-w-lg mx-auto mb-8">
-                  Be the first to read our in-depth guides on AI automation, SEO, and digital growth. No spam — unsubscribe anytime.
+                  Be the first to read our in-depth guides on Houston web design, local SEO, and digital growth strategies. No spam — unsubscribe anytime.
                 </p>
                 <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                   <input 
                     type="email" 
                     required 
                     placeholder="you@company.com" 
-                    className="flex-1 bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                    className="flex-1 bg-white/10 border border-white/20 px-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/50 rounded-xl"
                   />
-                  <Button className="bg-red-600 hover:bg-red-700 px-8">Subscribe</Button>
+                  <Button className="bg-red-600 hover:bg-red-700 px-8 rounded-xl">Subscribe</Button>
                 </form>
               </motion.div>
             </div>

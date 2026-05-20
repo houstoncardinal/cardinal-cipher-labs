@@ -28,6 +28,7 @@ import About from "./pages/About";
 import PortfolioPage from "./pages/PortfolioPage";
 import ContactPage from "./pages/ContactPage";
 import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import Careers from "./pages/Careers";
 import Pricing from "./pages/Pricing";
 import { HealthcareIndustry } from "./pages/industry/Healthcare";
@@ -77,6 +78,7 @@ const App = () => (
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/industry/healthcare" element={<HealthcareIndustry />} />
