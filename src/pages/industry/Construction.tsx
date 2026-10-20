@@ -26,7 +26,7 @@ const industryFaqs = [
   },
   {
     question: "How much does a construction company website cost in Houston?",
-    answer: "Construction websites start at $3,000 for a 5–8 page site. Websites with project portfolio galleries, multiple service area pages, and lead generation integrations typically range $5,000–$12,000. We offer transparent pricing with no hidden fees. Contact us for a free quote.",
+    answer: "Construction websites start at $1,500 for a focused small business site. Websites with project portfolio galleries, multiple service area pages, and lead generation integrations are quoted based on scope. Custom e-commerce or parts/order portals start at $3,500, and custom mobile apps for field teams start at $5K+. We offer transparent pricing with no hidden fees. Contact us for a free quote.",
   },
 ];
 

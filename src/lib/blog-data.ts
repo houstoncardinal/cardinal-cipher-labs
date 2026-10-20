@@ -303,13 +303,15 @@ export const articles: BlogArticle[] = [
         {
           heading: "How Much Does Web Design Cost in Houston?",
           body: "One of the most common questions we hear from Houston business owners is straightforward but rarely answered transparently: how much does a website actually cost? The truth is that web design pricing varies dramatically based on complexity, functionality, and the quality of the agency you choose. This guide breaks down real Houston web design costs so you can budget with confidence.",
-          highlight: "Houston web design costs typically range from $3,000 for a basic brochure site to $30,000+ for a custom e-commerce platform.",
+          highlight: "Houston web design costs start as low as $1,500 for a basic site and scale up based on your needs. We work with every budget to deliver exceptional value.",
           bullets: [
-            "Basic brochure site (3-5 pages): $3,000 — $8,000",
-            "Custom business website (5-15 pages): $8,000 — $15,000",
-            "E-commerce website: $15,000 — $30,000+",
-            "Enterprise website with custom functionality: $20,000 — $50,000+",
-            "Ongoing maintenance: $200 — $1,000+ per month"
+            "Basic brochure site (3-5 pages): Starting at $1,500",
+            "Houston small business website (3-5 pages): Starting at $1,500",
+            "Custom-made e-commerce store: Starting at $3,500",
+            "E-commerce build integrated with your systems: Starting at $3,500",
+            "Custom mobile application with deployment/management help: Starting at $5K+",
+            "Enterprise website with custom functionality: Custom quote",
+            "Ongoing maintenance: $150 — $1,000+ per month"
           ]
         },
         {
@@ -394,7 +396,7 @@ export const articles: BlogArticle[] = [
             "Lower hourly rates and overall project costs",
             "Direct communication with the person doing the work",
             "More flexible scheduling and availability",
-            "Good option for small, simple projects under $5,000",
+            "Good option for small, simple projects starting under $3,000",
             "Personal relationships can lead to strong partnerships"
           ]
         },
@@ -403,7 +405,7 @@ export const articles: BlogArticle[] = [
           body: "There's no one-size-fits-all answer. Here's a practical framework to help you decide which route is best for your specific situation:",
           bullets: [
             "Choose an agency if: Your project requires multiple skill sets, you need long-term support, your timeline is tight, or your website is critical to your revenue",
-            "Choose a freelancer if: Your budget is under $5,000, your project is small and straightforward, or you already have a strong technical team to handle ongoing maintenance"
+            "Choose a freelancer if: Your budget is under $3,000, your project is small and straightforward, or you already have a strong technical team to handle ongoing maintenance"
           ]
         },
         {
@@ -437,7 +439,7 @@ export const articles: BlogArticle[] = [
           heading: "Understanding WordPress",
           body: "WordPress is a powerful content management system that powers a significant portion of the web. It offers thousands of themes and plugins, making it possible to build a functional website relatively quickly and affordably. However, the flexibility of WordPress comes with trade-offs that many Houston businesses discover only after launch.",
           bullets: [
-            "Lower initial cost for basic sites ($1,000 - $5,000)",
+            "Lower initial cost for basic sites (starting under $1,500)",
             "Thousands of pre-built themes and plugins available",
             "Easy content management with a familiar dashboard",
             "Large community for support and resources"
@@ -447,7 +449,7 @@ export const articles: BlogArticle[] = [
           heading: "The Hidden Costs of WordPress",
           body: "While WordPress appears affordable upfront, many Houston businesses find that hidden costs add up quickly. Premium plugins can cost hundreds of dollars annually, security vulnerabilities require constant monitoring, and performance issues often necessitate expensive optimization work.",
           bullets: [
-            "Premium plugins and themes can cost $500 - $2,000+ annually",
+            "Premium plugins and themes can cost $500 - $2,000+ annually on top of development",
             "Security vulnerabilities require constant updates and monitoring",
             "Performance optimization is often needed to achieve acceptable load times",
             "Custom functionality requires specialized WordPress development skills",
@@ -1027,7 +1029,7 @@ export const articles: BlogArticle[] = [
             "Monthly leads × average sale value = monthly revenue from website",
             "Monthly revenue × 12 months = annual revenue from website",
             "Annual revenue − annual website cost = annual ROI",
-            "A $10,000 website generating just 10 leads/month at $500 average value returns $60,000/year — a 6x ROI"
+            "A $5,000 website generating just 10 leads/month at $500 average value returns $60,000/year — a 12x ROI"
           ]
         },
         {

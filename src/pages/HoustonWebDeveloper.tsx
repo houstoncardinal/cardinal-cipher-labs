@@ -76,7 +76,7 @@ const faqs = [
   },
   {
     question: "How much does a web developer cost in Houston?",
-    answer: "Web developer rates in Houston vary. Freelancers charge $50-$150/hour, while agencies like Cardinal Consulting offer project-based pricing for better value and accountability. Our Houston web development projects start at $3,000 for simple sites and range to $100,000+ for complex enterprise platforms. We provide detailed quotes upfront with no hidden fees. Most Houston businesses find our project pricing more cost-effective than hiring a full-time developer."
+    answer: "Web developer rates in Houston vary. Freelancers charge $50-$150/hour, while agencies like Cardinal Consulting offer project-based pricing for better value and accountability. Our Houston small business websites start at $1,500, custom-made e-commerce stores and system-integrated builds start at $3,500, and custom mobile applications with deployment and management help start at $5K+. We provide detailed quotes upfront with no hidden fees. Most Houston businesses find our project pricing more cost-effective than hiring a full-time developer."
   },
   {
     question: "Should I hire a Houston web developer or use a website builder?",

@@ -91,7 +91,7 @@ const caseStudies = [
 const faqs = [
   {
     question: "How much does app development cost in Houston?",
-    answer: "App development costs in Houston vary based on complexity. A simple MVP app typically costs $25,000-$60,000, a mid-complexity app $60,000-$150,000, and enterprise apps $150,000+. Cardinal Consulting offers transparent project quotes with no hidden fees. We also offer phased development plans that let Houston businesses start with an MVP and scale up. Contact us for a free estimate tailored to your specific app idea."
+    answer: "App development costs in Houston vary based on complexity. Cardinal Consulting builds custom mobile applications starting at $5K+, including help with deployment, app store submission, release management, and post-launch support options. More complex apps with advanced integrations, dashboards, or multi-platform requirements are quoted based on scope. Contact us for a free estimate tailored to your specific app idea."
   },
   {
     question: "What's the best app development company near me in Houston?",

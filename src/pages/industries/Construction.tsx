@@ -152,7 +152,7 @@ const faqs = [
   },
   {
     question: "What is the investment for construction company digital marketing?",
-    answer: "Our construction website packages start at $5,000 for a professional 5-page site and range to $25,000+ for enterprise solutions with custom portals. Monthly digital marketing retainers (SEO, PPC, content) typically range from $2,000-$8,000 depending on your market and goals. We provide detailed proposals during our free consultation so there are no surprises.",
+    answer: "Our construction website packages start at $1,500 for a professional small business site. Custom e-commerce or ordering portals start at $3,500, and custom mobile apps for field teams start at $5K+ with deployment and management help available. Monthly digital marketing retainers (SEO, PPC, content) typically range from $2,000-$8,000 depending on your market and goals. We provide detailed proposals during our free consultation so there are no surprises.",
   },
 ];
 

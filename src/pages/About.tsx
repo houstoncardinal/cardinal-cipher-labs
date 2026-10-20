@@ -1,53 +1,55 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
-import { LuxuryCard } from "@/components/ui/luxury-card";
-import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight, Shield, Target, Lightbulb, Users, Award, Globe, 
-  CheckCircle, Briefcase, GraduationCap, Star, TrendingUp 
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import { Container, Eyebrow, SectionHeader, reveal, revealDelay } from "@/components/site/primitives";
 import { siteConfig } from "@/lib/seo-config";
-import { 
-  generateOrganizationSchema, generatePersonSchemas, 
-  generateBreadcrumbSchema, generateWebPageSchema, generateReviewSchemas 
+import {
+  generateOrganizationSchema, generatePersonSchemas,
+  generateBreadcrumbSchema, generateWebPageSchema, generateReviewSchemas,
 } from "@/lib/schema-generators";
 
 const values = [
-  { icon: Shield, title: "Integrity First", description: "We build on trust. Every recommendation, every line of code, every strategy is crafted with your best interests at the center." },
-  { icon: Target, title: "Precision Engineering", description: "We don't do approximations. Our solutions are architected with surgical precision to solve your exact business challenges." },
-  { icon: Lightbulb, title: "Relentless Innovation", description: "We stay ahead of the curve, leveraging cutting-edge technologies to give your business an unfair competitive advantage." },
-  { icon: Users, title: "Partnership Mentality", description: "We're not vendors — we're partners. Your success is our success, and we invest deeply in every relationship." },
+  { title: "Integrity first", description: "We recommend what's right for your business — even when it's the smaller engagement." },
+  { title: "Precision", description: "Every solution is engineered to solve your specific problem, not adapted from a template." },
+  { title: "Pragmatic innovation", description: "We adopt new technology when it creates a real advantage for you, not for its own sake." },
+  { title: "Partnership", description: "We act as an extension of your team and measure our success by yours." },
 ];
 
 const milestones = [
-  { year: "2020", title: "Founded in Houston", description: "Cardinal Consulting established with a mission to deliver enterprise-grade solutions to businesses of all sizes." },
-  { year: "2021", title: "First Major Clients", description: "Began serving Houston's fastest-growing SMBs — healthcare practices, law firms, and real estate groups that needed real digital results, fast." },
-  { year: "2022", title: "National Expansion", description: "Expanded operations coast-to-coast, serving clients across healthcare, finance, and technology sectors." },
-  { year: "2023", title: "500+ Projects Milestone", description: "Crossed 500+ projects delivered for Houston and national clients across healthcare, legal, finance, and technology." },
-  { year: "2024", title: "AI Division Launch", description: "Launched dedicated AI & Machine Learning practice, helping enterprises leverage intelligent automation." },
-  { year: "2025", title: "Global Reach", description: "Extended services internationally with clients across North America, Europe, and Asia Pacific." },
+  { year: "2020", title: "Founded in Houston", description: "Cardinal Consulting is established to bring enterprise-grade digital capability to growing organizations." },
+  { year: "2021", title: "First major clients", description: "Healthcare practices, law firms, and real estate groups engage Cardinal to drive measurable digital results." },
+  { year: "2022", title: "National expansion", description: "Operations expand coast-to-coast across healthcare, finance, and technology." },
+  { year: "2023", title: "500+ projects delivered", description: "The team crosses 500 projects for clients in Houston and nationwide." },
+  { year: "2024", title: "AI practice launched", description: "A dedicated AI and automation practice helps clients apply intelligent automation to operations." },
+  { year: "2025", title: "International reach", description: "Clients now span North America, Europe, and Asia Pacific." },
 ];
 
 const stats = [
-  { value: "500+", label: "Projects Delivered" },
-  { value: "200+", label: "Happy Clients" },
-  { value: "99.9%", label: "Client Retention" },
-  { value: "4.9★", label: "Average Rating" },
+  { value: "500+", label: "Projects delivered" },
+  { value: "200+", label: "Clients served" },
+  { value: "99.9%", label: "Client retention" },
+  { value: "4.9★", label: "Average rating" },
 ];
 
-const certifications = siteConfig.expertise.certifications;
+const standards = [
+  { title: "HIPAA-ready development", description: "Architecture and processes for organizations handling protected health information." },
+  { title: "WCAG 2.1 AA accessibility", description: "Experiences designed to be usable by everyone, including people using assistive technology." },
+  { title: "OWASP security practices", description: "Secure coding, encryption in transit and at rest, and hardened infrastructure by default." },
+];
 
 export default function About() {
+  const founder = siteConfig.team[0];
   const schemas = [
     generateOrganizationSchema(),
     ...generatePersonSchemas(),
     ...generateReviewSchemas(),
     generateWebPageSchema({
       name: "About Cardinal Consulting",
-      description: "Learn about Cardinal Consulting — Houston's SMB-first web design, app development, and SEO agency. 500+ projects delivered. Founded by Hunain Qureshi.",
+      description: "Cardinal Consulting is a Houston-headquartered digital firm delivering websites, apps, brands, and growth marketing. 500+ projects delivered. Founded by Hunain Qureshi.",
       url: `${siteConfig.url}/about`,
     }),
     generateBreadcrumbSchema([
@@ -59,7 +61,7 @@ export default function About() {
       "@type": "AboutPage",
       "@id": `${siteConfig.url}/about`,
       name: "About Cardinal Consulting",
-      description: "Our story, mission, and the team behind Houston's leading SMB digital agency.",
+      description: "Our story, values, and the team behind Cardinal Consulting.",
       url: `${siteConfig.url}/about`,
       mainEntity: { "@id": `${siteConfig.url}#organization` },
     },
@@ -69,7 +71,7 @@ export default function About() {
     <>
       <SEOHead
         title="About Cardinal Consulting | Houston's #1 Web Design & App Development Agency"
-        description="Cardinal Consulting is Houston's #1 web design, app development, and SEO agency. Founded by Hunain Qureshi in 2020, we've delivered 500+ projects for Houston businesses and clients nationwide. Learn our story."
+        description="Cardinal Consulting is a Houston-headquartered web design, app development, and SEO firm. Founded by Hunain Qureshi in 2020, we've delivered 500+ projects for organizations in Houston and nationwide."
         url={`${siteConfig.url}/about`}
         schemas={schemas}
         keywords={["about cardinal consulting", "Houston web design agency", "Houston app development company", "best web design agency Houston", "Hunain Qureshi Cardinal Consulting", "Houston digital agency", "web design company Houston Texas", "top SEO company Houston"]}
@@ -77,182 +79,129 @@ export default function About() {
 
       <div className="min-h-screen bg-background">
         <Header />
-        <main>
+        <main className="pt-[72px]">
           {/* Hero */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-            <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-                <Link to="/" className="inline-flex items-center gap-2 text-sm text-primary mb-6 hover:underline">← Back to Home</Link>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-14 h-14 bg-primary/10 flex items-center justify-center"><Briefcase className="w-7 h-7 text-primary" /></div>
-                  <span className="text-xs tracking-[0.3em] uppercase text-primary">About Us</span>
-                </div>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">
-                  Engineering Excellence,<br />Delivered.
+          <section className="border-b border-border bg-secondary">
+            <Container className="pb-20 pt-10 lg:pb-24 lg:pt-12">
+              <Breadcrumbs items={[{ label: "About" }]} />
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
+                <Eyebrow className="mb-6">About us</Eyebrow>
+                <h1 className="font-display text-4xl leading-[1.05] text-foreground md:text-5xl lg:text-6xl">
+                  Engineers, designers, and strategists building what's next for our clients
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mb-8">
-                  We are Cardinal Consulting — a team of engineers, strategists, and designers obsessed with building digital solutions that transform businesses.
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
+                  Cardinal Consulting is a Houston-headquartered digital firm. We help organizations build better products, earn more trust, and grow — with one senior team accountable for results.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                    <Link to="/contact">Work With Us <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild>
-                    <Link to="/portfolio">See Our Work</Link>
-                  </Button>
-                </div>
               </motion.div>
-            </div>
+            </Container>
           </section>
 
           {/* Stats */}
-          <section className="py-16 border-y border-border/50">
-            <div className="container mx-auto px-6 lg:px-12">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {stats.map((stat, i) => (
-                  <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                    <div className="font-serif text-4xl lg:text-5xl text-primary mb-2">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+          <section className="bg-ink text-ink-foreground">
+            <Container className="grid grid-cols-2 gap-y-10 py-14 md:grid-cols-4">
+              {stats.map((s, i) => (
+                <div key={s.label} className={i > 0 ? "md:border-l md:border-white/10 md:pl-8" : ""}>
+                  <div className="font-display text-4xl font-semibold lg:text-5xl">{s.value}</div>
+                  <div className="mt-2 text-sm text-ink-muted">{s.label}</div>
+                </div>
+              ))}
+            </Container>
           </section>
 
-          {/* Our Story */}
+          {/* Story + founder */}
           <section className="py-24 lg:py-32">
-            <div className="container mx-auto px-6 lg:px-12">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                  <span className="text-xs tracking-[0.3em] uppercase text-primary mb-4 block">Our Story</span>
-                  <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Built from the ground up with a singular mission</h2>
-                  <div className="space-y-4 text-muted-foreground leading-relaxed">
-                    <p>Cardinal Consulting was founded in 2020 by Hunain Qureshi with a simple mission: help Houston small businesses compete online and win. What started as a boutique consultancy has grown into a full-service digital agency that has delivered 500+ websites, apps, and SEO campaigns for clients across Houston and the country.</p>
-                    <p>We specialize in SMBs that are serious about growth — healthcare practices, law firms, real estate groups, contractors, and service businesses that need real leads, not just a pretty website. Every project is built to generate measurable revenue.</p>
-                    <p>For larger companies and enterprise projects, we bring the same results-driven approach with dedicated resources and white-glove service. Talk to us about your specific needs.</p>
-                  </div>
-                </motion.div>
-                <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                  <LuxuryCard elevation={4} borderStyle="metallic-crimson" className="p-10">
-                    <div className="space-y-8">
-                      <div>
-                        <h3 className="font-serif text-2xl text-foreground mb-2">Hunain Qureshi</h3>
-                        <p className="text-primary text-sm mb-4">Founder & CEO</p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{siteConfig.team[0].description}</p>
-                      </div>
-                      <div className="space-y-3">
-                        {siteConfig.team[0].credentials.map((cred) => (
-                          <div key={cred} className="flex items-center gap-3 text-sm">
-                            <GraduationCap className="w-4 h-4 text-primary flex-shrink-0" />
-                            <span className="text-muted-foreground">{cred}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </LuxuryCard>
-                </motion.div>
-              </div>
-            </div>
+            <Container className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
+              <motion.div {...reveal}>
+                <Eyebrow className="mb-5">Our story</Eyebrow>
+                <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">Built to give growing organizations an unfair advantage</h2>
+                <div className="mt-8 space-y-5 text-lg leading-relaxed text-text-secondary">
+                  <p>
+                    Hunain Qureshi founded Cardinal Consulting in 2020 with a clear mission: give organizations the same caliber of digital strategy and engineering that the largest companies rely on. What began as a boutique consultancy has delivered more than 500 websites, apps, and growth programs.
+                  </p>
+                  <p>
+                    Today we partner with organizations in healthcare, legal, financial services, technology, and construction — industries where security, compliance, and trust aren't optional. Every engagement is measured against business outcomes: leads, revenue, efficiency, and customer experience.
+                  </p>
+                  <p>
+                    Whether you need a single high-performing website or a multi-year digital program, you work directly with senior people who own the result.
+                  </p>
+                </div>
+              </motion.div>
+              <motion.aside {...reveal} className="self-start border border-border p-8 lg:p-10" aria-label="Founder">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Leadership</p>
+                <h3 className="mt-4 font-display text-2xl text-foreground">{founder.name}</h3>
+                <p className="text-muted-foreground">{founder.role}</p>
+                <p className="mt-5 leading-relaxed text-text-secondary">{founder.description}</p>
+                <ul className="mt-6 space-y-2 border-t border-border pt-6">
+                  {founder.credentials.map((c) => (
+                    <li key={c} className="text-sm text-text-secondary">{c}</li>
+                  ))}
+                </ul>
+              </motion.aside>
+            </Container>
           </section>
 
           {/* Values */}
-          <section className="py-24 lg:py-32 bg-card/50">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Core Values</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">The principles that guide every decision, every project, and every relationship.</p>
-              </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {values.map((value, i) => (
-                  <motion.div key={value.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                    <LuxuryCard className="p-6 h-full">
-                      <value.icon className="w-10 h-10 text-primary mb-4" />
-                      <h3 className="font-serif text-xl text-foreground mb-2">{value.title}</h3>
-                      <p className="text-sm text-muted-foreground">{value.description}</p>
-                    </LuxuryCard>
+          <section className="border-t border-border bg-secondary py-24 lg:py-32">
+            <Container>
+              <SectionHeader eyebrow="Our values" title="The principles behind every engagement" />
+              <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
+                {values.map((v, i) => (
+                  <motion.div key={v.title} {...revealDelay(i)} className="border-t-2 border-foreground pt-6">
+                    <h3 className="text-xl font-semibold text-foreground">{v.title}</h3>
+                    <p className="mt-3 leading-relaxed text-muted-foreground">{v.description}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </Container>
           </section>
 
           {/* Timeline */}
-          <section className="py-24 lg:py-32">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Journey</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">Key milestones that have shaped Cardinal Consulting.</p>
-              </motion.div>
-              <div className="max-w-3xl mx-auto space-y-8">
+          <section className="border-t border-border py-24 lg:py-32">
+            <Container>
+              <SectionHeader eyebrow="Our journey" title="Milestones" />
+              <ol className="border-t border-border">
                 {milestones.map((m, i) => (
-                  <motion.div key={m.year} initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex gap-6">
-                    <div className="text-4xl font-serif text-primary/30 w-20 flex-shrink-0">{m.year}</div>
-                    <div className="border-l-2 border-primary/20 pl-6 pb-8">
-                      <h3 className="font-serif text-xl text-foreground mb-2">{m.title}</h3>
-                      <p className="text-sm text-muted-foreground">{m.description}</p>
-                    </div>
+                  <motion.li key={m.year} {...revealDelay(i)} className="grid gap-2 border-b border-border py-8 md:grid-cols-[160px_1fr_2fr] md:gap-8">
+                    <span className="font-display text-2xl font-semibold text-primary">{m.year}</span>
+                    <h3 className="text-xl font-semibold text-foreground">{m.title}</h3>
+                    <p className="leading-relaxed text-muted-foreground">{m.description}</p>
+                  </motion.li>
+                ))}
+              </ol>
+            </Container>
+          </section>
+
+          {/* Standards */}
+          <section className="border-t border-border bg-secondary py-24 lg:py-32">
+            <Container>
+              <SectionHeader eyebrow="Standards" title="Standards we build to" />
+              <div className="grid gap-10 md:grid-cols-3">
+                {standards.map((s, i) => (
+                  <motion.div key={s.title} {...revealDelay(i)} className="border-t border-border pt-6">
+                    <h3 className="text-xl font-semibold text-foreground">{s.title}</h3>
+                    <p className="mt-3 leading-relaxed text-muted-foreground">{s.description}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </Container>
           </section>
 
-          {/* Certifications */}
-          <section className="py-24 lg:py-32 bg-card/50">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Certifications & Compliance</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">Industry-recognized certifications that validate our expertise and commitment to excellence.</p>
-              </motion.div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                {certifications.map((cert, i) => (
-                  <motion.div key={cert} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                    <LuxuryCard className="p-6 text-center h-full">
-                      <Award className="w-8 h-8 text-primary mx-auto mb-3" />
-                      <p className="text-sm text-foreground font-medium">{cert}</p>
-                    </LuxuryCard>
-                  </motion.div>
-                ))}
+          {/* Next steps */}
+          <section className="border-t border-border py-20">
+            <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-xl">
+                <h2 className="font-display text-3xl text-foreground">See what we've built</h2>
+                <p className="mt-3 text-muted-foreground">Explore client work across healthcare, finance, legal, construction, and technology.</p>
               </div>
-            </div>
-          </section>
-
-          {/* Related Services */}
-          <section className="py-24 lg:py-32">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Our Services in Houston</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">Explore what Houston's #1 digital agency can do for your business.</p>
-              </motion.div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {[
-                  { label: "Web Design", href: "/houston-web-design" },
-                  { label: "App Development", href: "/houston-app-development" },
-                  { label: "SEO Services", href: "/houston-seo-company" },
-                  { label: "Web Developer", href: "/houston-web-developer" },
-                  { label: "Digital Marketing", href: "/services/digital-marketing" },
-                  { label: "UX/UI Design", href: "/services/ux-ui" },
-                ].map((link) => (
-                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-2 p-4 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-sm font-medium text-foreground transition-all text-center">
-                    {link.label} <ArrowRight className="w-3 h-3 text-primary flex-shrink-0" />
-                  </Link>
-                ))}
+              <div className="flex flex-wrap gap-4">
+                <Link to="/portfolio" className="inline-flex h-12 items-center gap-2 bg-ink px-6 font-semibold text-ink-foreground transition-colors hover:bg-primary">
+                  View our work <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link to="/careers" className="inline-flex h-12 items-center gap-2 border border-foreground px-6 font-semibold text-foreground transition-colors hover:bg-foreground hover:text-background">
+                  Careers
+                </Link>
               </div>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section className="py-24 lg:py-32 bg-primary/5">
-            <div className="container mx-auto px-6 lg:px-12 text-center">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Ready to Work Together?</h2>
-                <p className="text-muted-foreground max-w-xl mx-auto mb-8">Let's discuss how Cardinal Consulting can accelerate your digital transformation. Call <a href="tel:281-901-7016" className="text-primary font-semibold">(281) 901-7016</a> or schedule a free consultation.</p>
-                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <Link to="/contact">Schedule Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                </Button>
-              </motion.div>
-            </div>
+            </Container>
           </section>
         </main>
         <Footer />

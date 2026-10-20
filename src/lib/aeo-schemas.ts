@@ -17,7 +17,7 @@ export function generateHoustonWebDesignQAPage() {
     },
     {
       question: "How much does web design cost in Houston?",
-      answer: "Houston web design costs range from $3,000 for a basic brochure site to $30,000+ for a custom e-commerce platform. Cardinal Consulting offers transparent pricing with no hidden fees, and every project includes custom design, SEO optimization, mobile responsiveness, and performance optimization."
+      answer: "Houston web design costs start as low as $1,500 for a basic brochure site and scale up based on your specific needs. We work with businesses of every budget, from startups to enterprises. Every project includes custom design, SEO optimization, mobile responsiveness, and performance optimization. Contact us for a free, transparent quote."
     },
     {
       question: "Who is the best web designer in Houston?",
@@ -45,7 +45,7 @@ export function generateHoustonWebDesignQAPage() {
     },
     {
       question: "Does Cardinal Consulting offer ongoing website maintenance in Houston?",
-      answer: "Yes, Cardinal Consulting offers comprehensive ongoing maintenance and support for Houston businesses, including security updates, performance monitoring, content updates, SEO optimization, and 24/7 support. Monthly plans start at $200."
+      answer: "Yes, Cardinal Consulting offers comprehensive ongoing maintenance and support for Houston businesses, including security updates, performance monitoring, content updates, SEO optimization, and 24/7 support. Monthly plans start as low as $150 and scale based on your needs."
     },
     {
       question: "Why choose Cardinal Consulting over other Houston web design agencies?",
@@ -92,11 +92,11 @@ export function generateWebDesignProcessHowTo() {
     "@type": "HowTo",
     "@id": `${siteConfig.url}#web-design-process`,
     "name": "How to Build a Professional Website in Houston",
-    "description": "Follow this step-by-step guide to build a high-performing, SEO-optimized website for your Houston business with Cardinal Consulting.",
+    "description": "Follow this step-by-step guide to build a high-performing, SEO-optimized website for your Houston business with Cardinal Consulting. Prices start as low as $1,500.",
     "estimatedCost": {
       "@type": "MonetaryAmount",
       "currency": "USD",
-      "value": "3000"
+      "value": "1500"
     },
     "totalTime": "P6W",
     "supply": [
@@ -184,7 +184,7 @@ export function generateTopQuestionsForHoustonWebDesign() {
         "name": "Is web design expensive in Houston?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Web design in Houston ranges from $3,000 to $30,000+ depending on complexity. Basic brochure sites start around $3,000-$8,000, custom business websites range $8,000-$15,000, and e-commerce platforms cost $15,000-$30,000+. Cardinal Consulting offers transparent, itemized quotes with no hidden fees."
+          "text": "Web design in Houston starts at $1,500 for small business websites. Custom-made e-commerce stores, including builds that integrate with your own systems, start at $3,500. Custom mobile applications with deployment and management help start at $5K+. Cardinal Consulting offers transparent, itemized quotes with no hidden fees and works with every budget."
         }
       },
       {
@@ -292,7 +292,7 @@ export function generateWebDesignServiceSchemas() {
       "@id": `${siteConfig.url}/houston-web-design#service`,
       "serviceType": "WebDesign",
       "name": "Houston Web Design Services",
-      "description": "Custom web design and development for Houston businesses. SEO-optimized, mobile-responsive websites built with modern frameworks like React, Next.js, and Vue.js.",
+      "description": "Custom web design and development for Houston businesses. SEO-optimized, mobile-responsive websites built with modern frameworks like React, Next.js, and Vue.js. Prices start at $1,500.",
       "provider": { "@id": `${siteConfig.url}#organization` },
       "areaServed": [
         { "@type": "City", "name": "Houston", "containedInPlace": { "@type": "State", "name": "Texas" } },
@@ -305,14 +305,12 @@ export function generateWebDesignServiceSchemas() {
       ],
       "audience": {
         "@type": "BusinessAudience",
-        "suggestedAge": "18+",
-        "suggestedGender": "http://schema.org/Female",
-        "suggestedMaxAge": "65"
+        "suggestedAge": "18+"
       },
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
-        "lowPrice": "3000",
+        "lowPrice": "1500",
         "highPrice": "30000",
         "offerCount": "20"
       },
@@ -322,10 +320,10 @@ export function generateWebDesignServiceSchemas() {
         "@type": "OfferCatalog",
         "name": "Web Design Packages",
         "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Basic Brochure Website" }, "price": "3000", "priceCurrency": "USD" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Business Website" }, "price": "8000", "priceCurrency": "USD" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce Website" }, "price": "15000", "priceCurrency": "USD" },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Enterprise Digital Platform" }, "price": "25000", "priceCurrency": "USD" }
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Basic Brochure Website" }, "price": "1500", "priceCurrency": "USD" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Business Website" }, "price": "1500", "priceCurrency": "USD" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce Website" }, "price": "3500", "priceCurrency": "USD" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Mobile Application" }, "price": "5000", "priceCurrency": "USD" }
         ]
       },
       "review": [

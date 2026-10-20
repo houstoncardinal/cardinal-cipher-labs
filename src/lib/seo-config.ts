@@ -230,27 +230,19 @@ export const siteConfig = {
       category: 'Bookkeeping Services',
       technologies: ['Next.js', 'Supabase', 'Tailwind CSS'],
     },
-    {
-      name: 'BluTouch Pools & Spas',
-      description: 'Expert pool service company with over 10 years experience in swimming pool maintenance and award-winning pool design.',
-      url: 'https://blutouchpools.com',
-      image: '/portfolio/blutouch.png',
-      category: 'Pool & Spa Services',
-      technologies: ['React', 'AWS', 'Custom CRM'],
-    },
   ],
 };
 
 export const services = [
   {
     name: 'Custom Website Development',
-    description: 'Professional, responsive websites built with modern technologies. From simple business sites to complex e-commerce platforms.',
+    description: 'Professional, responsive websites built with modern technologies. Houston small business websites start at $1,500, with custom e-commerce stores starting at $3,500.',
     provider: siteConfig.name,
     serviceType: 'WebDevelopment',
     category: 'Web Development',
     areaServed: ['North America', 'Europe', 'Asia Pacific'],
     offers: {
-      price: '10000',
+      price: '1500',
       priceCurrency: 'USD',
       priceSpecification: 'Starting at',
     },
@@ -259,15 +251,15 @@ export const services = [
   },
   {
     name: 'Mobile & Web Applications',
-    description: 'Custom mobile apps and web applications that streamline business operations. Built for performance and scalability.',
+    description: 'Custom mobile apps and web applications that streamline business operations, with deployment and management help available.',
     provider: siteConfig.name,
     serviceType: 'SoftwareDevelopment',
     category: 'Mobile Apps',
     areaServed: ['North America', 'Europe', 'Asia Pacific'],
     offers: {
-      price: 'Contact for Quote',
+      price: '5000',
       priceCurrency: 'USD',
-      priceSpecification: 'Custom pricing',
+      priceSpecification: 'Starting at',
     },
     duration: 'P8W',
     features: ['iOS & Android', 'Cross-Platform', 'API Development', 'Cloud Integration'],

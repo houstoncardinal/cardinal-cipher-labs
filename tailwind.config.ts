@@ -54,10 +54,17 @@ export default {
           tertiary: "hsl(var(--text-tertiary))",
         },
         divider: "hsl(var(--divider))",
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          foreground: "hsl(var(--ink-foreground))",
+          muted: "hsl(var(--ink-muted))",
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
+        // Legacy pages use `font-serif` for headings; it now maps to the display face.
+        serif: ['Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

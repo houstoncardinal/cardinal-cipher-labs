@@ -115,7 +115,7 @@ const faqs = [
   },
   {
     question: "How much does an ecommerce website cost in Houston?",
-    answer: "Ecommerce website costs in Houston: Shopify store setup (custom theme, product import, payment gateway) — $4,000–$12,000. WooCommerce store (custom theme, full optimization, SEO) — $6,000–$18,000. Custom ecommerce platform — $25,000–$100,000+. B2B wholesale portal — $15,000–$50,000. All packages include mobile optimization, payment gateway integration, and Google Analytics setup. Most Houston ecommerce stores built by Cardinal see positive ROI within 6–12 months from increased conversion rates, recovered abandoned carts, and improved Google rankings. We offer monthly payment plans for qualifying Houston businesses."
+    answer: "Ecommerce website costs in Houston start at $3,500 for a custom-made store with product catalog, checkout, payment gateway, mobile optimization, and analytics setup. We can also build stores that integrate with your existing inventory, CRM, shipping, or internal systems. Larger custom ecommerce platforms, B2B wholesale portals, and marketplace builds are quoted based on scope. Most Houston ecommerce stores built by Cardinal see positive ROI within 6–12 months from increased conversion rates, recovered abandoned carts, and improved Google rankings. We offer monthly payment plans for qualifying Houston businesses."
   },
   {
     question: "How long does it take to build an ecommerce website?",

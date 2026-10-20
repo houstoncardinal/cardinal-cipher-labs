@@ -1,70 +1,28 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-
-const clients = [
-  { name: "ABQ MRI", logo: "/clients/abqmri.png", url: "https://www.abqmri.com/" },
-  { name: "APN Clinic", logo: "/clients/apnclinic.png", url: "https://www.apnclinic.com/" },
-  { name: "United CCR", logo: "/clients/ccr.jpg", url: "https://www.unitedccr.com/" },
-  { name: "ClearLedger", logo: "/clients/clearledger.png", url: "https://www.yourclearledger.com/" },
-  { name: "HougenPros", logo: "/clients/hougenpros.png", url: "https://www.hougenpros.com/" },
-  { name: "IAC Centers", logo: "/clients/iac.png", url: "https://www.injuryassistancecenters.com/" },
-  { name: "HOU Inc", logo: "/clients/houinc.png", url: "https://www.houinc.com/" },
-];
+import { clientLogos } from "@/lib/case-studies";
+import { Container } from "@/components/site/primitives";
 
 export function Clients() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="py-6 lg:py-8 relative overflow-hidden bg-white">
-      {/* Vertical red accent lines */}
-      <div className="absolute left-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/10 to-transparent" />
-      <div className="absolute right-[8%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-red-400/10 to-transparent" />
-
-      <div className="container mx-auto px-6 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <h3 className="text-lg md:text-xl tracking-[0.15em] uppercase text-gray-900 font-bold">
-            Trusted By Industry Leaders
-          </h3>
-        </motion.div>
-
-        {/* Infinite scroll container */}
-        <div className="relative">
-          {/* Clean fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-          <motion.div
-            className="flex gap-16 md:gap-20 items-center"
-            animate={{ x: [0, -1050] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            {/* Double the logos for seamless loop */}
-            {[...clients, ...clients].map((client, index) => (
-              <motion.a
-                key={`${client.name}-${index}`}
-                href={client.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 group"
-                whileHover={{ scale: 1.08, y: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              >
+    <div className="border-b border-border bg-background py-14">
+      <Container>
+        <p className="text-center text-sm font-medium text-muted-foreground">
+          Trusted by organizations across healthcare, legal, finance, and construction
+        </p>
+        <ul className="mt-10 grid grid-cols-2 items-center gap-x-10 gap-y-10 sm:grid-cols-4 lg:grid-cols-7">
+          {clientLogos.map((c) => (
+            <li key={c.name} className="flex justify-center">
+              <a href={c.url} target="_blank" rel="noopener noreferrer" aria-label={c.name}>
                 <img
-                  src={client.logo}
-                  alt={`${client.name} logo`}
-                  className="h-12 md:h-14 w-auto object-contain"
+                  src={c.logo}
+                  alt={`${c.name} logo`}
+                  loading="lazy"
+                  className="h-10 w-auto max-w-[140px] object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
                 />
-              </motion.a>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </div>
   );
 }

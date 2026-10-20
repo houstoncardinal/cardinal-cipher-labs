@@ -920,21 +920,21 @@ export function generateProductSchemas() {
   const packages = [
     {
       name: 'Starter Website Package',
-      description: 'Professional small business website with responsive design, SEO optimization, and CMS integration. Perfect for startups and growing businesses.',
-      price: '3000',
+      description: 'Professional Houston small business website with responsive design, SEO optimization, and CMS integration.',
+      price: '1500',
       sku: 'CARD-WEB-STARTER',
     },
     {
-      name: 'Professional Website Package',
-      description: 'Advanced custom website with e-commerce, custom integrations, advanced SEO, and priority support. For established businesses scaling online.',
-      price: '8000',
-      sku: 'CARD-WEB-PRO',
+      name: 'E-Commerce Store Package',
+      description: 'Custom-made e-commerce store with checkout, product catalog, and optional integrations with existing business systems.',
+      price: '3500',
+      sku: 'CARD-ECOM-STARTER',
     },
     {
-      name: 'Enterprise Digital Platform',
-      description: 'Full enterprise-grade digital platform including web app, mobile app, SEO strategy, and dedicated account management.',
-      price: '25000',
-      sku: 'CARD-ENT-FULL',
+      name: 'Custom Mobile Application',
+      description: 'Custom mobile application with app deployment and management help.',
+      price: '5000',
+      sku: 'CARD-APP-STARTER',
     },
   ];
 

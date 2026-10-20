@@ -26,7 +26,7 @@ const industryFaqs = [
   },
   {
     question: "How much does a healthcare website cost?",
-    answer: "Healthcare websites start at $3,000 for a basic 5-page practice site. Complex sites with patient portals, appointment booking, and EMR integration typically range from $8,000–$25,000. We offer transparent pricing with no hidden fees. Contact us for a free custom quote.",
+    answer: "Healthcare websites start at $1,500 for a basic practice site. Complex sites with patient portals, appointment booking, EMR integration, or custom mobile app workflows are quoted based on scope, with custom mobile applications starting at $5K+. We offer transparent pricing with no hidden fees. Contact us for a free custom quote.",
   },
 ];
 

@@ -111,7 +111,7 @@ const testimonials = [
 const faqs = [
   {
     question: "How much does a restaurant website cost in Houston?",
-    answer: "Restaurant website costs in Houston range from $3,500 for a simple menu and contact site to $15,000+ for a full online ordering platform with multi-location support. Cardinal Consulting's restaurant packages: Menu & Presence ($3,500) — beautiful menu, hours, contact, Google Maps optimization; Order-Ready ($7,500) — adds direct online ordering with zero commission fees; Restaurant Pro ($12,000+) — multi-location, reservation integration, catering portal, and full local SEO. The direct ordering system typically pays for itself in the first 2–3 months by eliminating third-party delivery app commissions."
+    answer: "Restaurant websites in Houston start at $1,500 for a focused menu and contact site. Custom e-commerce or direct online ordering stores start at $3,500 and can include payment processing, menu management, pickup/delivery workflows, and integrations with your existing restaurant systems. Larger multi-location, reservation, catering, or loyalty platforms are quoted based on scope. The direct ordering system typically pays for itself by eliminating third-party delivery app commissions."
   },
   {
     question: "What online ordering platforms do you integrate with?",

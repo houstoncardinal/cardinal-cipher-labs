@@ -115,7 +115,7 @@ const faqs = [
   },
   {
     question: "How much does a real estate website cost in Houston?",
-    answer: "Real estate website costs in Houston: Agent website with IDX — $4,500–$9,000. Team website with full IDX, lead capture, and CRM — $8,000–$18,000. Brokerage website with team profiles and advanced features — $15,000–$35,000. Property management platform — $12,000–$40,000 depending on tenant portal complexity. All packages include Houston HAR IDX integration, lead capture optimization, and Google Analytics. Unlike Placester or Real Geeks subscription platforms that charge $300–$600/month forever, Cardinal builds websites you own outright. The SEO value alone typically delivers ROI within the first 2–3 transactions."
+    answer: "Real estate website costs in Houston start at $1,500 for a focused agent or small business site. IDX-enabled agent and team websites, CRM integrations, brokerage sites, and property management platforms are quoted based on scope. Custom mobile applications for agents, tenants, or property teams start at $5K+ with deployment and management help available. All packages include lead capture optimization and Google Analytics. Unlike subscription platforms that charge monthly forever, Cardinal builds websites you own outright. The SEO value alone typically delivers ROI within the first 2–3 transactions."
   },
   {
     question: "What is the difference between IDX and VOW for real estate websites?",

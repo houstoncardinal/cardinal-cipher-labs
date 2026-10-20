@@ -1,63 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Light Mode - Clean, Professional */
+  /* Corporate light — navy ink, white space, cardinal crimson accent */
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 15% 10%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 10%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 10%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Crimson Accent - Deep Red */
-    --primary: 0 72% 35%;
+    /* Cardinal crimson — used sparingly for emphasis */
+    --primary: 352 72% 36%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 96%;
-    --secondary-foreground: 220 15% 10%;
+    --secondary: 210 33% 97%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 15% 96%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 210 30% 96%;
+    --muted-foreground: 215 16% 38%;
 
-    --accent: 0 72% 35%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 210 30% 95%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 0 72% 35%;
+    --border: 214 20% 88%;
+    --input: 214 20% 85%;
+    --ring: 352 72% 36%;
 
-    --radius: 0.125rem;
+    --radius: 0.25rem;
+
+    /* Navy "ink" surfaces for contrast bands, primary buttons, footer */
+    --ink: 222 47% 11%;
+    --ink-foreground: 0 0% 100%;
+    --ink-muted: 215 20% 70%;
 
     /* Enhanced Custom tokens */
-    --surface-elevated: 220 15% 98%;
-    --text-secondary: 220 10% 40%;
-    --text-tertiary: 220 10% 60%;
-    --divider: 220 15% 92%;
-    --glow-primary: 0 72% 35% / 0.15;
-    --glow-soft: 0 72% 40% / 0.05;
-    
+    --surface-elevated: 210 33% 98%;
+    --text-secondary: 215 19% 30%;
+    --text-tertiary: 215 14% 52%;
+    --divider: 214 20% 90%;
+    --glow-primary: 352 72% 36% / 0.12;
+    --glow-soft: 352 72% 36% / 0.04;
+
     /* Glass effects */
-    --glass-bg: 0 0% 100% / 0.8;
-    --glass-border: 220 15% 85% / 0.5;
-    
+    --glass-bg: 0 0% 100% / 0.85;
+    --glass-border: 214 20% 85% / 0.6;
+
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 72% 35%), hsl(0 72% 25%));
-    --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 15% 98%));
-    --gradient-radial: radial-gradient(ellipse at center, hsl(0 72% 35% / 0.08), transparent 70%);
-    
+    --gradient-primary: linear-gradient(135deg, hsl(352 72% 36%), hsl(352 72% 28%));
+    --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 33% 98%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(352 72% 36% / 0.06), transparent 70%);
+
     /* Clients section specific */
     --clients-bg: 0 0% 100%;
-    --clients-text: 220 15% 25%;
+    --clients-text: 215 19% 30%;
   }
 
   /* Dark Mode - Premium Enterprise Palette */
@@ -165,8 +170,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    @apply tracking-tight;
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
 
   ::selection {

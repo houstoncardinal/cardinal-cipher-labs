@@ -26,7 +26,7 @@ const industryFaqs = [
   },
   {
     question: "What is the typical cost for a financial advisor website?",
-    answer: "A professional financial advisor website starts at $3,000 for a 5–8 page site. Larger RIA firm websites with client portals, compliance features, and custom content typically range $8,000–$20,000. We provide detailed quotes after a free consultation.",
+    answer: "A professional financial advisor website starts at $1,500 for a focused small business site. Larger RIA firm websites with client portals, compliance features, custom content, or system integrations are quoted based on scope. Custom mobile applications with deployment and management help start at $5K+. We provide detailed quotes after a free consultation.",
   },
 ];
 

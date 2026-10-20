@@ -72,7 +72,7 @@ const faqData = [
   {
     question: "How much does web design cost in Houston?",
     answer:
-      "Web design costs in Houston vary depending on the complexity and scope of the project. At Cardinal Consulting, our Houston web design packages start at $3,000 for a professional small business website and can range up to $25,000+ for enterprise-level custom web applications. Every Houston web design project includes responsive design, SEO optimization, and a content management system. We offer flexible payment plans for Houston businesses of all sizes. Contact us at (281) 901-7016 for a free, no-obligation quote tailored to your Houston business needs.",
+      "Web design costs in Houston vary depending on the complexity and scope of the project. At Cardinal Consulting, Houston small business websites start at $1,500, custom-made e-commerce stores and system-integrated builds start at $3,500, and custom mobile applications with deployment and management help start at $5K+. Every Houston web design project includes responsive design, SEO optimization, and a content management system. We offer flexible payment plans for Houston businesses of all sizes. Contact us at (281) 901-7016 for a free, no-obligation quote tailored to your Houston business needs.",
   },
   {
     question: "What makes Cardinal the best web design agency in Houston?",

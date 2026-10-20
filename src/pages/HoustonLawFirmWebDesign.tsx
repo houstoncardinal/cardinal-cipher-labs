@@ -111,7 +111,7 @@ const testimonials = [
 const faqs = [
   {
     question: "How much does a law firm website cost in Houston?",
-    answer: "Law firm websites in Houston typically range from $5,000 for a solo attorney site to $25,000+ for large multi-practice firms. Cardinal Consulting offers transparent, flat-fee packages: our Attorney Starter package begins at $5,000 (5 pages, intake form, SEO), the Firm Growth package at $12,000 (full practice area pages, client portal, advanced SEO), and custom Enterprise packages for large Houston firms. All packages include Texas Bar advertising compliance review, mobile optimization, and 90 days of support. We also offer monthly payment plans so Houston firms can get started without a large upfront investment."
+    answer: "Law firm websites in Houston start at $1,500 for a focused solo attorney or small-firm site. Larger multi-practice websites with full practice area pages, client portals, advanced SEO, or custom intake workflows are quoted based on scope. All packages include Texas Bar advertising compliance review, mobile optimization, and launch support. We also offer monthly payment plans so Houston firms can get started without a large upfront investment."
   },
   {
     question: "How long does it take to build a law firm website?",

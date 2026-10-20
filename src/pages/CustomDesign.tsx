@@ -142,7 +142,7 @@ const faqs = [
   {
     question: "How much does custom website design cost in Houston?",
     answer:
-      "Custom website design in Houston typically ranges from $5,000 to $50,000+ depending on scope, complexity, and number of pages. A custom small-business website with 5–8 pages generally starts around $5,000–$10,000. For Houston law firms, medical practices, or e-commerce businesses needing custom functionality, pricing ranges from $10,000–$30,000. Enterprise-level custom websites for Energy Corridor corporations or large Houston businesses start at $30,000+. We provide transparent quotes with no hidden fees — call (281) 901-7016 for a free estimate.",
+      "Custom website design in Houston starts at $1,500 for small-business websites. Custom-made e-commerce stores, including builds that integrate with your own systems, start at $3,500. Custom mobile applications with deployment and management help start at $5K+. Larger custom platforms are quoted based on scope, complexity, and integrations. We provide transparent quotes with no hidden fees — call (281) 901-7016 for a free estimate.",
   },
   {
     question: "How long does custom web design take in Houston?",
@@ -157,7 +157,7 @@ const faqs = [
   {
     question: "Do you design websites for Houston small businesses?",
     answer:
-      "Absolutely. We proudly serve Houston small businesses across all industries and budgets — from solo practitioners in Katy and Sugar Land to growing companies in The Woodlands and Pearland. We offer scaled custom design packages starting around $5,000 that give small Houston businesses a unique, professional online presence that competes with larger firms. We believe every Houston business deserves a custom website — not a generic template.",
+      "Absolutely. We proudly serve Houston small businesses across all industries and budgets — from solo practitioners in Katy and Sugar Land to growing companies in The Woodlands and Pearland. We offer scaled custom design packages starting at $1,500 that give small Houston businesses a unique, professional online presence that competes with larger firms. We believe every Houston business deserves a custom website — not a generic template.",
   },
 ];
 
@@ -233,7 +233,7 @@ export default function CustomDesign() {
       {
         question: "How much does custom website design cost in Houston?",
         answer:
-          "Custom website design in Houston typically ranges from $5,000 to $50,000+ depending on scope, complexity, and number of pages. Small-business custom websites generally start around $5,000–$10,000. For Houston law firms, medical practices, or e-commerce businesses, pricing ranges from $10,000–$30,000. Enterprise-level custom websites for Energy Corridor corporations start at $30,000+. We provide transparent quotes with no hidden fees.",
+          "Custom website design in Houston starts at $1,500 for small-business websites. Custom-made e-commerce stores, including builds that integrate with your own systems, start at $3,500. Custom mobile applications with deployment and management help start at $5K+. Larger custom platforms are quoted based on scope, complexity, and integrations. We provide transparent quotes with no hidden fees.",
       },
       {
         question: "How long does custom web design take in Houston?",
@@ -248,7 +248,7 @@ export default function CustomDesign() {
       {
         question: "Do you design websites for Houston small businesses?",
         answer:
-          "Absolutely. We proudly serve Houston small businesses across all industries — from solo practitioners in Katy and Sugar Land to growing companies in The Woodlands and Pearland. We offer scaled custom design packages starting around $5,000 that give small Houston businesses a unique, professional online presence that competes with larger firms.",
+          "Absolutely. We proudly serve Houston small businesses across all industries — from solo practitioners in Katy and Sugar Land to growing companies in The Woodlands and Pearland. We offer scaled custom design packages starting at $1,500 that give small Houston businesses a unique, professional online presence that competes with larger firms.",
       },
     ]),
   ];

@@ -286,7 +286,7 @@ const testimonials = [
 ];
 
 const faqs = [
-  { question: "How much does web design cost?", answer: "Our web design packages start at $3,000 for small businesses and range up to $25,000+ for enterprise solutions. All packages include responsive design, SEO optimization, and a content management system." },
+  { question: "How much does web design cost?", answer: "Our Houston small business websites start at $1,500. Custom-made e-commerce stores and builds that integrate with your own systems start at $3,500, and custom mobile applications with deployment and management help start at $5K+. Website packages include responsive design, SEO optimization, and a content management system." },
   { question: "How long does SEO take?", answer: "SEO typically shows significant results within 3-6 months. Most clients see first-page rankings within 4-6 months for competitive keywords." },
   { question: "Why choose a local agency?", answer: "A local agency understands your market, competition, and customer behavior. We can meet in person and provide city-specific insights that out-of-town agencies miss." },
   { question: "Do you offer ongoing services?", answer: "Yes! We offer monthly SEO and marketing packages starting at $1,500/month with no long-term contracts required." },

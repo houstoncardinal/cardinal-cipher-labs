@@ -314,6 +314,10 @@
       document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     </script>
+    <!-- Static copies of the React contact forms so Netlify can detect them at deploy time.
+         Field names must match src/components/site/ContactForm.tsx. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="text" name="firstName" /><input type="text" name="lastName" /><input type="email" name="email" /><input type="tel" name="phone" /><input type="text" name="company" /><input type="url" name="website" /><input type="text" name="services" /><select name="budget"></select><textarea name="message"></textarea><input name="bot-field" /></form>
+    <form name="contact-page" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="text" name="firstName" /><input type="text" name="lastName" /><input type="email" name="email" /><input type="tel" name="phone" /><input type="text" name="company" /><input type="url" name="website" /><input type="text" name="services" /><select name="budget"></select><textarea name="message"></textarea><input name="bot-field" /></form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { CursorTrail } from "@/components/ui/cursor-trail";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -26,6 +25,7 @@ import BrandIdentity from "./pages/services/BrandIdentity";
 import UXUI from "./pages/services/UXUI";
 import About from "./pages/About";
 import PortfolioPage from "./pages/PortfolioPage";
+import CaseStudyPage from "./pages/CaseStudyPage";
 import ContactPage from "./pages/ContactPage";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
@@ -60,7 +60,6 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
-          <CursorTrail />
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -76,6 +75,7 @@ const App = () => (
               <Route path="/services/ux-ui" element={<UXUI />} />
               <Route path="/about" element={<About />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/portfolio/:slug" element={<CaseStudyPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogArticle />} />

@@ -1,5 +1,4 @@
 import { Header } from "@/components/layout/Header";
-import { VerticalNav } from "@/components/layout/VerticalNav";
 import { Hero } from "@/components/sections/Hero";
 import { Clients } from "@/components/sections/Clients";
 import { Services } from "@/components/sections/Services";
@@ -9,7 +8,6 @@ import { Process } from "@/components/sections/Process";
 import { Industries } from "@/components/sections/Industries";
 import { FAQ } from "@/components/sections/FAQ";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { FreeAuditCTA } from "@/components/sections/FreeAuditCTA";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
@@ -69,40 +67,35 @@ const Index = () => {
 
       <div className="min-h-screen bg-background">
         <Header />
-        <VerticalNav />
         <main>
           <section id="hero"><Hero /></section>
           <section id="clients"><Clients /></section>
           <section id="services"><Services /></section>
-          <section id="advantage"><Advantage /></section>
           <section id="portfolio"><Portfolio /></section>
-          <section id="process"><Process /></section>
           <section id="industries"><Industries /></section>
+          <section id="advantage"><Advantage /></section>
+          <section id="process"><Process /></section>
           <section id="reviews"><GoogleReviews /></section>
-          <section id="audit"><FreeAuditCTA /></section>
           <section id="faq"><FAQ /></section>
           <section id="contact"><Contact /></section>
 
-          {/* Industry-Specific Web Design — Internal Link Hub */}
-          <section className="py-16 bg-gray-50 border-t border-gray-100">
-            <div className="container mx-auto px-6 lg:px-12">
-              <p className="text-center text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold mb-3">Industry-Specific Web Design in Houston</p>
-              <p className="text-center text-sm text-gray-500 max-w-2xl mx-auto mb-8">We build specialized websites for every Houston industry — designed for your customers and optimized for your keywords.</p>
-              <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-                {[
-                  { label: "Law Firm Websites", href: "/houston-law-firm-website-design" },
-                  { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
-                  { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
-                  { label: "eCommerce Websites", href: "/houston-ecommerce-website-design" },
-                  { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
-                  { label: "Construction Websites", href: "/houston-construction-website-design" },
-                  { label: "Startup Websites", href: "/houston-startup-website-design" },
-                ].map((link) => (
-                  <Link key={link.href} to={link.href} className="inline-flex items-center gap-1 px-5 py-2.5 bg-white rounded-full border border-gray-200 hover:border-red-300 hover:text-red-600 text-sm font-semibold text-gray-700 transition-all duration-200 hover:shadow-sm">
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+          {/* Industry-specific web design — internal link hub */}
+          <section className="border-t border-border bg-secondary py-12">
+            <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-3 px-6 text-sm lg:px-10">
+              <span className="font-semibold text-foreground">Industry websites in Houston:</span>
+              {[
+                { label: "Law Firm Websites", href: "/houston-law-firm-website-design" },
+                { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
+                { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
+                { label: "eCommerce Websites", href: "/houston-ecommerce-website-design" },
+                { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
+                { label: "Construction Websites", href: "/houston-construction-website-design" },
+                { label: "Startup Websites", href: "/houston-startup-website-design" },
+              ].map((link) => (
+                <Link key={link.href} to={link.href} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </section>
         </main>
