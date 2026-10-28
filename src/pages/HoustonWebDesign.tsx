@@ -181,11 +181,11 @@ const generateSchemas = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": "https://www.visitcardinal.com/houston-web-design#localbusiness",
+    "@id": "https://visitcardinal.com/houston-web-design#localbusiness",
     "name": "Cardinal Consulting — #1 Web Design Company Houston TX",
     "alternateName": ["Cardinal Web Design Houston", "Cardinal Consulting Houston", "Best Web Design Company Houston"],
     "description": "Houston's #1 rated web design company. Custom websites, SEO-first design, and digital marketing for Houston businesses. 500+ projects delivered. Serving all Houston neighborhoods.",
-    "url": "https://www.visitcardinal.com/houston-web-design",
+    "url": "https://visitcardinal.com/houston-web-design",
     "telephone": "+12819017016",
     "email": "hello@visitcardinal.com",
     "address": {
@@ -254,7 +254,7 @@ const generateSchemas = () => {
     "description": "Professional, custom web design services for Houston businesses. SEO-first websites that rank on Google and convert visitors into customers. Serving all Houston neighborhoods.",
     "provider": {
       "@type": "LocalBusiness",
-      "@id": "https://www.visitcardinal.com/houston-web-design#localbusiness"
+      "@id": "https://visitcardinal.com/houston-web-design#localbusiness"
     },
     "areaServed": {
       "@type": "City",
@@ -289,9 +289,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Services", "item": "https://www.visitcardinal.com/houston-seo" },
-      { "@type": "ListItem", "position": 3, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Services", "item": "https://visitcardinal.com/houston-seo" },
+      { "@type": "ListItem", "position": 3, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" }
     ]
   };
 
@@ -330,7 +330,7 @@ export function HoustonWebDesignPage() {
           "best website design Houston", "Houston web design and development"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-web-design"
+        url="https://visitcardinal.com/houston-web-design"
       />
 
       <div className="min-h-screen bg-white">

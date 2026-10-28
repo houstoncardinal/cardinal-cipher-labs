@@ -73,4 +73,4 @@ Disallow: /*?*sort=
 Disallow: /*?*filter=
 
 # Sitemaps
-Sitemap: https://www.visitcardinal.com/sitemap.xml
+Sitemap: https://visitcardinal.com/sitemap.xml

@@ -132,11 +132,11 @@ const generateSchemas = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": "https://www.visitcardinal.com/houston-seo-company#localbusiness",
+    "@id": "https://visitcardinal.com/houston-seo-company#localbusiness",
     "name": "Cardinal Consulting — #1 SEO Company Houston TX",
     "alternateName": ["Best SEO Company Houston", "Houston SEO Company", "SEO Agency Houston TX", "Top SEO Company Houston", "Houston Local SEO Company"],
     "description": "Houston's best SEO company. Local SEO, technical SEO, and content marketing to rank your Houston business #1 on Google. 500+ Houston clients. Proven results in 90 days.",
-    "url": "https://www.visitcardinal.com/houston-seo-company",
+    "url": "https://visitcardinal.com/houston-seo-company",
     "telephone": "+12819017016",
     "email": "hello@visitcardinal.com",
     "address": {
@@ -181,7 +181,7 @@ const generateSchemas = () => {
     "description": "Professional SEO services for Houston businesses. Local SEO, technical SEO, link building, and content marketing. Rank #1 on Google for Houston keywords.",
     "provider": {
       "@type": "LocalBusiness",
-      "@id": "https://www.visitcardinal.com/houston-seo-company#localbusiness"
+      "@id": "https://visitcardinal.com/houston-seo-company#localbusiness"
     },
     "areaServed": {
       "@type": "City",
@@ -204,9 +204,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston SEO", "item": "https://www.visitcardinal.com/houston-seo" },
-      { "@type": "ListItem", "position": 3, "name": "Houston SEO Company", "item": "https://www.visitcardinal.com/houston-seo-company" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston SEO", "item": "https://visitcardinal.com/houston-seo" },
+      { "@type": "ListItem", "position": 3, "name": "Houston SEO Company", "item": "https://visitcardinal.com/houston-seo-company" }
     ]
   };
 
@@ -231,7 +231,7 @@ export function HoustonSEOCompanyPage() {
           "Google ranking Houston", "Houston website ranking"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-seo-company"
+        url="https://visitcardinal.com/houston-seo-company"
       />
 
       <div className="min-h-screen bg-white">

@@ -162,7 +162,7 @@ const generateSchemas = () => {
     "name": "eCommerce Website Design Houston TX",
     "alternateName": ["Shopify Developer Houston", "WooCommerce Houston", "Online Store Design Houston"],
     "description": "Houston's top ecommerce website design agency. Shopify, WooCommerce, and custom stores with checkout optimization, product SEO, and Houston-to-nationwide fulfillment.",
-    "url": "https://www.visitcardinal.com/houston-ecommerce-website-design",
+    "url": "https://visitcardinal.com/houston-ecommerce-website-design",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cardinal Consulting",
@@ -194,9 +194,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" },
-      { "@type": "ListItem", "position": 3, "name": "eCommerce Website Design Houston", "item": "https://www.visitcardinal.com/houston-ecommerce-website-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" },
+      { "@type": "ListItem", "position": 3, "name": "eCommerce Website Design Houston", "item": "https://visitcardinal.com/houston-ecommerce-website-design" }
     ]
   };
 
@@ -205,8 +205,8 @@ const generateSchemas = () => {
     "@type": "WebPage",
     "name": "eCommerce Website Design Houston | Shopify & WooCommerce Developer Houston TX",
     "description": "Houston's top ecommerce website design agency. Shopify, WooCommerce, and custom stores with checkout optimization, product SEO, and Houston-to-nationwide fulfillment.",
-    "url": "https://www.visitcardinal.com/houston-ecommerce-website-design",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.visitcardinal.com", "name": "Cardinal Consulting" }
+    "url": "https://visitcardinal.com/houston-ecommerce-website-design",
+    "isPartOf": { "@type": "WebSite", "url": "https://visitcardinal.com", "name": "Cardinal Consulting" }
   };
 
   return [serviceSchema, faqSchema, breadcrumbSchema, webPageSchema];
@@ -229,7 +229,7 @@ export default function HoustonEcommerceWebDesignPage() {
           "ecommerce seo houston", "checkout optimization houston", "houston ecommerce consultant"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-ecommerce-website-design"
+        url="https://visitcardinal.com/houston-ecommerce-website-design"
       />
 
       <div className="min-h-screen bg-white">

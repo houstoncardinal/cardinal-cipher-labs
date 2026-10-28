@@ -103,11 +103,11 @@ const generateSchemas = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": "https://www.visitcardinal.com/houston-web-developer#localbusiness",
+    "@id": "https://visitcardinal.com/houston-web-developer#localbusiness",
     "name": "Cardinal Consulting — Best Web Developer Houston TX",
     "alternateName": ["Houston Web Developer", "Web Developer Near Me Houston", "Best Web Developer Houston", "Houston Web Development Company"],
     "description": "Houston's best web developers. Full-stack React, Next.js, Node.js development for Houston businesses. 500+ projects delivered. Expert web developers serving all Houston neighborhoods.",
-    "url": "https://www.visitcardinal.com/houston-web-developer",
+    "url": "https://visitcardinal.com/houston-web-developer",
     "telephone": "+12819017016",
     "email": "hello@visitcardinal.com",
     "address": {
@@ -152,7 +152,7 @@ const generateSchemas = () => {
     "description": "Expert web development services for Houston businesses. React, Next.js, Node.js, and full-stack development. Custom websites, web apps, e-commerce, and technical SEO.",
     "provider": {
       "@type": "LocalBusiness",
-      "@id": "https://www.visitcardinal.com/houston-web-developer#localbusiness"
+      "@id": "https://visitcardinal.com/houston-web-developer#localbusiness"
     },
     "areaServed": {
       "@type": "City",
@@ -175,8 +175,8 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Developer", "item": "https://www.visitcardinal.com/houston-web-developer" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Developer", "item": "https://visitcardinal.com/houston-web-developer" }
     ]
   };
 
@@ -202,7 +202,7 @@ export function HoustonWebDeveloperPage() {
           "web developer Houston Texas", "web development services Houston"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-web-developer"
+        url="https://visitcardinal.com/houston-web-developer"
       />
 
       <div className="min-h-screen bg-white">

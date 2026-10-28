@@ -7,6 +7,8 @@ import {
   Users, Mail, Video, LineChart, PenTool,
   Type, BookOpen, Printer, Eye, Layers,
   TestTube, Accessibility, ScanLine,
+  Share2, CalendarDays, MessageSquare, Clapperboard, Bot, Workflow, Files,
+  ShieldCheck, Server, Compass, Network, ClipboardCheck, DatabaseBackup, Activity, Wrench,
 } from "lucide-react";
 
 /**
@@ -53,7 +55,16 @@ export interface ServiceTestimonial {
   rating: number;
 }
 
-export type ServiceGroup = "Build" | "Design" | "Grow";
+export type ServiceGroup = "Build" | "Design" | "Grow" | "Advise";
+
+/** An industry statistic shown on a service page. Every entry must cite a real, checkable source. */
+export interface ResearchStat {
+  value: string;
+  label: string;
+  source: string;
+  year: string;
+  url?: string;
+}
 
 export interface ServiceDefinition {
   slug: string;
@@ -74,11 +85,13 @@ export interface ServiceDefinition {
   included: ServiceFeature[];
   tiers: [ServiceTier, ServiceTier, ServiceTier];
   process: [ServiceStep, ServiceStep, ServiceStep, ServiceStep];
-  stats: { value: string; label: string }[];
-  /** Homepage card extras */
-  capabilities: string[];
-  highlights: string[];
-  testimonials: ServiceTestimonial[];
+  /** Cardinal's own figures (shown in the stats band) */
+  stats?: { value: string; label: string }[];
+  /** Independent industry research with citations */
+  research?: ResearchStat[];
+  capabilities?: string[];
+  highlights?: string[];
+  testimonials?: ServiceTestimonial[];
   faqs: ServiceFAQ[];
   related: string[];
   /** Slugs from case-studies.ts shown as "Selected work" */
@@ -93,8 +106,8 @@ export interface ServiceDefinition {
     serviceType: string;
     category: string;
     duration: string;
-    aggregateRating: { ratingValue: number; reviewCount: number };
-    reviewDate: string;
+    aggregateRating?: { ratingValue: number; reviewCount: number };
+    reviewDate?: string;
   };
 }
 
@@ -109,10 +122,63 @@ const planStep = (what: string): ServiceStep => ({
   description: `You get a written plan for your ${what}, the price, and the timeline before any work starts.`,
 });
 
+/** Website Care Plans — monthly add-on for any website we build. */
+export const carePlans: [ServiceTier, ServiceTier, ServiceTier] = [
+  {
+    level: "Foundation",
+    name: "Care Essentials",
+    price: "$299",
+    billing: "per month",
+    bestFor: "Keeping your site secure, backed up, and running.",
+    features: [
+      "Monthly software updates",
+      "Daily cloud backups",
+      "24/7 uptime monitoring",
+      "Security scanning & malware removal",
+      "1 hour of content updates/mo",
+    ],
+  },
+  {
+    level: "Growth",
+    name: "Care Plus",
+    price: "$499",
+    billing: "per month",
+    bestFor: "Proactive upkeep with faster support.",
+    popular: true,
+    features: [
+      "Everything in Essentials",
+      "3 hours of content updates/mo",
+      "Priority 24-hour support response",
+      "Core Web Vitals monitoring",
+      "Monthly analytics review",
+      "Quarterly design refreshes",
+    ],
+  },
+  {
+    level: "Enterprise",
+    name: "Care Pro",
+    price: "$799",
+    billing: "per month",
+    bestFor: "A site that keeps improving every month.",
+    features: [
+      "Everything in Plus",
+      "6 hours of development/mo",
+      "New feature development",
+      "A/B testing & conversion ideas",
+      "Dedicated account manager",
+      "Quarterly strategy sessions",
+    ],
+  },
+];
+
 export const services: ServiceDefinition[] = [
   // ───────────────────────────── Web Development ─────────────────────────────
   {
     slug: "web-development",
+    research: [
+      { value: "53%", label: "of mobile site visits are abandoned when a page takes longer than three seconds to load.", source: "Google, The Need for Mobile Speed", year: "2016", url: "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/" },
+      { value: "8.4%", label: "more retail conversions when key mobile speed metrics improved by just 0.1 seconds across 37 brand sites.", source: "Deloitte & Google, Milliseconds Make Millions", year: "2020", url: "https://web.dev/case-studies/milliseconds-make-millions" },
+    ],
     path: "/services/web-development",
     icon: Globe,
     group: "Build",
@@ -249,6 +315,10 @@ export const services: ServiceDefinition[] = [
   // ─────────────────────────────── Mobile Apps ───────────────────────────────
   {
     slug: "mobile-apps",
+    research: [
+      { value: "4.2T", label: "hours were spent in mobile apps worldwide in 2024 — about 3.5 hours per user, per day.", source: "Sensor Tower, State of Mobile 2025", year: "2025", url: "https://sensortower.com/blog/2025-state-of-mobile-consumers-usd150-billion-spent-on-mobile-highlights" },
+      { value: "$150B", label: "was spent by consumers in mobile apps in 2024, the fastest growth since 2021.", source: "Sensor Tower, State of Mobile 2025", year: "2025", url: "https://sensortower.com/blog/2025-state-of-mobile-consumers-usd150-billion-spent-on-mobile-highlights" },
+    ],
     path: "/services/mobile-apps",
     icon: Smartphone,
     group: "Build",
@@ -384,6 +454,10 @@ export const services: ServiceDefinition[] = [
   // ─────────────────────────────── Brand Identity ───────────────────────────────
   {
     slug: "brand-identity",
+    research: [
+      { value: "23%", label: "estimated revenue increase attributed to consistent brand presentation, in a survey of 200+ brand leaders.", source: "Lucidpress & Demand Metric, The Impact of Brand Consistency", year: "2016" },
+      { value: "32 pts", label: "higher revenue growth for companies in the top quartile of design performance versus industry peers over five years.", source: "McKinsey, The Business Value of Design", year: "2018", url: "https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-business-value-of-design" },
+    ],
     path: "/services/brand-identity",
     icon: Palette,
     group: "Design",
@@ -510,6 +584,10 @@ export const services: ServiceDefinition[] = [
   // ─────────────────────────────── UX/UI Design ───────────────────────────────
   {
     slug: "ux-ui",
+    research: [
+      { value: "32 pts", label: "higher revenue growth — and 56 points higher shareholder returns — for top-quartile design performers across 300 companies.", source: "McKinsey, The Business Value of Design", year: "2018", url: "https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-business-value-of-design" },
+      { value: "70.19%", label: "average documented online shopping-cart abandonment rate, across 49 studies — much of it driven by fixable checkout UX.", source: "Baymard Institute", year: "2023", url: "https://baymard.com/lists/cart-abandonment-rate" },
+    ],
     path: "/services/ux-ui",
     icon: MousePointer,
     group: "Design",
@@ -642,6 +720,10 @@ export const services: ServiceDefinition[] = [
   // ─────────────────────────────── SEO & Analytics ───────────────────────────────
   {
     slug: "seo-analytics",
+    research: [
+      { value: "27.6%", label: "average click-through rate for the #1 organic Google result — 10x more likely to be clicked than #10.", source: "Backlinko, Google CTR study of 4M search results", year: "2023", url: "https://backlinko.com/google-ctr-stats" },
+      { value: "Only 4%", label: "of consumers say they never read online reviews when choosing a local business.", source: "BrightLocal, Local Consumer Review Survey", year: "2025", url: "https://www.brightlocal.com/research/local-consumer-review-survey-2025/" },
+    ],
     path: "/services/seo-analytics",
     icon: Search,
     group: "Grow",
@@ -767,6 +849,10 @@ export const services: ServiceDefinition[] = [
   // ─────────────────────────────── Digital Marketing ───────────────────────────────
   {
     slug: "digital-marketing",
+    research: [
+      { value: "71%", label: "of U.S. adults use Facebook and 50% use Instagram — the core reach of paid social campaigns.", source: "Pew Research Center, Americans' Social Media Use", year: "2025", url: "https://www.pewresearch.org/internet/2025/11/20/americans-social-media-use-2025/" },
+      { value: "8.4%", label: "more retail conversions from a 0.1-second mobile speed improvement — landing-page speed directly affects ad ROI.", source: "Deloitte & Google, Milliseconds Make Millions", year: "2020", url: "https://web.dev/case-studies/milliseconds-make-millions" },
+    ],
     path: "/services/digital-marketing",
     icon: Megaphone,
     group: "Grow",
@@ -892,61 +978,413 @@ export const services: ServiceDefinition[] = [
       reviewDate: "2025-01-20",
     },
   },
+
+  // ─────────────────────────── Social Media Management ───────────────────────────
+  {
+    slug: "social-media-management",
+    path: "/services/social-media-management",
+    icon: Share2,
+    group: "Grow",
+    name: "Social Media Management",
+    headline: "Social media that builds trust and brings in business",
+    summary: "We plan, create, publish, and manage your social channels — and answer your audience — so your brand stays active, consistent, and visible where customers spend their time.",
+    menuBlurb: "Content, community & paid social",
+    startingAt: "Custom",
+    startingBilling: "per month",
+    research: [
+      { value: "73%", label: "of consumers expect brands to respond on social media within 24 hours or sooner.", source: "Sprout Social Index", year: "2025", url: "https://sproutsocial.com/insights/social-media-response-time/" },
+      { value: "84%", label: "of U.S. adults use YouTube, 71% use Facebook, and 50% use Instagram.", source: "Pew Research Center, Americans' Social Media Use", year: "2025", url: "https://www.pewresearch.org/internet/2025/11/20/americans-social-media-use-2025/" },
+    ],
+    whoItsFor: [
+      "Your social accounts are inactive, inconsistent, or off-brand",
+      "Comments and messages sit unanswered for days",
+      "You post regularly but can't connect social media to leads or sales",
+    ],
+    included: [
+      { icon: CalendarDays, title: "Strategy & content calendar", description: "A monthly plan built around your goals, audience, and the platforms that matter for your business." },
+      { icon: Clapperboard, title: "Custom creative", description: "On-brand graphics, short-form video, and copy produced by our design team — no generic templates." },
+      { icon: Share2, title: "Publishing & scheduling", description: "Posts published at the right times on every channel, with platform-specific formats and hashtags." },
+      { icon: MessageSquare, title: "Community management", description: "We monitor and respond to comments and messages so customers get timely, on-brand answers." },
+      { icon: Target, title: "Paid social campaigns", description: "Targeted Meta, LinkedIn, and TikTok ads that reach new customers and retarget warm audiences." },
+      { icon: BarChart3, title: "Reporting that ties to revenue", description: "Monthly reports on reach, engagement, clicks, and leads — with what we'll change next month." },
+    ],
+    tiers: [
+      {
+        level: "Foundation",
+        name: "Social Essentials",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "A consistent, professional presence on your most important channels.",
+        features: [
+          "2 platforms managed",
+          "12 posts per month",
+          "Monthly content calendar",
+          "Branded graphics & copy",
+          "Publishing & scheduling",
+          "Business-day community management",
+          "Monthly performance report",
+        ],
+      },
+      {
+        level: "Growth",
+        name: "Social Growth",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Growing reach and turning followers into leads.",
+        popular: true,
+        features: [
+          "Everything in Social Essentials",
+          "Up to 4 platforms managed",
+          "20 posts per month, including short-form video",
+          "Paid social campaign management (ad spend separate)",
+          "Audience & competitor analysis",
+          "Monthly strategy call",
+        ],
+      },
+      {
+        level: "Enterprise",
+        name: "Social Program",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Multi-brand or multi-location organizations.",
+        features: [
+          "Everything in Social Growth",
+          "All relevant platforms",
+          "Video production & editing",
+          "Social listening & reputation monitoring",
+          "Influencer & creator partnerships",
+          "Dedicated social media manager",
+          "Weekly reporting",
+        ],
+      },
+    ],
+    process: [
+      consultStep,
+      planStep("social strategy"),
+      { title: "Create & publish", description: "We produce the content, you approve it, and we publish and manage your channels every day." },
+      { title: "Report & improve", description: "Monthly reporting shows what's working, and we double down on the content that drives results." },
+    ],
+    faqs: [
+      { question: "Which social media platforms should my business be on?", answer: "Only the ones your customers use. In the U.S., YouTube (84% of adults) and Facebook (71%) have the broadest reach, Instagram reaches half of adults, and LinkedIn is the strongest channel for B2B. We recommend a focused mix on your consultation rather than spreading thin." },
+      { question: "Do you create the content, or do we?", answer: "We do. Our team writes the copy and produces the graphics and short-form video. You review and approve everything before it's published, and you can send us photos, news, or ideas any time." },
+      { question: "Do you respond to comments and messages?", answer: "Yes. Community management is included in every plan. We respond to routine comments and messages on your behalf and escalate anything that needs your team, like pricing questions or complaints." },
+      { question: "Is ad spend included?", answer: "No. Our fee covers strategy, creative, and campaign management. Your ad budget is paid directly to the platforms, so you always see exactly where it goes." },
+      { question: "How do you measure results?", answer: "We track reach, engagement, website clicks, and leads from social each month, and connect them to your analytics so you can see which posts and campaigns drive business — not just likes." },
+    ],
+    related: ["digital-marketing", "brand-identity", "seo-analytics"],
+    localLinks: [
+      { label: "Houston SEO Services", href: "/houston-seo" },
+      { label: "Web Design Houston", href: "/houston-web-design" },
+    ],
+    seo: {
+      title: "Social Media Management Houston TX | Content, Community & Paid Social",
+      description: "Social media management for Houston businesses: strategy, custom content, publishing, community management, and paid social — with monthly reporting tied to leads. Call (281) 901-7016.",
+      keywords: [
+        "social media management Houston", "social media marketing agency Houston", "social media agency Houston TX", "social media manager Houston",
+        "Instagram marketing Houston", "Facebook marketing Houston", "LinkedIn marketing Houston", "TikTok marketing Houston",
+        "social media content creation Houston", "community management services", "paid social advertising Houston", "B2B social media management",
+      ],
+      serviceName: "Social Media Management Services",
+      serviceDescription: "Social media strategy, content creation, publishing, community management, and paid social campaigns with monthly reporting.",
+      serviceType: "MarketingService",
+      category: "Social Media Management",
+      duration: "P1M",
+    },
+  },
+
+  // ─────────────────────────── AI & Automation ───────────────────────────
+  {
+    slug: "ai-automation",
+    path: "/services/ai-automation",
+    icon: Bot,
+    group: "Build",
+    name: "AI & Automation",
+    headline: "Practical AI that removes manual work",
+    summary: "We find where AI and automation will genuinely pay off, then build secure assistants, workflow automations, and integrations that connect to the systems you already use.",
+    menuBlurb: "AI assistants & workflow automation",
+    startingAt: "Custom",
+    startingBilling: "custom quote",
+    research: [
+      { value: "88%", label: "of organizations now use AI regularly in at least one business function, up from 78% a year earlier.", source: "McKinsey, The State of AI", year: "2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
+      { value: "~1 in 3", label: "organizations have begun scaling AI across the enterprise — most are still stuck in pilots.", source: "McKinsey, The State of AI", year: "2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
+    ],
+    whoItsFor: [
+      "Your team spends hours on data entry, follow-ups, or reporting",
+      "You want to use AI but aren't sure where it will actually pay off",
+      "Leads, documents, or support requests need faster, more consistent handling",
+    ],
+    included: [
+      { icon: Compass, title: "AI opportunity assessment", description: "We map your workflows and rank automation opportunities by time saved, risk, and cost to build." },
+      { icon: Bot, title: "Custom AI assistants", description: "Chat and voice assistants trained on your own content to answer customers and support your team." },
+      { icon: Workflow, title: "Workflow automation", description: "Connect your CRM, email, forms, scheduling, and spreadsheets so routine work happens automatically." },
+      { icon: Files, title: "Document processing", description: "Extract, classify, and summarize data from forms, invoices, contracts, and intake documents." },
+      { icon: Plug, title: "Integrations & APIs", description: "Secure connections between AI services and the business systems you already rely on." },
+      { icon: ShieldCheck, title: "Guardrails & monitoring", description: "Access controls, data-privacy safeguards, human review where it matters, and ongoing quality monitoring." },
+    ],
+    tiers: [
+      {
+        level: "Foundation",
+        name: "AI Opportunity Assessment",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Knowing exactly where AI will pay off before you invest.",
+        features: [
+          "Workflow & data review",
+          "Prioritized list of automation opportunities",
+          "Estimated time and cost savings",
+          "Risk, privacy & compliance review",
+          "Recommended tools and build plan",
+          "Executive readout",
+        ],
+      },
+      {
+        level: "Growth",
+        name: "Automation Build",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Launching one or two high-impact automations or assistants.",
+        popular: true,
+        features: [
+          "Everything in the Assessment",
+          "Custom AI assistant or workflow automation",
+          "Integration with your existing systems",
+          "Testing with real data and users",
+          "Team training & documentation",
+          "30 days of post-launch tuning",
+        ],
+      },
+      {
+        level: "Enterprise",
+        name: "AI Program",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Rolling out AI across departments with governance.",
+        features: [
+          "Everything in Automation Build",
+          "Multiple assistants & automations",
+          "AI usage policy & governance framework",
+          "Security review & access controls",
+          "Usage, quality & ROI dashboards",
+          "Ongoing optimization & support",
+        ],
+      },
+    ],
+    process: [
+      consultStep,
+      planStep("AI roadmap"),
+      { title: "Build & test", description: "We build in short cycles, test with your real data and people, and add guardrails before launch." },
+      { title: "Launch & measure", description: "We roll out, train your team, and track time saved and quality so the value is visible." },
+    ],
+    faqs: [
+      { question: "Where does AI usually pay off first for a business?", answer: "The fastest wins are repetitive, text-heavy tasks: answering common customer questions, qualifying and routing leads, processing intake forms and documents, drafting follow-ups, and building reports. We confirm the right starting point in the assessment." },
+      { question: "Is our data safe?", answer: "We design for privacy from the start: access controls, encryption, and enterprise AI services that don't train on your data. For regulated information we recommend architecture that keeps sensitive data within approved systems, with human review where accuracy matters." },
+      { question: "Will AI replace our staff?", answer: "Our focus is removing low-value manual work so your people can spend time on customers and higher-value tasks. Most projects are measured in hours saved per week and faster response times." },
+      { question: "Can AI connect to our existing CRM and tools?", answer: "Usually, yes. We integrate with common CRMs, email, scheduling, spreadsheets, and databases through their APIs, and build custom connectors when needed." },
+      { question: "How do we know it's working?", answer: "Every build includes success measures agreed upfront — such as hours saved, response time, or accuracy — and we report against them after launch." },
+    ],
+    related: ["technical-consulting", "web-development", "mobile-apps"],
+    localLinks: [
+      { label: "AI & Automation for Industry", href: "/industry/ai-automation" },
+      { label: "App Development Houston", href: "/houston-app-development" },
+    ],
+    seo: {
+      title: "AI & Automation Consulting Houston TX | AI Assistants & Workflow Automation",
+      description: "AI and automation services for Houston businesses: opportunity assessments, custom AI assistants, workflow automation, and secure integrations with your existing systems.",
+      keywords: [
+        "AI consulting Houston", "AI automation agency Houston", "business process automation Houston", "AI chatbot development Houston",
+        "workflow automation services", "AI integration services", "custom AI assistant development", "AI consultant for small business",
+        "document processing automation", "CRM automation Houston",
+      ],
+      serviceName: "AI & Automation Services",
+      serviceDescription: "AI opportunity assessments, custom AI assistants, workflow automation, document processing, and secure integrations.",
+      serviceType: "ProfessionalService",
+      category: "AI & Automation",
+      duration: "P6W",
+    },
+  },
+
+  // ─────────────────────────── Technical Consulting ───────────────────────────
+  {
+    slug: "technical-consulting",
+    path: "/services/technical-consulting",
+    icon: Network,
+    group: "Advise",
+    name: "Technical Consulting",
+    headline: "Senior technical guidance for confident decisions",
+    summary: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership — so you invest in the right technology and avoid expensive mistakes.",
+    menuBlurb: "Fractional CTO, architecture & cloud",
+    startingAt: "Custom",
+    startingBilling: "custom quote",
+    research: [
+      { value: "84%", label: "of organizations say managing cloud spend is their top cloud challenge.", source: "Flexera, State of the Cloud Report", year: "2025", url: "https://www.flexera.com/about-us/press-center/new-flexera-report-finds-84-percent-of-organizations-struggle-to-manage-cloud-spend" },
+      { value: "$10.22M", label: "average cost of a data breach for U.S. organizations — a record high (global average: $4.44M).", source: "IBM, Cost of a Data Breach Report", year: "2025", url: "https://www.ibm.com/reports/data-breach" },
+    ],
+    whoItsFor: [
+      "You're facing a major technology decision and want an independent expert view",
+      "Cloud costs, outages, or security gaps keep growing",
+      "You need CTO-level leadership without a full-time executive hire",
+    ],
+    included: [
+      { icon: Compass, title: "Technology strategy & roadmaps", description: "A prioritized plan that ties technology investments to business goals, budgets, and timelines." },
+      { icon: ClipboardCheck, title: "Architecture & code reviews", description: "Independent review of your platform's design, code quality, scalability, and technical debt." },
+      { icon: Server, title: "Cloud cost & performance", description: "Find waste, right-size infrastructure, and improve reliability across AWS, Azure, or Google Cloud." },
+      { icon: ShieldCheck, title: "Security & compliance readiness", description: "Assess against OWASP practices and prepare for HIPAA, SOC 2, or customer security reviews." },
+      { icon: Layers, title: "Vendor & platform selection", description: "Objective evaluation of software, agencies, and platforms before you sign a contract." },
+      { icon: Users, title: "Fractional CTO", description: "Ongoing technical leadership: guide your team, manage vendors, and represent technology to your board." },
+    ],
+    tiers: [
+      {
+        level: "Foundation",
+        name: "Technical Assessment",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "An independent, written review of one platform or decision.",
+        features: [
+          "Stakeholder interviews",
+          "Architecture, code, or cloud review",
+          "Security & risk findings, ranked by severity",
+          "Cost and performance recommendations",
+          "Written report & prioritized roadmap",
+          "Executive readout",
+        ],
+      },
+      {
+        level: "Growth",
+        name: "Advisory Retainer",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Ongoing senior guidance for your team and vendors.",
+        popular: true,
+        features: [
+          "Everything in the Assessment",
+          "Monthly advisory hours",
+          "Architecture & vendor decision support",
+          "Roadmap and budget planning",
+          "Security & compliance check-ins",
+          "On-call access for critical decisions",
+        ],
+      },
+      {
+        level: "Enterprise",
+        name: "Fractional CTO",
+        price: "Custom",
+        billing: "custom quote",
+        bestFor: "Part-time executive technology leadership.",
+        features: [
+          "Everything in Advisory Retainer",
+          "Technology leadership & team guidance",
+          "Hiring & vendor management",
+          "Board and investor technical reporting",
+          "Security program oversight",
+          "Defined weekly time commitment",
+        ],
+      },
+    ],
+    process: [
+      consultStep,
+      planStep("engagement"),
+      { title: "Assess & advise", description: "We review your systems, interview your team, and deliver clear, prioritized recommendations." },
+      { title: "Guide execution", description: "We stay involved to guide your team and vendors through the changes that matter most." },
+    ],
+    faqs: [
+      { question: "What is a fractional CTO?", answer: "A fractional CTO is an experienced technology executive who works with your company part-time. You get senior leadership for strategy, architecture, vendors, and team guidance without the cost of a full-time hire." },
+      { question: "When should a business hire a technical consultant?", answer: "Common triggers are a major platform decision, rising cloud bills, a security review from a customer or insurer, a failing vendor relationship, or a product that isn't scaling. An independent review before you commit usually costs far less than fixing the wrong decision later." },
+      { question: "Can you review work done by another agency or developer?", answer: "Yes. Independent code and architecture reviews are a core part of our consulting. We document what's working, what's risky, and the most cost-effective path forward." },
+      { question: "Do you help with HIPAA or SOC 2 readiness?", answer: "We assess your systems and practices against the relevant requirements and help you close technical gaps. Formal certification is performed by an independent auditor; we help you get ready." },
+      { question: "Which cloud platforms do you work with?", answer: "AWS, Microsoft Azure, and Google Cloud, plus modern hosting platforms like Vercel, Netlify, and Supabase." },
+    ],
+    related: ["ai-automation", "web-development", "website-maintenance"],
+    localLinks: [
+      { label: "Web Developer Houston", href: "/houston-web-developer" },
+      { label: "App Development Houston", href: "/houston-app-development" },
+    ],
+    seo: {
+      title: "Technical Consulting & Fractional CTO Houston TX | Cloud, Architecture & Security",
+      description: "Independent technical consulting in Houston: technology roadmaps, architecture and code reviews, cloud cost and security assessments, and fractional CTO leadership.",
+      keywords: [
+        "technical consulting Houston", "fractional CTO Houston", "IT consulting Houston", "technology consultant Houston",
+        "software architecture review", "code audit services", "cloud cost optimization consulting", "cloud consulting Houston",
+        "HIPAA compliance readiness", "SOC 2 readiness consulting", "technology roadmap consulting", "CTO as a service",
+      ],
+      serviceName: "Technical Consulting & Fractional CTO Services",
+      serviceDescription: "Technology strategy, architecture and code reviews, cloud cost and security assessments, and fractional CTO leadership.",
+      serviceType: "ProfessionalService",
+      category: "Technical Consulting",
+      duration: "P1M",
+    },
+  },
+
+  // ─────────────────────────── Website Care & Maintenance ───────────────────────────
+  {
+    slug: "website-maintenance",
+    path: "/services/website-maintenance",
+    icon: Wrench,
+    group: "Advise",
+    name: "Website Care & Maintenance",
+    headline: "Your website, always fast, secure, and up to date",
+    summary: "Monthly care plans covering updates, backups, security monitoring, uptime, and content changes — so your site keeps performing without taking up your time.",
+    menuBlurb: "Care plans, security & updates",
+    startingAt: "$299",
+    startingBilling: "per month",
+    research: [
+      { value: "11,334", label: "new security vulnerabilities were found in the WordPress ecosystem in 2025 — up 42% in a year, most of them in plugins.", source: "Patchstack, State of WordPress Security", year: "2026", url: "https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/" },
+      { value: "53%", label: "of mobile visits are abandoned when a page takes longer than three seconds to load — speed needs ongoing care.", source: "Google, The Need for Mobile Speed", year: "2016", url: "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/" },
+    ],
+    whoItsFor: [
+      "Nobody on your team owns website updates, backups, or security",
+      "Your site has been hacked, gone down, or slowed over time",
+      "Small content changes take weeks because you don't have a developer",
+    ],
+    included: [
+      { icon: RefreshCw, title: "Software & plugin updates", description: "Tested updates every month so your site stays compatible and protected." },
+      { icon: DatabaseBackup, title: "Daily cloud backups", description: "Automatic off-site backups with restore support if anything goes wrong." },
+      { icon: Activity, title: "24/7 uptime monitoring", description: "We're alerted the moment your site goes down — often before your customers notice." },
+      { icon: ShieldCheck, title: "Security scanning & cleanup", description: "Malware scanning, hardening, and removal if an issue is found." },
+      { icon: Gauge, title: "Speed & Core Web Vitals", description: "Ongoing performance monitoring so your site stays fast for visitors and search engines." },
+      { icon: PenLine, title: "Content updates", description: "Monthly hours for text, image, and page changes — just send a request." },
+    ],
+    tiers: carePlans,
+    process: [
+      consultStep,
+      { title: "Site health check", description: "We audit your current site for security, speed, backups, and outdated software before onboarding." },
+      { title: "Secure & stabilize", description: "We fix critical issues, set up monitoring and backups, and document your site." },
+      { title: "Ongoing care", description: "Monthly updates, monitoring, and content changes, with a report on everything we did." },
+    ],
+    faqs: [
+      { question: "How much does website maintenance cost?", answer: "Our care plans start at $299 per month for essentials (updates, daily backups, uptime monitoring, security scanning, and one hour of content changes). Care Plus is $499 and Care Pro is $799 per month, with more support hours and proactive improvements." },
+      { question: "Do you maintain websites you didn't build?", answer: "Yes. We start with a site health check to understand its condition, fix any critical issues, then move it onto a care plan." },
+      { question: "What happens if my site is hacked or goes down?", answer: "Uptime monitoring alerts us immediately. We restore from a clean backup or remove the malware, then patch the cause. Security cleanup is included in every plan." },
+      { question: "Are there long-term contracts?", answer: "No. Care plans are month-to-month." },
+      { question: "Why do websites need ongoing maintenance?", answer: "Software, plugins, and browsers change constantly, and new vulnerabilities are discovered every day — Patchstack recorded 11,334 new WordPress-ecosystem vulnerabilities in 2025 alone. Regular updates, backups, and monitoring keep your site secure, fast, and working." },
+    ],
+    related: ["web-development", "technical-consulting", "seo-analytics"],
+    localLinks: [
+      { label: "Web Design Houston", href: "/houston-web-design" },
+      { label: "Web Developer Houston", href: "/houston-web-developer" },
+    ],
+    seo: {
+      title: "Website Maintenance & Care Plans Houston TX | Updates, Security & Support",
+      description: "Website maintenance plans for Houston businesses from $299/month: updates, daily backups, 24/7 uptime monitoring, security scanning, speed optimization, and content changes.",
+      keywords: [
+        "website maintenance Houston", "website maintenance services", "website care plans", "WordPress maintenance Houston",
+        "website support Houston", "website security monitoring", "website management services", "monthly website maintenance cost",
+      ],
+      serviceName: "Website Care & Maintenance Plans",
+      serviceDescription: "Monthly website maintenance: updates, daily backups, uptime monitoring, security scanning, performance optimization, and content changes.",
+      serviceType: "ProfessionalService",
+      category: "Website Maintenance",
+      duration: "P1M",
+    },
+  },
 ];
 
-/** Website Care Plans — monthly add-on for any website we build. */
-export const carePlans: [ServiceTier, ServiceTier, ServiceTier] = [
-  {
-    level: "Foundation",
-    name: "Care Essentials",
-    price: "$299",
-    billing: "per month",
-    bestFor: "Keeping your site secure, backed up, and running.",
-    features: [
-      "Monthly software updates",
-      "Daily cloud backups",
-      "24/7 uptime monitoring",
-      "Security scanning & malware removal",
-      "1 hour of content updates/mo",
-    ],
-  },
-  {
-    level: "Growth",
-    name: "Care Plus",
-    price: "$499",
-    billing: "per month",
-    bestFor: "Proactive upkeep with faster support.",
-    popular: true,
-    features: [
-      "Everything in Essentials",
-      "3 hours of content updates/mo",
-      "Priority 24-hour support response",
-      "Core Web Vitals monitoring",
-      "Monthly analytics review",
-      "Quarterly design refreshes",
-    ],
-  },
-  {
-    level: "Enterprise",
-    name: "Care Pro",
-    price: "$799",
-    billing: "per month",
-    bestFor: "A site that keeps improving every month.",
-    features: [
-      "Everything in Plus",
-      "6 hours of development/mo",
-      "New feature development",
-      "A/B testing & conversion ideas",
-      "Dedicated account manager",
-      "Quarterly strategy sessions",
-    ],
-  },
-];
+
 
 export const serviceGroups: { group: ServiceGroup; title: string; description: string }[] = [
   { group: "Build", title: "Build", description: "Websites, web platforms, and mobile apps engineered to perform." },
   { group: "Design", title: "Design", description: "Brand and experience design that earns trust and drives action." },
-  { group: "Grow", title: "Grow", description: "Search and performance marketing that builds measurable pipeline." },
+  { group: "Grow", title: "Grow", description: "Search, social, and performance marketing that builds measurable pipeline." },
+  { group: "Advise", title: "Advise & Support", description: "Senior technical guidance and ongoing care for the platforms you rely on." },
 ];
 
 export const tierLevelCopy: Record<TierLevel, string> = {

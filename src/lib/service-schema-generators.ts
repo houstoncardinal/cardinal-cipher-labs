@@ -42,8 +42,8 @@ interface ServicePageSchemaConfig {
   faqs: ServiceFAQ[];
   offers: ServiceOffer[];
   process: ProcessStep[];
-  reviews: ServiceReview[];
-  aggregateRating: { ratingValue: number; reviewCount: number };
+  reviews?: ServiceReview[];
+  aggregateRating?: { ratingValue: number; reviewCount: number };
   duration?: string;
   keywords?: string[];
   techStack?: TechStackItem[];
@@ -165,12 +165,12 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
     },
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: config.aggregateRating.ratingValue,
-      reviewCount: config.aggregateRating.reviewCount,
+      ratingValue: config.aggregateRating?.ratingValue,
+      reviewCount: config.aggregateRating?.reviewCount,
       bestRating: 5,
       worstRating: 1,
     },
-    review: config.reviews.map(r => ({
+    review: (config.reviews ?? []).map(r => ({
       '@type': 'Review',
       reviewRating: {
         '@type': 'Rating',
@@ -339,8 +339,8 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
       },
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: config.aggregateRating.ratingValue,
-        reviewCount: config.aggregateRating.reviewCount,
+        ratingValue: config.aggregateRating?.ratingValue,
+        reviewCount: config.aggregateRating?.reviewCount,
         bestRating: 5,
         worstRating: 1,
       },
@@ -379,8 +379,8 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
     },
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: config.aggregateRating.ratingValue,
-      reviewCount: config.aggregateRating.reviewCount,
+      ratingValue: config.aggregateRating?.ratingValue,
+      reviewCount: config.aggregateRating?.reviewCount,
       bestRating: 5,
       worstRating: 1,
     },

@@ -23,10 +23,10 @@ const Index = () => {
     generateVideoObjectSchema({
       name: "Cardinal Consulting — Houston's #1 Web Design & App Development Agency",
       description: "See how Cardinal Consulting builds custom websites that rank #1 on Google, iOS/Android apps, and SEO strategies that grow Houston businesses. 500+ projects delivered.",
-      thumbnailUrl: 'https://www.visitcardinal.com/og-image.jpg',
+      thumbnailUrl: 'https://visitcardinal.com/og-image.jpg',
       uploadDate: '2025-01-01',
       duration: 'PT3M',
-      url: 'https://www.visitcardinal.com',
+      url: 'https://visitcardinal.com',
     }),
   ];
 

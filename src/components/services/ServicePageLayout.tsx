@@ -29,7 +29,7 @@ function buildSchemas(service: ServiceDefinition) {
     faqs: service.faqs,
     offers: service.tiers.map((t) => ({ name: t.name, price: t.price, description: t.bestFor, features: t.features })),
     process: service.process.map((p) => ({ name: p.title, description: p.description })),
-    reviews: service.testimonials.map((t) => ({
+    reviews: (service.testimonials ?? []).map((t) => ({
       author: t.author,
       authorTitle: t.title.split(",")[0],
       company: t.title.split(",").slice(1).join(",").trim(),
@@ -52,7 +52,7 @@ function buildSchemas(service: ServiceDefinition) {
 export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
   const related = service.related.map(getService);
   const work = getCaseStudies(service.caseStudies ?? []);
-  const [featured, ...otherQuotes] = service.testimonials;
+  const [featured, ...otherQuotes] = service.testimonials ?? [];
 
   return (
     <>
@@ -112,16 +112,18 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
           </section>
 
           {/* Stats */}
-          <section className="bg-ink text-ink-foreground">
-            <Container className="grid grid-cols-2 gap-y-10 py-14 md:grid-cols-4">
-              {service.stats.map((s, i) => (
-                <div key={s.label} className={i > 0 ? "md:border-l md:border-white/10 md:pl-8" : ""}>
-                  <div className="font-display text-4xl font-semibold lg:text-5xl">{s.value}</div>
-                  <div className="mt-2 text-sm text-ink-muted">{s.label}</div>
-                </div>
-              ))}
-            </Container>
-          </section>
+          {service.stats && service.stats.length > 0 && (
+            <section className="bg-ink text-ink-foreground">
+              <Container className="grid grid-cols-2 gap-y-10 py-14 md:grid-cols-4">
+                {service.stats.map((s, i) => (
+                  <div key={s.label} className={i > 0 ? "md:border-l md:border-white/10 md:pl-8" : ""}>
+                    <div className="font-display text-4xl font-semibold lg:text-5xl">{s.value}</div>
+                    <div className="mt-2 text-sm text-ink-muted">{s.label}</div>
+                  </div>
+                ))}
+              </Container>
+            </section>
+          )}
 
           {/* Where we help + capabilities */}
           <section className="py-24 lg:py-32">
@@ -157,6 +159,34 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
               </div>
             </Container>
           </section>
+
+          {/* Industry research — every figure cites its source */}
+          {service.research && service.research.length > 0 && (
+            <section className="border-t border-border bg-ink py-20 text-ink-foreground lg:py-24">
+              <Container>
+                <SectionHeader inverted eyebrow="What the research says" title={`Why ${service.name} matters`} />
+                <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2">
+                  {service.research.map((r, i) => (
+                    <motion.figure key={r.label} {...revealDelay(i)} className="flex flex-col bg-ink p-8 lg:p-10">
+                      <p className="font-display text-5xl font-semibold leading-none lg:text-6xl">{r.value}</p>
+                      <p className="mt-5 flex-1 text-lg leading-relaxed text-ink-foreground/85">{r.label}</p>
+                      <figcaption className="mt-6 border-t border-white/10 pt-4 text-sm text-ink-muted">
+                        Source:{" "}
+                        {r.url ? (
+                          <a href={r.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink-foreground">
+                            {r.source}
+                          </a>
+                        ) : (
+                          r.source
+                        )}
+                        , {r.year}
+                      </figcaption>
+                    </motion.figure>
+                  ))}
+                </div>
+              </Container>
+            </section>
+          )}
 
           {/* Selected work */}
           {work.length > 0 && (

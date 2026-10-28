@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { BrowserFrame, Container, Eyebrow } from "@/components/site/primitives";
+import { Container, Eyebrow } from "@/components/site/primitives";
+import { HeroBuildStack } from "@/components/sections/HeroBuildStack";
 
 const stats = [
   { value: "500+", label: "Projects delivered" },
@@ -42,18 +43,8 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="relative mx-auto w-full max-w-xl lg:max-w-none"
-        >
-          <BrowserFrame src="/portfolio/vargas.png" alt="Vargas Tax Services website by Cardinal Consulting" eager className="relative z-10 ml-auto w-[88%]" />
-          <BrowserFrame src="/portfolio/unitedccr.png" alt="United CCR website by Cardinal Consulting" eager className="relative z-20 -mt-[28%] w-[58%]" />
-          <div className="absolute bottom-[8%] right-0 z-30 hidden border border-border bg-background px-5 py-4 shadow-[0_16px_40px_-20px_rgba(15,23,42,0.35)] sm:block">
-            <p className="font-display text-3xl font-semibold text-foreground">4.9 ★</p>
-            <p className="text-sm text-muted-foreground">127 Google reviews</p>
-          </div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.15 }} className="relative">
+          <HeroBuildStack />
         </motion.div>
       </Container>
 

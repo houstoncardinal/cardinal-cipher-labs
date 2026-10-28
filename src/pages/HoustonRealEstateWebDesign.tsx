@@ -162,7 +162,7 @@ const generateSchemas = () => {
     "name": "Real Estate Website Design Houston TX",
     "alternateName": ["Realtor Website Houston", "IDX Website Houston", "Property Management Website Houston"],
     "description": "Houston's #1 real estate website design agency. IDX MLS integration, lead capture, property search, and SEO for realtors and property management companies.",
-    "url": "https://www.visitcardinal.com/houston-real-estate-website-design",
+    "url": "https://visitcardinal.com/houston-real-estate-website-design",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cardinal Consulting",
@@ -194,9 +194,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" },
-      { "@type": "ListItem", "position": 3, "name": "Real Estate Website Design Houston", "item": "https://www.visitcardinal.com/houston-real-estate-website-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" },
+      { "@type": "ListItem", "position": 3, "name": "Real Estate Website Design Houston", "item": "https://visitcardinal.com/houston-real-estate-website-design" }
     ]
   };
 
@@ -205,8 +205,8 @@ const generateSchemas = () => {
     "@type": "WebPage",
     "name": "Real Estate Website Design Houston | IDX Website & Realtor Website Houston TX",
     "description": "Houston's #1 real estate website design agency. IDX MLS integration, lead capture, property search, and SEO for realtors and property management companies.",
-    "url": "https://www.visitcardinal.com/houston-real-estate-website-design",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.visitcardinal.com", "name": "Cardinal Consulting" }
+    "url": "https://visitcardinal.com/houston-real-estate-website-design",
+    "isPartOf": { "@type": "WebSite", "url": "https://visitcardinal.com", "name": "Cardinal Consulting" }
   };
 
   return [serviceSchema, faqSchema, breadcrumbSchema, webPageSchema];
@@ -229,7 +229,7 @@ export default function HoustonRealEstateWebDesignPage() {
           "real estate lead generation houston", "home valuation website houston", "property management platform houston"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-real-estate-website-design"
+        url="https://visitcardinal.com/houston-real-estate-website-design"
       />
 
       <div className="min-h-screen bg-white">

@@ -130,11 +130,11 @@ const generateSchemas = () => {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": "https://www.visitcardinal.com/houston-app-development#localbusiness",
+    "@id": "https://visitcardinal.com/houston-app-development#localbusiness",
     "name": "Cardinal Consulting — #1 App Development Company Houston TX",
     "alternateName": ["Cardinal App Development Houston", "App Development Company Houston", "App Development Company Near Me Houston", "Best App Developer Houston"],
     "description": "Houston's top-rated mobile app development company. iOS apps, Android apps, React Native cross-platform, and enterprise apps for Houston businesses. 500+ projects delivered.",
-    "url": "https://www.visitcardinal.com/houston-app-development",
+    "url": "https://visitcardinal.com/houston-app-development",
     "telephone": "+12819017016",
     "email": "hello@visitcardinal.com",
     "address": {
@@ -189,7 +189,7 @@ const generateSchemas = () => {
     "description": "Professional mobile app development for Houston businesses. Native iOS, Android, and React Native cross-platform apps. HIPAA-compliant, enterprise-grade, App Store optimized.",
     "provider": {
       "@type": "LocalBusiness",
-      "@id": "https://www.visitcardinal.com/houston-app-development#localbusiness"
+      "@id": "https://visitcardinal.com/houston-app-development#localbusiness"
     },
     "areaServed": {
       "@type": "City",
@@ -213,8 +213,8 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston App Development", "item": "https://www.visitcardinal.com/houston-app-development" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston App Development", "item": "https://visitcardinal.com/houston-app-development" }
     ]
   };
 
@@ -240,7 +240,7 @@ export function HoustonAppDevelopmentPage() {
           "app development services Houston TX", "top app development company Houston"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-app-development"
+        url="https://visitcardinal.com/houston-app-development"
       />
 
       <div className="min-h-screen bg-white">

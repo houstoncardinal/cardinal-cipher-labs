@@ -1,5 +1,5 @@
-// SEO Head Component for Meta Tags and Schema Injection
-// Google E-E-A-T Compliant
+// SEO head: per-page meta tags, canonical and JSON-LD.
+// Rendered into static HTML at build time by scripts/prerender.mjs.
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/lib/seo-config';
 
@@ -15,6 +15,48 @@ export interface SEOProps {
   schemas?: any[];
   keywords?: string[];
   noindex?: boolean;
+}
+
+const LEGACY_ORIGIN = /https?:\/\/(www\.)?visitcardinal\.com/g;
+
+/** Every URL we emit uses the one canonical origin (the live site serves visitcardinal.com; www 301s). */
+export function canonicalUrl(url?: string): string {
+  const raw = (url || siteConfig.url).replace(LEGACY_ORIGIN, siteConfig.url);
+  const { origin, pathname } = new URL(raw);
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : '';
+  return `${origin}${path}`;
+}
+
+/**
+ * Structured data must describe only what is visible and verifiable on the page.
+ * Strip, site-wide, the patterns Google treats as spammy or ineligible:
+ * - self-published ratings/reviews of our own business or services
+ * - awards and credentials we have not verified
+ * - "SoftwareApplication" markup on service pages (we sell services, not apps)
+ * Also rewrites any legacy www/http URLs to the canonical origin.
+ */
+const STRIPPED_KEYS = new Set(['aggregateRating', 'review', 'award', 'hasCredential']);
+
+function sanitize(node: unknown): unknown {
+  if (Array.isArray(node)) return node.map(sanitize).filter((n) => n !== undefined);
+  if (node && typeof node === 'object') {
+    const obj = node as Record<string, unknown>;
+    if (obj['@type'] === 'SoftwareApplication' && String(obj['@id'] ?? '').includes('#software')) return undefined;
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(obj)) {
+      if (STRIPPED_KEYS.has(k)) continue;
+      const clean = sanitize(v);
+      if (clean !== undefined) out[k] = clean;
+    }
+    return out;
+  }
+  if (typeof node === 'string') return node.replace(LEGACY_ORIGIN, siteConfig.url);
+  return node;
+}
+
+function isStandaloneReview(schema: any) {
+  const t = schema?.['@type'];
+  return t === 'Review' || t === 'AggregateRating';
 }
 
 export function SEOHead({
@@ -39,49 +81,27 @@ export function SEOHead({
     : `${siteConfig.name} - ${siteConfig.business.slogan}`;
 
   const pageDescription = description || siteConfig.description;
-  const pageImage = image || siteConfig.ogImage;
-  const pageUrl = url || siteConfig.url;
-  const pageImageAlt = `${siteConfig.name} - Web Design, App Development & SEO Agency Houston TX`;
-
-  const defaultKeywords = [
-    'web design company Houston',
-    'best web design company Houston',
-    'app development company Houston',
-    'web developer Houston',
-    'SEO company Houston',
-    'web development Houston TX',
-    'mobile app development Houston',
-    'Houston web design agency',
-    'custom website development Houston',
-    'digital marketing Houston',
-  ];
-
-  const allKeywords = [...defaultKeywords, ...keywords].join(', ');
+  const pageImage = (image || siteConfig.ogImage).replace(LEGACY_ORIGIN, siteConfig.url);
+  const pageUrl = canonicalUrl(url);
+  const pageImageAlt = `${siteConfig.name} — web design, app development and digital growth, Houston TX`;
+  const cleanSchemas = schemas.filter((s) => !isStandaloneReview(s)).map(sanitize).filter(Boolean);
 
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
       <title>{pageTitle}</title>
       <meta name="description" content={pageDescription} />
-      <meta name="keywords" content={allKeywords} />
-
-      {/* E-E-A-T: Author Attribution */}
+      {keywords.length > 0 && <meta name="keywords" content={keywords.slice(0, 12).join(', ')} />}
       <meta name="author" content={author || siteConfig.name} />
 
-      {/* Robots — full snippet allowances for rich results */}
       {noindex ? (
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex, follow" />
       ) : (
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       )}
-      {!noindex && (
-        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      )}
 
-      {/* Canonical URL */}
       <link rel="canonical" href={pageUrl} />
 
-      {/* Open Graph / Facebook */}
+      {/* Open Graph */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={pageUrl} />
       <meta property="og:title" content={pageTitle} />
@@ -90,52 +110,22 @@ export function SEOHead({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={pageImageAlt} />
-      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:site_name" content={siteConfig.name} />
       <meta property="og:locale" content="en_US" />
+      {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+      {type === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+      {type === 'article' && author && <meta property="article:author" content={author} />}
 
-      {/* Article specific Open Graph tags */}
-      {type === 'article' && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
-      )}
-      {type === 'article' && modifiedTime && (
-        <meta property="article:modified_time" content={modifiedTime} />
-      )}
-      {type === 'article' && (
-        <meta property="article:publisher" content="https://www.facebook.com/cardinalconsulting" />
-      )}
-      {type === 'article' && author && (
-        <meta property="article:author" content={author} />
-      )}
-
-      {/* Twitter Card */}
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={pageUrl} />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />
       <meta name="twitter:image:alt" content={pageImageAlt} />
       <meta name="twitter:site" content="@cardinalconsult" />
-      <meta name="twitter:creator" content="@cardinalconsult" />
 
-      {/* Local Business & Geo Tags */}
-      <meta name="geo.region" content="US-TX" />
-      <meta name="geo.placename" content="Houston" />
-      <meta name="geo.position" content="29.7399;-95.4617" />
-      <meta name="ICBM" content="29.7399, -95.4617" />
-
-      {/* Additional SEO Tags */}
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#DC2626" />
-      <meta name="msapplication-TileColor" content="#DC2626" />
-
-      {/* Schema.org JSON-LD */}
-      {schemas.map((schema, index) => (
-        <script
-          key={`schema-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+      {cleanSchemas.map((schema, index) => (
+        <script key={`schema-${index}`} type="application/ld+json">{JSON.stringify(schema)}</script>
       ))}
     </Helmet>
   );

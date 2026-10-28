@@ -162,7 +162,7 @@ const generateSchemas = () => {
     "name": "Restaurant Website Design Houston TX",
     "alternateName": ["Food Ordering Website Houston", "Restaurant Web Design Houston", "Online Ordering Website Houston"],
     "description": "Houston restaurant website design with zero-commission online ordering, OpenTable/Resy integration, Google Maps SEO, and mobile-first menus for the city's 10,000+ restaurants.",
-    "url": "https://www.visitcardinal.com/houston-restaurant-website-design",
+    "url": "https://visitcardinal.com/houston-restaurant-website-design",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cardinal Consulting",
@@ -194,9 +194,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" },
-      { "@type": "ListItem", "position": 3, "name": "Restaurant Website Design Houston", "item": "https://www.visitcardinal.com/houston-restaurant-website-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" },
+      { "@type": "ListItem", "position": 3, "name": "Restaurant Website Design Houston", "item": "https://visitcardinal.com/houston-restaurant-website-design" }
     ]
   };
 
@@ -205,8 +205,8 @@ const generateSchemas = () => {
     "@type": "WebPage",
     "name": "Restaurant Website Design Houston | Online Ordering & Reservation Websites Houston TX",
     "description": "Houston restaurant website design with online ordering, OpenTable/Resy integration, Google Maps SEO, and zero commission ordering for Houston's 10,000+ restaurants.",
-    "url": "https://www.visitcardinal.com/houston-restaurant-website-design",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.visitcardinal.com", "name": "Cardinal Consulting" }
+    "url": "https://visitcardinal.com/houston-restaurant-website-design",
+    "isPartOf": { "@type": "WebSite", "url": "https://visitcardinal.com", "name": "Cardinal Consulting" }
   };
 
   return [serviceSchema, faqSchema, breadcrumbSchema, webPageSchema];
@@ -229,7 +229,7 @@ export default function HoustonRestaurantWebDesignPage() {
           "food truck website houston", "houston restaurant online ordering", "zero commission ordering houston"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-restaurant-website-design"
+        url="https://visitcardinal.com/houston-restaurant-website-design"
       />
 
       <div className="min-h-screen bg-white">

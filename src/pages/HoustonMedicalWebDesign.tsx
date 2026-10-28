@@ -162,7 +162,7 @@ const generateSchemas = () => {
     "name": "Medical Practice Website Design Houston TX",
     "alternateName": ["Doctor Website Design Houston", "HIPAA Compliant Website Houston", "Healthcare Website Design Houston"],
     "description": "HIPAA-compliant medical practice website design for Houston doctors, clinics, and specialists. Online booking, patient portal integration, telehealth, and local SEO near the Texas Medical Center.",
-    "url": "https://www.visitcardinal.com/houston-medical-website-design",
+    "url": "https://visitcardinal.com/houston-medical-website-design",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cardinal Consulting",
@@ -194,9 +194,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" },
-      { "@type": "ListItem", "position": 3, "name": "Medical Practice Website Design Houston", "item": "https://www.visitcardinal.com/houston-medical-website-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" },
+      { "@type": "ListItem", "position": 3, "name": "Medical Practice Website Design Houston", "item": "https://visitcardinal.com/houston-medical-website-design" }
     ]
   };
 
@@ -205,8 +205,8 @@ const generateSchemas = () => {
     "@type": "WebPage",
     "name": "Medical Practice Website Design Houston | HIPAA Compliant Doctor Website Houston TX",
     "description": "Houston's #1 medical website design agency. HIPAA-compliant patient portals, online booking, and SEO for doctors, clinics, and specialists. Texas Medical Center experts.",
-    "url": "https://www.visitcardinal.com/houston-medical-website-design",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.visitcardinal.com", "name": "Cardinal Consulting" }
+    "url": "https://visitcardinal.com/houston-medical-website-design",
+    "isPartOf": { "@type": "WebSite", "url": "https://visitcardinal.com", "name": "Cardinal Consulting" }
   };
 
   return [serviceSchema, faqSchema, breadcrumbSchema, webPageSchema];
@@ -229,7 +229,7 @@ export default function HoustonMedicalWebDesignPage() {
           "dermatologist website houston", "pediatrician website houston", "urgent care website houston"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-medical-website-design"
+        url="https://visitcardinal.com/houston-medical-website-design"
       />
 
       <div className="min-h-screen bg-white">

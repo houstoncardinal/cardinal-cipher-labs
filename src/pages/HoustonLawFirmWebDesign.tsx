@@ -162,7 +162,7 @@ const generateSchemas = () => {
     "name": "Law Firm Website Design Houston TX",
     "alternateName": ["Attorney Website Design Houston", "Legal Website Design Houston", "Lawyer Website Houston"],
     "description": "Professional law firm website design for Houston attorneys. HIPAA-compliant intake forms, attorney profiles, case result pages, Texas Bar compliant advertising, and local SEO to rank on page 1.",
-    "url": "https://www.visitcardinal.com/houston-law-firm-website-design",
+    "url": "https://visitcardinal.com/houston-law-firm-website-design",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cardinal Consulting",
@@ -194,9 +194,9 @@ const generateSchemas = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitcardinal.com" },
-      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://www.visitcardinal.com/houston-web-design" },
-      { "@type": "ListItem", "position": 3, "name": "Law Firm Website Design Houston", "item": "https://www.visitcardinal.com/houston-law-firm-website-design" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitcardinal.com" },
+      { "@type": "ListItem", "position": 2, "name": "Houston Web Design", "item": "https://visitcardinal.com/houston-web-design" },
+      { "@type": "ListItem", "position": 3, "name": "Law Firm Website Design Houston", "item": "https://visitcardinal.com/houston-law-firm-website-design" }
     ]
   };
 
@@ -205,8 +205,8 @@ const generateSchemas = () => {
     "@type": "WebPage",
     "name": "Law Firm Website Design Houston | Attorney Website Design Houston TX",
     "description": "Houston's top law firm website design agency. HIPAA-compliant intake forms, attorney profiles, case result pages, and local SEO that puts your firm on page 1.",
-    "url": "https://www.visitcardinal.com/houston-law-firm-website-design",
-    "isPartOf": { "@type": "WebSite", "url": "https://www.visitcardinal.com", "name": "Cardinal Consulting" }
+    "url": "https://visitcardinal.com/houston-law-firm-website-design",
+    "isPartOf": { "@type": "WebSite", "url": "https://visitcardinal.com", "name": "Cardinal Consulting" }
   };
 
   return [serviceSchema, faqSchema, breadcrumbSchema, webPageSchema];
@@ -229,7 +229,7 @@ export default function HoustonLawFirmWebDesignPage() {
           "law firm marketing houston", "attorney marketing houston", "legal website design texas"
         ]}
         schemas={generateSchemas()}
-        url="https://www.visitcardinal.com/houston-law-firm-website-design"
+        url="https://visitcardinal.com/houston-law-firm-website-design"
       />
 
       <div className="min-h-screen bg-white">
