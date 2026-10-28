@@ -38,7 +38,7 @@ function ServicesPanel({ onNavigate }: { onNavigate: () => void }) {
           All services <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
-      <div className="grid gap-8 sm:grid-cols-3">
+      <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
         {serviceGroups.map((g) => (
           <div key={g.group}>
             <p className="mb-4 border-b border-border pb-3 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{g.title}</p>

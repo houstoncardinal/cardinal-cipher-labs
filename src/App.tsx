@@ -1,135 +1,45 @@
+import { useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { AdminLayout } from "@/components/admin/AdminLayout";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import { AdminLogin } from "./pages/admin/Login";
-import { AdminDashboard } from "./pages/admin/Dashboard";
-import { AdminClients } from "./pages/admin/Clients";
-import { AdminProjects } from "./pages/admin/Projects";
-import { AdminDocuments } from "./pages/admin/Documents";
-import { AdminActivityLogs } from "./pages/admin/ActivityLogs";
-import { AdminSEOSchemas } from "./pages/admin/SEOSchemas";
-import WebDevelopment from "./pages/services/WebDevelopment";
-import MobileApps from "./pages/services/MobileApps";
-import SEOAnalytics from "./pages/services/SEOAnalytics";
-import DigitalMarketing from "./pages/services/DigitalMarketing";
-import BrandIdentity from "./pages/services/BrandIdentity";
-import UXUI from "./pages/services/UXUI";
-import About from "./pages/About";
-import PortfolioPage from "./pages/PortfolioPage";
-import CaseStudyPage from "./pages/CaseStudyPage";
-import ContactPage from "./pages/ContactPage";
-import Blog from "./pages/Blog";
-import BlogArticle from "./pages/BlogArticle";
-import Careers from "./pages/Careers";
-import Pricing from "./pages/Pricing";
-import { HealthcareIndustry } from "./pages/industry/Healthcare";
-import { LegalIndustry } from "./pages/industry/Legal";
-import { FinancialIndustry } from "./pages/industry/Financial";
-import { TechnologyIndustry } from "./pages/industry/Technology";
-import { AIAutomationIndustry } from "./pages/industry/AIAutomation";
-import { ConstructionIndustry } from "./pages/industry/Construction";
-import { HoustonSEOPage } from "./pages/HoustonSEO";
-import { HoustonWebDesignPage } from "./pages/HoustonWebDesign";
-import { HoustonAppDevelopmentPage } from "./pages/HoustonAppDevelopment";
-import { HoustonWebDeveloperPage } from "./pages/HoustonWebDeveloper";
-import { HoustonSEOCompanyPage } from "./pages/HoustonSEOCompany";
-import CitySEOPage from "./pages/CitySEO";
-import RapidDelivery from "./pages/RapidDelivery";
-import RushPrototyping from "./pages/RushPrototyping";
-import EnterpriseSecurity from "./pages/EnterpriseSecurity";
-import SameDaySupport from "./pages/SameDaySupport";
-import CustomDesign from "./pages/CustomDesign";
-import ModernTechStack from "./pages/ModernTechStack";
-import ServicesPage from "./pages/ServicesPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
+import { AppRoutes } from "./AppRoutes";
+import { trackContactLinkClicks } from "@/lib/analytics";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/services/web-development" element={<WebDevelopment />} />
-              <Route path="/services/mobile-apps" element={<MobileApps />} />
-              <Route path="/services/seo-analytics" element={<SEOAnalytics />} />
-              <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
-              <Route path="/services/brand-identity" element={<BrandIdentity />} />
-              <Route path="/services/ux-ui" element={<UXUI />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/portfolio" element={<PortfolioPage />} />
-              <Route path="/portfolio/:slug" element={<CaseStudyPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogArticle />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/industry/healthcare" element={<HealthcareIndustry />} />
-              <Route path="/industry/legal" element={<LegalIndustry />} />
-              <Route path="/industry/financial" element={<FinancialIndustry />} />
-              <Route path="/industry/technology" element={<TechnologyIndustry />} />
-              <Route path="/industry/ai-automation" element={<AIAutomationIndustry />} />
-              <Route path="/industry/construction" element={<ConstructionIndustry />} />
-              <Route path="/:city-seo" element={<CitySEOPage />} />
-              <Route path="/houston-seo" element={<HoustonSEOPage />} />
-              <Route path="/houston-web-design" element={<HoustonWebDesignPage />} />
-              <Route path="/houston-app-development" element={<HoustonAppDevelopmentPage />} />
-              <Route path="/houston-web-developer" element={<HoustonWebDeveloperPage />} />
-              <Route path="/houston-seo-company" element={<HoustonSEOCompanyPage />} />
-              <Route path="/rapid-delivery" element={<RapidDelivery />} />
-              <Route path="/rush-prototyping" element={<RushPrototyping />} />
-              <Route path="/enterprise-security" element={<EnterpriseSecurity />} />
-              <Route path="/same-day-support" element={<SameDaySupport />} />
-              <Route path="/custom-design" element={<CustomDesign />} />
-              <Route path="/modern-tech-stack" element={<ModernTechStack />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
+/** Shared by the browser app and the build-time pre-renderer (src/entry-server.tsx). */
+export function AppProviders({ children, helmetContext }: { children: ReactNode; helmetContext?: object }) {
+  return (
+    <HelmetProvider context={helmetContext}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            {children}
+          </TooltipProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+}
 
-              {/* Protected Admin Routes */}
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <AdminLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<AdminDashboard />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="clients" element={<AdminClients />} />
-                <Route path="projects" element={<AdminProjects />} />
-                <Route path="documents" element={<AdminDocuments />} />
-                <Route path="seo-schemas" element={<AdminSEOSchemas />} />
-                <Route path="activity" element={<AdminActivityLogs />} />
-              </Route>
+const App = () => {
+  useEffect(() => trackContactLinkClicks(), []);
 
-              {/* Catch-all 404 */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+  return (
+    <AppProviders>
+      <BrowserRouter>
+        <ScrollToTop />
+        <AppRoutes />
+      </BrowserRouter>
+    </AppProviders>
+  );
+};
 
 export default App;

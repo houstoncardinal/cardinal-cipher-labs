@@ -42,6 +42,8 @@ function sanitize(node: unknown): unknown {
   if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>;
     if (obj['@type'] === 'SoftwareApplication' && String(obj['@id'] ?? '').includes('#software')) return undefined;
+    // HowTo rich results were retired by Google in 2023; a service process isn't a how-to guide.
+    if (obj['@type'] === 'HowTo') return undefined;
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(obj)) {
       if (STRIPPED_KEYS.has(k)) continue;

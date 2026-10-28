@@ -41,36 +41,8 @@ export default function Careers() {
       { name: "Home", url: siteConfig.url },
       { name: "Careers", url: `${siteConfig.url}/careers` },
     ]),
-    ...openings.map((job) => ({
-      "@context": "https://schema.org",
-      "@type": "JobPosting",
-      title: job.title,
-      description: job.description,
-      datePosted: "2025-01-15",
-      validThrough: "2025-12-31",
-      employmentType: "FULL_TIME",
-      hiringOrganization: {
-        "@type": "Organization",
-        name: siteConfig.name,
-        sameAs: siteConfig.url,
-        logo: siteConfig.logo,
-      },
-      jobLocation: {
-        "@type": "Place",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Houston",
-          addressRegion: "TX",
-          addressCountry: "US",
-        },
-      },
-      jobLocationType: job.location.includes("Remote") ? "TELECOMMUTE" : undefined,
-      applicantLocationRequirements: job.location.includes("Remote")
-        ? { "@type": "Country", name: "United States" }
-        : undefined,
-      industry: "Software Development",
-      occupationalCategory: job.department,
-    })),
+    // JobPosting markup removed: the listings' validThrough date (2025-12-31) had passed, and Google
+    // requires expired or unconfirmed roles to be removed. Re-add per role with current dates when hiring.
   ];
 
   return (

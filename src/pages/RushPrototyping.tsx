@@ -106,7 +106,7 @@ const faqs = [
   {
     question: "What is the difference between an MVP and a prototype in Houston app development?",
     answer:
-      "A prototype is typically a visual or partially-functional representation of an app — great for user testing, investor demos, and internal alignment. An MVP (minimum viable product) is a fully functional application with real features, real data, and real users. At Cardinal Cipher Labs, we build both: clickable prototypes for early validation, and working MVPs for actual market testing. Houston founders often start with a prototype, get feedback, then move to an MVP — and we support that entire journey.",
+      "A prototype is typically a visual or partially-functional representation of an app — great for user testing, investor demos, and internal alignment. An MVP (minimum viable product) is a fully functional application with real features, real data, and real users. At Cardinal Consulting, we build both: clickable prototypes for early validation, and working MVPs for actual market testing. Houston founders often start with a prototype, get feedback, then move to an MVP — and we support that entire journey.",
   },
   {
     question: "Can I get a rush prototype built the same week in Houston TX?",
@@ -143,7 +143,7 @@ export default function RushPrototyping() {
   const schemas = [
     generateOrganizationSchema(),
     generateWebPageSchema({
-      name: "Rush Prototyping Houston | MVP Development Houston Texas | Cardinal Cipher Labs",
+      name: "Rush Prototyping Houston | MVP Development Houston Texas | Cardinal Consulting",
       description:
         "Houston's top rush prototyping and MVP development agency. Get a working app prototype or minimum viable product in 48–72 hours. Serving Houston, The Woodlands, Sugar Land, Katy, Pearland, Cypress, and all of Greater Houston TX.",
       url: `${siteConfig.url}/rush-prototyping`,
@@ -162,7 +162,7 @@ export default function RushPrototyping() {
       provider: {
         "@type": "LocalBusiness",
         "@id": `${siteConfig.url}#organization`,
-        name: "Cardinal Cipher Labs",
+        name: "Cardinal Consulting",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Houston",
@@ -191,13 +191,13 @@ export default function RushPrototyping() {
       },
       serviceType: "Software Development",
     },
-    ...generateFAQSchemas(faqs),
+    generateFAQSchemas(faqs),
   ];
 
   return (
     <>
       <SEOHead
-        title="Rush Prototyping Houston | MVP Development Houston Texas | Cardinal Cipher Labs"
+        title="Rush Prototyping Houston | MVP Development Houston Texas | Cardinal Consulting"
         description="Houston's fastest rush prototyping and MVP development agency. Get a working app prototype in 48–72 hours. Serving Houston, The Woodlands, Sugar Land, Katy, Pearland, and all of Greater Houston TX. Call (281) 901-7016."
         keywords={[
           "rush prototyping houston",
@@ -257,7 +257,7 @@ export default function RushPrototyping() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto"
                 >
-                  Stop waiting months to validate your app idea. Cardinal Cipher Labs builds
+                  Stop waiting months to validate your app idea. Cardinal Consulting builds
                   functional MVPs and app prototypes in as little as 48 hours — for Houston
                   startups, energy tech companies, healthcare innovators, real estate platforms,
                   and entrepreneurs across The Woodlands, Katy, Sugar Land, and Greater Houston.
@@ -426,7 +426,7 @@ export default function RushPrototyping() {
                   Serving All of Greater Houston
                 </h2>
                 <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-                  Cardinal Cipher Labs is a Houston-based prototyping and development agency
+                  Cardinal Consulting is a Houston-based prototyping and development agency
                   serving startups and businesses across the entire Greater Houston metro. Whether
                   you're a founder in Midtown, a tech company in The Woodlands, a healthcare
                   startup near the Texas Medical Center, or a real estate platform in Sugar Land —

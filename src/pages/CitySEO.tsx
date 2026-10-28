@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import NotFound from "@/pages/NotFound";
 import { useState, useMemo, useEffect } from "react";
 
 // City data - easily extensible
@@ -308,26 +309,13 @@ const generateSchemas = (cityKey: string) => {
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": `https://visitcardinal.com/${city.slug}-seo#localbusiness`,
-    "name": `Cardinal Consulting - ${city.name} Web Design & SEO`,
-    "alternateName": `Cardinal ${city.name}`,
+    // Service (not LocalBusiness): we serve this city remotely from Houston and have no office here.
+    "@type": "Service",
+    "@id": `https://visitcardinal.com/${city.slug}-seo#service`,
+    "name": `Web Design & SEO for ${city.name} Businesses`,
+    "provider": { "@id": "https://visitcardinal.com#organization" },
     "description": `${city.name}, ${city.state}'s premier web design and SEO agency. Custom websites, local SEO, and digital marketing services for ${city.name} businesses.`,
     "url": `https://visitcardinal.com/${city.slug}-seo`,
-    "telephone": city.phone,
-    "email": "hello@visitcardinal.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": city.address,
-      "addressLocality": city.name,
-      "addressRegion": city.state,
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": city.coordinates.lat,
-      "longitude": city.coordinates.lng
-    },
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -378,10 +366,9 @@ interface CitySEOProps {
   cityKey?: string;
 }
 
-export function CitySEOPage() {
-  const params = useParams<{ "city-seo": string }>();
-  // Strip "-seo" suffix from URL param (e.g., "new-york-seo" -> "new-york")
-  const cityKey = params["city-seo"]?.replace(/-seo$/, "") || "austin";
+export const citySlugs = Object.keys(citiesData);
+
+export function CitySEOPage({ cityKey }: { cityKey: string }) {
   
   // Scroll to top on page load
   useEffect(() => {
@@ -397,14 +384,16 @@ export function CitySEOPage() {
   const displayCity = city;
 
   if (!city) {
-    return <Navigate to="/not-found" replace />;
+    return <NotFound />;
   }
 
   return (
     <>
       <SEOHead
-        title={`${displayCity.name} Web Design & SEO Agency | #1 Rated ${displayCity.name} Digital Marketing | Cardinal Consulting`}
-        description={`${displayCity.name}'s #1 web design and SEO agency. Custom websites, local SEO, and digital marketing that drive real results. Call for free consultation.`}
+        title={`${displayCity.name} Web Design & SEO Services | Cardinal Consulting`}
+        description={`Web design, SEO, and digital marketing for ${displayCity.name} businesses, delivered remotely by Cardinal Consulting in Houston, TX. Free consultation.`}
+        // Templated city pages stay out of the index until each has unique, local substance (Google doorway-page policy).
+        noindex
         keywords={[
           `web design ${displayCity.name}`, `${displayCity.name} SEO`, `${displayCity.name} website design`, `${displayCity.name} SEO company`,
           `${displayCity.name} digital marketing`, `${displayCity.name} web developer`, `${displayCity.name} SEO services`,
@@ -791,7 +780,7 @@ export function CitySEOPage() {
 
                 <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400 text-sm">
                   <span className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />{displayCity.address}
+                    <MapPin className="w-4 h-4" />Serving {displayCity.name} remotely from Houston, TX
                   </span>
                   <span className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />Mon-Fri 9AM-6PM

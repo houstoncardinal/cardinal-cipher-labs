@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { services } from "@/lib/services-catalog";
+import { trackEvent } from "@/lib/analytics";
 
 /**
  * Netlify Forms: field names must match the static form copies in index.html,
@@ -40,7 +41,15 @@ export function ContactForm({ formName }: { formName: "contact" | "contact-page"
     e.preventDefault();
     setStatus("submitting");
     try {
-      await submitToNetlify(e.currentTarget);
+      const form = e.currentTarget;
+      await submitToNetlify(form);
+      // GA4 recommended lead event — mark "generate_lead" as a key event in GA4 to count conversions.
+      trackEvent("generate_lead", {
+        form_name: formName,
+        services: selected.join(", ") || "not specified",
+        budget: (form.elements.namedItem("budget") as HTMLSelectElement | null)?.value || "not specified",
+        page_path: window.location.pathname,
+      });
       setStatus("sent");
     } catch {
       setStatus("error");

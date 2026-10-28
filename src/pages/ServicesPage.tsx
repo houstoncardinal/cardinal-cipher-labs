@@ -46,7 +46,7 @@ export default function ServicesPage() {
                   Everything you need to build, design, and grow your digital business
                 </h1>
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
-                  Three connected practices delivered by one senior team — so strategy, design, engineering, and growth work as a single program.
+                  Four connected practices delivered by one senior team — so strategy, design, engineering, and growth work as a single program.
                 </p>
               </motion.div>
             </Container>

@@ -2042,7 +2042,7 @@ export function getSchemasForPage(pageType: string) {
       return [
         ...generateServiceSchemas(),
         ...generateServiceProductSchemas(),
-        ...generateOfferCatalogSchema(),
+        generateOfferCatalogSchema(),
       ];
 case 'portfolio':
       return [
@@ -2062,7 +2062,7 @@ case 'portfolio':
     case 'careers':
       return [
         ...generateJobPostingSchemas(),
-        ...generateOrganizationSchema(),
+        generateOrganizationSchema(),
       ];
     case 'training':
       return [

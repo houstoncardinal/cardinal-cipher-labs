@@ -272,7 +272,7 @@ export default function ModernTechStack() {
         ],
       },
     },
-    ...generateFAQSchemas([
+    generateFAQSchemas([
       {
         question: "Why should Houston businesses use React instead of WordPress?",
         answer:

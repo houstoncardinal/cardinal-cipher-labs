@@ -294,7 +294,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Web Development Services Houston TX | Custom Website Development",
-      description: "Cardinal Consulting — Houston's #1 web development agency. Custom websites built with React & Next.js. 500+ sites launched, 99.9% uptime, 98 Lighthouse score. Serving all Houston neighborhoods. Free consultation (281) 901-7016.",
+      description: "Custom website development in Houston: fast, secure, SEO-ready websites, e-commerce, and web platforms built with React and Next.js. 500+ projects delivered. Free consultation: (281) 901-7016.",
       keywords: [
         "web development Houston TX", "web development agency Houston", "custom website development Houston", "Houston web developer",
         "best web development company Houston", "web design and development Houston", "React web development Houston", "Next.js development Houston",
@@ -432,8 +432,8 @@ export const services: ServiceDefinition[] = [
       { label: "Rush Prototyping", href: "/rush-prototyping" },
     ],
     seo: {
-      title: "#1 App Development Company Houston TX | iOS & Android Mobile Apps",
-      description: "Cardinal Consulting — Houston's #1 app development company. Custom iOS & Android apps, React Native, HIPAA-compliant. 150+ apps delivered. App development company near me in Houston. Call (281) 901-7016.",
+      title: "App Development Company Houston TX | iOS, Android & Cross-Platform Apps",
+      description: "Houston app development company building iOS, Android, and cross-platform apps — from MVPs to enterprise apps, including App Store launch. 150+ apps delivered. Call (281) 901-7016.",
       keywords: [
         "app development company Houston", "app development company near me Houston", "mobile app development Houston", "#1 app development company Houston",
         "best app development company Houston", "iOS app development Houston", "Android app development Houston", "app development agency Houston",
@@ -564,7 +564,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Brand Identity & Logo Design Agency Houston TX",
-      description: "Houston's top brand identity and logo design agency. Premium logos, brand guidelines, and visual systems for Houston businesses. 200+ brands transformed. Free consultation (281) 901-7016.",
+      description: "Brand identity and logo design in Houston: brand strategy, logos, color, typography, and brand guidelines for growing companies. Free consultation: (281) 901-7016.",
       keywords: [
         "brand identity design Houston", "logo design Houston", "branding agency Houston TX", "Houston logo designer", "brand guidelines Houston",
         "visual identity Houston", "Houston branding company", "logo design company Houston", "brand strategy Houston", "startup branding Houston",
@@ -700,7 +700,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "UX/UI Design Agency Houston TX | User Experience & Interface Design",
-      description: "Houston's top UX/UI design agency. User research, wireframes, Figma prototypes, and design systems for Houston businesses. 40% avg conversion lift. Free consultation (281) 901-7016.",
+      description: "UX/UI design in Houston: user research, wireframes, Figma prototypes, usability testing, and design systems that make websites and apps easier to use and convert better.",
       keywords: [
         "UX design agency Houston", "UI design Houston TX", "user experience design Houston", "UX designer Houston", "Houston UX UI agency",
         "web design UX Houston", "app UX design Houston", "Figma designer Houston", "UX research Houston", "interface design Houston",
@@ -828,8 +828,8 @@ export const services: ServiceDefinition[] = [
       { label: "Web Design Houston", href: "/houston-web-design" },
     ],
     seo: {
-      title: "#1 SEO Company Houston TX | SEO Services & Analytics",
-      description: "Houston's #1 SEO company. Technical SEO audits, local SEO, link building & analytics that rank Houston businesses #1 on Google. 340% avg traffic increase. Free SEO audit — (281) 901-7016.",
+      title: "SEO Company Houston TX | Local SEO, Technical SEO & Content",
+      description: "SEO services for Houston businesses: Google Business Profile, technical SEO, content, and link building with transparent monthly reporting. Month-to-month plans from $1,500/mo.",
       keywords: [
         "SEO company Houston", "best SEO company Houston", "#1 SEO company Houston", "Houston SEO company", "local SEO Houston",
         "SEO services Houston TX", "Houston SEO agency", "technical SEO Houston", "schema markup Houston", "link building Houston",
@@ -962,7 +962,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Digital Marketing Agency Houston TX | PPC & Social Media Marketing",
-      description: "Houston's best digital marketing agency. PPC, Google Ads, social media, email & content marketing. 350% avg ROI. Serving all Houston businesses. Free audit — (281) 901-7016.",
+      description: "Digital marketing agency in Houston: Google Ads, paid social, email marketing, and landing pages — with reporting that ties every campaign to leads and revenue. Call (281) 901-7016.",
       keywords: [
         "digital marketing agency Houston", "Houston digital marketing company", "PPC agency Houston", "Google Ads Houston", "social media marketing Houston",
         "email marketing Houston", "content marketing Houston", "paid advertising Houston TX", "digital marketing services Houston", "Houston marketing agency",

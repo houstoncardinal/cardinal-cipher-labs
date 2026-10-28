@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "Do you serve The Woodlands, Sugar Land, Katy, and other Houston suburbs?",
     answer:
-      "Absolutely. Cardinal Cipher Labs serves all of Greater Houston — including The Woodlands, Sugar Land, Katy, Pearland, Cypress, Spring, League City, Pasadena, Conroe, Friendswood, Bellaire, River Oaks, and every neighborhood in between. We work remotely and in-person, so location is never a barrier. We also serve clients across Texas, nationwide, and internationally.",
+      "Absolutely. Cardinal Consulting serves all of Greater Houston — including The Woodlands, Sugar Land, Katy, Pearland, Cypress, Spring, League City, Pasadena, Conroe, Friendswood, Bellaire, River Oaks, and every neighborhood in between. We work remotely and in-person, so location is never a barrier. We also serve clients across Texas, nationwide, and internationally.",
   },
   {
     question: "Can I get a rush website built the same week in Houston?",
@@ -111,7 +111,7 @@ const faqs = [
   {
     question: "What is the fastest way to get a website built in Houston TX?",
     answer:
-      "The fastest way is to call or contact Cardinal Cipher Labs directly at (281) 901-7016. We'll schedule a same-day kickoff call, gather your content and brand assets, and begin building immediately. Our team works in parallel using a proven rapid-build system so we're not waiting on one person at a time. Most Houston clients are surprised when we ask for approval on a working staging site just 48–72 hours after our first call.",
+      "The fastest way is to call or contact Cardinal Consulting directly at (281) 901-7016. We'll schedule a same-day kickoff call, gather your content and brand assets, and begin building immediately. Our team works in parallel using a proven rapid-build system so we're not waiting on one person at a time. Most Houston clients are surprised when we ask for approval on a working staging site just 48–72 hours after our first call.",
   },
 ];
 
@@ -143,7 +143,7 @@ export default function RapidDelivery() {
   const schemas = [
     generateOrganizationSchema(),
     generateWebPageSchema({
-      name: "Fast Website Design Houston | Live in 72 Hours | Cardinal Cipher Labs",
+      name: "Fast Website Design Houston | Live in 72 Hours | Cardinal Consulting",
       description:
         "Houston's fastest website design agency. Get a professional, SEO-optimized website live in as little as 72 hours. Serving Houston, The Woodlands, Sugar Land, Katy, Pearland, Cypress, and all of Greater Houston TX.",
       url: `${siteConfig.url}/rapid-delivery`,
@@ -162,7 +162,7 @@ export default function RapidDelivery() {
       provider: {
         "@type": "LocalBusiness",
         "@id": `${siteConfig.url}#organization`,
-        name: "Cardinal Cipher Labs",
+        name: "Cardinal Consulting",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Houston",
@@ -191,13 +191,13 @@ export default function RapidDelivery() {
       },
       serviceType: "Web Design",
     },
-    ...generateFAQSchemas(faqs),
+    generateFAQSchemas(faqs),
   ];
 
   return (
     <>
       <SEOHead
-        title="Fast Website Design Houston | 72-Hour Delivery | Cardinal Cipher Labs"
+        title="Fast Website Design Houston | 72-Hour Delivery | Cardinal Consulting"
         description="Houston's fastest website design agency. Get a professional, SEO-optimized website live in as little as 72 hours. Serving The Woodlands, Sugar Land, Katy, Pearland, Cypress, and all of Greater Houston TX. Call (281) 901-7016."
         keywords={[
           "fast website design houston",
@@ -424,7 +424,7 @@ export default function RapidDelivery() {
                   Serving All of Greater Houston
                 </h2>
                 <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-                  Cardinal Cipher Labs is a Houston-based web design agency proudly serving
+                  Cardinal Consulting is a Houston-based web design agency proudly serving
                   businesses across the entire Greater Houston metro area. Whether you're in
                   Midtown Houston, The Woodlands, or anywhere in between, we deliver fast, local
                   service with a deep understanding of the Houston market.

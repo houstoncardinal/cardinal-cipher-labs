@@ -11,30 +11,27 @@ import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
-import { generateAllHomePageSchemas, generateVideoObjectSchema, generateAllAdvancedHomePageSchemas } from "@/lib/schema-generators";
+import { faqSchema, organizationSchema, webPageSchema, websiteSchema } from "@/lib/site-schema";
 import { siteConfig } from "@/lib/seo-config";
+import { homeFaqs } from "@/lib/home-faqs";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   // Generate all comprehensive E-E-A-T compliant schemas
+  const description =
+    "Cardinal Consulting designs, builds, and grows digital businesses from Houston, TX: custom websites, mobile apps, branding, SEO, social media, AI automation, and technical consulting. 500+ projects delivered.";
   const schemas = [
-    ...generateAllHomePageSchemas(),
-    ...generateAllAdvancedHomePageSchemas(),
-    generateVideoObjectSchema({
-      name: "Cardinal Consulting — Houston's #1 Web Design & App Development Agency",
-      description: "See how Cardinal Consulting builds custom websites that rank #1 on Google, iOS/Android apps, and SEO strategies that grow Houston businesses. 500+ projects delivered.",
-      thumbnailUrl: 'https://visitcardinal.com/og-image.jpg',
-      uploadDate: '2025-01-01',
-      duration: 'PT3M',
-      url: 'https://visitcardinal.com',
-    }),
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema({ url: siteConfig.url, name: "Houston Web Design & App Development Company", description }),
+    faqSchema(siteConfig.url, homeFaqs),
   ];
 
   return (
     <>
       <SEOHead
-        title="#1 Web Design & App Development Company Houston TX"
-        description="Cardinal Consulting — Houston's #1 web design company, app development agency & SEO experts. Custom websites that rank #1 on Google, iOS/Android apps, local SEO & digital marketing. 500+ Houston projects. Call (281) 901-7016 for free consultation."
+        title="Houston Web Design & App Development Company"
+        description={description}
         url={siteConfig.url}
         schemas={schemas}
         keywords={[
@@ -89,8 +86,6 @@ const Index = () => {
                 { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
                 { label: "eCommerce Websites", href: "/houston-ecommerce-website-design" },
                 { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
-                { label: "Construction Websites", href: "/houston-construction-website-design" },
-                { label: "Startup Websites", href: "/houston-startup-website-design" },
               ].map((link) => (
                 <Link key={link.href} to={link.href} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
                   {link.label}

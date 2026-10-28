@@ -5,7 +5,7 @@
 export const siteConfig = {
   name: 'Cardinal Consulting',
   legalName: 'Cardinal Consulting LLC',
-  description: "Houston's #1 web design company, app development agency, and SEO experts. Cardinal Consulting builds custom websites that rank #1 on Google, iOS/Android mobile apps, and local SEO strategies that grow Houston businesses. 500+ projects delivered. Serving Houston and all of America.",
+  description: "Cardinal Consulting designs, builds, and grows digital businesses from Houston, TX: websites, mobile apps, branding, SEO, social media, AI automation, and technical consulting.",
   url: 'https://visitcardinal.com',
   ogImage: 'https://visitcardinal.com/og-image.jpg',
   logo: 'https://visitcardinal.com/logo.png',

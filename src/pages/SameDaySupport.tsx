@@ -240,7 +240,7 @@ export default function SameDaySupport() {
       provider: {
         "@type": "LocalBusiness",
         "@id": `${siteConfig.url}#organization`,
-        name: "Cardinal Cipher Labs",
+        name: "Cardinal Consulting",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Houston",
@@ -283,7 +283,7 @@ export default function SameDaySupport() {
       ],
       serviceType: "Website Maintenance & Support",
     },
-    ...generateFAQSchemas(faqs),
+    generateFAQSchemas(faqs),
   ];
 
   return (
@@ -598,7 +598,7 @@ export default function SameDaySupport() {
                   Serving All of Greater Houston
                 </h2>
                 <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-                  Cardinal Cipher Labs is a Houston-based web support agency serving businesses
+                  Cardinal Consulting is a Houston-based web support agency serving businesses
                   across every corner of the Greater Houston metro. Whether you're in The Woodlands,
                   Pearland, Katy, or downtown Houston — our team responds fast because we know this
                   city and its businesses.
@@ -632,7 +632,7 @@ export default function SameDaySupport() {
                   City — we understand what Houston businesses need from a web support team. We know
                   the pace, the industries, and the stakes. When your Houston website has a problem,
                   you want someone who understands your market calling you back — not a generic
-                  offshore support desk. That's what sets Cardinal Cipher Labs apart.
+                  offshore support desk. That's what sets Cardinal Consulting apart.
                 </p>
               </motion.div>
             </div>
@@ -739,7 +739,7 @@ export default function SameDaySupport() {
                   Based in Houston TX — Supporting Clients Everywhere
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Cardinal Cipher Labs is headquartered in Houston, Texas, and proudly serves
+                  Cardinal Consulting is headquartered in Houston, Texas, and proudly serves
                   businesses across the entire Greater Houston metro — including The Woodlands, Sugar
                   Land, Katy, Pearland, Cypress, Spring, League City, Pasadena, Conroe, and
                   Friendswood. We also support clients across all of Texas, nationwide across the

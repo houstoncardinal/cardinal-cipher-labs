@@ -11,14 +11,14 @@ export function Services() {
         <SectionHeader
           eyebrow="What we do"
           title="Websites, apps & marketing that bring you customers"
-          description="Three connected practices under one roof, so strategy, design, engineering, and growth never get lost between vendors."
+          description="Four connected practices under one roof, so strategy, design, engineering, and growth never get lost between vendors."
           action={
             <Link to="/services" className="inline-flex items-center gap-2 font-semibold text-foreground hover:text-primary">
               All services <ArrowRight className="h-4 w-4" />
             </Link>
           }
         />
-        <div className="grid gap-12 lg:grid-cols-3 lg:gap-10">
+        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-4 lg:gap-10">
           {serviceGroups.map((g, gi) => (
             <motion.div key={g.group} {...revealDelay(gi)} className="border-t-2 border-foreground pt-6">
               <p className="font-display text-sm font-semibold text-primary">0{gi + 1}</p>

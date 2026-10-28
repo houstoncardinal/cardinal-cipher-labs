@@ -1,2 +1,18 @@
-# Redirect all routes to index.html for client-side routing
-/*    /index.html   200
+# Public pages are pre-rendered to static HTML at build time (scripts/prerender.mjs).
+# Unknown URLs fall through to /404.html with a real 404 status.
+
+# Pages that share a name with a folder of sub-pages
+/services       /services.html    200
+/blog           /blog.html        200
+/portfolio      /portfolio.html   200
+
+# Client-only admin dashboard (not pre-rendered, not indexed)
+/admin          /app.html         200
+/admin/*        /app.html         200
+
+# Legacy and previously broken URLs
+/houston                              /houston-services             301
+/services/uxui                        /services/ux-ui               301
+/houston-construction-website-design  /industry/construction        301
+/houston-startup-website-design       /houston-web-design           301
+/industries/*                         /industry/:splat              301

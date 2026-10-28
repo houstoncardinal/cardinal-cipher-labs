@@ -159,7 +159,7 @@ const faqs = [
   {
     question: "Do Houston healthcare websites need to be HIPAA compliant?",
     answer:
-      "Yes — any Houston healthcare website that collects, transmits, or stores Protected Health Information (PHI) must comply with HIPAA's Technical, Physical, and Administrative Safeguards. This includes contact forms that ask about medical conditions, patient portals, appointment booking systems, telehealth platforms, and any system connected to an Electronic Health Record (EHR). The Texas Medical Center in Houston is the world's largest medical complex, making HIPAA compliance a critical concern for hundreds of healthcare organizations in the area. Cardinal Cipher Labs builds fully HIPAA-compliant websites and applications, including encrypted data storage, role-based access controls, audit logging, and Business Associate Agreements (BAA). Call us at (281) 901-7016 to discuss your Houston healthcare website security needs.",
+      "Yes — any Houston healthcare website that collects, transmits, or stores Protected Health Information (PHI) must comply with HIPAA's Technical, Physical, and Administrative Safeguards. This includes contact forms that ask about medical conditions, patient portals, appointment booking systems, telehealth platforms, and any system connected to an Electronic Health Record (EHR). The Texas Medical Center in Houston is the world's largest medical complex, making HIPAA compliance a critical concern for hundreds of healthcare organizations in the area. Cardinal Consulting builds fully HIPAA-compliant websites and applications, including encrypted data storage, role-based access controls, audit logging, and Business Associate Agreements (BAA). Call us at (281) 901-7016 to discuss your Houston healthcare website security needs.",
   },
   {
     question: "What security standards do Houston businesses need to follow?",
@@ -210,7 +210,7 @@ export default function EnterpriseSecurity() {
       provider: {
         "@type": "LocalBusiness",
         "@id": `${siteConfig.url}#organization`,
-        name: "Cardinal Cipher Labs",
+        name: "Cardinal Consulting",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Houston",
@@ -245,7 +245,7 @@ export default function EnterpriseSecurity() {
         ],
       },
     },
-    ...generateFAQSchemas(faqs),
+    generateFAQSchemas(faqs),
   ];
 
   return (
@@ -519,7 +519,7 @@ export default function EnterpriseSecurity() {
                   Securing Houston Websites Across the Entire Metro
                 </h2>
                 <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-                  Cardinal Cipher Labs is a Houston-based cybersecurity web design agency serving
+                  Cardinal Consulting is a Houston-based cybersecurity web design agency serving
                   businesses across every corner of Greater Houston. From The Woodlands medical
                   practices to Pearland law firms to Katy real estate agencies — we know the Houston
                   market and build for it.
@@ -661,7 +661,7 @@ export default function EnterpriseSecurity() {
                   Based in Houston TX — Securing Clients Everywhere
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Cardinal Cipher Labs is headquartered in Houston, Texas, and proudly serves clients
+                  Cardinal Consulting is headquartered in Houston, Texas, and proudly serves clients
                   across the entire Greater Houston metro — including The Woodlands, Sugar Land, Katy,
                   Pearland, Cypress, Spring, League City, Pasadena, Conroe, and Friendswood. We also
                   serve clients across all of Texas, nationwide across the United States, and

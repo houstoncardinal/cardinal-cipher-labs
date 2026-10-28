@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Container, Eyebrow, reveal } from "@/components/site/primitives";
-import { faqs } from "@/lib/seo-config";
+import { homeFaqs as faqs } from "@/lib/home-faqs";
 
 export function FAQ() {
   return (

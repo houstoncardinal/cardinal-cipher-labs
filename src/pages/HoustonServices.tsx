@@ -193,7 +193,7 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": "https://visitcardinal.com/houston#webpage",
-    url: "https://visitcardinal.com/houston",
+    url: "https://visitcardinal.com/houston-services",
     name: "Web Design Houston | #1 Rated Web Design Agency in Houston TX",
     description:
       "Looking for web design in Houston? Cardinal Consulting is Houston's top-rated web design agency. Custom websites, mobile apps, SEO & digital marketing. Call (281) 901-7016 for a free consultation.",
@@ -263,7 +263,7 @@ const schemas = [
         "@type": "ListItem",
         position: 2,
         name: "Houston Services",
-        item: "https://visitcardinal.com/houston",
+        item: "https://visitcardinal.com/houston-services",
       },
     ],
   },
@@ -560,7 +560,7 @@ export default function HoustonServices() {
       <SEOHead
         title="Web Design Houston | #1 Rated Web Design Agency in Houston TX"
         description="Looking for web design in Houston? Cardinal Consulting is Houston's top-rated web design agency. Custom websites, mobile apps, SEO & digital marketing. Call (281) 901-7016 for a free consultation."
-        url="https://visitcardinal.com/houston"
+        url="https://visitcardinal.com/houston-services"
         schemas={schemas}
         keywords={[
           "web design Houston",

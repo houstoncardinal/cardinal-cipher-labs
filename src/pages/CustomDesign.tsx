@@ -229,7 +229,7 @@ export default function CustomDesign() {
         ],
       },
     },
-    ...generateFAQSchemas([
+    generateFAQSchemas([
       {
         question: "How much does custom website design cost in Houston?",
         answer:

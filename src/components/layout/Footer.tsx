@@ -24,8 +24,6 @@ const local = [
   { label: "Restaurant Web Design", href: "/houston-restaurant-website-design" },
   { label: "eCommerce Web Design", href: "/houston-ecommerce-website-design" },
   { label: "Real Estate Web Design", href: "/houston-real-estate-website-design" },
-  { label: "Construction Web Design", href: "/houston-construction-website-design" },
-  { label: "Startup Web Design", href: "/houston-startup-website-design" },
 ];
 
 function Column({ title, links }: { title: string; links: { label: string; href: string }[] }) {
