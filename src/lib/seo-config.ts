@@ -215,13 +215,6 @@ export const siteConfig = {
   
   portfolio: [
     {
-      name: 'Vargas Tax',
-      description: 'Powerful website for tax preparation services with customized quick action widgets, powerful SEO, and customized landing pages.',
-      image: '/portfolio/vargas.png',
-      category: 'Tax Preparation Services',
-      technologies: ['React', 'Node.js', 'SEO Optimization'],
-    },
-    {
       name: 'ClearLedger Solutions',
       description: 'Trusted financial partner specializing in accurate, reliable, and transparent bookkeeping services.',
       url: 'https://www.yourclearledger.com',

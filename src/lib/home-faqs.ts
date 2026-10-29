@@ -4,7 +4,7 @@ export const homeFaqs = [
   {
     question: "How much does a website cost in Houston?",
     answer:
-      "At Cardinal Consulting, marketing websites start at $1,500 and e-commerce stores start at $3,500 (one-time). Custom platforms, portals, and enterprise builds are quoted after a free consultation. Ongoing website care plans start at $299 per month. Projects are typically billed 50% at kickoff and 50% at launch.",
+      "At Cardinal Consulting, marketing websites (up to 10 pages) start at $1,500, and custom websites of up to 30 pages — with portals, integrations, AI features, or online sales — start at $3,500 (one-time). Websites over 30 pages and enterprise platforms are quoted after a free consultation. Ongoing website care plans start at $299 per month. Projects are typically billed 50% at kickoff and 50% at launch.",
   },
   {
     question: "How long does it take to build a website?",

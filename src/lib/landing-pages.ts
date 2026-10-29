@@ -55,8 +55,8 @@ const WEBSITE_FACTS = [
 ];
 
 const websiteInvestment = [
-  { label: "Marketing website", value: "From $1,500", note: "Up to 5 custom pages, typically live in 72 hours to 2 weeks." },
-  { label: "Commerce & integrations", value: "From $3,500", note: "Online sales, payments, and connections to your systems." },
+  { label: "Marketing website", value: "From $1,500", note: "Up to 10 custom pages, typically live in 72 hours to 2 weeks." },
+  { label: "Custom website & integrations", value: "From $3,500", note: "Up to 30 pages with portals, integrations, AI features, or online sales." },
   { label: "Website care plans", value: "From $299/mo", note: "Updates, backups, security monitoring, and content changes." },
 ];
 
@@ -121,14 +121,14 @@ export const landingPages: LandingPage[] = [
     ],
     investment: websiteInvestment,
     faqs: [
-      { question: "How much does a website cost in Houston?", answer: "Cardinal's marketing websites start at $1,500 and e-commerce stores at $3,500 (one-time). Custom platforms are quoted after a free consultation. Website care plans start at $299 per month. Pricing across Houston agencies varies widely, so compare what's included: custom design, mobile performance, SEO setup, and post-launch support." },
+      { question: "How much does a website cost in Houston?", answer: "Cardinal's marketing websites (up to 10 pages) start at $1,500, and custom websites of up to 30 pages with portals, integrations, or online sales start at $3,500 (one-time). Sites over 30 pages and custom platforms are quoted after a free consultation. Website care plans start at $299 per month. Pricing across Houston agencies varies widely, so compare what's included: custom design, mobile performance, SEO setup, and post-launch support." },
       { question: "How long does it take to build a website?", answer: "Most marketing websites go live in 72 hours to 2 weeks after content is ready. E-commerce stores usually take 4–8 weeks. You get a written timeline before we start." },
       { question: "Do you only work with Houston businesses?", answer: "Our office is in Houston and we're glad to meet in person around the metro area, but we also work with clients across the U.S. remotely." },
       { question: "Will my new website rank on Google?", answer: "Every site launches with technical SEO, structured data, and fast load times — the foundation Google needs. Ranking for competitive Houston searches also depends on content, reviews, and links over time, which is what our SEO plans are for. No honest company can guarantee a specific ranking." },
       { question: "Can you redesign my existing website?", answer: "Yes. We review what's working on your current site — pages that rank, forms that convert — keep it, and redirect old URLs so you don't lose search traffic during the redesign." },
     ],
     related: ["web-development", "seo-analytics", "website-maintenance"],
-    caseStudies: ["hda-studio", "vargas", "unitedccr"],
+    caseStudies: ["hda-studio", "svrlawfirm", "unitedccr"],
     seo: {
       title: "Web Design Houston | Custom Website Design Company in Houston, TX",
       description: "Houston web design company in Uptown near the Galleria. Custom, mobile-first, SEO-ready websites from $1,500, typically live in 72 hours to 2 weeks. Free consultation: (281) 901-7016.",
@@ -357,7 +357,7 @@ export const landingPages: LandingPage[] = [
       { question: "Can you migrate my existing store?", answer: "Yes. We migrate products, customers, and order history where the platforms allow it, and redirect old URLs to protect your search rankings." },
     ],
     related: ["web-development", "ux-ui", "digital-marketing"],
-    caseStudies: ["vargas"],
+    caseStudies: ["hda-studio", "allhoustonproperty"],
     seo: {
       title: "E-commerce Website Design Houston | Shopify, WooCommerce & Custom Stores",
       description: "E-commerce website design in Houston on Shopify, WooCommerce, or custom platforms: conversion-focused checkout, payments, shipping, tax, and inventory integrations. Stores from $3,500.",
@@ -473,7 +473,7 @@ export const landingPages: LandingPage[] = [
       { question: "Do you build fintech product websites?", answer: "Yes — marketing sites, pricing and security pages, documentation, and web applications for financial software companies." },
     ],
     related: ["web-development", "technical-consulting", "seo-analytics"],
-    caseStudies: ["clearledger", "vargas"],
+    caseStudies: ["clearledger", "cwx"],
     seo: {
       title: "Financial Services Website Design | Accounting, Advisor & Fintech Websites",
       description: "Websites and digital marketing for accounting firms, financial advisors, lenders, insurance agencies, and fintech companies — secure, credible, and built around compliance review.",

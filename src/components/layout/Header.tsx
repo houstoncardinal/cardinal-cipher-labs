@@ -11,6 +11,7 @@ type PanelId = "services" | "industries";
 
 const simpleLinks = [
   { label: "Work", href: "/portfolio" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Insights", href: "/blog" },
   { label: "About", href: "/about" },
 ];
@@ -257,7 +258,7 @@ export function Header() {
                   )}
                 </div>
               ))}
-              {[...simpleLinks, { label: "Pricing", href: "/pricing" }, { label: "Careers", href: "/careers" }].map((l) => (
+              {[...simpleLinks, { label: "Careers", href: "/careers" }].map((l) => (
                 <Link key={l.href} to={l.href} className="block border-b border-border py-4 text-lg font-medium text-foreground">
                   {l.label}
                 </Link>
