@@ -64,21 +64,21 @@ export function ConstructionIndustry() {
         <main>
 
           {/* Hero */}
-          <section className="relative py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+          <section className="relative py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="max-w-4xl mx-auto text-center">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-8">
-                  <Building className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">Construction Industry</span>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-8">
+                  <Building className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">Construction Industry</span>
                 </motion.div>
                 <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="font-serif text-5xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6">
-                  Construction Websites That{" "}<span className="text-red-600">Win More Bids</span>
+                  Construction Websites That{" "}<span className="text-orange-600">Win More Bids</span>
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
                   Professional websites for Houston construction companies and contractors. Showcase your projects, rank #1 on Google, and generate more quote requests every day.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-red-700 transition-all">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-orange-700 transition-all">
                     Get Free Consultation <ArrowRight size={18} />
                   </Link>
                   <Link to="/portfolio" className="inline-flex items-center gap-2 text-gray-700 font-semibold tracking-wider uppercase px-8 py-4 rounded-xl border border-gray-200 hover:border-gray-300 transition-all">
@@ -90,7 +90,7 @@ export function ConstructionIndustry() {
           </section>
 
           {/* Stats */}
-          <section className="py-12 bg-red-600">
+          <section className="py-12 bg-orange-600">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 {[
@@ -101,7 +101,7 @@ export function ConstructionIndustry() {
                 ].map((stat, i) => (
                   <div key={i}>
                     <div className="font-serif text-3xl md:text-4xl text-white font-bold">{stat.value}</div>
-                    <div className="text-red-100 text-sm mt-1">{stat.label}</div>
+                    <div className="text-orange-100 text-sm mt-1">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -109,9 +109,9 @@ export function ConstructionIndustry() {
           </section>
 
           {/* Services */}
-          <section className="py-20 bg-white">
+          <section className="py-14 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="text-center mb-16">
+              <div className="text-center mb-10">
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">Construction Web Solutions</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">Comprehensive digital solutions for Houston construction companies and contractors</p>
               </div>
@@ -124,8 +124,8 @@ export function ConstructionIndustry() {
                   { title: "Service Area Pages", description: "Dedicated pages for every city you serve — Houston, Katy, Sugar Land, The Woodlands, and more.", icon: MapPin },
                   { title: "Mobile-First Design", description: "Fast-loading mobile sites — 70%+ of contractor searches happen on smartphones.", icon: Star },
                 ].map((service, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} className="p-8 rounded-2xl border border-gray-100 hover:border-red-100 hover:shadow-lg transition-all">
-                    <service.icon className="w-10 h-10 text-red-600 mb-4" />
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} className="p-8 rounded-2xl border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all">
+                    <service.icon className="w-10 h-10 text-orange-600 mb-4" />
                     <h3 className="font-serif text-xl text-gray-900 mb-3">{service.title}</h3>
                     <p className="text-gray-600">{service.description}</p>
                   </motion.div>
@@ -135,7 +135,7 @@ export function ConstructionIndustry() {
           </section>
 
           {/* Why Choose Us */}
-          <section className="py-20 bg-gray-50">
+          <section className="py-14 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -150,7 +150,7 @@ export function ConstructionIndustry() {
                       "License number, insurance badge, and BBB integration for trust",
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3">
-                        <Check className="w-5 h-5 text-red-600 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-orange-600 flex-shrink-0" />
                         <span className="text-gray-700">{item}</span>
                       </div>
                     ))}
@@ -160,11 +160,11 @@ export function ConstructionIndustry() {
                   <h3 className="font-serif text-2xl text-gray-900 mb-4">Ready to Win More Projects?</h3>
                   <p className="text-gray-600 mb-6">Get a contractor website that generates leads and wins bids. Free consultation, no obligation.</p>
                   <div className="space-y-3">
-                    <Link to="/contact" className="flex items-center gap-2 bg-red-600 text-white font-bold tracking-wider uppercase px-6 py-3 rounded-lg hover:bg-red-700 transition-all w-full justify-center">
+                    <Link to="/contact" className="flex items-center gap-2 bg-orange-600 text-white font-bold tracking-wider uppercase px-6 py-3 rounded-lg hover:bg-orange-700 transition-all w-full justify-center">
                       Schedule Free Consultation <ArrowRight size={16} />
                     </Link>
-                    <a href="tel:281-901-7016" className="flex items-center gap-2 border border-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:border-red-200 transition-all w-full justify-center">
-                      <Phone size={16} className="text-red-600" /> (281) 901-7016
+                    <a href="tel:281-901-7016" className="flex items-center gap-2 border border-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-lg hover:border-orange-200 transition-all w-full justify-center">
+                      <Phone size={16} className="text-orange-600" /> (281) 901-7016
                     </a>
                   </div>
                 </div>
@@ -173,7 +173,7 @@ export function ConstructionIndustry() {
           </section>
 
           {/* FAQ */}
-          <section className="py-20 bg-white">
+          <section className="py-14 bg-white">
             <div className="container mx-auto px-6 lg:px-12 max-w-3xl">
               <div className="text-center mb-12">
                 <h2 className="font-serif text-4xl text-gray-900 mb-4">Construction Website FAQs</h2>
@@ -203,8 +203,8 @@ export function ConstructionIndustry() {
                   { label: "SEO & Analytics", href: "/services/seo-analytics" },
                   { label: "Brand Identity", href: "/services/brand-identity" },
                 ].map((link) => (
-                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 text-sm font-medium text-gray-700 transition-all text-center">
-                    {link.label} <ArrowRight className="w-3 h-3 text-red-600 flex-shrink-0" />
+                  <Link key={link.href} to={link.href} className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-orange-200 hover:bg-orange-50 text-sm font-medium text-gray-700 transition-all text-center">
+                    {link.label} <ArrowRight className="w-3 h-3 text-orange-600 flex-shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -212,12 +212,12 @@ export function ConstructionIndustry() {
           </section>
 
           {/* CTA */}
-          <section id="contact" className="py-20 bg-gray-900">
+          <section id="contact" className="py-14 bg-gray-900">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">Ready to Build Your Online Presence?</h2>
               <p className="text-gray-400 mb-10 max-w-2xl mx-auto">Let's discuss how Cardinal Consulting can help your Houston construction company attract more clients and win more bids.</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-red-700 transition-all">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white font-bold tracking-wider uppercase px-8 py-4 rounded-xl hover:bg-orange-700 transition-all">
                   Get Started Today <ArrowRight size={18} />
                 </Link>
                 <a href="tel:281-901-7016" className="inline-flex items-center gap-2 border border-gray-600 text-white font-semibold px-8 py-4 rounded-xl hover:border-white transition-all">

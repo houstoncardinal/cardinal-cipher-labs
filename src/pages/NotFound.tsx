@@ -12,7 +12,7 @@ const NotFound = () => (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-[72px]">
-        <Container className="py-24 lg:py-32">
+        <Container className="py-16 lg:py-24">
           <Eyebrow className="mb-6">404</Eyebrow>
           <h1 className="max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">We couldn't find that page.</h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
@@ -26,7 +26,7 @@ const NotFound = () => (
               Contact us
             </Link>
           </div>
-          <div className="mt-16 border-t border-border pt-8">
+          <div className="mt-12 border-t border-border pt-8">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">Our services</p>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((s) => (

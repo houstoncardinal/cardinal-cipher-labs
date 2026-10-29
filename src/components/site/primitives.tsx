@@ -42,11 +42,33 @@ interface SectionHeaderProps {
   align?: "left" | "center";
   inverted?: boolean;
   action?: ReactNode;
+  /** Title left, description (and action) right on large screens — saves vertical space */
+  split?: boolean;
   className?: string;
 }
 
 /** Left-aligned by default — the corporate convention. */
-export function SectionHeader({ eyebrow, title, description, align = "left", inverted, action, className }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, title, description, align = "left", inverted, action, split, className }: SectionHeaderProps) {
+  if (split) {
+    return (
+      <motion.div {...reveal} className={cn("mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16", className)}>
+        <div>
+          {eyebrow && <Eyebrow inverted={inverted} className="mb-5">{eyebrow}</Eyebrow>}
+          <h2 className={cn("font-display text-3xl leading-[1.1] md:text-4xl lg:text-5xl", inverted ? "text-ink-foreground" : "text-foreground")}>
+            {typeof title === "string" ? <RevealText text={title} /> : title}
+          </h2>
+        </div>
+        {(description || action) && (
+          <div className="lg:pb-1">
+            {description && (
+              <p className={cn("text-lg leading-relaxed", inverted ? "text-ink-muted" : "text-muted-foreground")}>{description}</p>
+            )}
+            {action && <div className="mt-5">{action}</div>}
+          </div>
+        )}
+      </motion.div>
+    );
+  }
   return (
     <motion.div
       {...reveal}

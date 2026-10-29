@@ -202,7 +202,7 @@ We will respond to your inquiry as soon as possible.`
         <Header />
         <main>
           {/* Hero */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
+          <section className="pt-28 pb-14 lg:pt-32 lg:pb-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
             <div className="container mx-auto px-6 lg:px-12 relative">
               <motion.div 

@@ -12,6 +12,7 @@ import { trackContactLinkClicks } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/contact-intent";
 import { MotionConfig } from "framer-motion";
 import { CursorLabel, PageFade } from "@/components/site/motion";
+import { startSmoothScroll } from "@/lib/smooth-scroll";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +38,12 @@ export function AppProviders({ children, helmetContext }: { children: ReactNode;
 const App = () => {
   useEffect(() => {
     captureAttribution();
-    return trackContactLinkClicks();
+    const stopTracking = trackContactLinkClicks();
+    const stopSmoothScroll = startSmoothScroll();
+    return () => {
+      stopTracking?.();
+      stopSmoothScroll();
+    };
   }, []);
 
   return (

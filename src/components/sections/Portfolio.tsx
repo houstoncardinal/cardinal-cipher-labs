@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { BrowserFrame, Container, SectionHeader, reveal, revealDelay } from "@/components/site/primitives";
 import { featuredCaseStudies } from "@/lib/case-studies";
+import { Parallax } from "@/components/site/motion";
+import { TiltCard } from "@/components/site/canvas";
 
 export function Portfolio() {
   const [lead, ...rest] = featuredCaseStudies;
   return (
-    <div className="border-t border-border bg-secondary py-24 lg:py-32">
+    <div className="border-t border-border bg-secondary py-16 lg:py-24">
       <Container>
         <SectionHeader
           eyebrow="Our work"
@@ -22,11 +24,15 @@ export function Portfolio() {
         {lead && (
           <motion.article {...reveal} className="grid items-center gap-10 border-b border-border pb-16 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
             {lead.detail ? (
-              <Link to={`/portfolio/${lead.slug}`} data-cursor="View case study" aria-label={`Read the ${lead.client} case study`} className="block">
-                <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
-              </Link>
+              <TiltCard max={5}>
+                <Link to={`/portfolio/${lead.slug}`} data-cursor="View case study" aria-label={`Read the ${lead.client} case study`} className="block">
+                  <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+                </Link>
+              </TiltCard>
             ) : (
-              <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+              <TiltCard max={5}>
+                <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+              </TiltCard>
             )}
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{lead.industry}</p>
@@ -50,10 +56,14 @@ export function Portfolio() {
           </motion.article>
         )}
 
-        <div className="mt-16 grid gap-12 md:grid-cols-2">
+        <div className="mt-12 grid gap-12 md:grid-cols-2">
           {rest.map((c, i) => (
-            <motion.article key={c.slug} {...revealDelay(i)}>
-              <BrowserFrame src={c.image} alt={`${c.client} website`} />
+            <motion.article key={c.slug} {...revealDelay(i)} className={i % 2 === 1 ? "md:mt-24" : undefined}>
+              <Parallax distance={i % 2 === 1 ? 30 : 15} className="overflow-visible">
+                <TiltCard max={6}>
+                  <BrowserFrame src={c.image} alt={`${c.client} website`} />
+                </TiltCard>
+              </Parallax>
               <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-primary">{c.industry}</p>
               <h3 className="mt-2 font-display text-2xl text-foreground">{c.client}</h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{c.summary}</p>

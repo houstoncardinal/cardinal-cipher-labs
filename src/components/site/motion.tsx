@@ -12,11 +12,14 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function RevealText({
   text,
   className,
+  wordClassName,
   delay = 0,
   trigger = "inView",
 }: {
   text: string;
   className?: string;
+  /** Applied to each word (e.g. gradient text, which must sit on the moving element). */
+  wordClassName?: string;
   delay?: number;
   trigger?: "inView" | "mount";
 }) {
@@ -28,9 +31,9 @@ export function RevealText({
         // The space must sit between the clipped blocks: trailing whitespace inside an
         // inline-block is dropped by the browser and the words would run together.
         <Fragment key={i}>
-          <span className="inline-block overflow-hidden pb-[0.12em] align-bottom -mb-[0.12em]">
+          <span className="inline-block overflow-hidden pb-[0.24em] align-bottom -mb-[0.24em]">
             <motion.span
-              className="inline-block will-change-transform"
+              className={cn("inline-block will-change-transform", wordClassName)}
               initial={{ y: "105%" }}
               {...(trigger === "mount" ? { animate: target } : { whileInView: target, viewport: { once: true, margin: "-40px" } })}
               transition={{ duration: 0.9, ease: EASE, delay: delay + i * 0.045 }}
@@ -100,7 +103,7 @@ export function DrawLine({ className, delay = 0 }: { className?: string; delay?:
 }
 
 /** Soft light that follows the pointer across a dark section. */
-export function Spotlight({ children, className }: { children: ReactNode; className?: string }) {
+export function Spotlight({ children, className, background }: { children: ReactNode; className?: string; background?: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: React.PointerEvent) => {
     const el = ref.current;
@@ -111,10 +114,11 @@ export function Spotlight({ children, className }: { children: ReactNode; classN
   };
   return (
     <div ref={ref} onPointerMove={onMove} className={cn("group/spot relative isolate overflow-hidden", className)}>
+      {background}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-0 opacity-0 transition-opacity duration-700 group-hover/spot:opacity-100 motion-reduce:hidden"
-        style={{ background: "radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 50%), hsl(var(--primary) / 0.22), transparent 60%)" }}
+        style={{ background: "radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.06), transparent 60%)" }}
       />
       <div className="relative">{children}</div>
     </div>

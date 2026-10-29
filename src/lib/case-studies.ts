@@ -186,4 +186,5 @@ export const clientLogos = [
   { name: "United CCR", logo: "/clients/ccr.jpg", url: "https://www.unitedccr.com/" },
   { name: "HougenPros", logo: "/clients/hougenpros.png", url: "https://www.hougenpros.com/" },
   { name: "HOU Inc", logo: "/clients/houinc.png", url: "https://www.houinc.com/" },
+  { name: "ClearLedger", logo: "/clients/clearledger.png", url: "https://www.yourclearledger.com/" },
 ];

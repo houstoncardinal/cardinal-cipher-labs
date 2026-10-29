@@ -226,17 +226,17 @@ export default function RushPrototyping() {
         <Header />
         <main>
           {/* Hero */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+          <section className="pt-28 pb-14 lg:pt-32 lg:pb-24 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-8"
                 >
-                  <Zap className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <Zap className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Rush Prototyping — Houston TX
                   </span>
                 </motion.div>
@@ -248,7 +248,7 @@ export default function RushPrototyping() {
                   className="font-serif text-5xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6"
                 >
                   Rush Prototyping &{" "}
-                  <span className="text-red-600">MVP Development</span> in Houston Texas
+                  <span className="text-orange-600">MVP Development</span> in Houston Texas
                 </motion.h1>
 
                 <motion.p
@@ -280,7 +280,7 @@ export default function RushPrototyping() {
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                   <Link to="/contact">
-                    <Button size="lg" className="bg-red-600 hover:bg-red-700">
+                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
                       Start My MVP Today <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -312,7 +312,7 @@ export default function RushPrototyping() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <stat.icon className="w-7 h-7 text-red-400 mx-auto mb-2" />
+                    <stat.icon className="w-7 h-7 text-orange-400 mx-auto mb-2" />
                     <div className="font-serif text-2xl md:text-3xl font-bold text-white">
                       {stat.value}
                     </div>
@@ -326,13 +326,13 @@ export default function RushPrototyping() {
           </section>
 
           {/* Features */}
-          <section className="py-24 lg:py-32 bg-gray-50">
+          <section className="py-16 lg:py-24 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   Why Houston Businesses Choose Rush Prototyping
@@ -354,7 +354,7 @@ export default function RushPrototyping() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <LuxuryCard className="p-6 h-full">
-                      <CheckCircle2 className="w-8 h-8 text-red-600 mb-4" />
+                      <CheckCircle2 className="w-8 h-8 text-orange-600 mb-4" />
                       <h3 className="font-serif text-xl text-gray-900 mb-2">{feature.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed">
                         {feature.description}
@@ -367,13 +367,13 @@ export default function RushPrototyping() {
           </section>
 
           {/* Process */}
-          <section className="py-24 lg:py-32 bg-white">
+          <section className="py-16 lg:py-24 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   Our Houston MVP Build Process
@@ -395,7 +395,7 @@ export default function RushPrototyping() {
                     transition={{ delay: i * 0.15 }}
                   >
                     <LuxuryCard className="p-8 h-full">
-                      <div className="text-xs uppercase tracking-wider text-red-600 font-bold mb-2">
+                      <div className="text-xs uppercase tracking-wider text-orange-600 font-bold mb-2">
                         {step.day}
                       </div>
                       <h3 className="font-serif text-2xl text-gray-900 mb-3">{step.title}</h3>
@@ -408,7 +408,7 @@ export default function RushPrototyping() {
           </section>
 
           {/* Houston Neighborhoods */}
-          <section className="py-24 lg:py-32 bg-gray-50">
+          <section className="py-16 lg:py-24 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -417,8 +417,8 @@ export default function RushPrototyping() {
                 className="text-center mb-12"
               >
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <MapPin className="w-5 h-5 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Local Houston Coverage
                   </span>
                 </div>
@@ -444,7 +444,7 @@ export default function RushPrototyping() {
                     transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm"
                   >
-                    <MapPin className="w-3 h-3 text-red-600" />
+                    <MapPin className="w-3 h-3 text-orange-600" />
                     {hood}
                   </motion.div>
                 ))}
@@ -468,13 +468,13 @@ export default function RushPrototyping() {
           </section>
 
           {/* Testimonials */}
-          <section className="py-24 lg:py-32 bg-white">
+          <section className="py-16 lg:py-24 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   What Houston Founders Say
@@ -513,13 +513,13 @@ export default function RushPrototyping() {
           </section>
 
           {/* FAQ */}
-          <section className="py-24 lg:py-32 bg-gray-50">
+          <section className="py-16 lg:py-24 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   Rush Prototyping Houston — FAQ
@@ -541,7 +541,7 @@ export default function RushPrototyping() {
                   >
                     <LuxuryCard className="p-8">
                       <div className="flex items-start gap-4">
-                        <Check className="w-5 h-5 text-red-600 mt-1 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
                         <div>
                           <h3 className="font-serif text-xl text-gray-900 mb-3">
                             {faq.question}
@@ -565,7 +565,7 @@ export default function RushPrototyping() {
                 viewport={{ once: true }}
                 className="max-w-3xl mx-auto text-center"
               >
-                <Globe className="w-8 h-8 text-red-600 mx-auto mb-4" />
+                <Globe className="w-8 h-8 text-orange-600 mx-auto mb-4" />
                 <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-4">
                   Based in Houston TX — Serving Clients Everywhere
                 </h2>
@@ -592,10 +592,10 @@ export default function RushPrototyping() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 text-sm font-medium text-gray-700 transition-all text-center"
+                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-orange-200 hover:bg-orange-50 text-sm font-medium text-gray-700 transition-all text-center"
                   >
                     {link.label}{" "}
-                    <ArrowRight className="ml-1 w-3 h-3 text-red-600 flex-shrink-0" />
+                    <ArrowRight className="ml-1 w-3 h-3 text-orange-600 flex-shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -603,14 +603,14 @@ export default function RushPrototyping() {
           </section>
 
           {/* CTA */}
-          <section className="py-24 lg:py-32 bg-gray-900 text-white">
+          <section className="py-16 lg:py-24 bg-gray-900 text-white">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <Rocket className="w-10 h-10 text-red-400 mx-auto mb-6" />
+                <Rocket className="w-10 h-10 text-orange-400 mx-auto mb-6" />
                 <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">
                   Ready to Build Your Houston MVP?
                 </h2>
@@ -621,7 +621,7 @@ export default function RushPrototyping() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a href="tel:281-901-7016">
-                    <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white">
+                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
                       Call (281) 901-7016
                     </Button>
                   </a>

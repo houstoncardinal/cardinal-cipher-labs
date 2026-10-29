@@ -59,7 +59,7 @@ export default function Careers() {
         <Header />
         <main>
           {/* Hero */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
+          <section className="pt-28 pb-14 lg:pt-32 lg:pb-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
             <div className="container mx-auto px-6 lg:px-12 relative">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
@@ -97,9 +97,9 @@ export default function Careers() {
           </section>
 
           {/* Perks */}
-          <section className="py-24 lg:py-32">
+          <section className="py-16 lg:py-24">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Work at Cardinal</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">We believe exceptional work comes from exceptional people — and exceptional people deserve exceptional benefits.</p>
               </motion.div>
@@ -118,9 +118,9 @@ export default function Careers() {
           </section>
 
           {/* Open Positions */}
-          <section id="openings" className="py-24 lg:py-32 bg-card/50">
+          <section id="openings" className="py-16 lg:py-24 bg-card/50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Open Positions</h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">Find your next opportunity. All positions include competitive salary, equity, and full benefits.</p>
               </motion.div>
@@ -153,7 +153,7 @@ export default function Careers() {
           </section>
 
           {/* CTA */}
-          <section className="py-24 lg:py-32 bg-primary/5">
+          <section className="py-16 lg:py-24 bg-primary/5">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Don't See Your Role?</h2>

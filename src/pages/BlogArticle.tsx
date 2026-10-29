@@ -141,7 +141,7 @@ export default function BlogArticle() {
               ))}
 
               {/* CTA */}
-              <motion.div {...reveal} className="mt-16 bg-ink p-8 text-ink-foreground md:p-10">
+              <motion.div {...reveal} className="mt-12 bg-ink p-8 text-ink-foreground md:p-10">
                 <p className="font-display text-2xl leading-snug">{article.content.cta}</p>
                 <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4">
                   <Link to={cta} className="inline-flex h-12 items-center gap-2 bg-primary px-6 font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
@@ -172,7 +172,7 @@ export default function BlogArticle() {
           </Container>
 
           {/* Related articles */}
-          <section className="border-t border-border bg-secondary py-20">
+          <section className="border-t border-border bg-secondary py-14">
             <Container>
               <Eyebrow className="mb-5">Keep reading</Eyebrow>
               <div className="mt-6 grid gap-6 md:grid-cols-2">

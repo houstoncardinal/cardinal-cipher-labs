@@ -239,21 +239,21 @@ export function HoustonSEOCompanyPage() {
 
         <main>
           {/* HERO */}
-          <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+          <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-red-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-red-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-2 mb-8">
-                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-red-500 text-red-500" />)}</div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-8">
+                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />)}</div>
                 <span className="text-sm font-semibold text-gray-900">Houston's #1 Rated SEO Company — 4.9★ (127 Reviews)</span>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-gray-900 leading-[1.1] mb-6">
                 Houston's Best{' '}
-                <span className="text-red-600">SEO Company</span>
+                <span className="text-orange-600">SEO Company</span>
               </motion.h1>
 
               <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg lg:text-xl text-gray-500 max-w-2xl mb-4">
@@ -266,7 +266,7 @@ export function HoustonSEOCompanyPage() {
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-4 mb-12">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
                   Get Free SEO Audit <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors">
@@ -302,17 +302,17 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* SERVICES */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston SEO Services</span>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston SEO Services</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Everything Your Houston Business Needs to Rank</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {seoServices.map((service, i) => (
-                  <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-red-100 hover:shadow-lg transition-all">
-                    <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5">
-                      <service.icon className="w-6 h-6 text-red-600" />
+                  <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all">
+                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5">
+                      <service.icon className="w-6 h-6 text-orange-600" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                     <p className="text-gray-500 text-sm mb-5">{service.description}</p>
@@ -330,10 +330,10 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* RANKING RESULTS */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Real Rankings</span>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Real Rankings</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Houston Keywords We've Ranked #1</h2>
               </motion.div>
               <div className="max-w-3xl mx-auto space-y-4">
@@ -344,7 +344,7 @@ export function HoustonSEOCompanyPage() {
                       <div className="text-sm text-gray-500">Before: <span className="line-through">{result.before}</span></div>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <div className="text-2xl font-bold text-red-600 font-serif">{result.after}</div>
+                      <div className="text-2xl font-bold text-orange-600 font-serif">{result.after}</div>
                       <div className="text-xs text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded-full">{result.change}</div>
                     </div>
                   </motion.div>
@@ -354,15 +354,15 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* PROCESS */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Our Houston SEO Process</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {process.map((step, i) => (
                   <motion.div key={step.step} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8">
-                    <div className="text-5xl font-bold text-red-100 font-serif mb-4">{step.step}</div>
+                    <div className="text-5xl font-bold text-orange-100 font-serif mb-4">{step.step}</div>
                     <h3 className="font-serif text-lg font-bold text-gray-900 mb-3">{step.title}</h3>
                     <p className="text-gray-500 text-sm">{step.description}</p>
                   </motion.div>
@@ -372,10 +372,10 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* CASE STUDIES */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Proven SEO Results</span>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Proven SEO Results</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Houston SEO Case Studies</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 gap-6">
@@ -394,9 +394,9 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* REVIEWS */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">What Houston SEO Clients Say</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -413,9 +413,9 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* FAQ */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Houston SEO Company — FAQ</h2>
               </motion.div>
               <div className="max-w-3xl mx-auto space-y-4">
@@ -437,9 +437,9 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* SEO Pricing */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="text-center mb-16">
+              <div className="text-center mb-10">
                 <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-serif text-3xl lg:text-4xl text-gray-900 mb-4">
                   Houston SEO Pricing
                 </motion.h2>
@@ -453,10 +453,10 @@ export function HoustonSEOCompanyPage() {
                   { name: "SEO Growth", price: "$2,500/mo", desc: "Comprehensive SEO to outrank competitors.", features: ["Everything in Foundation", "Content marketing (4 blogs/mo)", "Link building & authority growth", "Competitor gap analysis", "Schema markup expansion", "Bi-weekly strategy calls"], popular: true },
                   { name: "SEO Domination", price: "$4,000/mo", desc: "Own your entire Houston market.", features: ["Everything in Growth", "8 long-form blog articles/mo", "PR & digital outreach", "Core Web Vitals monitoring", "Multi-location SEO", "Weekly reporting & calls"], popular: false },
                 ].map((pkg, i) => (
-                  <motion.div key={pkg.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className={`relative rounded-2xl border-2 p-8 ${pkg.popular ? "border-red-600 shadow-xl" : "border-gray-200"}`}>
-                    {pkg.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-red-600 text-white text-xs font-semibold rounded-full">Best Value</div>}
+                  <motion.div key={pkg.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className={`relative rounded-2xl border-2 p-8 ${pkg.popular ? "border-orange-600 shadow-xl" : "border-gray-200"}`}>
+                    {pkg.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-orange-600 text-white text-xs font-semibold rounded-full">Best Value</div>}
                     <h3 className="font-serif text-xl text-gray-900 mb-1">{pkg.name}</h3>
-                    <div className="font-serif text-3xl text-red-600 mb-1">{pkg.price}</div>
+                    <div className="font-serif text-3xl text-orange-600 mb-1">{pkg.price}</div>
                     <p className="text-sm text-gray-500 mb-6">{pkg.desc}</p>
                     <ul className="space-y-3 mb-8">
                       {pkg.features.map(f => (
@@ -465,7 +465,7 @@ export function HoustonSEOCompanyPage() {
                         </li>
                       ))}
                     </ul>
-                    <Link to="/contact" className={`block text-center py-3 px-6 rounded-full font-semibold transition-colors ${pkg.popular ? "bg-red-600 text-white hover:bg-red-700" : "border-2 border-gray-200 text-gray-700 hover:border-red-200 hover:bg-red-50"}`}>
+                    <Link to="/contact" className={`block text-center py-3 px-6 rounded-full font-semibold transition-colors ${pkg.popular ? "bg-orange-600 text-white hover:bg-orange-700" : "border-2 border-gray-200 text-gray-700 hover:border-orange-200 hover:bg-orange-50"}`}>
                       Get Started
                     </Link>
                   </motion.div>
@@ -475,8 +475,8 @@ export function HoustonSEOCompanyPage() {
           </section>
 
           {/* CTA */}
-          <section className="py-24 bg-gray-900 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(220,38,38,0.3), transparent 50%)' }} />
+          <section className="py-16 bg-gray-900 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(234,88,12,0.3), transparent 50%)' }} />
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl lg:text-5xl text-white mb-6">
@@ -486,7 +486,7 @@ export function HoustonSEOCompanyPage() {
                   Get your free Houston SEO audit today. We'll show you exactly why you're not ranking and give you a roadmap to page 1. No commitment required.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
                     Get Free SEO Audit <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors">
@@ -512,9 +512,9 @@ export function HoustonSEOCompanyPage() {
                   { title: "How to Rank Inside ChatGPT and AI Search Results", slug: "ai-search-ranking", tag: "AEO & AI Search" },
                   { title: "SEO vs AEO vs GEO: The Future of Search in 2026", slug: "seo-vs-aeo-vs-geo", tag: "Future of SEO" },
                 ].map((a) => (
-                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-red-200 hover:shadow-sm transition-all duration-200 group">
-                    <span className="text-xs font-semibold text-red-600 uppercase tracking-wider">{a.tag}</span>
-                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-red-600 transition-colors leading-snug">{a.title}</h3>
+                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all duration-200 group">
+                    <span className="text-xs font-semibold text-orange-600 uppercase tracking-wider">{a.tag}</span>
+                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-orange-600 transition-colors leading-snug">{a.title}</h3>
                     <span className="text-sm text-gray-500 mt-2 inline-block">Read article →</span>
                   </Link>
                 ))}
@@ -533,7 +533,7 @@ export function HoustonSEOCompanyPage() {
                   { label: "App Development Houston", href: "/houston-app-development" },
                   { label: "SEO & Analytics Services", href: "/services/seo-analytics" },
                 ].map((link) => (
-                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-red-600 transition-all duration-200">
+                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-orange-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-orange-600 transition-all duration-200">
                     {link.label}
                   </Link>
                 ))}

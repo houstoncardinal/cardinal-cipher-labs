@@ -255,10 +255,10 @@ export function HoustonSEOPage() {
 
         <main>
           {/* HERO SECTION */}
-          <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+          <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-red-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-red-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative">
@@ -266,11 +266,11 @@ export function HoustonSEOPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-2 mb-8"
+                className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-8"
               >
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-red-500 text-red-500" />
+                    <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
                   ))}
                 </div>
                 <span className="text-sm font-semibold text-gray-900">5.0 Rated — Houston's #1 Agency</span>
@@ -283,8 +283,8 @@ export function HoustonSEOPage() {
                 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-gray-900 leading-[1.1] mb-6"
               >
                 Houston's Premier{' '}
-                <span className="text-red-600">Web Design</span> &{' '}
-                <span className="text-red-600">SEO</span> Agency
+                <span className="text-orange-600">Web Design</span> &{' '}
+                <span className="text-orange-600">SEO</span> Agency
               </motion.h1>
 
               <motion.p
@@ -360,15 +360,15 @@ export function HoustonSEOPage() {
           </section>
 
           {/* SERVICES GRID */}
-          <section className="py-24 lg:py-28 bg-gray-50/50">
+          <section className="py-16 lg:py-20 bg-gray-50/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston Services</span>
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston Services</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">
                   Everything Houston Businesses Need
                 </h2>
@@ -385,10 +385,10 @@ export function HoustonSEOPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="bg-white rounded-2xl p-8 border border-gray-100 hover:border-red-100 hover:shadow-xl transition-all group"
+                    className="bg-white rounded-2xl p-8 border border-gray-100 hover:border-orange-100 hover:shadow-xl transition-all group"
                   >
-                    <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-red-100 transition-colors">
-                      <service.icon className="w-6 h-6 text-red-600" />
+                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5 group-hover:bg-orange-100 transition-colors">
+                      <service.icon className="w-6 h-6 text-orange-600" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                     <p className="text-gray-500 text-sm mb-5">{service.description}</p>
@@ -399,7 +399,7 @@ export function HoustonSEOPage() {
                         </li>
                       ))}
                     </ul>
-                    <Link to={service.link} className="inline-flex items-center gap-1 text-red-600 font-medium text-sm group-hover:gap-2 transition-all">
+                    <Link to={service.link} className="inline-flex items-center gap-1 text-orange-600 font-medium text-sm group-hover:gap-2 transition-all">
                       Learn More <ArrowRight className="w-4 h-4" />
                     </Link>
                   </motion.div>
@@ -409,13 +409,13 @@ export function HoustonSEOPage() {
           </section>
 
           {/* WHY CHOOSE SECTION */}
-          <section className="py-24 lg:py-28 bg-white">
+          <section className="py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">
                   Why Houston Businesses Choose Cardinal
@@ -444,15 +444,15 @@ export function HoustonSEOPage() {
           </section>
 
           {/* CASE STUDIES */}
-          <section className="py-24 lg:py-28 bg-gray-50/50">
+          <section className="py-16 lg:py-20 bg-gray-50/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Proven Results</span>
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Proven Results</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">
                   Results for Houston Businesses
                 </h2>
@@ -469,7 +469,7 @@ export function HoustonSEOPage() {
                     className="bg-white rounded-2xl p-8 border border-gray-100"
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <span className="bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full">{study.industry}</span>
+                      <span className="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 rounded-full">{study.industry}</span>
                       <h3 className="font-serif text-xl font-bold text-gray-900">{study.title}</h3>
                     </div>
                     <div className="space-y-4">
@@ -492,7 +492,7 @@ export function HoustonSEOPage() {
           </section>
 
           {/* SERVICE AREAS */}
-          <section className="py-20 bg-white">
+          <section className="py-14 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -514,7 +514,7 @@ export function HoustonSEOPage() {
                 {houstonAreas.map((area) => (
                   <span
                     key={area}
-                    className="inline-flex items-center gap-1 bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-red-50 hover:border-red-100 hover:text-red-600 transition-colors cursor-default"
+                    className="inline-flex items-center gap-1 bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 transition-colors cursor-default"
                   >
                     <MapPin className="w-3 h-3" />{area}
                   </span>
@@ -524,13 +524,13 @@ export function HoustonSEOPage() {
           </section>
 
           {/* TESTIMONIALS */}
-          <section className="py-24 lg:py-28 bg-gray-50/50">
+          <section className="py-16 lg:py-20 bg-gray-50/50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">
                   What Houston Clients Say
@@ -564,13 +564,13 @@ export function HoustonSEOPage() {
           </section>
 
           {/* FAQ SECTION */}
-          <section className="py-24 lg:py-28 bg-white">
+          <section className="py-16 lg:py-20 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">
                   Frequently Asked Questions
@@ -605,8 +605,8 @@ export function HoustonSEOPage() {
           </section>
 
           {/* CONTACT / CTA SECTION */}
-          <section className="py-24 lg:py-28 bg-gray-900 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(220,38,38,0.3), transparent 50%)' }} />
+          <section className="py-16 lg:py-20 bg-gray-900 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(234,88,12,0.3), transparent 50%)' }} />
             
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div
@@ -614,7 +614,7 @@ export function HoustonSEOPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <Building2 className="w-12 h-12 text-red-500 mx-auto mb-6" />
+                <Building2 className="w-12 h-12 text-orange-500 mx-auto mb-6" />
                 <h2 className="font-serif text-3xl lg:text-5xl text-white mb-6">
                   Ready to Dominate Houston Search?
                 </h2>
@@ -626,7 +626,7 @@ export function HoustonSEOPage() {
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors"
+                    className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors"
                   >
                     Get Free SEO Audit
                     <ArrowRight className="w-4 h-4" />
@@ -664,9 +664,9 @@ export function HoustonSEOPage() {
                   { title: "How to Rank Inside ChatGPT and AI Search Results", slug: "ai-search-ranking", tag: "AEO & AI Search" },
                   { title: "How to Choose a Web Design Agency in Houston", slug: "web-design-houston-agencies-guide", tag: "Houston Market" },
                 ].map((a) => (
-                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-red-200 hover:shadow-sm transition-all duration-200 group">
-                    <span className="text-xs font-semibold text-red-600 uppercase tracking-wider">{a.tag}</span>
-                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-red-600 transition-colors leading-snug">{a.title}</h3>
+                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all duration-200 group">
+                    <span className="text-xs font-semibold text-orange-600 uppercase tracking-wider">{a.tag}</span>
+                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-orange-600 transition-colors leading-snug">{a.title}</h3>
                     <span className="text-sm text-gray-500 mt-2 inline-block">Read article →</span>
                   </Link>
                 ))}
@@ -685,7 +685,7 @@ export function HoustonSEOPage() {
                   { label: "Houston Web Developer", href: "/houston-web-developer" },
                   { label: "Houston SEO Company", href: "/houston-seo-company" },
                 ].map((link) => (
-                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-red-600 transition-all duration-200">
+                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-orange-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-orange-600 transition-all duration-200">
                     {link.label}
                   </Link>
                 ))}

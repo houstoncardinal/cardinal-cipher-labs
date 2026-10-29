@@ -72,6 +72,18 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
+        "scroll-cue": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(200%)" },
+        },
+        shine: {
+          from: { backgroundPosition: "200% center" },
+          to: { backgroundPosition: "-200% center" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -274,6 +286,8 @@ export default {
         },
       },
       animation: {
+        marquee: "marquee 40s linear infinite",
+        shine: "shine 6s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards",
@@ -307,7 +321,7 @@ export default {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "grid-pattern": "linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px)",
         "metallic-gold": "linear-gradient(135deg, hsl(45 60% 60% / 0.3), hsl(45 80% 80% / 0.5), hsl(45 60% 60% / 0.3), hsl(45 40% 40% / 0.2))",
-        "metallic-crimson": "linear-gradient(135deg, hsl(0 72% 30% / 0.3), hsl(0 72% 30% / 0.6), hsl(0 72% 30% / 0.8), hsl(0 72% 30% / 0.4))",
+        "metallic-crimson": "linear-gradient(135deg, hsl(25 85% 50% / 0.3), hsl(25 85% 50% / 0.6), hsl(25 85% 50% / 0.8), hsl(25 85% 50% / 0.4))",
         "metallic-platinum": "linear-gradient(135deg, hsl(220 10% 40% / 0.3), hsl(220 10% 60% / 0.5), hsl(220 10% 80% / 0.3), hsl(220 10% 40% / 0.2))",
       },
     },

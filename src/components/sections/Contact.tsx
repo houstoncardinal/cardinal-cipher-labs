@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm } from "@/components/site/ContactForm";
 import { Container, Eyebrow, reveal } from "@/components/site/primitives";
+import { RevealText } from "@/components/site/motion";
 
 const details = [
   { icon: Phone, label: "Phone", value: "(281) 901-7016", href: "tel:281-901-7016" },
@@ -12,11 +13,11 @@ const details = [
 
 export function Contact() {
   return (
-    <div className="border-t border-border py-24 lg:py-32">
+    <div className="border-t border-border py-16 lg:py-24">
       <Container className="grid gap-16 lg:grid-cols-[1fr_1.4fr]">
         <motion.div {...reveal}>
           <Eyebrow className="mb-5">Contact</Eyebrow>
-          <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl">Start a conversation</h2>
+          <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl"><RevealText text="Start a conversation" /></h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
             Tell us where you want to go. We'll come back within 24 hours with next steps — no obligation.
           </p>

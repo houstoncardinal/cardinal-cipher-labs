@@ -17,7 +17,7 @@ const LAYER_GAP = 80;
 
 // ── Code layer content ───────────────────────────────────────────────────────
 type Tok = [string, string];
-const C = { kw: "#FF8FA3", fn: "#7DD3FC", str: "#A7F3D0", tag: "#FDE68A", txt: "#CBD5E1", dim: "#64748B" };
+const C = { kw: "#FDBA74", fn: "#7DD3FC", str: "#A7F3D0", tag: "#FDE68A", txt: "#CBD5E1", dim: "#64748B" };
 const codeLines: Tok[][] = [
   [["import", C.kw], [" { Hero, Metrics } ", C.txt], ["from", C.kw], [' "@/ui"', C.str]],
   [],

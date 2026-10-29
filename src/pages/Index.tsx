@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { Clients } from "@/components/sections/Clients";
 import { Services } from "@/components/sections/Services";
+import { Craft } from "@/components/sections/Craft";
 import { Advantage } from "@/components/sections/Advantage";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
@@ -14,6 +15,7 @@ import { faqSchema, organizationSchema, webPageSchema, websiteSchema } from "@/l
 import { siteConfig } from "@/lib/seo-config";
 import { homeFaqs } from "@/lib/home-faqs";
 import { Link } from "react-router-dom";
+import { VelocityMarquee } from "@/components/site/canvas";
 
 const Index = () => {
   // Generate all comprehensive E-E-A-T compliant schemas
@@ -67,11 +69,13 @@ const Index = () => {
           <section id="hero"><Hero /></section>
           <section id="clients"><Clients /></section>
           <section id="services"><Services /></section>
+          <Craft />
           <section id="portfolio"><Portfolio /></section>
           <section id="industries"><Industries /></section>
           <section id="advantage"><Advantage /></section>
           <section id="process"><Process /></section>
           <section id="faq"><FAQ /></section>
+          <VelocityMarquee words={["Let's build", "something", "remarkable"]} baseVelocity={1.8} className="border-t border-border" />
           <section id="contact"><Contact /></section>
 
           {/* Industry-specific web design — internal link hub */}

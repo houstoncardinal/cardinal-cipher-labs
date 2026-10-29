@@ -210,21 +210,21 @@ export function HoustonWebDeveloperPage() {
 
         <main>
           {/* HERO */}
-          <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+          <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-red-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-red-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-red-50 border border-red-100 rounded-full px-4 py-2 mb-8">
-                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-red-500 text-red-500" />)}</div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-8">
+                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />)}</div>
                 <span className="text-sm font-semibold text-gray-900">Houston's #1 Rated Web Developers — 4.9★ (127 Reviews)</span>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-gray-900 leading-[1.1] mb-6">
                 Houston's Best{' '}
-                <span className="text-red-600">Web Developers</span>
+                <span className="text-orange-600">Web Developers</span>
               </motion.h1>
 
               <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg lg:text-xl text-gray-500 max-w-2xl mb-4">
@@ -237,7 +237,7 @@ export function HoustonWebDeveloperPage() {
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-4 mb-12">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
                   Get Free Quote <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors">
@@ -273,17 +273,17 @@ export function HoustonWebDeveloperPage() {
           </section>
 
           {/* SERVICES */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">What Our Houston Web Developers Build</span>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">What Our Houston Web Developers Build</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Web Development Services in Houston</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {services.map((service, i) => (
-                  <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-red-100 hover:shadow-lg transition-all">
-                    <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5">
-                      <service.icon className="w-6 h-6 text-red-600" />
+                  <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all">
+                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5">
+                      <service.icon className="w-6 h-6 text-orange-600" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                     <p className="text-gray-500 text-sm mb-5">{service.description}</p>
@@ -301,10 +301,10 @@ export function HoustonWebDeveloperPage() {
           </section>
 
           {/* TECH STACK */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-                <span className="text-red-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Technology</span>
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Technology</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Our Houston Web Developer Tech Stack</h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">We use the latest and most performant technologies to give Houston businesses a competitive edge.</p>
               </motion.div>
@@ -324,9 +324,9 @@ export function HoustonWebDeveloperPage() {
           </section>
 
           {/* REVIEWS */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">What Houston Clients Say</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -343,9 +343,9 @@ export function HoustonWebDeveloperPage() {
           </section>
 
           {/* FAQ */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Houston Web Developer — FAQ</h2>
               </motion.div>
               <div className="max-w-3xl mx-auto space-y-4">
@@ -367,14 +367,14 @@ export function HoustonWebDeveloperPage() {
           </section>
 
           {/* CTA */}
-          <section className="py-24 bg-gray-900 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(220,38,38,0.3), transparent 50%)' }} />
+          <section className="py-16 bg-gray-900 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(234,88,12,0.3), transparent 50%)' }} />
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl lg:text-5xl text-white mb-6">Ready to Work with Houston's Best Web Developers?</h2>
                 <p className="text-gray-400 max-w-2xl mx-auto mb-10">Get a free consultation and project estimate. Houston's #1 web developers are ready to build your next website or web application.</p>
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-red-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
                     Start Your Project <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors">
@@ -401,7 +401,7 @@ export function HoustonWebDeveloperPage() {
                   { label: "Houston SEO Company", href: "/houston-seo-company" },
                   { label: "Modern Tech Stack", href: "/modern-tech-stack" },
                 ].map((link) => (
-                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-red-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-red-600 transition-all duration-200">
+                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-orange-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-orange-600 transition-all duration-200">
                     {link.label}
                   </Link>
                 ))}

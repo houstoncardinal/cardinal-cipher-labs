@@ -89,11 +89,11 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
   const shown = open ? tier.features : tier.features.slice(0, 4);
   const hidden = tier.features.length - 4;
   return (
-    <div className={cn("relative flex h-full flex-col rounded-2xl border bg-white p-6", tier.popular ? "border-red-600 shadow-[0_20px_50px_-28px_rgba(220,38,38,0.55)]" : "border-gray-200")}>
+    <div className={cn("relative flex h-full flex-col rounded-2xl border bg-white p-6", tier.popular ? "border-orange-600 shadow-[0_20px_50px_-28px_rgba(234,88,12,0.55)]" : "border-gray-200")}>
       {tier.popular && (
-        <span className="absolute -top-3 left-6 rounded-full bg-red-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Most popular</span>
+        <span className="absolute -top-3 left-6 rounded-full bg-orange-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Most popular</span>
       )}
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-red-600">{tier.level}</p>
+      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-orange-600">{tier.level}</p>
       <h4 className="mt-1 text-lg font-bold text-gray-900">{tier.name}</h4>
       <div className="mt-3"><Price tier={tier} /></div>
       <p className="mt-2 text-sm leading-relaxed text-gray-600">{tier.bestFor}</p>
@@ -106,7 +106,7 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
         ))}
       </ul>
       {hidden > 0 && (
-        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-gray-900 hover:text-red-600">
+        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-gray-900 hover:text-orange-600">
           {open ? "Show less" : `Show all ${tier.features.length} features`}
           <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
         </button>
@@ -116,7 +116,7 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
         to={contactHref({ service: service.slug, plan: tier.name, from: "pricing" })}
         className={cn(
           "mt-auto inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition",
-          tier.popular ? "bg-red-600 text-white hover:bg-red-700" : "border border-gray-300 text-gray-900 hover:border-gray-900",
+          tier.popular ? "bg-orange-600 text-white hover:bg-orange-700" : "border border-gray-300 text-gray-900 hover:border-gray-900",
         )}
       >
         {priceToNumber(tier.price) === undefined ? "Request a quote" : `Choose ${tier.level}`} <ArrowRight className="h-4 w-4" />
@@ -182,7 +182,7 @@ export default function Pricing() {
         <Header />
         <main>
           {/* HERO */}
-          <Spotlight className="bg-ink pb-16 pt-36 text-ink-foreground lg:pb-20 lg:pt-44">
+          <Spotlight className="bg-ink pb-16 pt-28 text-ink-foreground lg:pb-20 lg:pt-44">
             <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
             <Container className="relative">
               <nav aria-label="Breadcrumb" className="mb-8 text-sm text-ink-muted">
@@ -196,7 +196,7 @@ export default function Pricing() {
                 Every plan for every service, in one place. Use this guide to budget — your final scope and price are always confirmed in writing before work begins.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <a href="#overview" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-red-600 px-7 font-semibold text-white transition hover:bg-red-700">
+                <a href="#overview" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-orange-600 px-7 font-semibold text-white transition hover:bg-orange-700">
                   Compare all prices <ArrowRight className="h-4 w-4" />
                 </a>
                 <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-7 font-semibold text-white transition hover:bg-white/10">
@@ -219,17 +219,17 @@ export default function Pricing() {
           </Spotlight>
 
           {/* HOW PRICING WORKS */}
-          <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-20 lg:py-24">
+          <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-14 lg:py-24">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">How pricing works</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">How pricing works</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">Three simple ways we price</h2>
                 <p className="mt-4 text-lg text-gray-600">Every service has three plans — Foundation, Growth, and Enterprise — priced one of three ways.</p>
               </motion.div>
               <div className="mt-14 grid gap-6 md:grid-cols-3">
                 {MODELS.map((m, i) => (
                   <motion.div key={m.title} {...revealDelay(i)} className="flex flex-col rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-600"><m.icon className="h-6 w-6" /></span>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600"><m.icon className="h-6 w-6" /></span>
                     <h3 className="mt-5 text-xl font-bold text-gray-900">{m.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-gray-600">{m.body}</p>
                     <ul className="mt-5 flex flex-wrap gap-2 border-t border-gray-100 pt-5">
@@ -246,15 +246,15 @@ export default function Pricing() {
           </section>
 
           {/* AT-A-GLANCE OVERVIEW */}
-          <section id="overview" className="scroll-mt-24 py-20 lg:py-28">
+          <section id="overview" className="scroll-mt-24 py-14 lg:py-20">
             <Container>
               <motion.div {...reveal} className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">At a glance</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">At a glance</p>
                   <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">Every plan, side by side</h2>
                   <p className="mt-4 text-lg text-gray-600">Select any service for the full plan details below.</p>
                 </div>
-                <p className="text-sm text-gray-500"><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-red-600 align-middle" />Most popular plan</p>
+                <p className="text-sm text-gray-500"><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-orange-600 align-middle" />Most popular plan</p>
               </motion.div>
 
               {/* Desktop table */}
@@ -272,27 +272,27 @@ export default function Pricing() {
                   {serviceGroups.map((g) => (
                     <tbody key={g.group} className="border-t border-gray-200">
                       <tr className="bg-gray-900/[0.03]">
-                        <th colSpan={5} scope="colgroup" className="px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-red-600">{g.title}</th>
+                        <th colSpan={5} scope="colgroup" className="px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-600">{g.title}</th>
                       </tr>
                       {services.filter((s) => s.group === g.group).map((s) => (
-                        <tr key={s.slug} className="group border-t border-gray-100 transition hover:bg-red-50/40">
+                        <tr key={s.slug} className="group border-t border-gray-100 transition hover:bg-orange-50/40">
                           <th scope="row" className="px-6 py-5 align-top">
                             <a href={`#${s.slug}`} className="flex items-center gap-3">
-                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600"><s.icon className="h-4 w-4" /></span>
-                              <span className="font-semibold text-gray-900 group-hover:text-red-600">{s.name}</span>
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><s.icon className="h-4 w-4" /></span>
+                              <span className="font-semibold text-gray-900 group-hover:text-orange-600">{s.name}</span>
                             </a>
                           </th>
                           {s.tiers.map((t) => (
                             <td key={t.level} className="px-6 py-5 align-top">
                               <div className="flex items-center gap-2">
                                 <Price tier={t} size="sm" />
-                                {t.popular && <span className="h-2 w-2 rounded-full bg-red-600" aria-label="Most popular" />}
+                                {t.popular && <span className="h-2 w-2 rounded-full bg-orange-600" aria-label="Most popular" />}
                               </div>
                               <p className="mt-0.5 text-sm text-gray-500">{t.name}</p>
                             </td>
                           ))}
                           <td className="px-6 py-5 text-right align-top">
-                            <a href={`#${s.slug}`} aria-label={`${s.name} plan details`} className="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 group-hover:bg-red-600 group-hover:text-white">
+                            <a href={`#${s.slug}`} aria-label={`${s.name} plan details`} className="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 group-hover:bg-orange-600 group-hover:text-white">
                               <ArrowRight className="h-4 w-4" />
                             </a>
                           </td>
@@ -307,13 +307,13 @@ export default function Pricing() {
               <div className="mt-10 space-y-10 lg:hidden">
                 {serviceGroups.map((g) => (
                   <div key={g.group}>
-                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-red-600">{g.title}</p>
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-600">{g.title}</p>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       {services.filter((s) => s.group === g.group).map((s) => (
                         <a key={s.slug} href={`#${s.slug}`} className="block min-w-0 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
                           <div className="flex items-center justify-between gap-3">
                             <span className="flex items-center gap-3">
-                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600"><s.icon className="h-4 w-4" /></span>
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><s.icon className="h-4 w-4" /></span>
                               <span className="font-semibold text-gray-900">{s.name}</span>
                             </span>
                             <ArrowRight className="h-4 w-4 shrink-0 text-gray-400" />
@@ -323,7 +323,7 @@ export default function Pricing() {
                               <div key={t.level} className="flex items-center justify-between gap-3 py-2.5">
                                 <dt className="min-w-0 text-sm">
                                   <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
-                                    {t.level}{t.popular && <span className="ml-1.5 text-red-600">· Popular</span>}
+                                    {t.level}{t.popular && <span className="ml-1.5 text-orange-600">· Popular</span>}
                                   </span>
                                   <span className="block truncate text-gray-700">{t.name}</span>
                                 </dt>
@@ -355,11 +355,11 @@ export default function Pricing() {
 
           {/* DETAILED PLANS, BY GROUP */}
           {serviceGroups.map((g, gi) => (
-            <section key={g.group} className={cn("py-20 lg:py-24", gi % 2 === 0 ? "bg-gray-50" : "bg-white")}>
+            <section key={g.group} className={cn("py-14 lg:py-24", gi % 2 === 0 ? "bg-gray-50" : "bg-white")}>
               <Container>
                 <motion.div {...reveal} className="flex flex-col gap-2 border-b border-gray-200 pb-8 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <p className="font-display text-sm font-semibold text-red-600">{String(gi + 1).padStart(2, "0")} — {g.title}</p>
+                    <p className="font-display text-sm font-semibold text-orange-600">{String(gi + 1).padStart(2, "0")} — {g.title}</p>
                     <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">{g.description}</h2>
                   </div>
                 </motion.div>
@@ -368,7 +368,7 @@ export default function Pricing() {
                   {services.filter((s) => s.group === g.group).map((s) => (
                     <article key={s.slug} id={s.slug} className="scroll-mt-36 grid gap-8 py-14 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12">
                       <motion.div {...reveal} className="lg:sticky lg:top-36 lg:self-start">
-                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-600 text-white shadow-lg shadow-red-600/20"><s.icon className="h-6 w-6" /></span>
+                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-600 text-white shadow-lg shadow-orange-600/20"><s.icon className="h-6 w-6" /></span>
                         <h3 className="mt-5 font-display text-2xl font-semibold text-gray-900 md:text-3xl">{s.name}</h3>
                         <p className="mt-3 leading-relaxed text-gray-600">{s.summary}</p>
                         <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
@@ -378,8 +378,8 @@ export default function Pricing() {
                           </p>
                         </div>
                         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                          <Link to={s.path} className="inline-flex items-center gap-1.5 text-gray-900 hover:text-red-600">Service details <ArrowRight className="h-4 w-4" /></Link>
-                          <Link to={contactHref({ service: s.slug, from: "pricing" })} className="inline-flex items-center gap-1.5 text-red-600 hover:text-red-700">Ask a question <ArrowRight className="h-4 w-4" /></Link>
+                          <Link to={s.path} className="inline-flex items-center gap-1.5 text-gray-900 hover:text-orange-600">Service details <ArrowRight className="h-4 w-4" /></Link>
+                          <Link to={contactHref({ service: s.slug, from: "pricing" })} className="inline-flex items-center gap-1.5 text-orange-600 hover:text-orange-700">Ask a question <ArrowRight className="h-4 w-4" /></Link>
                         </div>
                       </motion.div>
                       <div className="grid gap-5 pt-3 md:grid-cols-3">
@@ -397,20 +397,20 @@ export default function Pricing() {
           ))}
 
           {/* BILLING PROCESS */}
-          <section className="bg-ink py-20 text-ink-foreground lg:py-28">
+          <section className="bg-ink py-14 text-ink-foreground lg:py-20">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-400">How billing works</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400">How billing works</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight md:text-5xl">No surprises, start to finish</h2>
                 <p className="mt-4 text-lg text-ink-muted">You always know what you're paying for and when.</p>
               </motion.div>
-              <ol className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-6">
-                <div aria-hidden className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-red-600/60 via-white/20 to-red-600/60 md:block" />
+              <ol className="relative mt-12 grid gap-10 md:grid-cols-4 md:gap-6">
+                <div aria-hidden className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-orange-600/60 via-white/20 to-orange-600/60 md:block" />
                 {BILLING_STEPS.map((step, i) => (
                   <motion.li key={step.title} {...revealDelay(i)} className="relative flex gap-5 md:block">
-                    <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-600 text-white ring-8 ring-ink"><step.icon className="h-5 w-5" /></span>
+                    <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white ring-8 ring-ink"><step.icon className="h-5 w-5" /></span>
                     <div className="md:mt-6">
-                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-red-400">Step {i + 1}</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-orange-400">Step {i + 1}</p>
                       <h3 className="mt-1 text-lg font-bold">{step.title}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.body}</p>
                     </div>
@@ -421,16 +421,16 @@ export default function Pricing() {
           </section>
 
           {/* EVERY ENGAGEMENT INCLUDES */}
-          <section className="py-20 lg:py-28">
+          <section className="py-14 lg:py-20">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">Every engagement</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">Every engagement</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">What you can count on</h2>
               </motion.div>
               <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {PROMISES.map((p, i) => (
                   <motion.div key={p.title} {...revealDelay(i)} className="flex gap-4 rounded-2xl border border-gray-200 bg-gray-50/60 p-6">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-red-600 shadow-sm"><p.icon className="h-5 w-5" /></span>
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-orange-600 shadow-sm"><p.icon className="h-5 w-5" /></span>
                     <div>
                       <h3 className="font-bold text-gray-900">{p.title}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-gray-600">{p.body}</p>
@@ -442,12 +442,12 @@ export default function Pricing() {
           </section>
 
           {/* FAQ */}
-          <section className="border-t border-gray-100 bg-gray-50 py-20 lg:py-28">
+          <section className="border-t border-gray-100 bg-gray-50 py-14 lg:py-20">
             <Container className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
               <motion.div {...reveal}>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">FAQ</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">FAQ</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">Pricing questions, answered</h2>
-                <p className="mt-4 text-gray-600">Still unsure? <Link to={contactHref({ from: "pricing" })} className="font-semibold text-red-600 hover:underline">Ask us directly</Link> — we reply within 24 hours.</p>
+                <p className="mt-4 text-gray-600">Still unsure? <Link to={contactHref({ from: "pricing" })} className="font-semibold text-orange-600 hover:underline">Ask us directly</Link> — we reply within 24 hours.</p>
               </motion.div>
               <Accordion type="single" collapsible className="space-y-3">
                 {faqs.map((faq, i) => (
@@ -461,16 +461,16 @@ export default function Pricing() {
           </section>
 
           {/* CTA */}
-          <section className="py-20 lg:py-24">
+          <section className="py-14 lg:py-24">
             <Container>
-              <motion.div {...reveal} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 to-red-700 px-6 py-14 text-center text-white sm:px-12 lg:py-20">
+              <motion.div {...reveal} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 to-orange-700 px-6 py-14 text-center text-white sm:px-12 lg:py-20">
                 <div aria-hidden className="pointer-events-none absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
                 <div className="relative">
                   <Sparkles className="mx-auto h-8 w-8 text-white/80" />
                   <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-5xl">Not sure which plan fits?</h2>
                   <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">Tell us your goals and budget. We'll recommend the right plan and send a written quote — free, with no obligation.</p>
                   <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                    <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 font-semibold text-red-700 transition hover:bg-gray-100">
+                    <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 font-semibold text-orange-700 transition hover:bg-gray-100">
                       Get a recommended plan <ArrowRight className="h-4 w-4" />
                     </Link>
                     <a href="tel:281-901-7016" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/40 px-7 font-semibold text-white transition hover:bg-white/10">

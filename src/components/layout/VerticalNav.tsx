@@ -102,7 +102,7 @@ export const VerticalNav = () => {
                   w-full flex items-center gap-3 px-4 py-3 text-left
                   transition-all duration-300 relative group
                   ${isActive
-                    ? "text-red-600 bg-red-50/80"
+                    ? "text-orange-600 bg-orange-50/80"
                     : "text-gray-400 hover:text-gray-900 hover:bg-gray-50"
                   }
                 `}
@@ -115,7 +115,7 @@ export const VerticalNav = () => {
                       initial={{ opacity: 0, scaleY: 0 }}
                       animate={{ opacity: 1, scaleY: 1 }}
                       exit={{ opacity: 0, scaleY: 0 }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-red-500 rounded-r-full"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-orange-500 rounded-r-full"
                     />
                   )}
                 </AnimatePresence>
@@ -136,7 +136,7 @@ export const VerticalNav = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -10 }}
                       className={`text-[13px] font-medium whitespace-nowrap flex-1 ${
-                        isActive ? "text-red-600" : "text-gray-600 group-hover:text-gray-900"
+                        isActive ? "text-orange-600" : "text-gray-600 group-hover:text-gray-900"
                       }`}
                     >
                       {item.label}
@@ -149,7 +149,7 @@ export const VerticalNav = () => {
                   <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-red-500"
+                    className="text-orange-500"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </motion.div>
@@ -163,7 +163,7 @@ export const VerticalNav = () => {
         <div className="px-3 pb-4 pt-2 border-t border-gray-100">
           <div className="relative h-1 bg-gray-100 rounded-full overflow-hidden">
             <motion.div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full"
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
               style={{
                 width: `${((navItems.findIndex(i => i.id === activeSection) + 1) / navItems.length) * 100}%`
               }}

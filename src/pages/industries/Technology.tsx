@@ -226,8 +226,8 @@ export default function Technology() {
         <main>
 
           {/* Hero */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-red-50/60 via-transparent to-transparent" />
+          <section className="pt-28 pb-14 lg:pt-32 lg:pb-20 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-transparent to-transparent" />
             <div className="container mx-auto px-6 lg:px-12 relative">
               <Breadcrumbs items={[{ label: "Industries", href: "/industries" }, { label: "Technology" }]} />
               <motion.div
@@ -237,10 +237,10 @@ export default function Technology() {
                 className="max-w-4xl"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-14 h-14 bg-red-50 flex items-center justify-center rounded-lg">
-                    <Cpu className="w-7 h-7 text-red-600" />
+                  <div className="w-14 h-14 bg-orange-50 flex items-center justify-center rounded-lg">
+                    <Cpu className="w-7 h-7 text-orange-600" />
                   </div>
-                  <span className="text-xs tracking-[0.3em] uppercase text-red-600 font-medium">Technology Industry</span>
+                  <span className="text-xs tracking-[0.3em] uppercase text-orange-600 font-medium">Technology Industry</span>
                 </div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-6">
                   Technology Company Website Development & Digital Marketing
@@ -279,7 +279,7 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <div className="font-serif text-4xl lg:text-5xl text-red-600 mb-2">{stat.value}</div>
+                    <div className="font-serif text-4xl lg:text-5xl text-orange-600 mb-2">{stat.value}</div>
                     <div className="text-sm text-gray-500">{stat.label}</div>
                   </motion.div>
                 ))}
@@ -288,13 +288,13 @@ export default function Technology() {
           </section>
 
           {/* Services for Technology */}
-          <section className="py-20 lg:py-28">
+          <section className="py-14 lg:py-20">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">
                   Digital Services for Technology Companies
@@ -311,9 +311,9 @@ export default function Technology() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-6 h-full shadow-sm hover:shadow-md hover:border-red-200 transition-all"
+                    className="bg-white border border-gray-200 rounded-lg p-6 h-full shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
                   >
-                    <service.icon className="w-10 h-10 text-red-600 mb-4" />
+                    <service.icon className="w-10 h-10 text-orange-600 mb-4" />
                     <h3 className="font-serif text-xl text-gray-900 mb-2">{service.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
                   </motion.div>
@@ -323,13 +323,13 @@ export default function Technology() {
           </section>
 
           {/* Why Tech Companies Choose Us */}
-          <section className="py-20 lg:py-28 bg-gray-50">
+          <section className="py-14 lg:py-20 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">
                   Why Tech Companies Choose Cardinal
@@ -348,8 +348,8 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="flex gap-5"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-red-50 flex items-center justify-center rounded-lg">
-                      <diff.icon className="w-6 h-6 text-red-600" />
+                    <div className="flex-shrink-0 w-12 h-12 bg-orange-50 flex items-center justify-center rounded-lg">
+                      <diff.icon className="w-6 h-6 text-orange-600" />
                     </div>
                     <div>
                       <h3 className="font-serif text-xl text-gray-900 mb-2">{diff.title}</h3>
@@ -362,13 +362,13 @@ export default function Technology() {
           </section>
 
           {/* Results */}
-          <section className="py-20 lg:py-28">
+          <section className="py-14 lg:py-20">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">
                   Results That Speak for Themselves
@@ -387,14 +387,14 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm"
                   >
-                    <div className="font-serif text-5xl text-red-600 mb-3">{result.metric}</div>
+                    <div className="font-serif text-5xl text-orange-600 mb-3">{result.metric}</div>
                     <h3 className="font-serif text-lg text-gray-900 mb-3">{result.company}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed mb-5">{result.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {result.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-3 py-1 bg-red-50 text-red-600 rounded-full font-medium"
+                          className="text-xs px-3 py-1 bg-orange-50 text-orange-600 rounded-full font-medium"
                         >
                           {tag}
                         </span>
@@ -407,13 +407,13 @@ export default function Technology() {
           </section>
 
           {/* Process */}
-          <section className="py-20 lg:py-28 bg-gray-50">
+          <section className="py-14 lg:py-20 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">
                   Our Process for Technology Companies
@@ -432,7 +432,7 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <div className="text-6xl font-serif text-red-600/20 mb-2">{item.step}</div>
+                    <div className="text-6xl font-serif text-orange-600/20 mb-2">{item.step}</div>
                     <h3 className="font-serif text-xl text-gray-900 mb-2">{item.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
                   </motion.div>
@@ -442,13 +442,13 @@ export default function Technology() {
           </section>
 
           {/* FAQs */}
-          <section className="py-20 lg:py-28">
+          <section className="py-14 lg:py-20">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-center mb-16"
+                className="text-center mb-10"
               >
                 <h2 className="font-serif text-3xl md:text-4xl text-gray-900 mb-4">
                   Frequently Asked Questions
@@ -490,7 +490,7 @@ export default function Technology() {
           </section>
 
           {/* CTA */}
-          <section className="py-20 lg:py-28 bg-gray-900">
+          <section className="py-14 lg:py-20 bg-gray-900">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -505,7 +505,7 @@ export default function Technology() {
                 </p>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 text-white text-sm font-medium hover:bg-orange-700 transition-colors"
                 >
                   Schedule Free Consultation <ArrowRight className="w-4 h-4" />
                 </Link>

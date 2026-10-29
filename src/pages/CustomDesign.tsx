@@ -282,16 +282,16 @@ export default function CustomDesign() {
         <Header />
         <main>
           {/* Hero Section */}
-          <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 bg-gradient-to-b from-gray-50 to-white">
+          <section className="pt-28 pb-14 lg:pt-32 lg:pb-24 bg-gradient-to-b from-gray-50 to-white">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="max-w-4xl mx-auto text-center">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-8"
                 >
-                  <MapPin className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <MapPin className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Houston's #1 Custom Web Design Agency
                   </span>
                 </motion.div>
@@ -303,7 +303,7 @@ export default function CustomDesign() {
                   className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-6"
                 >
                   Custom Website Design in Houston Texas —{" "}
-                  <span className="text-red-600">Built From Scratch, Zero Templates</span>
+                  <span className="text-orange-600">Built From Scratch, Zero Templates</span>
                 </motion.h1>
 
                 <motion.p
@@ -324,12 +324,12 @@ export default function CustomDesign() {
                   className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
                 >
                   <Link to="/contact">
-                    <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8">
+                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8">
                       Get a Free Custom Quote <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
                   <a href="tel:281-901-7016">
-                    <Button size="lg" variant="outline" className="border-red-200 text-red-600 hover:bg-red-50">
+                    <Button size="lg" variant="outline" className="border-orange-200 text-orange-600 hover:bg-orange-50">
                       Call (281) 901-7016
                     </Button>
                   </a>
@@ -348,7 +348,7 @@ export default function CustomDesign() {
           </section>
 
           {/* Stats Bar */}
-          <section className="py-10 bg-red-600">
+          <section className="py-10 bg-orange-600">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
                 {[
@@ -365,7 +365,7 @@ export default function CustomDesign() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                    <div className="text-red-100 text-sm">{stat.label}</div>
+                    <div className="text-orange-100 text-sm">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -373,17 +373,17 @@ export default function CustomDesign() {
           </section>
 
           {/* Why Custom Design — 6 Benefits */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="max-w-3xl mx-auto text-center mb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
                 >
-                  <Sparkles className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <Sparkles className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Why Custom Beats Templates
                   </span>
                 </motion.div>
@@ -406,7 +406,7 @@ export default function CustomDesign() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <LuxuryCard className="p-7 h-full">
-                      <CheckCircle2 className="w-8 h-8 text-red-600 mb-4 flex-shrink-0" />
+                      <CheckCircle2 className="w-8 h-8 text-orange-600 mb-4 flex-shrink-0" />
                       <h3 className="font-serif text-xl text-gray-900 mb-3">{benefit.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
                     </LuxuryCard>
@@ -417,17 +417,17 @@ export default function CustomDesign() {
           </section>
 
           {/* Design Process — 5 Steps */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="max-w-3xl mx-auto text-center mb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
                 >
-                  <Layers className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <Layers className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Our Process
                   </span>
                 </motion.div>
@@ -451,7 +451,7 @@ export default function CustomDesign() {
                   >
                     <LuxuryCard className="p-7">
                       <div className="flex gap-6 items-start">
-                        <div className="flex-shrink-0 w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-white font-bold text-sm">
+                        <div className="flex-shrink-0 w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center text-white font-bold text-sm">
                           {step.step}
                         </div>
                         <div>
@@ -467,17 +467,17 @@ export default function CustomDesign() {
           </section>
 
           {/* Houston Industries We Serve */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="max-w-3xl mx-auto text-center mb-10">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
                 >
-                  <Palette className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <Palette className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Houston Industries
                   </span>
                 </motion.div>
@@ -499,7 +499,7 @@ export default function CustomDesign() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <LuxuryCard className="p-7 h-full border-l-4 border-l-red-600">
+                    <LuxuryCard className="p-7 h-full border-l-4 border-l-orange-600">
                       <h3 className="font-serif text-lg text-gray-900 mb-3">{item.industry}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
                     </LuxuryCard>
@@ -510,9 +510,9 @@ export default function CustomDesign() {
           </section>
 
           {/* Testimonials */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="max-w-3xl mx-auto text-center mb-10">
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   What Houston Clients Say
                 </h2>
@@ -533,7 +533,7 @@ export default function CustomDesign() {
                     <LuxuryCard className="p-7 h-full flex flex-col">
                       <div className="flex gap-1 mb-4">
                         {Array.from({ length: t.stars }).map((_, s) => (
-                          <Star key={s} className="w-4 h-4 fill-red-600 text-red-600" />
+                          <Star key={s} className="w-4 h-4 fill-orange-600 text-orange-600" />
                         ))}
                       </div>
                       <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-6 italic">
@@ -553,17 +553,17 @@ export default function CustomDesign() {
           </section>
 
           {/* Houston Neighborhoods */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="max-w-3xl mx-auto text-center mb-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
                 >
-                  <MapPin className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <MapPin className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Greater Houston Service Area
                   </span>
                 </motion.div>
@@ -586,7 +586,7 @@ export default function CustomDesign() {
                     transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 border border-gray-100"
                   >
-                    <Check className="w-4 h-4 text-red-600 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-orange-600 flex-shrink-0" />
                     <span className="text-gray-700 text-sm font-medium">{neighborhood}</span>
                   </motion.div>
                 ))}
@@ -595,7 +595,7 @@ export default function CustomDesign() {
               <div className="text-center mt-8">
                 <p className="text-gray-500 text-sm">
                   Don't see your area?{" "}
-                  <a href="tel:281-901-7016" className="text-red-600 font-semibold hover:underline">
+                  <a href="tel:281-901-7016" className="text-orange-600 font-semibold hover:underline">
                     Call (281) 901-7016
                   </a>{" "}
                   — we serve all of Greater Houston and beyond.
@@ -605,9 +605,9 @@ export default function CustomDesign() {
           </section>
 
           {/* Houston FAQs */}
-          <section className="py-24 bg-gray-50">
+          <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
-              <div className="max-w-3xl mx-auto text-center mb-16">
+              <div className="max-w-3xl mx-auto text-center mb-10">
                 <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">
                   Custom Web Design Houston — Frequently Asked Questions
                 </h2>
@@ -637,17 +637,17 @@ export default function CustomDesign() {
           </section>
 
           {/* Serving Houston + Nationwide + Worldwide */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="max-w-4xl mx-auto text-center mb-12">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
                 >
-                  <Globe className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                  <Globe className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Our Reach
                   </span>
                 </motion.div>
@@ -663,19 +663,19 @@ export default function CustomDesign() {
               <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 {[
                   {
-                    icon: <MapPin className="w-8 h-8 text-red-600" />,
+                    icon: <MapPin className="w-8 h-8 text-orange-600" />,
                     title: "Houston & Greater Texas",
                     description:
                       "Deep roots in Houston's business community. We serve companies across Harris County, Fort Bend, Montgomery, Galveston, and Brazoria counties. From Downtown Houston to Conroe, from Katy to League City — we know the Houston market inside and out.",
                   },
                   {
-                    icon: <Check className="w-8 h-8 text-red-600" />,
+                    icon: <Check className="w-8 h-8 text-orange-600" />,
                     title: "Nationwide United States",
                     description:
                       "We design custom websites for businesses in every state. Our fully remote-capable workflow means we deliver the same white-glove Houston-quality service to clients in New York, Los Angeles, Chicago, Miami, Dallas, and everywhere in between.",
                   },
                   {
-                    icon: <Globe className="w-8 h-8 text-red-600" />,
+                    icon: <Globe className="w-8 h-8 text-orange-600" />,
                     title: "International & Worldwide",
                     description:
                       "Custom web design for international businesses, multinational corporations, and global e-commerce brands. We've delivered projects for clients in Europe, Asia Pacific, the Middle East, and Latin America. Wherever you are, we can build your custom website.",
@@ -717,9 +717,9 @@ export default function CustomDesign() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 text-sm font-medium text-gray-700 transition-all text-center"
+                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-orange-200 hover:bg-orange-50 text-sm font-medium text-gray-700 transition-all text-center"
                   >
-                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-red-600 flex-shrink-0" />
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-orange-600 flex-shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -727,7 +727,7 @@ export default function CustomDesign() {
           </section>
 
           {/* CTA Section */}
-          <section className="py-24 bg-white">
+          <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -735,9 +735,9 @@ export default function CustomDesign() {
                 viewport={{ once: true }}
                 className="max-w-3xl mx-auto text-center"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full mb-6">
-                  <Sparkles className="w-4 h-4 text-red-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-red-600 font-semibold">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6">
+                  <Sparkles className="w-4 h-4 text-orange-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
                     Get Started Today
                   </span>
                 </div>
@@ -750,12 +750,12 @@ export default function CustomDesign() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                   <Link to="/contact">
-                    <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-10">
+                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-10">
                       Start Your Custom Design <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
                   <a href="tel:281-901-7016">
-                    <Button size="lg" variant="outline" className="border-red-200 text-red-600 hover:bg-red-50">
+                    <Button size="lg" variant="outline" className="border-orange-200 text-orange-600 hover:bg-orange-50">
                       Call (281) 901-7016
                     </Button>
                   </a>

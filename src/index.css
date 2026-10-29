@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Cardinal crimson — used sparingly for emphasis */
-    --primary: 352 72% 36%;
+    /* Sunset orange — used sparingly for emphasis */
+    --primary: 25 85% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 33% 97%;
@@ -34,7 +34,7 @@
 
     --border: 214 20% 88%;
     --input: 214 20% 85%;
-    --ring: 352 72% 36%;
+    --ring: 25 85% 50%;
 
     --radius: 0.25rem;
 
@@ -48,17 +48,17 @@
     --text-secondary: 215 19% 30%;
     --text-tertiary: 215 14% 52%;
     --divider: 214 20% 90%;
-    --glow-primary: 352 72% 36% / 0.12;
-    --glow-soft: 352 72% 36% / 0.04;
+    --glow-primary: 25 85% 50% / 0.12;
+    --glow-soft: 25 85% 50% / 0.04;
 
     /* Glass effects */
     --glass-bg: 0 0% 100% / 0.85;
     --glass-border: 214 20% 85% / 0.6;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(352 72% 36%), hsl(352 72% 28%));
+    --gradient-primary: linear-gradient(135deg, hsl(25 85% 50%), hsl(20 85% 44%));
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 33% 98%));
-    --gradient-radial: radial-gradient(ellipse at center, hsl(352 72% 36% / 0.06), transparent 70%);
+    --gradient-radial: radial-gradient(ellipse at center, hsl(25 85% 50% / 0.06), transparent 70%);
 
     /* Clients section specific */
     --clients-bg: 0 0% 100%;
@@ -77,7 +77,7 @@
     --popover-foreground: 40 10% 96%;
 
     /* Crimson Accent - Deep Red */
-    --primary: 0 72% 30%;
+    --primary: 25 85% 50%;
     --primary-foreground: 40 10% 96%;
 
     --secondary: 220 15% 10%;
@@ -86,7 +86,7 @@
     --muted: 220 15% 13%;
     --muted-foreground: 220 10% 50%;
 
-    --accent: 0 72% 30%;
+    --accent: 25 85% 50%;
     --accent-foreground: 40 10% 96%;
 
     --destructive: 0 62.8% 30.6%;
@@ -94,24 +94,24 @@
 
     --border: 220 15% 15%;
     --input: 220 15% 15%;
-    --ring: 0 72% 30%;
+    --ring: 25 85% 50%;
 
     /* Enhanced Custom tokens */
     --surface-elevated: 220 15% 9%;
     --text-secondary: 220 10% 65%;
     --text-tertiary: 220 10% 40%;
     --divider: 220 15% 18%;
-    --glow-primary: 0 72% 30% / 0.2;
-    --glow-soft: 0 72% 40% / 0.08;
+    --glow-primary: 25 85% 50% / 0.2;
+    --glow-soft: 25 85% 55% / 0.08;
     
     /* Glass effects */
     --glass-bg: 220 15% 8% / 0.7;
     --glass-border: 220 15% 20% / 0.5;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 72% 30%), hsl(0 72% 20%));
+    --gradient-primary: linear-gradient(135deg, hsl(25 85% 50%), hsl(20 85% 40%));
     --gradient-dark: linear-gradient(180deg, hsl(220 15% 5%), hsl(220 15% 3%));
-    --gradient-radial: radial-gradient(ellipse at center, hsl(0 72% 30% / 0.15), transparent 70%);
+    --gradient-radial: radial-gradient(ellipse at center, hsl(25 85% 50% / 0.15), transparent 70%);
     
     /* Clients section specific */
     --clients-bg: 0 0% 100%;
@@ -126,6 +126,11 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Lenis drives smooth scrolling itself; native smoothing would fight it */
+  html.lenis {
+    scroll-behavior: auto;
   }
 
   /* Smooth theme transitions */
@@ -189,7 +194,7 @@
 
   .text-gradient-primary {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(0 72% 45%));
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(35 90% 55%));
   }
 
   .border-gradient {
@@ -655,7 +660,7 @@
     -45deg,
     hsl(220 15% 5%),
     hsl(220 15% 7%),
-    hsl(0 72% 10% / 0.3),
+    hsl(25 85% 12% / 0.3),
     hsl(220 15% 5%)
   );
   background-size: 400% 400%;
@@ -1203,7 +1208,7 @@
 /* Color Shift Glow */
 @keyframes color-shift-glow {
   0% {
-    box-shadow: 0 0 20px hsl(0 72% 30% / 0.5);
+    box-shadow: 0 0 20px hsl(25 85% 50% / 0.5);
   }
   33% {
     box-shadow: 0 0 30px hsl(280 100% 50% / 0.5), 0 0 60px hsl(280 100% 50% / 0.3);
@@ -1212,7 +1217,7 @@
     box-shadow: 0 0 30px hsl(180 100% 50% / 0.5), 0 0 60px hsl(180 100% 50% / 0.3);
   }
   100% {
-    box-shadow: 0 0 20px hsl(0 72% 30% / 0.5);
+    box-shadow: 0 0 20px hsl(25 85% 50% / 0.5);
   }
 }
 

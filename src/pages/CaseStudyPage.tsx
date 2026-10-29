@@ -119,7 +119,7 @@ export default function CaseStudyPage() {
           )}
 
           {/* Challenge + client facts */}
-          <section className="py-24 lg:py-32">
+          <section className="py-16 lg:py-24">
             <Container className="grid gap-16 lg:grid-cols-[2fr_1fr]">
               <motion.div {...reveal}>
                 <Eyebrow className="mb-5">The challenge</Eyebrow>
@@ -140,7 +140,7 @@ export default function CaseStudyPage() {
           </section>
 
           {/* Approach */}
-          <section className="border-t border-border bg-secondary py-24 lg:py-32">
+          <section className="border-t border-border bg-secondary py-16 lg:py-24">
             <Container>
               <SectionHeader eyebrow="Our approach" title="What we built" />
               <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
@@ -156,7 +156,7 @@ export default function CaseStudyPage() {
           </section>
 
           {/* Gallery */}
-          <section className="py-24 lg:py-32">
+          <section className="py-16 lg:py-24">
             <Container>
               <SectionHeader eyebrow="Inside the build" title="Key experiences" />
               <div className="space-y-20">
@@ -179,7 +179,7 @@ export default function CaseStudyPage() {
 
           {/* Mobile */}
           {d.mobileImage && (
-            <section className="border-t border-border bg-secondary py-24 lg:py-32">
+            <section className="border-t border-border bg-secondary py-16 lg:py-24">
               <Container className="grid items-center gap-16 lg:grid-cols-2">
                 <motion.div {...reveal}>
                   <Eyebrow className="mb-5">Responsive</Eyebrow>
@@ -199,7 +199,7 @@ export default function CaseStudyPage() {
 
           {/* Services used */}
           {serviceLinks.length > 0 && (
-            <section className="border-t border-border py-20">
+            <section className="border-t border-border py-14">
               <Container>
                 <SectionHeader eyebrow="Services" title="Capabilities on this project" />
                 <div className="grid border-l border-t border-border md:grid-cols-3">
@@ -219,7 +219,7 @@ export default function CaseStudyPage() {
           )}
 
           {/* More work */}
-          <section className="border-t border-border bg-secondary py-24">
+          <section className="border-t border-border bg-secondary py-16">
             <Container>
               <SectionHeader
                 eyebrow="More work"

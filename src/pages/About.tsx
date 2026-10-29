@@ -82,7 +82,7 @@ export default function About() {
         <main className="pt-[72px]">
           {/* Hero */}
           <section className="border-b border-border bg-secondary">
-            <Container className="pb-20 pt-10 lg:pb-24 lg:pt-12">
+            <Container className="pb-14 pt-10 lg:pb-24 lg:pt-12">
               <Breadcrumbs items={[{ label: "About" }]} />
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
                 <Eyebrow className="mb-6">About us</Eyebrow>
@@ -109,7 +109,7 @@ export default function About() {
           </section>
 
           {/* Story + founder */}
-          <section className="py-24 lg:py-32">
+          <section className="py-16 lg:py-24">
             <Container className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
               <motion.div {...reveal}>
                 <Eyebrow className="mb-5">Our story</Eyebrow>
@@ -141,7 +141,7 @@ export default function About() {
           </section>
 
           {/* At a glance — clear, consistent facts for people and AI assistants */}
-          <section className="border-t border-border py-24 lg:py-28" aria-labelledby="at-a-glance">
+          <section className="border-t border-border py-16 lg:py-20" aria-labelledby="at-a-glance">
             <Container className="grid gap-12 lg:grid-cols-[1fr_2fr]">
               <motion.div {...reveal}>
                 <Eyebrow className="mb-5">Company facts</Eyebrow>
@@ -168,7 +168,7 @@ export default function About() {
           </section>
 
           {/* Values */}
-          <section className="border-t border-border bg-secondary py-24 lg:py-32">
+          <section className="border-t border-border bg-secondary py-16 lg:py-24">
             <Container>
               <SectionHeader eyebrow="Our values" title="The principles behind every engagement" />
               <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
@@ -183,7 +183,7 @@ export default function About() {
           </section>
 
           {/* Timeline */}
-          <section className="border-t border-border py-24 lg:py-32">
+          <section className="border-t border-border py-16 lg:py-24">
             <Container>
               <SectionHeader eyebrow="Our journey" title="Milestones" />
               <ol className="border-t border-border">
@@ -199,7 +199,7 @@ export default function About() {
           </section>
 
           {/* Standards */}
-          <section className="border-t border-border bg-secondary py-24 lg:py-32">
+          <section className="border-t border-border bg-secondary py-16 lg:py-24">
             <Container>
               <SectionHeader eyebrow="Standards" title="Standards we build to" />
               <div className="grid gap-10 md:grid-cols-3">
@@ -214,7 +214,7 @@ export default function About() {
           </section>
 
           {/* Next steps */}
-          <section className="border-t border-border py-20">
+          <section className="border-t border-border py-14">
             <Container className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
               <div className="max-w-xl">
                 <h2 className="font-display text-3xl text-foreground">See what we've built</h2>

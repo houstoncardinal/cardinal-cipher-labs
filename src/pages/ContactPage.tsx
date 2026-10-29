@@ -71,7 +71,7 @@ export default function ContactPage() {
             </Container>
           </section>
 
-          <section className="py-20 lg:py-24">
+          <section className="py-14 lg:py-24">
             <Container className="grid gap-16 lg:grid-cols-[1.5fr_1fr]">
               <motion.div {...reveal} className="border border-border p-8 lg:p-10">
                 <h2 className="mb-8 font-display text-2xl text-foreground">Send us a message</h2>
@@ -94,7 +94,7 @@ export default function ContactPage() {
                   ))}
                 </dl>
 
-                <h2 className="mt-16 font-display text-2xl text-foreground">Common questions</h2>
+                <h2 className="mt-12 font-display text-2xl text-foreground">Common questions</h2>
                 <Accordion type="single" collapsible className="mt-6 border-t border-border">
                   {faqs.map((faq, i) => (
                     <AccordionItem key={faq.q} value={`faq-${i}`} className="border-border">

@@ -38,7 +38,7 @@ export default function ServicesPage() {
         <Header />
         <main className="pt-[72px]">
           <section className="border-b border-border bg-secondary">
-            <Container className="pb-20 pt-10 lg:pb-24 lg:pt-12">
+            <Container className="pb-14 pt-10 lg:pb-24 lg:pt-12">
               <Breadcrumbs items={[{ label: "Services" }]} />
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-4xl">
                 <Eyebrow className="mb-6">Services</Eyebrow>
@@ -53,7 +53,7 @@ export default function ServicesPage() {
           </section>
 
           {serviceGroups.map((g, gi) => (
-            <section key={g.group} className="border-b border-border py-20 lg:py-24">
+            <section key={g.group} className="border-b border-border py-14 lg:py-24">
               <Container className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
                 <motion.div {...reveal}>
                   <p className="font-display text-sm font-semibold text-primary">0{gi + 1}</p>

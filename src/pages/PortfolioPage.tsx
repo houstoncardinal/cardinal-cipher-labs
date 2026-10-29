@@ -88,7 +88,7 @@ export default function PortfolioPage() {
         <Header />
         <main>
           {/* HERO */}
-          <Spotlight className="bg-ink pb-20 pt-36 text-ink-foreground lg:pb-24 lg:pt-44">
+          <Spotlight className="bg-ink pb-14 pt-28 text-ink-foreground lg:pb-24 lg:pt-44">
             <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
             <Container className="relative">
               <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-ink-muted">Our work</p>
@@ -114,7 +114,7 @@ export default function PortfolioPage() {
           </Spotlight>
 
           {/* SPOTLIGHT */}
-          <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-20 lg:py-28">
+          <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-14 lg:py-20">
             <Container>
               <p className="mb-8 text-xs font-semibold uppercase tracking-[0.22em] text-primary">Featured case study</p>
               <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
@@ -158,7 +158,7 @@ export default function PortfolioPage() {
           </section>
 
           {/* FILTER + GRID */}
-          <section className="pb-20 lg:pb-24">
+          <section className="pb-14 lg:pb-24">
             <div className="sticky top-[72px] z-30 border-b border-gray-100 bg-white/90 backdrop-blur">
               <Container>
                 <div role="group" aria-label="Filter by industry" className="-mx-1 flex gap-2 overflow-x-auto px-1 py-4 [scrollbar-width:none]">
@@ -229,7 +229,7 @@ export default function PortfolioPage() {
           </section>
 
           {/* CAPABILITIES */}
-          <section className="border-t border-gray-100 bg-gray-50 py-20">
+          <section className="border-t border-gray-100 bg-gray-50 py-14">
             <Container>
               <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-center">
                 <div>
