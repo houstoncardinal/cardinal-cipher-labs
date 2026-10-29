@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useLocation } from "react-router-dom";
 import { ArrowRight, Check, CheckCircle2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { services, type ServiceDefinition } from "@/lib/services-catalog";
+import { services } from "@/lib/services-catalog";
+import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, PROMPTS, TIMELINES } from "@/lib/contact-options";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution, lastViewedService } from "@/lib/contact-intent";
 
@@ -10,36 +11,6 @@ import { getAttribution, lastViewedService } from "@/lib/contact-intent";
  * Netlify Forms: every field name below must also appear in the static form copies in
  * index.html, which Netlify parses at deploy time (it can't see forms React renders).
  */
-
-const NEEDS: Record<string, string[]> = {
-  "web-development": ["New website", "Website redesign", "Online store", "Customer portal or web app"],
-  "mobile-apps": ["New app (MVP)", "Add features to an app", "Fix or take over an existing app"],
-  "ai-automation": ["AI opportunity assessment", "AI assistant or chatbot", "Workflow automation", "Document processing"],
-  "brand-identity": ["New logo", "Full brand identity", "Rebrand"],
-  "ux-ui": ["UX audit", "Product or site redesign", "Design system"],
-  "seo-analytics": ["Rank higher locally", "Fix technical SEO", "Content and links", "Analytics setup"],
-  "digital-marketing": ["Google Ads", "Paid social ads", "Email marketing", "Landing pages"],
-  "social-media-management": ["Content creation", "Full account management", "Paid social campaigns", "Community management"],
-  "technical-consulting": ["Technical assessment", "Fractional CTO", "Cloud cost review", "Security or compliance readiness"],
-  "website-maintenance": ["Monthly care plan", "Fix a broken or hacked site", "Speed and security", "Content updates"],
-};
-
-const PROMPTS: Record<string, string> = {
-  "web-development": "What does your business do, and what should the website help you achieve? Links to sites you like are helpful.",
-  "mobile-apps": "What problem does the app solve, and who will use it? Do you need iPhone, Android, or both?",
-  "ai-automation": "Which tasks take your team the most time today? What tools do you already use?",
-  "brand-identity": "Tell us about your business, your customers, and what feels off about your current brand (if you have one).",
-  "ux-ui": "Which site or app should we look at, and where do users get stuck?",
-  "seo-analytics": "Which services and areas do you want to rank for? Who are your main competitors?",
-  "digital-marketing": "What are you selling, who's your ideal customer, and what have you tried so far?",
-  "social-media-management": "Which platforms are you on now, and what do you want social media to do for your business?",
-  "technical-consulting": "What decision or problem are you facing? Share any context on your systems, team, or vendors.",
-  "website-maintenance": "What's your website address and what platform is it built on? Anything broken right now?",
-};
-
-const ONE_TIME_BUDGETS = ["Under $5,000", "$5,000 – $15,000", "$15,000 – $50,000", "$50,000+", "Not sure yet"];
-const MONTHLY_BUDGETS = ["Under $1,000/mo", "$1,000 – $2,500/mo", "$2,500 – $5,000/mo", "$5,000+/mo", "Not sure yet"];
-const TIMELINES = ["As soon as possible", "Within 1–3 months", "In 3–6 months", "Just researching"];
 
 const field =
   "w-full border border-input bg-background px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-foreground focus:outline-none focus:ring-2 focus:ring-ring/20";
@@ -54,8 +25,6 @@ async function submitToNetlify(form: HTMLFormElement) {
   });
   if (!res.ok) throw new Error(`Submission failed (${res.status})`);
 }
-
-const isMonthly = (s?: ServiceDefinition) => s?.startingBilling === "per month";
 
 export function ContactForm({
   formName,

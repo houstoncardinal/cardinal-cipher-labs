@@ -1,54 +1,69 @@
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
-import { FileText, MessageCircle, PenTool, Rocket, type LucideIcon } from "lucide-react";
+import { motion, useInView, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { DraftingCompass, FileCheck2, MessagesSquare, Rocket, type LucideIcon } from "lucide-react";
 import { Container, SectionHeader } from "@/components/site/primitives";
+import { cn } from "@/lib/utils";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const steps: { icon: LucideIcon; title: string; description: string }[] = [
-  { icon: MessageCircle, title: "Free consultation", description: "We learn your business, goals, constraints, and what success looks like to your leadership." },
-  { icon: FileText, title: "Clear plan & price", description: "You receive a written scope, timeline, and investment before any work begins." },
-  { icon: PenTool, title: "Design & delivery", description: "We work in short cycles with regular reviews, so you see progress and approve each step." },
+  { icon: MessagesSquare, title: "Free consultation", description: "We learn your business, goals, constraints, and what success looks like to your leadership." },
+  { icon: FileCheck2, title: "Clear plan & price", description: "You receive a written scope, timeline, and investment before any work begins." },
+  { icon: DraftingCompass, title: "Design & delivery", description: "We work in short cycles with regular reviews, so you see progress and approve each step." },
   { icon: Rocket, title: "Launch & improve", description: "We launch, measure results against your goals, and keep optimizing with ongoing support." },
 ];
+const n = steps.length;
 
 function Step({ step, i, progress }: { step: (typeof steps)[number]; i: number; progress: MotionValue<number> }) {
-  // The node lights as the drawn line reaches it
-  const at = i / steps.length;
-  const lit = useTransform(progress, [at, at + 0.08], [0, 1]);
-  const ring = useTransform(lit, [0, 1], [0.6, 1]);
+  const ref = useRef<HTMLLIElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const reduce = useReducedMotion();
+  // The ring warms to the accent as the line reaches it; the connector fills toward the next step
+  const lit = useTransform(progress, [i / n, i / n + 0.06], [0, 1]);
+  const ring = useTransform(lit, (v) => `hsl(var(--primary) / ${0.15 + v * 0.5})`);
+  const fill = useTransform(progress, [i / n + 0.04, (i + 1) / n], [0, 1]);
+  const last = i === n - 1;
+
   return (
     <motion.li
-      initial={{ opacity: 0, y: 20 }}
+      ref={ref}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
-      className="group relative pl-10 lg:pl-0 lg:pt-10"
+      transition={{ duration: 0.8, delay: i * 0.1, ease: EASE }}
+      className="group relative flex gap-5 pb-9 last:pb-0 lg:flex-col lg:items-center lg:gap-0 lg:px-5 lg:pb-0 lg:text-center"
     >
-      <span
-        aria-hidden
-        className="absolute left-0 top-[31px] z-10 sm:top-[35px] flex h-[18px] w-[18px] -translate-x-1/2 items-center justify-center rounded-full border border-border bg-background lg:left-8 lg:top-0 lg:-translate-y-1/2"
-      >
-        <motion.span className="h-2.5 w-2.5 rounded-full bg-primary" style={{ opacity: lit, scale: ring }} />
-        <motion.span className="absolute inset-[-6px] rounded-full border border-primary/40" style={{ opacity: lit, scale: ring }} />
-      </span>
-
-      <div className="relative h-full overflow-hidden border border-border bg-background p-5 transition-all sm:p-6 duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_30px_60px_-35px_rgba(15,23,42,0.4)] lg:p-7">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute right-5 top-3 hidden select-none font-display text-[4.5rem] sm:block font-semibold leading-none text-transparent transition-all duration-700 [-webkit-text-stroke:1px_hsl(var(--border))] group-hover:-translate-y-1 group-hover:[-webkit-text-stroke-color:hsl(var(--foreground)/0.25)]"
-        >
-          {i + 1}
+      {/* Connector to the next step: vertical on phones/tablets, horizontal on desktop */}
+      {!last && (
+        <span aria-hidden className="absolute bottom-0 left-[27px] top-[60px] w-px bg-border lg:bottom-auto lg:left-[calc(50%+40px)] lg:top-8 lg:h-px lg:w-[calc(100%-80px)]">
+          <motion.span className="absolute inset-0 origin-top bg-primary lg:hidden" style={{ scaleY: fill }} />
+          <motion.span className="absolute inset-0 hidden origin-left bg-primary lg:block" style={{ scaleX: fill }} />
         </span>
-        <div className="relative flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center bg-ink text-ink-foreground transition-transform duration-500 group-hover:scale-105">
-            <step.icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-          </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Step {i + 1}</p>
-        </div>
-        <h3 className="relative mt-4 text-xl font-semibold text-foreground">{step.title}</h3>
-        <p className="relative mt-2.5 text-[15px] leading-relaxed text-muted-foreground">{step.description}</p>
-        <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-foreground transition-transform duration-500 ease-out group-hover:scale-x-100" />
+      )}
+
+      {/* Icon in a hairline ring with an orbiting accent */}
+      <div className="relative h-14 w-14 shrink-0 lg:h-16 lg:w-16">
+        <motion.span aria-hidden className="absolute inset-0 rounded-full border bg-background transition-transform duration-700 group-hover:scale-110" style={{ borderColor: ring }} />
+        <motion.span aria-hidden style={{ opacity: lit }} className="absolute inset-0 animate-[spin_6s_linear_infinite] motion-reduce:animate-none">
+          <span className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary" />
+        </motion.span>
+        <span aria-hidden className="absolute inset-[5px] rounded-full border border-dashed border-foreground/10 opacity-0 transition-opacity duration-700 group-hover:animate-[spin_12s_linear_infinite] group-hover:opacity-100 motion-reduce:hidden" />
+        <step.icon
+          aria-hidden
+          strokeWidth={1.15}
+          style={{ ["--draw-delay" as string]: `${0.2 + i * 0.18}s` }}
+          className={cn(
+            "absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-foreground transition-colors duration-500 group-hover:text-primary lg:h-7 lg:w-7",
+            !reduce && "icon-draw",
+            !reduce && inView && "is-drawn",
+          )}
+        />
+      </div>
+
+      <div className="min-w-0 pt-1 lg:mt-6 lg:pt-0">
+        <p className="font-display text-xs font-semibold tabular-nums tracking-[0.2em] text-primary">0{i + 1}</p>
+        <h3 className="mt-1.5 text-lg font-semibold text-foreground lg:text-xl">{step.title}</h3>
+        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground lg:mx-auto lg:max-w-[16rem]">{step.description}</p>
       </div>
     </motion.li>
   );
@@ -57,24 +72,21 @@ function Step({ step, i, progress }: { step: (typeof steps)[number]; i: number; 
 export function Process() {
   const ref = useRef<HTMLOListElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 80%", "end 60%"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 60%"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 25, mass: 0.4 });
   const progress = reduce ? scrollYProgress : smooth;
 
   return (
-    <div className="border-t border-border bg-secondary py-14 lg:py-24">
+    <div className="border-t border-border bg-secondary py-14 lg:py-20">
       <Container>
         <SectionHeader
           split
           eyebrow="How we work"
           title="From first call to launch in four clear steps"
           description="Every engagement follows the same disciplined process, so you always know what happens next. Need it fast? Many projects can be delivered in 72 hours."
+          className="mb-10 lg:mb-14"
         />
-        <ol ref={ref} className="relative grid gap-5 lg:grid-cols-4 lg:gap-5">
-          {/* Track + the line that draws itself with scroll: vertical on small screens, horizontal on large */}
-          <span aria-hidden className="absolute bottom-0 left-0 top-0 w-px bg-border lg:bottom-auto lg:right-0 lg:h-px lg:w-auto" />
-          <motion.span aria-hidden className="absolute bottom-0 left-0 top-0 w-px origin-top bg-primary lg:hidden" style={{ scaleY: progress }} />
-          <motion.span aria-hidden className="absolute left-0 right-0 top-0 hidden h-px origin-left bg-primary lg:block" style={{ scaleX: progress }} />
+        <ol ref={ref} className="relative grid lg:grid-cols-4">
           {steps.map((s, i) => (
             <Step key={s.title} step={s} i={i} progress={progress} />
           ))}

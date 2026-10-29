@@ -3,7 +3,6 @@ import { Hero } from "@/components/sections/Hero";
 import { Clients } from "@/components/sections/Clients";
 import { Services } from "@/components/sections/Services";
 import { Craft } from "@/components/sections/Craft";
-import { Advantage } from "@/components/sections/Advantage";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
 import { Industries } from "@/components/sections/Industries";
@@ -72,14 +71,13 @@ const Index = () => {
           <Craft />
           <section id="portfolio"><Portfolio /></section>
           <section id="industries"><Industries /></section>
-          <section id="advantage"><Advantage /></section>
           <section id="process"><Process /></section>
           <section id="faq"><FAQ /></section>
           <VelocityMarquee words={["Let's build", "something", "remarkable"]} baseVelocity={1.8} className="border-t border-border" />
           <section id="contact"><Contact /></section>
 
           {/* Industry-specific web design — internal link hub */}
-          <section className="border-t border-border bg-secondary py-12">
+          <section className="border-t border-border bg-background py-10">
             <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-3 px-6 text-sm lg:px-10">
               <span className="font-semibold text-foreground">Industry websites in Houston:</span>
               {[

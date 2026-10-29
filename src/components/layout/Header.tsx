@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { serviceGroups, services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
 import { ScrollProgress } from "@/components/site/motion";
-import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 
 type PanelId = "services" | "industries";
 
@@ -174,7 +173,6 @@ export function Header() {
           </nav>
 
           <div className="hidden items-center gap-6 lg:flex">
-            <ThemeSwitcher />
             <a href="tel:281-901-7016" className="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground">
               <Phone className="h-4 w-4" /> (281) 901-7016
             </a>
@@ -266,10 +264,6 @@ export function Header() {
                 </Link>
               ))}
               <div className="mt-8 space-y-3">
-                <div className="flex items-center justify-between py-3 border-b border-border">
-                  <span className="text-lg font-medium text-foreground">Theme</span>
-                  <ThemeSwitcher />
-                </div>
                 <Link to="/contact" className="flex h-12 items-center justify-center gap-2 bg-ink font-semibold text-ink-foreground">
                   Contact us <ArrowRight className="h-4 w-4" />
                 </Link>

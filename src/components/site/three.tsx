@@ -1,7 +1,7 @@
 // WebGL art pieces (three.js). three is imported lazily inside effects, so it never
 // enters the SSR bundle or blocks first paint, and each scene:
 //  - pauses its render loop when off-screen and releases the GPU context on unmount
-//  - follows the live accent/ink colors (the ThemeSwitcher edits CSS variables on <html>)
+//  - follows the live accent/ink colors (read from the CSS variables on <html>)
 //  - drops idle motion for prefers-reduced-motion and renders nothing without WebGL
 import { useEffect, useRef, type RefObject } from "react";
 import { useReducedMotion, type MotionValue } from "framer-motion";
@@ -513,114 +513,6 @@ export function SystemSculpture({
       colors({ ink, accent }) {
         uniforms.uInk.value.copy(ink);
         uniforms.uAccent.value.copy(accent);
-      },
-      dispose() {
-        geometry.dispose();
-        material.dispose();
-      },
-    };
-  });
-
-  return <div ref={ref} aria-hidden className={cn("pointer-events-none absolute inset-0", className)} />;
-}
-
-// ── Wave field ───────────────────────────────────────────────────────────────
-
-const WAVE_VERT = /* glsl */ `
-  uniform float uTime;
-  uniform vec2 uPointer;
-  uniform float uPointerStrength;
-  uniform float uPixelRatio;
-  uniform float uMotion;
-  varying float vFade;
-  varying float vLift;
-
-  void main() {
-    vec3 p = position;
-    float t = uTime * uMotion;
-    float w = sin(p.x * 0.45 + t * 0.55) * 0.32
-            + cos(p.z * 0.7 + t * 0.4) * 0.22
-            + sin((p.x + p.z) * 0.25 + t * 0.3) * 0.28;
-    float d = distance(p.xz, uPointer);
-    float ripple = sin(d * 2.4 - uTime * 3.2) * exp(-d * 0.55) * 0.45 * uPointerStrength;
-    p.y += w + ripple;
-
-    vec4 mv = modelViewMatrix * vec4(p, 1.0);
-    gl_Position = projectionMatrix * mv;
-    gl_PointSize = 2.6 * uPixelRatio * (8.0 / -mv.z);
-    vFade = smoothstep(-26.0, -6.0, mv.z) * smoothstep(13.0, 6.0, abs(p.x));
-    vLift = clamp(ripple * 2.0, 0.0, 1.0);
-  }
-`;
-
-const WAVE_FRAG = /* glsl */ `
-  varying float vFade;
-  varying float vLift;
-  void main() {
-    float d = length(gl_PointCoord - 0.5);
-    if (d > 0.5) discard;
-    float a = smoothstep(0.5, 0.1, d) * vFade * (0.4 + vLift * 0.6);
-    gl_FragColor = vec4(vec3(1.0), a);
-  }
-`;
-
-/** An ocean of white points rolling in perspective; the pointer sends ripples across it. Built for dark sections. */
-export function WaveField({ className }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useThreeScene(ref, ({ THREE, scene, camera, renderer, reduce, pointer }) => {
-    const cols = window.innerWidth < 768 ? 90 : 170;
-    const rows = window.innerWidth < 768 ? 50 : 80;
-    const width = 26;
-    const depth = 22;
-    const pos = new Float32Array(cols * rows * 3);
-    for (let r = 0; r < rows; r++)
-      for (let c = 0; c < cols; c++) {
-        const i = (r * cols + c) * 3;
-        pos[i] = (c / (cols - 1) - 0.5) * width;
-        pos[i + 1] = 0;
-        pos[i + 2] = -(r / (rows - 1)) * depth + 4;
-      }
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const uniforms = {
-      uTime: { value: 0 },
-      uPointer: { value: new THREE.Vector2(0, -6) },
-      uPointerStrength: { value: 0 },
-      uPixelRatio: { value: renderer.getPixelRatio() },
-      uMotion: { value: reduce ? 0 : 1 },
-    };
-    const material = new THREE.ShaderMaterial({
-      vertexShader: WAVE_VERT,
-      fragmentShader: WAVE_FRAG,
-      uniforms,
-      transparent: true,
-      depthWrite: false,
-    });
-    scene.add(new THREE.Points(geometry, material));
-    camera.position.set(0, 2.6, 7.5);
-    camera.lookAt(0, -0.4, -4);
-
-    const raycaster = new THREE.Raycaster();
-    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-    const hit = new THREE.Vector3();
-    const ndc = new THREE.Vector2();
-
-    return {
-      update(t, dt) {
-        uniforms.uTime.value = t;
-        const p = pointer.current;
-        let target = 0;
-        if (p && !reduce) {
-          ndc.set(p.x, p.y);
-          raycaster.setFromCamera(ndc, camera);
-          if (raycaster.ray.intersectPlane(plane, hit)) {
-            uniforms.uPointer.value.x = easeTo(uniforms.uPointer.value.x, hit.x, dt, 5);
-            uniforms.uPointer.value.y = easeTo(uniforms.uPointer.value.y, hit.z, dt, 5);
-            target = 1;
-          }
-        }
-        uniforms.uPointerStrength.value = easeTo(uniforms.uPointerStrength.value, target, dt, 2);
       },
       dispose() {
         geometry.dispose();

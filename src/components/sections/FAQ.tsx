@@ -13,7 +13,7 @@ const INITIAL = 6;
 export function FAQ() {
   const [showAll, setShowAll] = useState(false);
   return (
-    <div className="border-t border-border bg-secondary py-14 lg:py-24">
+    <div className="border-t border-border bg-background py-14 lg:py-24">
       <Container className="grid gap-10 lg:grid-cols-[1fr_1.9fr] lg:gap-16">
         <motion.div {...reveal} className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow className="mb-5">FAQ</Eyebrow>
@@ -44,7 +44,7 @@ export function FAQ() {
                 value={`faq-${i}`}
                 // Extra questions are hidden, not removed; all answers also ship in the FAQ schema
                 className={cn(
-                  "group relative border border-border bg-background/60 transition-colors duration-300 data-[state=open]:bg-background data-[state=open]:shadow-[0_20px_40px_-30px_rgba(15,23,42,0.35)] hover:bg-background",
+                  "group relative border border-border bg-secondary/50 transition-colors duration-300 data-[state=open]:bg-background data-[state=open]:shadow-[0_20px_40px_-30px_rgba(15,23,42,0.35)] hover:bg-background",
                   i >= INITIAL && !showAll && "hidden",
                 )}
               >
