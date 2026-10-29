@@ -25,8 +25,7 @@ const faqs = [
 export default function Pricing() {
   const allOffers = [
     ...services.flatMap((s) => s.tiers.map((t) => ({ ...t, serviceName: s.name }))),
-    ...carePlans.map((t) => ({ ...t, serviceName: "Website Care Plans" })),
-  ];
+      ];
 
   const schemas = [
     ...generateServiceSchemas(),
@@ -97,7 +96,6 @@ export default function Pricing() {
                     {s.name}
                   </a>
                 ))}
-                <a href="#care-plans" className="font-medium text-text-secondary underline-offset-4 hover:text-foreground hover:underline">Care Plans</a>
               </nav>
             </Container>
           </section>
@@ -118,34 +116,13 @@ export default function Pricing() {
                 <div className="grid gap-6 md:grid-cols-3">
                   {s.tiers.map((tier, ti) => (
                     <motion.div key={tier.name} {...revealDelay(ti)}>
-                      <PlanCard tier={tier} />
+                      <PlanCard tier={tier} serviceSlug={s.slug} />
                     </motion.div>
                   ))}
                 </div>
               </Container>
             </section>
           ))}
-
-          {/* Care plans */}
-          <section id="care-plans" className="scroll-mt-24 border-b border-border py-20 lg:py-24">
-            <Container>
-              <motion.div {...reveal} className="mb-10 flex max-w-2xl items-start gap-4">
-                <ShieldCheck className="mt-1 h-7 w-7 shrink-0 text-primary" strokeWidth={1.75} />
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Add-on</p>
-                  <h2 className="mt-2 font-display text-3xl text-foreground md:text-4xl">Website Care Plans</h2>
-                  <p className="mt-3 text-muted-foreground">Updates, backups, monitoring, security, and content changes handled for you every month.</p>
-                </div>
-              </motion.div>
-              <div className="grid gap-6 md:grid-cols-3">
-                {carePlans.map((tier, i) => (
-                  <motion.div key={tier.name} {...revealDelay(i)}>
-                    <PlanCard tier={tier} />
-                  </motion.div>
-                ))}
-              </div>
-            </Container>
-          </section>
 
           {/* FAQ */}
           <section className="bg-secondary py-24 lg:py-32">

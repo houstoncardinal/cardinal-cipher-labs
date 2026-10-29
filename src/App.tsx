@@ -9,6 +9,9 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { AppRoutes } from "./AppRoutes";
 import { trackContactLinkClicks } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/contact-intent";
+import { MotionConfig } from "framer-motion";
+import { CursorLabel, PageFade } from "@/components/site/motion";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +19,7 @@ const queryClient = new QueryClient();
 export function AppProviders({ children, helmetContext }: { children: ReactNode; helmetContext?: object }) {
   return (
     <HelmetProvider context={helmetContext}>
+      <MotionConfig reducedMotion="user">
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <TooltipProvider>
@@ -25,18 +29,25 @@ export function AppProviders({ children, helmetContext }: { children: ReactNode;
           </TooltipProvider>
         </AuthProvider>
       </QueryClientProvider>
+      </MotionConfig>
     </HelmetProvider>
   );
 }
 
 const App = () => {
-  useEffect(() => trackContactLinkClicks(), []);
+  useEffect(() => {
+    captureAttribution();
+    return trackContactLinkClicks();
+  }, []);
 
   return (
     <AppProviders>
       <BrowserRouter>
         <ScrollToTop />
-        <AppRoutes />
+        <CursorLabel />
+        <PageFade>
+          <AppRoutes />
+        </PageFade>
       </BrowserRouter>
     </AppProviders>
   );

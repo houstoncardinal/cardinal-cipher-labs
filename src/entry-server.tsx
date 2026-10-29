@@ -5,9 +5,14 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import type { HelmetServerState } from "react-helmet-async";
 import { AppProviders } from "./App";
-import { AppRoutes, noindexPaths, publicPaths } from "./AppRoutes";
+import { AppRoutes, noindexPaths, publicPaths, redirects } from "./AppRoutes";
 
-export { noindexPaths, publicPaths };
+export { noindexPaths, publicPaths, redirects };
+export { services, carePlans } from "./lib/services-catalog";
+export { landingPages } from "./lib/landing-pages";
+export { caseStudies } from "./lib/case-studies";
+export { articles } from "./lib/blog-data";
+export { homeFaqs } from "./lib/home-faqs";
 
 export function render(url: string) {
   const helmetContext: { helmet?: HelmetServerState } = {};

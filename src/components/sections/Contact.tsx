@@ -5,7 +5,7 @@ import { Container, Eyebrow, reveal } from "@/components/site/primitives";
 
 const details = [
   { icon: Phone, label: "Phone", value: "(281) 901-7016", href: "tel:281-901-7016" },
-  { icon: Mail, label: "Email", value: "hello@visitcardinal.com", href: "mailto:hello@visitcardinal.com" },
+  { icon: Mail, label: "Email", value: "Hunain@visitcardinal.com", href: "mailto:Hunain@visitcardinal.com" },
   { icon: MapPin, label: "Headquarters", value: "2100 West Loop S Fwy, Houston, TX 77027" },
   { icon: Clock, label: "Hours", value: "Mon–Fri, 9AM–6PM CST" },
 ];

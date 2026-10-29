@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Container, SectionHeader, revealDelay } from "@/components/site/primitives";
+import { Spotlight } from "@/components/site/motion";
 
 const pillars = [
   { title: "One senior team", description: "Strategy, design, engineering, and marketing under one roof — no hand-offs between agencies, no junior bait-and-switch." },
@@ -12,7 +13,7 @@ const pillars = [
 
 export function Advantage() {
   return (
-    <div className="bg-ink py-24 text-ink-foreground lg:py-32">
+    <Spotlight className="bg-ink py-24 text-ink-foreground lg:py-32">
       <Container>
         <SectionHeader
           inverted
@@ -30,6 +31,6 @@ export function Advantage() {
           ))}
         </div>
       </Container>
-    </div>
+    </Spotlight>
   );
 }

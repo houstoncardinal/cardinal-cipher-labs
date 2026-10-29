@@ -19,8 +19,8 @@ export const siteConfig = {
   },
   
   contact: {
-    email: 'hello@visitcardinal.com',
-    supportEmail: 'support@visitcardinal.com',
+    email: 'Hunain@visitcardinal.com',
+    supportEmail: 'Hunain@visitcardinal.com',
     phone: '+1-281-901-7016',
     formattedPhone: '(281) 901-7016',
     fax: '+1-281-901-7017',
@@ -95,7 +95,7 @@ export const siteConfig = {
     {
       name: 'Hunain Qureshi',
       role: 'Founder & CEO',
-      email: 'hello@visitcardinal.com',
+      email: 'Hunain@visitcardinal.com',
       expertise: ['Web Design Houston', 'App Development', 'SEO Strategy', 'Cloud Architecture', 'AI/ML', 'Enterprise Architecture'],
       credentials: [
         'MS Computer Science - Stanford University',
@@ -108,7 +108,7 @@ export const siteConfig = {
       image: '/team/hunain-qureshi.jpg',
       linkedin: 'https://linkedin.com/in/hunain-qureshi',
       twitter: 'https://twitter.com/cardinalconsult',
-      description: "Hunain Qureshi is the Founder and CEO of Cardinal Consulting — Houston's #1 web design and app development agency. With 15+ years of software engineering experience and a Stanford MS in Computer Science, he leads a team that has delivered 500+ websites, mobile apps, and SEO campaigns for Houston businesses across all industries.",
+      description: "Hunain Qureshi is the Founder and CEO of Cardinal Consulting, a Houston-based web design, app development, and digital growth firm. With 15+ years of software engineering experience and a Stanford MS in Computer Science, he leads a team that has delivered 500+ websites, mobile apps, and SEO campaigns for Houston businesses across all industries.",
       worksFor: 'Cardinal Consulting LLC',
       location: 'Houston, TX',
     },
@@ -217,7 +217,6 @@ export const siteConfig = {
     {
       name: 'Vargas Tax',
       description: 'Powerful website for tax preparation services with customized quick action widgets, powerful SEO, and customized landing pages.',
-      url: 'https://vargastax.com',
       image: '/portfolio/vargas.png',
       category: 'Tax Preparation Services',
       technologies: ['React', 'Node.js', 'SEO Optimization'],
@@ -225,7 +224,7 @@ export const siteConfig = {
     {
       name: 'ClearLedger Solutions',
       description: 'Trusted financial partner specializing in accurate, reliable, and transparent bookkeeping services.',
-      url: 'https://clearledger.com',
+      url: 'https://www.yourclearledger.com',
       image: '/portfolio/clearledger.png',
       category: 'Bookkeeping Services',
       technologies: ['Next.js', 'Supabase', 'Tailwind CSS'],

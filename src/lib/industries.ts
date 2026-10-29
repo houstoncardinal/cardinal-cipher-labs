@@ -10,10 +10,10 @@ export interface Industry {
 }
 
 export const industries: Industry[] = [
-  { name: "Healthcare", href: "/industry/healthcare", icon: Stethoscope, blurb: "HIPAA-ready portals & patient acquisition", description: "HIPAA-compliant patient portals, clinical workflow tools, and websites that bring in new patients." },
-  { name: "Legal", href: "/industry/legal", icon: Scale, blurb: "Client intake & authority building", description: "Websites, intake systems, and secure document handling that help firms win more cases." },
-  { name: "Financial Services", href: "/industry/financial", icon: Building2, blurb: "Secure, compliant digital experiences", description: "Regulation-aware platforms, dashboards, and secure client experiences for financial firms." },
-  { name: "Technology", href: "/industry/technology", icon: Cpu, blurb: "SaaS platforms & product engineering", description: "SaaS products, developer platforms, and the marketing engines that grow them." },
-  { name: "AI & Automation", href: "/industry/ai-automation", icon: Brain, blurb: "Applied AI & process automation", description: "Custom AI tools and automation that remove manual work from your operations." },
-  { name: "Construction", href: "/industry/construction", icon: HardHat, blurb: "Lead generation & project showcases", description: "Websites and lead generation for commercial and residential builders." },
+  { name: "Healthcare", href: "/houston-medical-website-design", icon: Stethoscope, blurb: "Practice websites & patient experience", description: "Medical practice websites with clear provider pages, appointment requests, accessible design, and privacy-conscious forms." },
+  { name: "Legal", href: "/houston-law-firm-website-design", icon: Scale, blurb: "Law firm websites & client intake", description: "Law firm websites with practice-area pages, attorney bios, and intake forms, built with Texas advertising rules in mind." },
+  { name: "Financial Services", href: "/industry/financial", icon: Building2, blurb: "Secure, credible digital experiences", description: "Websites for accounting firms, advisors, lenders, and fintech, with content workflows built around compliance review." },
+  { name: "Technology & SaaS", href: "/industry/technology", icon: Cpu, blurb: "Product marketing & engineering", description: "Marketing sites, pricing and security pages, documentation, and web applications for technology companies." },
+  { name: "AI & Automation Companies", href: "/industry/ai-automation", icon: Brain, blurb: "Positioning, demos & trust", description: "Websites that explain AI products clearly, show them working, and make accurate, defensible claims." },
+  { name: "Construction", href: "/industry/construction", icon: HardHat, blurb: "Project portfolios & bid requests", description: "Websites for contractors and trades with project portfolios, bid requests, and service-area pages." },
 ];

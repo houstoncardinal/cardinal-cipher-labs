@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { ImageReveal, RevealText } from "@/components/site/motion";
 
 /** Shared scroll-reveal: subtle, fast, once. */
 export const reveal = {
@@ -21,7 +22,14 @@ export function Eyebrow({ children, className, inverted }: { children: ReactNode
         className,
       )}
     >
-      <span className={cn("h-px w-8", inverted ? "bg-ink-muted/60" : "bg-primary")} />
+      <motion.span
+        aria-hidden
+        className={cn("block h-px w-8 origin-left", inverted ? "bg-ink-muted/60" : "bg-primary")}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      />
       {children}
     </span>
   );
@@ -51,7 +59,7 @@ export function SectionHeader({ eyebrow, title, description, align = "left", inv
       <div className={cn(align === "left" && "max-w-3xl")}>
         {eyebrow && <Eyebrow inverted={inverted} className="mb-5">{eyebrow}</Eyebrow>}
         <h2 className={cn("font-display text-3xl leading-[1.1] md:text-4xl lg:text-5xl", inverted ? "text-ink-foreground" : "text-foreground")}>
-          {title}
+          {typeof title === "string" ? <RevealText text={title} /> : title}
         </h2>
         {description && (
           <p className={cn("mt-5 text-lg leading-relaxed", inverted ? "text-ink-muted" : "text-muted-foreground")}>{description}</p>
@@ -71,7 +79,12 @@ export function BrowserFrame({ src, alt, className, eager }: { src: string; alt:
         <span className="h-2 w-2 rounded-full bg-border" />
         <span className="h-2 w-2 rounded-full bg-border" />
       </div>
-      <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} className="block aspect-[16/10] w-full object-cover object-top" />
+      <ImageReveal>
+        {/* object-contain: the whole screenshot is always visible — never cropped or stretched */}
+        <div className="aspect-[16/9] w-full bg-[#eef1f5]">
+          <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} className="block h-full w-full object-contain" />
+        </div>
+      </ImageReveal>
     </div>
   );
 }

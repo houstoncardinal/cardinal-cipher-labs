@@ -1233,3 +1233,45 @@
     0 0 100px hsl(var(--primary) / 0.6),
     0 0 150px hsl(var(--primary) / 0.4);
 }
+
+/* Arrow links nudge toward their destination on hover */
+@layer utilities {
+  .lucide-arrow-right,
+  .lucide-arrow-up-right {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  a:hover > .lucide-arrow-right,
+  button:hover > .lucide-arrow-right {
+    transform: translateX(3px);
+  }
+  a:hover .lucide-arrow-up-right {
+    transform: translate(2px, -2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lucide-arrow-right,
+    .lucide-arrow-up-right {
+      transition: none;
+    }
+  }
+}
+
+/* Arrow links nudge toward their destination on hover */
+@layer utilities {
+  .lucide-arrow-right,
+  .lucide-arrow-up-right {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  a:hover > .lucide-arrow-right,
+  button:hover > .lucide-arrow-right {
+    transform: translateX(3px);
+  }
+  a:hover .lucide-arrow-up-right {
+    transform: translate(2px, -2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lucide-arrow-right,
+    .lucide-arrow-up-right {
+      transition: none;
+    }
+  }
+}

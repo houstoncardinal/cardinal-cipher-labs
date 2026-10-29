@@ -1,3 +1,7 @@
+// Insights articles. Editorial rules: every statistic cites a checkable source in `sources`;
+// Cardinal's own prices come from services-catalog.ts; regulatory topics stay general and
+// point readers to their own counsel. Retired 2025 posts redirect via src/lib/redirects.ts.
+
 export interface BlogArticle {
   slug: string;
   title: string;
@@ -10,6 +14,9 @@ export interface BlogArticle {
   readTime: string;
   featured: boolean;
   keywords: string[];
+  /** Service or landing page this article supports (used for the CTA and contact pre-fill) */
+  relatedService?: string;
+  sources?: { label: string; url: string }[];
   content: {
     sections: BlogSection[];
     cta: string;
@@ -18,6 +25,7 @@ export interface BlogArticle {
 
 export interface BlogSection {
   heading: string;
+  /** Paragraphs separated by blank lines */
   body: string;
   highlight?: string;
   bullets?: string[];
@@ -30,1211 +38,802 @@ export interface BlogPillar {
 }
 
 export const pillars: BlogPillar[] = [
-  { id: "houston-web-design", name: "Houston Web Design", description: "Comprehensive guides on Houston web design services, companies, and how to choose the right partner for your business." },
-  { id: "web-design-comparisons", name: "Comparisons & Guides", description: "Compare web design options in Houston — agency vs freelancer, WordPress vs custom, and find the right fit for your budget." },
-  { id: "industry-web-design", name: "Industry Design", description: "Specialized web design for Houston law firms, medical practices, ecommerce stores, and real estate agencies." },
-  { id: "design-process", name: "Design Process", description: "Best practices for mobile-first design, speed optimization, local SEO integration, and the full website development process." },
-  { id: "business-roi", name: "Business & ROI", description: "Understand the real value of web design investment, when to redesign, and how to maximize conversion rates." },
+  { id: "websites", name: "Websites & Costs", description: "Planning, pricing, and maintaining a website that brings in customers." },
+  { id: "growth", name: "Growth Marketing", description: "Social media, local search, and the marketing that fills your pipeline." },
+  { id: "ai-technology", name: "AI & Technology", description: "Practical guidance on AI, automation, cloud, and technical leadership." },
+  { id: "industry", name: "Industry Guides", description: "Specialized advice for healthcare, apps, and other regulated or complex fields." },
 ];
 
+const AUTHOR = "Hunain Qureshi";
+const DATE = "2026-10-28";
+
+const SRC = {
+  pew: { label: "Pew Research Center — Americans' Social Media Use 2025", url: "https://www.pewresearch.org/internet/2025/11/20/americans-social-media-use-2025/" },
+  sprout: { label: "Sprout Social — Social media response time (Sprout Social Index 2025)", url: "https://sproutsocial.com/insights/social-media-response-time/" },
+  brightlocal: { label: "BrightLocal — Local Consumer Review Survey 2025", url: "https://www.brightlocal.com/research/local-consumer-review-survey-2025/" },
+  google53: { label: "Google, The Need for Mobile Speed (via Marketing Dive)", url: "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/" },
+  deloitte: { label: "Deloitte & Google — Milliseconds Make Millions (web.dev case study)", url: "https://web.dev/case-studies/milliseconds-make-millions" },
+  mckinseyAI: { label: "McKinsey — The State of AI in 2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
+  mckinseyDesign: { label: "McKinsey — The Business Value of Design", url: "https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-business-value-of-design" },
+  flexera: { label: "Flexera — 2025 State of the Cloud Report (press release)", url: "https://www.flexera.com/about-us/press-center/new-flexera-report-finds-84-percent-of-organizations-struggle-to-manage-cloud-spend" },
+  ibm: { label: "IBM — Cost of a Data Breach Report 2025", url: "https://www.ibm.com/reports/data-breach" },
+  patchstack: { label: "Patchstack — State of WordPress Security in 2026", url: "https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/" },
+  sensortower: { label: "Sensor Tower — State of Mobile 2025", url: "https://sensortower.com/blog/2025-state-of-mobile-consumers-usd150-billion-spent-on-mobile-highlights" },
+  gbpGuidelines: { label: "Google — Guidelines for representing your business on Google", url: "https://support.google.com/business/answer/3038177" },
+  ahaBecerra: { label: "Holland & Knight — American Hospital Assn. v. Becerra (2024)", url: "https://www.hklaw.com/en/insights/publications/2024/06/american-hospital-assn-v-becerra-are-tracking-tools-ok-again" },
+  hhs504: { label: "Feldesman — HHS Extends Section 504 Web Accessibility Compliance Deadlines (2026)", url: "https://www.feldesman.com/hhs-extends-compliance-deadlines-for-web-and-mobile-accessibility-requirements/" },
+  ftcAI: { label: "Orrick — FTC Targets Unfair or Deceptive AI Practices (Operation AI Comply, 2024)", url: "https://www.orrick.com/en/Insights/2024/10/FTC-Targets-Unfair-or-Deceptive-AI-Practices-With-Five-New-Enforcement-Actions" },
+};
+
 export const articles: BlogArticle[] = [
-  // PILLAR 1: HOUSTON WEB DESIGN SERVICES
+  // 1 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-company",
-    title: "Houston Web Design Company: Why Businesses Trust Cardinal Consulting",
-    excerpt: "Looking for a Houston web design company that delivers real results? Discover why Cardinal Consulting is the go-to choice for Houston businesses seeking custom, high-performing websites that drive leads and revenue.",
-    category: "Houston Web Design",
-    pillar: "houston-web-design",
+    slug: "how-much-does-a-website-cost-houston",
+    title: "How Much Does a Website Cost in Houston? A Transparent Pricing Guide",
+    excerpt: "Real numbers for marketing websites, e-commerce stores, and custom platforms — plus the ongoing costs most quotes leave out and the questions to ask before you sign.",
+    category: "Websites & Costs",
+    pillar: "websites",
     priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-05-20",
-    readTime: "12 min read",
+    author: AUTHOR,
+    date: DATE,
+    readTime: "8 min read",
     featured: true,
-    keywords: ["houston web design company", "web design houston", "best web design company houston", "houston website design company"],
+    keywords: ["how much does a website cost Houston", "website cost Houston", "web design pricing Houston", "small business website cost", "ecommerce website cost"],
+    relatedService: "/services/web-development",
+    sources: [SRC.google53, SRC.deloitte],
     content: {
       sections: [
         {
-          heading: "The State of Web Design in Houston",
-          body: "Houston is the fourth-largest city in the United States, home to over 2.3 million residents and tens of thousands of businesses competing for attention. In this hyper-competitive landscape, your website isn't just a digital brochure — it's your most powerful sales tool, your 24/7 brand ambassador, and often the first impression potential clients have of your business. Yet most Houston businesses are leaving money on the table with outdated, slow, or poorly designed websites that fail to convert visitors into customers.",
-          highlight: "A professionally designed website can increase conversion rates by up to 200%, while a great UX design can yield conversion rates up to 400%.",
+          heading: "The short answer",
+          body: "Website pricing in Houston ranges from a few hundred dollars for a do-it-yourself template to six figures for a custom platform. The honest answer depends on what the site needs to do for your business.\n\nFor reference, here is what Cardinal Consulting charges, so you have real numbers to compare against other quotes:",
           bullets: [
-            "72% of consumers say a business's website design impacts their perception of credibility",
-            "48% of users cite site design as the number one factor in determining a business's credibility",
-            "Houston businesses with modern, responsive websites see 3x more lead conversions than those with outdated designs"
-          ]
+            "Marketing website (up to 5 custom pages): from $1,500, one-time",
+            "E-commerce store: from $3,500, one-time",
+            "Custom platforms, portals, and web applications: quoted after a free consultation",
+            "Website care plans: $299, $499, or $799 per month",
+            "Payment terms: typically 50% at kickoff and 50% at launch",
+          ],
         },
         {
-          heading: "What Sets a Great Houston Web Design Company Apart",
-          body: "Not all web design agencies are created equal. Many promise the world but deliver templated solutions that look like every other site in your industry. The difference comes down to strategy, customization, and a deep understanding of what makes Houston businesses unique. A top-tier Houston web design company doesn't just build pretty interfaces — they engineer systems that generate leads, nurture prospects, and scale with your business.",
+          heading: "What actually drives the price",
+          body: "Two websites that look similar on the surface can differ in cost by thousands of dollars. These are the factors that move the number most:",
           bullets: [
-            "Custom strategy tailored to Houston's diverse market demographics",
-            "SEO-first architecture designed to rank for local search terms like 'web design houston'",
-            "Performance-optimized code that loads in under 2 seconds — critical for both user experience and Google rankings",
-            "Conversion-centered design with strategic calls-to-action and user flow optimization"
-          ]
+            "Custom design versus a template — custom design takes more time but makes your business look distinct",
+            "Number of unique page layouts, not just number of pages",
+            "Who writes the content — copywriting is often priced separately",
+            "Integrations such as booking, CRM, payments, inventory, or patient portals",
+            "E-commerce catalog size, product options, and shipping or tax complexity",
+            "Migrating content and redirecting old URLs so you keep your search rankings",
+            "Accessibility and industry requirements, such as healthcare privacy or lawyer-advertising rules",
+          ],
         },
         {
-          heading: "The Cardinal Consulting Difference",
-          body: "Since our founding in Houston, Cardinal Consulting has been at the forefront of web design and digital innovation. We don't just build websites — we build digital growth engines. Our team combines world-class design talent with technical expertise in modern frameworks like React, Vue.js, and Next.js, delivering websites that are as powerful as they are beautiful. Every project begins with a deep discovery phase where we learn about your business, your customers, and your goals. We don't make assumptions — we build strategies based on data.",
-          highlight: "Our clients see an average of 340% increase in organic traffic within 6 months of launching their new website.",
+          heading: "The ongoing costs most quotes leave out",
+          body: "The build is only part of the cost of owning a website. Budget for these recurring items so there are no surprises:",
           bullets: [
-            "100+ websites launched for Houston businesses across 15+ industries",
-            "Average 4.9/5 client satisfaction rating",
-            "Proven track record of improving search rankings for competitive local keywords"
-          ]
+            "Domain name renewal",
+            "Hosting — or a platform subscription such as Shopify",
+            "Payment processing fees on online sales",
+            "Software, plugin, and security updates",
+            "Content changes and new pages",
+            "SEO or marketing, if you want the site to keep bringing in new traffic",
+          ],
+          highlight: "Speed is part of value, not a luxury. Google found that 53% of mobile visits are abandoned when a page takes longer than three seconds to load, and a Deloitte study for Google measured an 8.4% lift in retail conversions from a 0.1-second speed improvement.",
         },
         {
-          heading: "Services We Offer",
-          body: "From custom website design and development to e-commerce solutions and ongoing optimization, Cardinal Consulting provides end-to-end digital services designed to help Houston businesses thrive online. Every project is handled by a dedicated team that includes a project manager, designer, developer, and SEO specialist.",
-          bullets: [
-            "Custom website design and development tailored to your brand and goals",
-            "E-commerce website development with seamless payment integration",
-            "Local SEO optimization to dominate Houston search results",
-            "Website redesign and migration services for existing sites",
-            "Ongoing maintenance, security updates, and performance monitoring"
-          ]
+          heading: "DIY builder, freelancer, or agency?",
+          body: "A website builder is the cheapest way to get online and can be the right call for a brand-new business testing an idea. You trade money for your own time, and you are limited to what the template allows.\n\nA freelancer can be a good value for a well-defined project. Ask how they handle design, development, SEO, and support if one person is responsible for everything, and what happens if they become unavailable.\n\nAn agency costs more than a builder but brings design, development, SEO, and support under one roof, with a team that can keep supporting the site after launch. The right choice depends on how much the website needs to contribute to revenue.",
         },
         {
-          heading: "Ready to Work with Houston's Premier Web Design Company?",
-          body: "Whether you're launching a new business or need to revitalize an existing website, Cardinal Consulting has the expertise and experience to deliver results. We're proud to serve businesses throughout Houston — from the Energy Corridor to the Medical Center, from Downtown to The Woodlands. Your website should be your hardest-working employee. Let's build it together.",
-        }
+          heading: "Questions to ask before you sign",
+          body: "Whoever you hire, these questions separate clear quotes from vague ones:",
+          bullets: [
+            "Is the design custom, or based on a template?",
+            "How many rounds of revisions are included?",
+            "Who owns the domain, the content, and the website files?",
+            "What is included after launch, and for how long?",
+            "How will you protect our current search rankings during a redesign?",
+            "What are the ongoing monthly costs, line by line?",
+            "Can I see live websites you've built for businesses like mine?",
+          ],
+        },
+        {
+          heading: "How to get an accurate quote",
+          body: "Before requesting quotes, write down your goals (calls, bookings, sales), the pages you need, the tools the site must connect to, and two or three websites you like. That one page of notes lets every company quote the same project, so you can compare fairly.",
+        },
       ],
-      cta: "Ready to dominate Houston's digital landscape? Schedule your free consultation today and discover what a world-class website can do for your business."
-    }
-  },
-  {
-    slug: "best-web-designer-houston",
-    title: "Best Web Designer in Houston: How to Choose the Right Partner for Your Business",
-    excerpt: "Finding the best web designer in Houston can make or break your online presence. Learn exactly what to look for, questions to ask, and why Cardinal Consulting stands out from the competition.",
-    category: "Houston Web Design",
-    pillar: "houston-web-design",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-05-18",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["best web designer in houston", "top web designer houston", "houston web designer", "best website designer houston"],
-    content: {
-      sections: [
-        {
-          heading: "Why Finding the Right Web Designer Matters",
-          body: "Your website is the digital face of your business. In a city as competitive as Houston, the difference between a good website and a great one can mean thousands of dollars in lost or gained revenue. Finding the best web designer in Houston isn't just about aesthetics — it's about finding a partner who understands your business goals, your target audience, and the technical landscape required to rank in today's search environment.",
-          highlight: "90% of users judge a business's credibility based on website design alone.",
-          bullets: [
-            "First impressions happen in 0.05 seconds — your website's design makes or breaks that impression",
-            "75% of consumers admit to making judgments about a company's credibility based on their website design",
-            "Houston businesses with professionally designed websites generate 2.5x more revenue than those without"
-          ]
-        },
-        {
-          heading: "What to Look for in a Houston Web Designer",
-          body: "Not every designer or agency is right for your business. Before you commit, evaluate potential web designers on these critical criteria. The best web designers in Houston offer more than just visual design — they provide strategic thinking, technical expertise, and a proven process for delivering results.",
-          bullets: [
-            "Portfolio diversity: Do they have experience in your industry?",
-            "SEO knowledge: Do they build sites optimized for search from day one?",
-            "Technical capability: Are they using modern frameworks or outdated platforms?",
-            "Communication style: Do they explain things clearly or use jargon to confuse?",
-            "Post-launch support: What happens after your site goes live?"
-          ]
-        },
-        {
-          heading: "Red Flags to Avoid",
-          body: "Unfortunately, not every web designer in Houston has your best interests at heart. Watch out for these common warning signs when evaluating potential partners. The cheapest option upfront often costs the most in the long run through lost revenue, poor performance, and expensive redesigns.",
-          bullets: [
-            "They use page builders or templates exclusively with little customization",
-            "No clear process or timeline for project delivery",
-            "Vague on SEO strategy or claim SEO is 'built in' without specifics",
-            "No portfolio of actual Houston-based projects",
-            "They outsource development overseas without transparency",
-            "No post-launch support or maintenance plan"
-          ]
-        },
-        {
-          heading: "Why Cardinal Consulting Is Houston's Top Choice",
-          body: "When Houston businesses search for the best web designer in Houston, Cardinal Consulting consistently rises to the top. Our combination of technical excellence, strategic thinking, and genuine care for our clients' success sets us apart. We don't just build websites — we build long-term partnerships that drive real, measurable growth.",
-          highlight: "Cardinal Consulting has an average client retention rate of 94% — proof that our work speaks for itself.",
-          bullets: [
-            "Led by a team with 15+ years of combined experience in web design and digital strategy",
-            "Deep understanding of Houston's local market and business landscape",
-            "Proven results with measurable case studies and testimonials",
-            "End-to-end service from strategy through launch and beyond"
-          ]
-        },
-        {
-          heading: "Your Next Step",
-          body: "Choosing the best web designer in Houston is one of the most important business decisions you'll make. We invite you to compare — look at our portfolio, read our client testimonials, and reach out for a no-obligation consultation. See for yourself why businesses throughout Houston trust Cardinal Consulting to design, build, and grow their digital presence.",
-        }
-      ],
-      cta: "Ready to work with the best web designer in Houston? Contact Cardinal Consulting today for a free strategy session."
-    }
-  },
-  {
-    slug: "houston-website-design-services",
-    title: "Houston Website Design Services: Custom Solutions That Drive Results",
-    excerpt: "From local SEO-optimized sites to full e-commerce platforms, explore Cardinal Consulting's Houston website design services tailored to your industry. Get a site that ranks, converts, and grows with you.",
-    category: "Houston Web Design",
-    pillar: "houston-web-design",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-05-15",
-    readTime: "11 min read",
-    featured: false,
-    keywords: ["houston website design services", "website design houston", "houston web design services", "professional web design houston"],
-    content: {
-      sections: [
-        {
-          heading: "Comprehensive Website Design Services for Houston Businesses",
-          body: "In a city as dynamic and diverse as Houston, one-size-fits-all website solutions simply don't cut it. Your business is unique, and your website should reflect that. Cardinal Consulting offers a full spectrum of Houston website design services designed to meet the specific needs of businesses across every industry — from startups and small businesses to established enterprises.",
-          highlight: "Businesses with custom-designed websites see 3x better conversion rates compared to template-based sites."
-        },
-        {
-          heading: "Our Website Design Services",
-          body: "We offer everything you need to establish, grow, and maintain a powerful online presence. Every service is delivered with the same commitment to quality, performance, and results that has made Cardinal Consulting one of the most trusted names in Houston web design.",
-          bullets: [
-            "Custom Website Design — Tailored designs built from scratch using modern frameworks like React and Next.js",
-            "Responsive Web Design — Mobile-first designs that look and perform flawlessly on every device",
-            "E-commerce Development — Full-featured online stores with secure payment processing and inventory management",
-            "Landing Page Design — High-converting landing pages for campaigns and promotions",
-            "Website Redesign — Complete overhauls of existing sites to improve performance, design, and SEO",
-            "UI/UX Design — User experience optimization to maximize engagement and conversions",
-            "Maintenance & Support — Ongoing updates, security monitoring, and performance optimization"
-          ]
-        },
-        {
-          heading: "The Technology Behind Our Designs",
-          body: "We believe in building websites on modern, scalable technology stacks that deliver exceptional performance and flexibility. Unlike agencies that rely on outdated platforms or restrictive templates, Cardinal Consulting uses cutting-edge technologies that give our clients a competitive advantage.",
-          highlight: "Our modern tech stack delivers page load speeds under 1.5 seconds — 3x faster than the industry average.",
-          bullets: [
-            "React, Next.js, and Vue.js for lightning-fast, dynamic user interfaces",
-            "Tailwind CSS for highly customizable, maintainable designs",
-            "Headless CMS architecture for content flexibility and scalability",
-            "Cloud hosting with automatic scaling, global CDN, and 99.9% uptime",
-            "Built-in SEO infrastructure including structured data, meta management, and sitemap generation"
-          ]
-        },
-        {
-          heading: "Designed for Houston Businesses",
-          body: "Every website we build is designed with Houston's unique market in mind. We understand the local competitive landscape, the search behaviors of Houston consumers, and what it takes to rank in one of the country's most competitive markets.",
-          bullets: [
-            "Local SEO optimization targeting Houston-specific search terms",
-            "Google Business Profile integration for local search visibility",
-            "Houston-focused content strategy that resonates with local audiences",
-            "Mobile optimization for Houston's on-the-go consumers",
-            "Fast-loading designs optimized for all devices and connection speeds"
-          ]
-        },
-        {
-          heading: "Get Started Today",
-          body: "Whether you need a brand-new website or a complete redesign, Cardinal Consulting's Houston website design services deliver the quality, performance, and results your business deserves. Contact us today to schedule a free consultation and discover what a custom-designed website can do for your Houston business.",
-        }
-      ],
-      cta: "Ready to elevate your online presence? Get your free Houston website design consultation today."
-    }
-  },
-  {
-    slug: "houston-small-business-web-design",
-    title: "Houston Small Business Web Design: Affordable Websites That Compete with the Big Guys",
-    excerpt: "Small business web design in Houston doesn't have to break the bank. Learn how affordable, custom websites help local businesses attract more customers and compete with larger competitors.",
-    category: "Houston Web Design",
-    pillar: "houston-web-design",
-    priority: 4,
-    author: "Hunain Qureshi",
-    date: "2026-05-12",
-    readTime: "9 min read",
-    featured: false,
-    keywords: ["houston small business web design", "affordable web design houston", "small business website houston", "cheap web design houston"],
-    content: {
-      sections: [
-        {
-          heading: "Small Business, Big Online Presence",
-          body: "As a small business owner in Houston, you already know the challenges of competing against larger companies with deeper pockets. But here's the truth: a great website is the great equalizer. With the right small business web design in Houston, you can look every bit as professional and credible as the biggest players in your industry — often for a fraction of what you'd expect to pay.",
-          highlight: "46% of small businesses still don't have a website. Having one immediately puts you ahead of nearly half your competition.",
-          bullets: [
-            "73% of small business owners believe a website is critical to their success",
-            "Small businesses with websites grow 40% faster than those without",
-            "The average cost of not having a website? $1,000+ in lost revenue per month for most local businesses"
-          ]
-        },
-        {
-          heading: "What Affordable Web Design Really Means",
-          body: "Affordable doesn't mean cheap. At Cardinal Consulting, affordable Houston small business web design means delivering exceptional value — a professional, custom-designed website that performs at the highest level, built with the same modern technology stack we use for enterprise clients, but scaled to fit the needs and budget of a growing business.",
-          bullets: [
-            "No hidden fees or surprise costs — transparent pricing from day one",
-            "Scalable solutions that grow with your business",
-            "Professional-grade designs that rival enterprise websites",
-            "Built-in SEO to help customers find you online",
-            "Mobile-responsive design optimized for every device"
-          ]
-        },
-        {
-          heading: "How We Make It Possible",
-          body: "We've refined our process to deliver maximum value for small businesses. By using efficient workflows, modern development tools, and strategic design choices, we create stunning websites at prices that make sense for growing companies. You get the same quality and expertise that larger companies pay premium prices for — without the premium price tag.",
-          bullets: [
-            "Streamlined design process that reduces development time without sacrificing quality",
-            "Smart template systems that are fully customizable — not pre-built templates",
-            "Efficient technology choices that minimize hosting and maintenance costs",
-            "Focus on features that drive results, not unnecessary bells and whistles"
-          ]
-        },
-        {
-          heading: "Your Path to a Professional Website",
-          body: "Ready to take your small business to the next level? Cardinal Consulting makes it easy to get started with a professional, results-driven website that fits your budget. Our team will guide you through every step of the process, from initial strategy to final launch and beyond.",
-        }
-      ],
-      cta: "Build the website your small business deserves. Contact Cardinal Consulting for affordable Houston web design that delivers big results."
-    }
+      cta: "Want a written price for your project? Book a free consultation and we'll send a clear scope, timeline, and quote — no obligation.",
+    },
   },
 
-  // PILLAR 2: WEB DESIGN COMPARISONS & GUIDES
+  // 2 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-cost",
-    title: "Houston Web Design Cost: How Much Should a Website Cost in 2026?",
-    excerpt: "What does web design actually cost in Houston? From basic brochure sites to custom e-commerce platforms, get a transparent breakdown of pricing and what you get at every investment level.",
-    category: "Web Design Comparisons",
-    pillar: "web-design-comparisons",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-05-10",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["houston web design cost", "how much does a website cost houston", "website pricing houston", "web design rates houston"],
+    slug: "social-media-management-whats-included",
+    title: "What's Included in Social Media Management — and How to Budget for It",
+    excerpt: "A clear breakdown of strategy, content, community management, paid social, and reporting, so you know exactly what you're paying for.",
+    category: "Growth Marketing",
+    pillar: "growth",
+    priority: 2,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "7 min read",
+    featured: true,
+    keywords: ["social media management", "social media management services", "social media management cost", "what does a social media manager do", "social media agency Houston"],
+    relatedService: "/services/social-media-management",
+    sources: [SRC.pew, SRC.sprout],
     content: {
       sections: [
         {
-          heading: "How Much Does Web Design Cost in Houston?",
-          body: "One of the most common questions we hear from Houston business owners is straightforward but rarely answered transparently: how much does a website actually cost? The truth is that web design pricing varies dramatically based on complexity, functionality, and the quality of the agency you choose. This guide breaks down real Houston web design costs so you can budget with confidence.",
-          highlight: "Houston web design costs start as low as $1,500 for a basic site and scale up based on your needs. We work with every budget to deliver exceptional value.",
-          bullets: [
-            "Basic brochure site (3-5 pages): Starting at $1,500",
-            "Houston small business website (3-5 pages): Starting at $1,500",
-            "Custom-made e-commerce store: Starting at $3,500",
-            "E-commerce build integrated with your systems: Starting at $3,500",
-            "Custom mobile application with deployment/management help: Starting at $5K+",
-            "Enterprise website with custom functionality: Custom quote",
-            "Ongoing maintenance: $150 — $1,000+ per month"
-          ]
+          heading: "What social media management actually means",
+          body: "Social media management is the ongoing work of planning, creating, publishing, and responding on your company's social channels — and measuring whether it's working. Done well, it keeps your brand visible and trustworthy where customers spend time, and turns that attention into inquiries.",
         },
         {
-          heading: "What Determines Web Design Pricing?",
-          body: "Several factors influence the final cost of a website. Understanding these variables helps you make informed decisions and ensures you're comparing apples to apples when evaluating proposals from different agencies.",
-          highlight: "The cheapest website upfront often costs the most in the long run through lost revenue, poor performance, and necessary redesigns.",
-          bullets: [
-            "Number of pages and overall site complexity",
-            "Custom design vs template-based approach",
-            "E-commerce functionality, payment processing, and product management",
-            "Custom features like booking systems, membership portals, or interactive tools",
-            "Content creation — copywriting, photography, and video production",
-            "SEO setup and ongoing optimization",
-            "Post-launch maintenance, security updates, and support"
-          ]
+          heading: "Pick channels by where your customers are",
+          body: "You don't need to be everywhere. According to Pew Research Center's 2025 survey of U.S. adults, 84% use YouTube, 71% use Facebook, and 50% use Instagram. For business-to-business companies, LinkedIn is often the most valuable channel even though its overall reach is smaller.\n\nA focused presence on two or three channels almost always beats a thin presence on six.",
         },
         {
-          heading: "Hidden Costs to Watch For",
-          body: "Many Houston businesses are surprised by hidden costs that weren't included in the initial quote. At Cardinal Consulting, we believe in complete transparency. Here are the most common hidden costs to watch for:",
+          heading: "The six parts of a complete service",
+          body: "When comparing providers, check that each of these is clearly included — or clearly priced separately:",
           bullets: [
-            "Domain registration and hosting fees that aren't included in the design price",
-            "Stock photography and asset licensing fees",
-            "Third-party plugin or extension costs (common with WordPress)",
-            "SEO setup as an add-on rather than a built-in service",
-            "Post-launch training and documentation",
-            "Ongoing maintenance contracts that auto-renew at high rates"
-          ]
+            "Strategy: goals, audiences, content themes, and a monthly calendar",
+            "Content creation: graphics, short-form video, and copy produced for each platform",
+            "Publishing: scheduling posts at the right times with the right formats",
+            "Community management: responding to comments and direct messages",
+            "Paid social: targeting, creative, and budget management for ads",
+            "Reporting: reach, engagement, clicks, and leads — tied back to business results",
+          ],
         },
         {
-          heading: "Why Investing in Quality Web Design Pays Off",
-          body: "While the upfront cost of professional web design may seem significant, consider the return on investment. A well-designed website doesn't just look good — it actively generates leads, sales, and growth for your business. When viewed as a long-term investment rather than an expense, the cost of web design becomes one of the most valuable investments you can make.",
-          highlight: "The average ROI for professional web design is 2-5x the initial investment within the first year alone.",
-          bullets: [
-            "A 1-second delay in page load time can reduce conversions by 7%",
-            "Professional design increases perceived trust and credibility by 75%",
-            "SEO-optimized sites generate 3-5x more organic traffic than non-optimized sites",
-            "Mobile-responsive design captures the 60%+ of traffic coming from mobile devices"
-          ]
+          heading: "Response time is part of the job",
+          body: "Social media is also a customer-service channel. Sprout Social's 2025 Index found that about 73% of consumers expect brands to respond on social within 24 hours or sooner. If no one owns replies, that expectation turns into lost customers.",
+          highlight: "Ask every provider who answers comments and messages, during which hours, and how anything sensitive gets escalated to your team.",
         },
         {
-          heading: "Get a Transparent Quote",
-          body: "At Cardinal Consulting, we believe in full transparency. Every project quote includes a detailed breakdown of costs, deliverables, and timelines. There are no surprises, no hidden fees, and no bait-and-switch pricing. Contact us today for a free, no-obligation consultation and quote for your Houston web design project.",
-        }
+          heading: "How pricing usually works",
+          body: "Most agencies price social media management by the scope of work rather than by the hour. The main cost drivers are:",
+          bullets: [
+            "Number of platforms managed",
+            "Posting volume per month",
+            "How much video is produced, and how polished it is",
+            "Whether community management covers business hours only or extended hours",
+            "Whether paid campaigns are included — ad spend is almost always billed separately and paid directly to the platforms",
+          ],
+        },
+        {
+          heading: "Red flags to avoid",
+          body: "Be cautious of any provider that offers to buy followers or engagement, reports only vanity metrics like impressions, won't share ad-account access with you, or locks you into a long contract before proving results.",
+        },
       ],
-      cta: "Get a transparent, itemized quote for your Houston web design project. Schedule your free consultation today."
-    }
+      cta: "Want a plan built around your goals and platforms? Book a free consultation and we'll recommend a focused social strategy with a clear monthly scope.",
+    },
   },
+
+  // 3 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-agency-vs-freelancer",
-    title: "Houston Web Design Agency vs Freelancer: Which Is Right for Your Business?",
-    excerpt: "Stuck between hiring a Houston web design agency or a freelancer? Compare the pros, cons, costs, and outcomes of each to make the best choice for your project and budget.",
-    category: "Web Design Comparisons",
-    pillar: "web-design-comparisons",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-05-08",
+    slug: "in-house-vs-agency-social-media-management",
+    title: "In-House vs. Agency Social Media Management: An Honest Comparison",
+    excerpt: "The skills social media really requires, the trade-offs of hiring versus outsourcing, and the hybrid model many growing companies use.",
+    category: "Growth Marketing",
+    pillar: "growth",
+    priority: 3,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "6 min read",
+    featured: false,
+    keywords: ["in-house vs agency social media", "outsource social media management", "hire a social media manager", "social media agency vs employee"],
+    relatedService: "/services/social-media-management",
+    sources: [SRC.sprout],
+    content: {
+      sections: [
+        {
+          heading: "Start with the skills, not the job title",
+          body: "Strong social media takes more than one skill set. Before deciding who should do it, list what the work requires:",
+          bullets: [
+            "Strategy and planning",
+            "Graphic design",
+            "Short-form video shooting and editing",
+            "Copywriting in your brand voice",
+            "Community management and customer service",
+            "Paid advertising and targeting",
+            "Analytics and reporting",
+          ],
+          highlight: "It's rare to find one person who is excellent at all seven. That single fact drives most of this decision.",
+        },
+        {
+          heading: "When an in-house hire makes sense",
+          body: "Hiring internally works well when you need someone embedded in daily operations — capturing behind-the-scenes content, attending events, and answering customers in real time. It also suits companies with enough volume to keep a full-time person busy.\n\nThe trade-offs are the total cost of a salary plus benefits and tools, the time to recruit and train, and coverage gaps during vacations or turnover.",
+        },
+        {
+          heading: "When an agency makes sense",
+          body: "An agency gives you a team — strategist, designer, video editor, and analyst — for less than the cost of hiring each role. You get consistent output, established processes, and experience from other accounts.\n\nThe trade-offs are less day-to-day presence in your business and the need for a clear approval process so content stays authentic to your brand.",
+        },
+        {
+          heading: "The hybrid model",
+          body: "Many growing companies combine both: an internal coordinator captures photos, video, and company news, while an agency handles strategy, design, editing, publishing, ads, and reporting. This often delivers the best of both — authentic content and professional execution.",
+        },
+        {
+          heading: "Don't forget response coverage",
+          body: "Whatever model you choose, decide who answers comments and messages. Sprout Social's 2025 Index found about 73% of consumers expect a response within 24 hours or sooner.",
+        },
+        {
+          heading: "A quick decision checklist",
+          body: "Answer these honestly:",
+          bullets: [
+            "Do we have enough work to keep a full-time person busy?",
+            "Can we hire and keep someone with design, video, and ads skills?",
+            "Who covers when that person is out?",
+            "Do we need someone on-site to capture content?",
+            "How will we measure whether social media is producing leads?",
+          ],
+        },
+      ],
+      cta: "Considering an agency or hybrid model? Talk with us — we'll map out what to keep in-house and what to hand off.",
+    },
+  },
+
+  // 4 ────────────────────────────────────────────────────────────────
+  {
+    slug: "what-is-a-fractional-cto",
+    title: "What Is a Fractional CTO, and When Does Your Company Need One?",
+    excerpt: "How part-time technology leadership works, the signs you need it, and how it compares to a full-time hire, a consultant, or an agency.",
+    category: "AI & Technology",
+    pillar: "ai-technology",
+    priority: 4,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "7 min read",
+    featured: true,
+    keywords: ["fractional CTO", "what is a fractional CTO", "fractional CTO Houston", "CTO as a service", "part-time CTO"],
+    relatedService: "/services/technical-consulting",
+    sources: [SRC.flexera, SRC.ibm],
+    content: {
+      sections: [
+        {
+          heading: "The definition",
+          body: "A fractional CTO is an experienced technology executive who works with your company part-time — a defined number of hours per week or month. You get senior leadership for technology strategy, architecture, vendors, security, and team guidance without the cost of a full-time executive.",
+        },
+        {
+          heading: "What a fractional CTO does",
+          body: "The scope varies by company stage, but typically includes:",
+          bullets: [
+            "Setting a technology roadmap tied to business goals and budget",
+            "Making or reviewing major architecture and platform decisions",
+            "Managing outside developers and agencies, and reviewing their work",
+            "Overseeing security, data protection, and compliance readiness",
+            "Controlling cloud and software costs",
+            "Hiring and mentoring engineers",
+            "Explaining technology plans and risks to leadership, boards, and investors",
+          ],
+        },
+        {
+          heading: "Signs you need one",
+          body: "Companies usually bring in a fractional CTO at an inflection point:",
+          bullets: [
+            "You're about to make a large technology investment and want an independent view",
+            "You rely on an outside developer and can't evaluate their work",
+            "Cloud bills keep rising without a clear reason",
+            "A customer, insurer, or partner is asking security questions you can't answer",
+            "Your product isn't keeping up with growth",
+            "You need technical leadership before you can justify a full-time CTO",
+          ],
+          highlight: "Two numbers explain why this matters: 84% of organizations call managing cloud spend their top cloud challenge (Flexera, 2025), and the average U.S. data breach cost reached a record $10.22 million (IBM, 2025).",
+        },
+        {
+          heading: "Fractional CTO vs. the alternatives",
+          body: "A full-time CTO makes sense when technology is your product and you need daily leadership. A one-time consultant is ideal for a specific question, like an architecture review. An agency builds things but isn't usually accountable for your overall technology strategy.\n\nA fractional CTO sits in between: ongoing, accountable leadership at a fraction of a full-time commitment.",
+        },
+        {
+          heading: "How engagements usually work",
+          body: "Most engagements start with an assessment of your systems, team, vendors, and risks, followed by a written roadmap. From there, the fractional CTO works a defined number of hours each week or month, with clear priorities and regular check-ins.",
+        },
+        {
+          heading: "Questions to ask a candidate",
+          body: "Before engaging anyone, ask:",
+          bullets: [
+            "What companies at our stage and in our industry have you led?",
+            "How do you decide when to build, buy, or outsource?",
+            "How will you measure success in the first 90 days?",
+            "What's your weekly time commitment and availability for urgent issues?",
+            "How do you hand off to a full-time hire when we're ready?",
+          ],
+        },
+      ],
+      cta: "Facing a big technology decision? Start with an independent technical assessment — we'll review your systems and give you a prioritized roadmap.",
+    },
+  },
+
+  // 5 ────────────────────────────────────────────────────────────────
+  {
+    slug: "business-processes-to-automate-with-ai",
+    title: "10 Business Processes to Automate with AI First",
+    excerpt: "The practical, lower-risk places where AI and automation save the most time — and the guardrails to put in place before you start.",
+    category: "AI & Technology",
+    pillar: "ai-technology",
+    priority: 5,
+    author: AUTHOR,
+    date: DATE,
     readTime: "8 min read",
-    featured: false,
-    keywords: ["houston web design agency vs freelancer", "web design agency houston", "freelance web designer houston", "houston web design agency"],
+    featured: true,
+    keywords: ["business processes to automate with AI", "AI automation for small business", "AI workflow automation", "business process automation", "AI consulting Houston"],
+    relatedService: "/services/ai-automation",
+    sources: [SRC.mckinseyAI],
     content: {
       sections: [
         {
-          heading: "Agency vs Freelancer: The Great Web Design Debate",
-          body: "Every Houston business owner faces this decision at some point: should I hire a web design agency or work with a freelance designer? Both options have their merits, and the right choice depends on your specific needs, budget, timeline, and goals. This guide will help you make an informed decision.",
+          heading: "Adoption is broad — results are uneven",
+          body: "McKinsey's 2025 State of AI survey found that 88% of organizations regularly use AI in at least one business function, up from 78% a year earlier — yet only about a third have begun scaling it across the enterprise. The gap usually comes from starting with the wrong processes. The best first projects are repetitive, text-heavy, easy to check, and low-risk if something goes wrong.",
         },
         {
-          heading: "The Case for a Houston Web Design Agency",
-          body: "A web design agency brings a full team of specialists to your project. Instead of relying on one person to handle design, development, SEO, and project management, you get dedicated experts in each discipline. This team approach often leads to better results, faster delivery, and more comprehensive support.",
-          highlight: "Agencies have an average project success rate of 94% compared to 68% for independent freelancers.",
+          heading: "Ten good places to start",
+          body: "Each of these is common across industries and easy to measure:",
           bullets: [
-            "Access to a full team of designers, developers, SEO specialists, and project managers",
-            "Redundancy — if someone is sick or unavailable, the project continues",
-            "Established processes for quality assurance, testing, and delivery",
-            "Long-term reliability for ongoing maintenance and support",
-            "Broader range of expertise and experience across multiple industries"
-          ]
+            "Lead intake and routing — classify inquiries and send them to the right person instantly",
+            "Answering common customer questions from your own approved content",
+            "Document intake — extract details from forms, invoices, and applications",
+            "Meeting notes and action items — summaries sent to attendees automatically",
+            "Follow-up drafting — first drafts of emails and quotes for staff to review",
+            "Recurring reports — pull data from several systems into one summary",
+            "Invoice and expense processing — match, categorize, and flag exceptions",
+            "Scheduling — coordinate appointments and reminders across calendars",
+            "Internal knowledge search — let staff ask questions of policies and manuals",
+            "Support triage — tag, prioritize, and route tickets before a person picks them up",
+          ],
         },
         {
-          heading: "The Case for a Freelance Web Designer",
-          body: "Freelancers can be an excellent choice for smaller projects or businesses with limited budgets. Many talented freelance web designers in Houston offer quality work at lower rates than agencies, since they have lower overhead costs.",
+          heading: "How to choose your first project",
+          body: "Score each candidate on three things: hours spent per week, how easy it is to check the output, and the cost of a mistake. Start with high hours, easy checking, and low risk. One well-measured win builds the case for the next.",
+        },
+        {
+          heading: "Guardrails before you launch",
+          body: "Responsible automation is what separates projects that scale from projects that stall:",
           bullets: [
-            "Lower hourly rates and overall project costs",
-            "Direct communication with the person doing the work",
-            "More flexible scheduling and availability",
-            "Good option for small, simple projects starting under $3,000",
-            "Personal relationships can lead to strong partnerships"
-          ]
+            "Use enterprise AI services that don't train on your data",
+            "Keep sensitive or regulated information within approved systems",
+            "Add human review wherever accuracy matters",
+            "Limit what each automation can access",
+            "Log what the system does so you can audit it",
+            "Write an internal AI-use policy your team understands",
+          ],
         },
         {
-          heading: "When to Choose Each Option",
-          body: "There's no one-size-fits-all answer. Here's a practical framework to help you decide which route is best for your specific situation:",
-          bullets: [
-            "Choose an agency if: Your project requires multiple skill sets, you need long-term support, your timeline is tight, or your website is critical to your revenue",
-            "Choose a freelancer if: Your budget is under $3,000, your project is small and straightforward, or you already have a strong technical team to handle ongoing maintenance"
-          ]
+          heading: "Measure the result",
+          body: "Agree on success measures before building — hours saved per week, response time, error rate, or leads handled — and compare against a baseline after launch. If you can't measure it, it's hard to justify scaling it.",
+          highlight: "Most successful first projects don't replace people. They remove the repetitive parts of a job so your team spends more time with customers.",
         },
-        {
-          heading: "Why Cardinal Consulting Is the Right Choice",
-          body: "As a full-service Houston web design agency, Cardinal Consulting offers the best of both worlds. You get the resources, reliability, and expertise of a full agency with the personalized attention and direct communication you'd expect from a freelancer. Every project is led by a senior team member who serves as your primary point of contact, supported by our full team of specialists.",
-        }
       ],
-      cta: "Get the best of both worlds — schedule a free consultation with Cardinal Consulting and experience the agency difference with a personal touch."
-    }
-  },
-  {
-    slug: "wordpress-vs-custom-website-houston",
-    title: "WordPress vs Custom Website Development in Houston: The Real Difference",
-    excerpt: "WordPress or custom-built? Houston businesses face this choice every day. Discover the hidden costs, performance trade-offs, and long-term value of each option for your specific needs.",
-    category: "Web Design Comparisons",
-    pillar: "web-design-comparisons",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-05-05",
-    readTime: "9 min read",
-    featured: false,
-    keywords: ["wordpress vs custom website houston", "wordpress website design houston", "custom website houston", "wordpress developer houston"],
-    content: {
-      sections: [
-        {
-          heading: "WordPress or Custom: The Question Every Houston Business Asks",
-          body: "When planning a new website, one of the first decisions you'll face is whether to use WordPress or invest in a custom-built solution. It's a question with no simple answer — the right choice depends on your specific needs, goals, and long-term vision for your online presence.",
-          highlight: "While WordPress powers 43% of websites globally, custom-built sites outperform WordPress in speed, security, and scalability by up to 300%.",
-        },
-        {
-          heading: "Understanding WordPress",
-          body: "WordPress is a powerful content management system that powers a significant portion of the web. It offers thousands of themes and plugins, making it possible to build a functional website relatively quickly and affordably. However, the flexibility of WordPress comes with trade-offs that many Houston businesses discover only after launch.",
-          bullets: [
-            "Lower initial cost for basic sites (starting under $1,500)",
-            "Thousands of pre-built themes and plugins available",
-            "Easy content management with a familiar dashboard",
-            "Large community for support and resources"
-          ]
-        },
-        {
-          heading: "The Hidden Costs of WordPress",
-          body: "While WordPress appears affordable upfront, many Houston businesses find that hidden costs add up quickly. Premium plugins can cost hundreds of dollars annually, security vulnerabilities require constant monitoring, and performance issues often necessitate expensive optimization work.",
-          bullets: [
-            "Premium plugins and themes can cost $500 - $2,000+ annually on top of development",
-            "Security vulnerabilities require constant updates and monitoring",
-            "Performance optimization is often needed to achieve acceptable load times",
-            "Custom functionality requires specialized WordPress development skills",
-            "Website migrations and major updates can be complex and expensive"
-          ]
-        },
-        {
-          heading: "The Advantages of Custom Website Development",
-          body: "Custom website development using modern frameworks like React, Next.js, or Vue.js offers significant advantages for businesses that need top-tier performance, security, and scalability. While the initial investment is higher, the long-term benefits often far outweigh the additional cost.",
-          highlight: "Custom-built websites load 2-3x faster than WordPress sites and have 70% fewer security vulnerabilities.",
-          bullets: [
-            "Blazing-fast performance with optimized code and modern architecture",
-            "Superior security with no third-party plugin vulnerabilities",
-            "Complete design freedom — no limitations from theme constraints",
-            "Scalable architecture that grows with your business",
-            "Better SEO performance with cleaner code and faster load times"
-          ]
-        },
-        {
-          heading: "Making the Right Choice for Your Business",
-          body: "The decision between WordPress and custom development ultimately comes down to your specific needs and goals. If you need a simple blog or brochure site with minimal functionality, WordPress may be sufficient. But if you're a Houston business serious about growth, performance, and competitive advantage, custom development is the clear winner.",
-        }
-      ],
-      cta: "Ready to build a website that outperforms the competition? Contact Cardinal Consulting to discuss your custom development project."
-    }
-  },
-  {
-    slug: "houston-web-design-seo-importance",
-    title: "Why SEO-First Web Design Matters in Houston: A Complete Guide",
-    excerpt: "In a competitive market like Houston, SEO-first web design is non-negotiable. Learn how building a website with search engines in mind from day one gives you a massive advantage over competitors.",
-    category: "Web Design Comparisons",
-    pillar: "web-design-comparisons",
-    priority: 4,
-    author: "Hunain Qureshi",
-    date: "2026-05-03",
-    readTime: "11 min read",
-    featured: false,
-    keywords: ["seo web design houston", "seo friendly website houston", "houston seo website design", "seo optimized website houston"],
-    content: {
-      sections: [
-        {
-          heading: "What Is SEO-First Web Design?",
-          body: "SEO-first web design is the practice of building a website with search engine optimization as a foundational consideration, not an afterthought. Instead of designing a beautiful site and then trying to bolt on SEO later, every aspect of the design and development process is informed by SEO best practices — from information architecture and URL structure to page speed and content hierarchy.",
-          highlight: "Websites built with SEO-first design principles rank an average of 53% higher in search results than sites where SEO was added after launch."
-        },
-        {
-          heading: "Why Houston Businesses Need SEO-First Design",
-          body: "Houston is one of the most competitive markets in the country. When someone searches for 'web design houston' or 'best web designer in houston,' dozens of businesses are competing for that click. SEO-first web design gives you a fundamental advantage by ensuring your site is optimized to rank from the moment it launches, rather than playing catch-up.",
-          bullets: [
-            "Houston has over 2.3 million residents actively searching for local services",
-            "68% of online experiences begin with a search engine",
-            "The top 3 Google search results get 75% of all clicks",
-            "75% of users never scroll past the first page of search results"
-          ]
-        },
-        {
-          heading: "Key Elements of SEO-First Web Design",
-          body: "Building an SEO-optimized website involves dozens of technical considerations working together. Here are the most critical elements we build into every Cardinal Consulting project:",
-          bullets: [
-            "Semantic HTML structure with proper heading hierarchy (H1, H2, H3)",
-            "Optimized page load speed under 2 seconds using modern frameworks and CDN",
-            "Mobile-first responsive design that passes Google's Core Web Vitals",
-            "Clean, descriptive URL structures that include target keywords",
-            "Automatic sitemap generation and proper robots.txt configuration",
-            "Structured data markup (Schema.org) for rich search results",
-            "Meta title and description optimization for every page",
-            "Internal linking strategy that distributes page authority effectively"
-          ]
-        },
-        {
-          heading: "The Cost of Ignoring SEO in Web Design",
-          body: "Many Houston businesses learn the hard way that retrofitting SEO onto an existing website is difficult, expensive, and often less effective than building it in from the start. The cost of ignoring SEO in web design goes far beyond lower search rankings.",
-          bullets: [
-            "Lost revenue from missed organic traffic opportunities",
-            "Expensive SEO audits and remediation projects that could have been avoided",
-            "Competitive disadvantage as SEO-first competitors capture more search traffic",
-            "Higher ongoing advertising costs to compensate for poor organic performance"
-          ]
-        },
-        {
-          heading: "Build Your SEO Foundation Today",
-          body: "Don't make the mistake of building a beautiful website that nobody can find. Cardinal Consulting specializes in SEO-first web design for Houston businesses, ensuring your site is built to rank from day one. Contact us today to learn more about our approach to SEO-optimized web design.",
-        }
-      ],
-      cta: "Build a website that ranks from day one. Schedule your free SEO-first web design consultation with Cardinal Consulting."
-    }
+      cta: "Not sure where AI will pay off in your business? Our AI opportunity assessment ranks your processes by time saved, risk, and cost to build.",
+    },
   },
 
-  // PILLAR 3: INDUSTRY WEB DESIGN
+  // 6 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-law-firm-web-design",
-    title: "Houston Law Firm Web Design: Websites That Win Cases and Clients",
-    excerpt: "Your law firm's website is your 24/7 lead generation machine. Discover Houston law firm web design strategies that build trust, showcase expertise, and convert visitors into paying clients.",
-    category: "Industry Web Design",
-    pillar: "industry-web-design",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-05-01",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["houston law firm web design", "law firm website houston", "legal website design houston", "attorney website design houston"],
-    content: {
-      sections: [
-        {
-          heading: "Why Your Law Firm's Website Matters More Than Ever",
-          body: "In Houston's competitive legal market, potential clients are increasingly turning to the internet to find and evaluate attorneys. Your law firm's website is often the first — and sometimes the only — impression you'll make on a prospective client. A poorly designed website can cost you clients before they ever pick up the phone.",
-          highlight: "96% of people seeking legal advice use a search engine. 74% visit a law firm's website before calling."
-        },
-        {
-          heading: "What Makes Effective Law Firm Web Design",
-          body: "Law firm websites face unique challenges. They must convey authority and trustworthiness while being accessible and easy to navigate. They need to showcase expertise without overwhelming visitors with legal jargon. And they must comply with strict advertising and ethics rules specific to the legal profession.",
-          bullets: [
-            "Professional, authoritative design that builds immediate trust",
-            "Clear practice area pages with detailed information about your specialties",
-            "Attorney profiles that humanize your firm and build personal connections",
-            "Client testimonials and case results (where ethically permissible)",
-            "Easy-to-use contact forms and click-to-call functionality",
-            "Mobile-responsive design (over 70% of legal searches happen on mobile)"
-          ]
-        },
-        {
-          heading: "SEO Strategies for Houston Law Firms",
-          body: "Competition for legal keywords in Houston is fierce. Ranking for terms like 'houston personal injury lawyer' or 'houston divorce attorney' requires a sophisticated SEO strategy integrated into your website from the ground up.",
-          bullets: [
-            "Local SEO optimization targeting Houston and surrounding areas",
-            "Practice area pages optimized for specific legal keywords",
-            "Google Local Service Ads integration alongside organic SEO",
-            "Schema markup for attorney profile, reviews, and FAQs",
-            "Content strategy focused on answering common legal questions"
-          ]
-        },
-        {
-          heading: "Build a Law Firm Website That Works",
-          body: "At Cardinal Consulting, we understand the unique needs of Houston law firms. We've helped dozens of legal practices build websites that attract, engage, and convert potential clients. Let us help you build a digital presence that reflects the quality and professionalism of your practice.",
-        }
-      ],
-      cta: "Attract more clients with a law firm website designed for results. Contact Cardinal Consulting for your free consultation."
-    }
-  },
-  {
-    slug: "houston-medical-website-design",
-    title: "Houston Medical Website Design: Build Trust and Attract More Patients Online",
-    excerpt: "Medical web design in Houston requires a unique approach. From HIPAA compliance to patient-friendly UX, learn how to build a healthcare website that ranks and converts.",
-    category: "Industry Web Design",
-    pillar: "industry-web-design",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-04-28",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["houston medical website design", "medical web design houston", "healthcare website houston", "doctor website design houston"],
-    content: {
-      sections: [
-        {
-          heading: "The Unique Demands of Medical Web Design",
-          body: "Healthcare websites in Houston face a unique set of requirements that go far beyond standard web design. From HIPAA compliance and patient privacy to appointment scheduling and telehealth integration, medical websites must balance functionality, security, and user experience in ways that few other industries require.",
-          highlight: "77% of patients research a healthcare provider online before booking an appointment."
-        },
-        {
-          heading: "Must-Have Features for Medical Websites",
-          body: "To effectively serve both patients and providers, a Houston medical website should include these essential features. Each element plays a crucial role in patient acquisition, retention, and satisfaction.",
-          bullets: [
-            "HIPAA-compliant contact forms and patient portals",
-            "Online appointment scheduling with real-time availability",
-            "Provider profiles with credentials, specializations, and patient reviews",
-            "Mobile-optimized design for on-the-go appointment booking",
-            "Patient education resources and blog content",
-            "Insurance and payment information with transparent pricing",
-            "Telehealth integration for virtual consultations"
-          ]
-        },
-        {
-          heading: "Building Trust Through Design",
-          body: "Trust is the currency of healthcare. Patients need to feel confident in your expertise, professionalism, and commitment to their wellbeing before they'll book an appointment. Your website design plays a critical role in building that trust from the very first visit.",
-          bullets: [
-            "Clean, professional design that conveys competence and care",
-            "Patient testimonials and before/after results (where applicable)",
-            "Professional photography of your facility and team",
-            "Clear communication of your medical philosophy and approach",
-            "Easy access to credentials, certifications, and affiliations"
-          ]
-        },
-        {
-          heading: "SEO for Houston Medical Practices",
-          body: "With so many healthcare providers competing for patients in Houston, SEO is essential for getting found online. Medical SEO requires a specialized approach that balances search engine requirements with the sensitivity of healthcare marketing.",
-          bullets: [
-            "Local SEO targeting Houston neighborhoods and surrounding communities",
-            "Service pages optimized for specific medical procedures and treatments",
-            "Google Business Profile management with review generation strategy",
-            "Medical schema markup for rich search results",
-            "Content marketing focused on patient education and common conditions"
-          ]
-        },
-        {
-          heading: "Partner with a Medical Web Design Expert",
-          body: "Cardinal Consulting has extensive experience designing websites for Houston healthcare providers. We understand the regulatory requirements, patient expectations, and competitive dynamics of the medical industry. Let us help you build a website that attracts more patients and grows your practice.",
-        }
-      ],
-      cta: "Attract more patients with a medical website designed for trust and results. Schedule your free consultation today."
-    }
-  },
-  {
-    slug: "houston-ecommerce-web-design",
-    title: "Houston Ecommerce Web Design: Build an Online Store That Actually Sells",
-    excerpt: "Launch a high-converting ecommerce website in Houston. From product pages to checkout optimization, learn the web design strategies that turn browsers into buyers.",
-    category: "Industry Web Design",
-    pillar: "industry-web-design",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-04-25",
-    readTime: "11 min read",
-    featured: false,
-    keywords: ["houston ecommerce web design", "ecommerce website houston", "online store houston", "houston ecommerce development"],
-    content: {
-      sections: [
-        {
-          heading: "The Ecommerce Opportunity in Houston",
-          body: "Houston is one of the fastest-growing ecommerce markets in the country. With a population of over 7 million people in the metro area and a thriving local economy, the opportunity for Houston businesses to sell online has never been greater. But success requires more than just listing products on a basic website.",
-          highlight: "Global ecommerce sales are projected to reach $8.1 trillion by 2026. Houston's ecommerce market is growing at 15% annually."
-        },
-        {
-          heading: "Key Elements of High-Converting Ecommerce Design",
-          body: "Building an online store that actually sells requires careful attention to every step of the customer journey. From the moment a visitor lands on your site to the final checkout confirmation, every element must be optimized for conversion.",
-          bullets: [
-            "Professional product photography and compelling product descriptions",
-            "Intuitive navigation with clear category structure and search functionality",
-            "Streamlined checkout process with minimal friction",
-            "Mobile-optimized shopping experience (over 50% of ecommerce traffic is mobile)",
-            "Customer reviews and social proof throughout the shopping journey",
-            "Secure payment processing with multiple payment options",
-            "Email integration for abandoned cart recovery and follow-up marketing"
-          ]
-        },
-        {
-          heading: "Ecommerce Platforms: Making the Right Choice",
-          body: "Choosing the right ecommerce platform is one of the most important decisions you'll make. Each platform has strengths and weaknesses, and the right choice depends on your specific needs, budget, and technical requirements.",
-          bullets: [
-            "Custom ecommerce development: Maximum flexibility, performance, and scalability",
-            "Shopify: Great for quickly launching, but limited customization and higher transaction fees",
-            "WooCommerce (WordPress): Flexible but requires ongoing maintenance and plugin management",
-            "BigCommerce: Strong built-in features but limited design flexibility"
-          ]
-        },
-        {
-          heading: "SEO for Ecommerce Success",
-          body: "In a competitive market like Houston, getting your products found in search results is essential for ecommerce success. Ecommerce SEO requires a specialized approach that addresses the unique challenges of product pages, category pages, and competitive keyword landscapes.",
-          bullets: [
-            "Product page optimization with unique descriptions, not manufacturer copy",
-            "Category page structure that targets high-value keywords",
-            "Technical SEO considerations for large product catalogs",
-            "Customer review schema markup for rich search results",
-            "Local SEO for businesses with physical storefronts in Houston"
-          ]
-        },
-        {
-          heading: "Launch Your Houston Ecommerce Store",
-          body: "Ready to take your Houston business online? Cardinal Consulting builds custom ecommerce websites designed to attract customers, drive sales, and grow your business. From product catalog management to payment integration, we handle every aspect of your ecommerce launch.",
-        }
-      ],
-      cta: "Launch an online store that sells. Contact Cardinal Consulting for your free ecommerce consultation."
-    }
-  },
-  {
-    slug: "houston-real-estate-web-design",
-    title: "Houston Real Estate Web Design: Showcase Properties and Capture Leads",
-    excerpt: "Stand out in Houston's competitive real estate market with a website designed to showcase listings, capture leads, and build your brand. IDX integration and virtual tour strategies included.",
-    category: "Industry Web Design",
-    pillar: "industry-web-design",
-    priority: 4,
-    author: "Hunain Qureshi",
-    date: "2026-04-22",
-    readTime: "9 min read",
-    featured: false,
-    keywords: ["houston real estate web design", "real estate website houston", "realtor website design houston", "property website houston"],
-    content: {
-      sections: [
-        {
-          heading: "Why Real Estate Agents Need a Professional Website",
-          body: "In Houston's competitive real estate market, your website is often the first place potential buyers and sellers experience your brand. A professional, feature-rich website can be the difference between a client choosing you or your competitor. Today's home buyers and sellers expect a seamless digital experience.",
-          highlight: "97% of home buyers start their search online. 51% found their agent through a website."
-        },
-        {
-          heading: "Essential Features for Real Estate Websites",
-          body: "A successful real estate website needs more than just property listings. It needs to be a complete lead generation and nurturing system that serves both buyers and sellers while showcasing your expertise and market knowledge.",
-          bullets: [
-            "IDX/MLS integration with up-to-date property listings and search filters",
-            "Interactive property maps showing listings by neighborhood and price range",
-            "Virtual tours and high-quality property photography",
-            "Advanced search functionality with save-favorite and alert features",
-            "Lead capture forms strategically placed throughout the site",
-            "Neighborhood guides and local market information",
-            "Agent profiles with experience, credentials, and client testimonials"
-          ]
-        },
-        {
-          heading: "Building Trust in Real Estate",
-          body: "Real estate transactions are among the most significant financial decisions people make. Your website must inspire confidence and trust from the first visit. Professional design, transparent information, and social proof are all essential elements.",
-          bullets: [
-            "Professional, luxury-oriented design that reflects your brand quality",
-            "Client testimonials, case studies, and success stories",
-            "Market reports and data that demonstrate local expertise",
-            "Clear calls-to-action for both buyers and sellers",
-            "Responsive design that works perfectly on mobile devices"
-          ]
-        },
-        {
-          heading: "Local SEO for Houston Real Estate",
-          body: "Real estate is inherently local. Ranking for keywords like 'Houston real estate agent' or 'homes for sale in Sugar Land' requires a focused local SEO strategy that goes beyond basic optimization.",
-          bullets: [
-            "Neighborhood and community-specific landing pages",
-            "Local schema markup for real estate agents and offices",
-            "Google Business Profile optimization with property showcase",
-            "Content marketing focused on Houston real estate market trends",
-            "Citation building across real estate directories and platforms"
-          ]
-        },
-        {
-          heading: "Sell More Properties with Better Design",
-          body: "Your real estate website should work as hard as you do. At Cardinal Consulting, we build custom real estate websites for Houston agents and agencies that attract more listings, generate more leads, and close more deals. Let us help you build a digital presence that sets you apart.",
-        }
-      ],
-      cta: "Sell more properties with a real estate website designed for results. Schedule your free consultation with Cardinal Consulting."
-    }
-  },
-
-  // PILLAR 4: DESIGN PROCESS & BEST PRACTICES
-  {
-    slug: "houston-website-design-process",
-    title: "The Houston Website Design Process: How We Build High-Performing Sites",
-    excerpt: "Ever wonder what goes into building a top-tier website? Walk through Cardinal Consulting's proven Houston website design process from discovery to launch and beyond.",
-    category: "Design Process",
-    pillar: "design-process",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-04-20",
-    readTime: "8 min read",
-    featured: false,
-    keywords: ["houston website design process", "website development process houston", "how to build a website houston", "web design workflow houston"],
-    content: {
-      sections: [
-        {
-          heading: "Our Proven Website Design Process",
-          body: "Building a great website isn't magic — it's a process. At Cardinal Consulting, we've refined our website design process over hundreds of successful projects to ensure every site we deliver is strategic, beautiful, and results-driven. Here's how we build high-performing websites for Houston businesses.",
-        },
-        {
-          heading: "Phase 1: Discovery & Strategy",
-          body: "Every great website starts with understanding. We begin each project with a comprehensive discovery phase where we learn everything about your business, your customers, your competitors, and your goals. This foundation ensures every design decision we make is intentional and strategic.",
-          bullets: [
-            "In-depth stakeholder interviews to understand your vision and goals",
-            "Competitive analysis of the Houston market landscape",
-            "User persona development to guide design decisions",
-            "Keyword research and SEO opportunity analysis",
-            "Content audit and strategy development",
-            "Technical requirements gathering and platform selection"
-          ]
-        },
-        {
-          heading: "Phase 2: Design & Prototyping",
-          body: "Once we have a clear strategy, we move into the design phase. We create detailed wireframes and interactive prototypes that map out the user experience before a single line of code is written. This approach allows us to test and refine the design before committing to development.",
-          bullets: [
-            "Wireframing to establish layout and information hierarchy",
-            "Interactive prototypes for user testing and stakeholder review",
-            "Visual design exploration including typography, color, and imagery",
-            "Mobile-first responsive design for every device",
-            "Design system creation for consistent branding across all pages"
-          ]
-        },
-        {
-          heading: "Phase 3: Development & Testing",
-          body: "With the design approved, our development team brings it to life using modern frameworks and technologies. We follow best practices for performance, security, and SEO throughout the development process, with rigorous testing at every stage.",
-          bullets: [
-            "Frontend development using React, Next.js, or Vue.js",
-            "Backend integration with CMS, CRM, and third-party services",
-            "Performance optimization targeting sub-2-second load times",
-            "Cross-browser and cross-device compatibility testing",
-            "SEO implementation including structured data and meta tags",
-            "Security testing and vulnerability assessment"
-          ]
-        },
-        {
-          heading: "Phase 4: Launch & Optimization",
-          body: "Launch is just the beginning. We carefully manage the deployment process to minimize risk and ensure a smooth transition. After launch, we continuously monitor performance and make data-driven optimizations to improve results over time.",
-          bullets: [
-            "Staged deployment with rollback capability",
-            "Post-launch monitoring and performance benchmarking",
-            "Ongoing SEO optimization and content updates",
-            "Regular security updates and maintenance",
-            "Quarterly strategy reviews to align with business goals"
-          ]
-        },
-        {
-          heading: "Ready to Start Your Project?",
-          body: "Our proven website design process has delivered exceptional results for Houston businesses across every industry. Whether you're building a new site or redesigning an existing one, Cardinal Consulting has the expertise and experience to bring your vision to life.",
-        }
-      ],
-      cta: "Start your website project with confidence. Contact Cardinal Consulting to begin the discovery process."
-    }
-  },
-  {
-    slug: "houston-mobile-responsive-web-design",
-    title: "Mobile-First Web Design in Houston: Why It's Critical for Local SEO",
-    excerpt: "With most searches happening on mobile, mobile-first web design is essential for Houston businesses. Learn how responsive design impacts your local search rankings and user experience.",
-    category: "Design Process",
-    pillar: "design-process",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-04-18",
+    slug: "ai-assistant-for-your-website",
+    title: "Adding an AI Assistant to Your Website: Costs, Risks, and ROI",
+    excerpt: "What an AI assistant can realistically do for your customers, what drives the cost, the risks to plan for, and how to tell whether it's paying off.",
+    category: "AI & Technology",
+    pillar: "ai-technology",
+    priority: 6,
+    author: AUTHOR,
+    date: DATE,
     readTime: "7 min read",
     featured: false,
-    keywords: ["mobile responsive web design houston", "mobile first website houston", "responsive web design houston", "mobile friendly website houston"],
+    keywords: ["AI chatbot for website", "AI assistant for business website", "AI chatbot cost", "website chatbot", "AI customer service"],
+    relatedService: "/services/ai-automation",
+    sources: [SRC.mckinseyAI, SRC.ftcAI],
     content: {
       sections: [
         {
-          heading: "Why Mobile-First Web Design Matters in Houston",
-          body: "The way people access the internet has fundamentally changed. More than 60% of all web traffic now comes from mobile devices, and in a city like Houston — where people are constantly on the move — that number is even higher. Mobile-first web design isn't just a nice-to-have; it's essential for reaching and engaging your audience.",
-          highlight: "60%+ of all web traffic is mobile. Google uses mobile-first indexing, meaning your mobile site determines your search rankings."
+          heading: "What a website AI assistant can do well",
+          body: "Modern AI assistants can answer questions in natural language using your own content — services, pricing, policies, hours, and FAQs — and hand visitors off to a person or a booking form when needed. They work best for high-volume, repeatable questions, not complex judgment calls.",
         },
         {
-          heading: "What Mobile-First Design Means",
-          body: "Mobile-first design is exactly what it sounds like: designing for mobile devices first, then scaling up for tablets and desktop screens. This approach ensures that the mobile experience is not an afterthought but the primary focus, resulting in better performance, usability, and SEO for all users.",
+          heading: "What drives the cost",
+          body: "Costs vary widely, so it helps to know the components:",
           bullets: [
-            "Content prioritization for smaller screens — what matters most appears first",
-            "Touch-friendly navigation and interactive elements",
-            "Optimized images and media that load quickly on mobile connections",
-            "Streamlined forms and checkout processes for mobile users",
-            "Readable typography without requiring zoom",
-            "Fast load times optimized for cellular data speeds"
-          ]
+            "Setup: preparing and structuring your content, designing conversations, and building the interface",
+            "Integrations: connecting to booking, CRM, order status, or support systems",
+            "Usage: AI providers typically charge based on volume of conversations",
+            "Guardrails and testing: making sure the assistant stays accurate and on-topic",
+            "Ongoing tuning: reviewing conversations and improving answers over time",
+          ],
         },
         {
-          heading: "The SEO Impact of Mobile Design",
-          body: "Google's mobile-first indexing means that the mobile version of your website is the primary version used for ranking and indexing. If your mobile experience is poor, your search rankings will suffer — regardless of how good your desktop site looks.",
+          heading: "Risks to plan for",
+          body: "An assistant speaks on behalf of your business, so plan for these risks up front:",
           bullets: [
-            "Page speed on mobile is a direct ranking factor",
-            "Mobile usability issues can result in ranking penalties",
-            "Local search results heavily favor mobile-optimized websites",
-            "Core Web Vitals (LCP, FID, CLS) are measured on mobile devices",
-            "Mobile-friendly sites appear in Google's 'Near Me' search results"
-          ]
+            "Incorrect answers — limit the assistant to approved content and route uncertain questions to people",
+            "Privacy — avoid collecting sensitive information in chat unless the system is designed for it",
+            "Manipulation — users may try to make the assistant say things it shouldn't; test for this",
+            "Brand voice — set tone and boundaries, and review conversations regularly",
+          ],
+          highlight: "Be careful how you describe AI to customers. In 2024 the U.S. Federal Trade Commission brought a sweep of enforcement actions (\"Operation AI Comply\") against companies over deceptive AI claims. Describe what your assistant does accurately.",
         },
         {
-          heading: "Build a Mobile-First Website Today",
-          body: "If your website isn't optimized for mobile, you're losing customers and ranking opportunities. Cardinal Consulting specializes in mobile-first web design for Houston businesses, ensuring your site delivers an exceptional experience on every device while maximizing your search visibility.",
-        }
+          heading: "How to measure ROI",
+          body: "Track the assistant against goals you set before launch:",
+          bullets: [
+            "Share of questions answered without staff involvement",
+            "Leads or bookings started from chat",
+            "Response time compared with email or phone",
+            "Escalations and customer satisfaction",
+            "Staff hours saved per week",
+          ],
+        },
+        {
+          heading: "A sensible rollout",
+          body: "Start with your top 20–30 questions, launch on one or two pages, review every conversation for the first few weeks, then expand. AI adoption is now widespread — McKinsey reports 88% of organizations use AI in at least one function — but careful rollouts are what turn experiments into results.",
+        },
       ],
-      cta: "Don't let a poor mobile experience cost you customers. Contact Cardinal Consulting for mobile-first web design that drives results."
-    }
-  },
-  {
-    slug: "houston-website-speed-optimization",
-    title: "Houston Website Speed Optimization: Faster Sites Rank Higher and Convert Better",
-    excerpt: "Site speed isn't just about user experience — it's a ranking factor. Discover Houston website speed optimization techniques that improve load times and boost your bottom line.",
-    category: "Design Process",
-    pillar: "design-process",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-04-15",
-    readTime: "8 min read",
-    featured: false,
-    keywords: ["website speed optimization houston", "page speed houston", "fast website houston", "site performance houston"],
-    content: {
-      sections: [
-        {
-          heading: "Speed Matters: The Business Case for Fast Websites",
-          body: "In today's fast-paced digital world, speed isn't just a technical metric — it's a business imperative. Every second of delay in your website's load time directly impacts your revenue, customer satisfaction, and search engine rankings. For Houston businesses competing in a crowded market, website speed optimization can be the difference between winning and losing customers.",
-          highlight: "A 1-second delay in page load time can reduce conversions by 7%, costing a $100,000/year online business approximately $7,000 annually."
-        },
-        {
-          heading: "Why Houston Websites Need to Be Fast",
-          body: "Houston consumers are busy and have high expectations. With lightning-fast 5G networks becoming standard and competitors just a click away, there's no tolerance for slow websites. The impact of speed extends beyond user experience to directly affect your bottom line.",
-          bullets: [
-            "53% of mobile users abandon a site that takes longer than 3 seconds to load",
-            "Google uses page speed as a ranking factor for both mobile and desktop",
-            "The average conversion rate drops by 4.2% with every additional second of load time",
-            "Fast-loading websites have 50% higher engagement rates",
-            "Core Web Vitals scores directly impact search visibility"
-          ]
-        },
-        {
-          heading: "How We Optimize Website Speed",
-          body: "At Cardinal Consulting, we employ a comprehensive set of techniques to ensure every website we build loads as fast as possible. Our optimization approach touches every layer of the technology stack.",
-          bullets: [
-            "Modern frontend frameworks (React, Next.js) with server-side rendering",
-            "Image optimization with next-gen formats (WebP, AVIF) and lazy loading",
-            "Minified and tree-shaken CSS and JavaScript",
-            "Content Delivery Network (CDN) integration for global fast delivery",
-            "Database optimization and query caching",
-            "HTTP/2 and HTTP/3 protocol support for faster data transfer",
-            "Critical CSS inlining for above-the-fold content"
-          ]
-        },
-        {
-          heading: "Measure and Improve Your Speed",
-          body: "Curious how your current website performs? Cardinal Consulting offers free website speed audits for Houston businesses. We'll analyze your site's performance, identify bottlenecks, and provide a detailed roadmap for improvement.",
-        }
-      ],
-      cta: "Get a free website speed audit for your Houston business. Contact Cardinal Consulting and discover how fast your site can be."
-    }
-  },
-  {
-    slug: "houston-local-seo-web-design",
-    title: "Local SEO and Web Design in Houston: The Ultimate Combination for Local Search Dominance",
-    excerpt: "Dominate Houston local search with a website built for local SEO from the ground up. Google Business Profile integration, local schema markup, and citation strategies included.",
-    category: "Design Process",
-    pillar: "design-process",
-    priority: 4,
-    author: "Hunain Qureshi",
-    date: "2026-04-12",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["local seo houston web design", "houston local seo", "local search houston", "google business profile houston"],
-    content: {
-      sections: [
-        {
-          heading: "The Power of Local SEO for Houston Businesses",
-          body: "When someone in Houston searches for a product or service, they're looking for a local solution. Local SEO is the practice of optimizing your online presence to attract more business from relevant local searches. When combined with professional web design, it creates a powerful combination that can dominate your local market.",
-          highlight: "46% of all Google searches are looking for local information. 88% of local searches result in a call or visit within 24 hours."
-        },
-        {
-          heading: "Integrating Local SEO into Web Design",
-          body: "The most effective local SEO strategies start with your website. By building local optimization into the design and development process, we create a foundation that helps you rank higher in Houston search results from day one.",
-          bullets: [
-            "Location-specific landing pages optimized for Houston neighborhoods and surrounding cities",
-            "Local business schema markup (NAP, hours, service area, reviews)",
-            "Google Business Profile integration with proper categorization and optimization",
-            "Local citation consistency across major directories",
-            "Houston-focused content strategy targeting local keywords",
-            "Mobile-optimized design for 'near me' searches",
-            "Review generation strategy integrated into the user experience"
-          ]
-        },
-        {
-          heading: "The Components of Local Search Success",
-          body: "Dominating local search requires a multifaceted approach that extends beyond your website. The most successful Houston businesses combine an optimized website with a comprehensive local SEO strategy.",
-          bullets: [
-            "Google Business Profile: Fully optimized with photos, posts, reviews, and accurate information",
-            "Local Citations: Consistent NAP across Google, Yelp, Bing, and industry directories",
-            "Online Reviews: Active review generation and management strategy",
-            "Local Content: Blog posts and pages targeting Houston-specific topics and keywords",
-            "Backlinks: Local link building from Houston organizations, publications, and partners"
-          ]
-        },
-        {
-          heading: "Ready to Dominate Houston Local Search?",
-          body: "Cardinal Consulting combines expert web design with proven local SEO strategies to help Houston businesses dominate their local market. Our integrated approach ensures your website is not just beautiful, but also optimized to attract the customers who matter most — the ones searching for your services right now.",
-        }
-      ],
-      cta: "Dominate Houston local search with a website built for results. Schedule your free local SEO consultation today."
-    }
+      cta: "Want an assistant that answers accurately from your own content? Talk with us about a scoped, measured AI build.",
+    },
   },
 
-  // PILLAR 5: BUSINESS & ROI
+  // 7 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-roi",
-    title: "Web Design ROI in Houston: What a Great Website Is Really Worth to Your Business",
-    excerpt: "A great website isn't an expense — it's an investment. Calculate the real ROI of professional web design for Houston businesses, from lead generation to customer lifetime value.",
-    category: "Business & ROI",
-    pillar: "business-roi",
-    priority: 1,
-    author: "Hunain Qureshi",
-    date: "2026-04-10",
-    readTime: "9 min read",
+    slug: "website-maintenance-checklist",
+    title: "The Website Maintenance Checklist: Monthly, Quarterly, and Yearly",
+    excerpt: "Everything a business website needs to stay secure, fast, and accurate — organized into a simple schedule you can follow or hand off.",
+    category: "Websites & Costs",
+    pillar: "websites",
+    priority: 7,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "6 min read",
     featured: false,
-    keywords: ["web design roi houston", "website investment houston", "roi of web design houston", "website value houston"],
+    keywords: ["website maintenance checklist", "website maintenance", "WordPress maintenance", "website care plan", "website maintenance Houston"],
+    relatedService: "/services/website-maintenance",
+    sources: [SRC.patchstack, SRC.google53],
     content: {
       sections: [
         {
-          heading: "Is Web Design Worth the Investment?",
-          body: "For many Houston business owners, the question isn't whether they need a website — it's whether investing in professional web design is worth the cost. The answer, backed by data from thousands of businesses, is a resounding yes. A professionally designed website isn't an expense; it's one of the highest-ROI investments you can make.",
-          highlight: "The average ROI for professional web design is 2-5x within the first year, with some businesses seeing 10x+ returns over three years."
+          heading: "Why maintenance matters",
+          body: "Websites are software, and software changes constantly. Patchstack recorded 11,334 new security vulnerabilities in the WordPress ecosystem in 2025 — up 42% from the year before, with most found in plugins. Speed also drifts as content and plugins pile up, and Google has found that 53% of mobile visits are abandoned when pages take longer than three seconds to load.",
         },
         {
-          heading: "Calculating Your Web Design ROI",
-          body: "Understanding the potential return on your web design investment helps justify the cost and set realistic expectations. Here's how to calculate the ROI of a professional website for your Houston business:",
+          heading: "Every month",
+          body: "These tasks prevent most problems before they start:",
           bullets: [
-            "Average monthly website visitors × conversion rate = monthly leads",
-            "Monthly leads × average sale value = monthly revenue from website",
-            "Monthly revenue × 12 months = annual revenue from website",
-            "Annual revenue − annual website cost = annual ROI",
-            "A $5,000 website generating just 10 leads/month at $500 average value returns $60,000/year — a 12x ROI"
-          ]
+            "Update the CMS, plugins, and themes — after testing on a staging copy",
+            "Confirm daily backups are running, and test a restore occasionally",
+            "Review uptime and security scan alerts",
+            "Check that every form sends and arrives",
+            "Update hours, prices, staff, and promotions",
+            "Review analytics for sudden drops in traffic or conversions",
+          ],
         },
         {
-          heading: "Factors That Maximize Web Design ROI",
-          body: "Not all websites deliver the same return. The most successful websites share common characteristics that maximize their ROI potential. Understanding these factors helps you make informed decisions about your investment.",
+          heading: "Every quarter",
+          body: "A deeper review keeps the site fast and findable:",
           bullets: [
-            "Professional design increases trust and credibility, leading to higher conversion rates",
-            "SEO optimization drives organic traffic without ongoing ad spend",
-            "Fast load times improve user experience and search rankings",
-            "Mobile optimization captures the growing mobile search market",
-            "Clear calls-to-action guide visitors toward conversion",
-            "Analytics and tracking enable continuous optimization"
-          ]
+            "Run a speed and Core Web Vitals check on key pages",
+            "Find and fix broken links and 404 errors",
+            "Review Google Search Console for indexing and security issues",
+            "Remove unused plugins and user accounts",
+            "Refresh content on your most important service pages",
+          ],
         },
         {
-          heading: "The Cost of NOT Investing in Web Design",
-          body: "Every day you delay a website redesign, you're potentially losing revenue. The cost of a poor website goes beyond its development price — it includes lost leads, lower search rankings, and a competitive disadvantage that compounds over time.",
+          heading: "Every year",
+          body: "Step back and look at the bigger picture:",
           bullets: [
-            "Lost leads from poor conversion rates (industry average website conversion is just 2-3%)",
-            "Lower search rankings due to poor SEO performance",
-            "Higher paid advertising costs to compensate for weak organic presence",
-            "Lost credibility with potential customers who judge your business by your website"
-          ]
+            "Renew the domain and SSL certificate (or confirm auto-renewal)",
+            "Review hosting performance and cost",
+            "Run an accessibility review",
+            "Update your privacy policy and legal pages",
+            "Decide whether the site needs a redesign to keep up with your business",
+          ],
         },
         {
-          heading: "Invest in Your Digital Future",
-          body: "Ready to calculate exactly what a professional website could mean for your Houston business? Cardinal Consulting can help you understand the potential ROI of your web design investment and build a site that delivers measurable results.",
-        }
+          heading: "Do it yourself or hand it off?",
+          body: "If someone on your team is comfortable with the tasks above and has time each month, you can manage maintenance internally. If not, a care plan is usually cheaper than recovering from a hacked or broken site.",
+          highlight: "Cardinal's website care plans cost $299, $499, or $799 per month, are month-to-month, and include updates, daily backups, 24/7 uptime monitoring, security scanning, and monthly content changes.",
+        },
       ],
-      cta: "Invest in a website that delivers real returns. Contact Cardinal Consulting for a free ROI analysis."
-    }
+      cta: "Want this handled for you? Start with a free site health check, then choose a month-to-month care plan.",
+    },
   },
+
+  // 8 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-redesign",
-    title: "When to Redesign Your Houston Business Website: 7 Telltale Signs",
-    excerpt: "Is your website costing you customers? Learn the 7 signs it's time for a Houston web design redesign and how a modern website can transform your business growth.",
-    category: "Business & ROI",
-    pillar: "business-roi",
-    priority: 2,
-    author: "Hunain Qureshi",
-    date: "2026-04-08",
-    readTime: "7 min read",
+    slug: "brand-identity-vs-logo",
+    title: "Brand Identity vs. Logo: What Your Business Actually Needs",
+    excerpt: "Why a logo alone rarely solves a branding problem, what a complete identity system includes, and how to decide what to invest in now.",
+    category: "Growth Marketing",
+    pillar: "growth",
+    priority: 8,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "6 min read",
     featured: false,
-    keywords: ["houston website redesign", "redesign website houston", "website redesign cost houston", "site redesign houston"],
+    keywords: ["brand identity vs logo", "brand identity design", "what is brand identity", "branding agency Houston", "logo design Houston"],
+    relatedService: "/services/brand-identity",
+    sources: [SRC.mckinseyDesign],
     content: {
       sections: [
         {
-          heading: "Is Your Website Working Against You?",
-          body: "Your website should be your most powerful marketing tool. But for many Houston businesses, an outdated or poorly designed website is actually driving customers away. Here are the 7 telltale signs that it's time for a website redesign — and how a modern site can transform your business.",
+          heading: "A logo is one piece of a system",
+          body: "A logo is the mark that identifies your business. A brand identity is the complete visual and verbal system around it — the colors, typography, imagery, voice, and rules that make everything you publish look and sound like the same company.\n\nA great logo used inconsistently still makes a business look disorganized. A consistent identity makes even a simple logo feel established.",
         },
         {
-          heading: "Sign #1: Your Website Takes Too Long to Load",
-          body: "In a world where attention spans are measured in seconds, a slow website is a conversion killer. If your site takes more than 3 seconds to load, you're losing more than half of your potential visitors before they even see your content.",
-          highlight: "A 1-second delay in page load time causes a 7% reduction in conversions, 11% fewer page views, and a 16% decrease in customer satisfaction."
+          heading: "What a brand identity includes",
+          body: "A complete identity system typically contains:",
+          bullets: [
+            "Logo, with variations for different sizes and backgrounds",
+            "Color palette with exact values for print and screen",
+            "Typography for headlines and body text",
+            "Imagery and illustration style",
+            "Voice and messaging guidelines",
+            "Brand guidelines document showing correct and incorrect use",
+            "Applications: business cards, signage, social templates, presentations",
+          ],
         },
         {
-          heading: "Sign #2: Your Site Isn't Mobile-Friendly",
-          body: "With over 60% of web traffic coming from mobile devices, a non-responsive website is essentially invisible to the majority of your potential customers. If you need to pinch and zoom to read content on your phone, it's time for a redesign.",
+          heading: "When a logo is enough",
+          body: "If you're a new business validating an idea with a small budget, a professional logo plus a simple color and font choice can be enough to start. Plan to build the full system once you've found your market.",
         },
         {
-          heading: "Sign #3: Your Traffic Is Declining",
-          body: "If you've noticed a steady decline in website traffic, your SEO may be suffering. Google regularly updates its algorithms, and sites that don't keep up with best practices lose visibility over time. A redesign gives you the opportunity to rebuild your SEO foundation.",
+          heading: "When you need a full identity",
+          body: "Invest in a complete identity when:",
+          bullets: [
+            "You're entering a market where buyers compare established competitors",
+            "Several people or vendors create materials for your brand",
+            "You're raising capital, rebranding, merging, or launching a new division",
+            "Your current materials all look slightly different from each other",
+          ],
+          highlight: "Design is a business lever, not decoration: McKinsey found companies in the top quartile of design performance grew revenue 32 percentage points faster than industry peers over five years.",
         },
         {
-          heading: "Sign #4: Your Conversion Rates Are Low",
-          body: "If visitors are coming to your site but not taking action — filling out forms, making purchases, or calling your business — your design is failing to convert. This is one of the most expensive problems a business can have.",
+          heading: "What it costs",
+          body: "For reference, Cardinal's brand identity packages start at $5,000 (Essentials, about 3–4 weeks), $12,000 (Professional, about 6–8 weeks), and $25,000+ (Enterprise, about 10–14 weeks). You own all files and intellectual property at the end.",
         },
-        {
-          heading: "Sign #5: Your Brand Has Evolved",
-          body: "Businesses grow and change. If your website no longer reflects your current brand, messaging, or offerings, it creates confusion and erodes trust with potential customers. Your website should always be an accurate reflection of who you are.",
-        },
-        {
-          heading: "Sign #6: Your Competitors Have Passed You By",
-          body: "Take an honest look at your competitors' websites. If they look more professional, load faster, and provide a better user experience than yours, you're losing business to them. In a competitive market like Houston, you can't afford to fall behind.",
-        },
-        {
-          heading: "Sign #7: Your Website Is a Security Risk",
-          body: "Outdated websites are vulnerable to security breaches that can compromise customer data and damage your reputation. If your site is running on outdated software or lacks SSL encryption, a redesign isn't just recommended — it's urgent.",
-        },
-        {
-          heading: "Transform Your Online Presence",
-          body: "If any of these signs sound familiar, it's time to consider a website redesign. Cardinal Consulting specializes in transforming outdated websites into powerful marketing and sales tools for Houston businesses.",
-        }
       ],
-      cta: "Is your website costing you customers? Get a free website audit from Cardinal Consulting and discover how a redesign can transform your business."
-    }
+      cta: "Not sure whether you need a logo or a full identity? Book a free consultation and we'll recommend the right scope for your stage.",
+    },
   },
+
+  // 9 ────────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-conversion-optimization",
-    title: "Houston Web Design Conversion Optimization: Turn Visitors into Paying Customers",
-    excerpt: "Drive more sales and leads from your Houston website. Learn conversion optimization strategies including CTA placement, form design, trust signals, and user flow improvements.",
-    category: "Business & ROI",
-    pillar: "business-roi",
-    priority: 3,
-    author: "Hunain Qureshi",
-    date: "2026-04-05",
-    readTime: "10 min read",
-    featured: false,
-    keywords: ["houston web design conversion", "website conversion houston", "cro houston", "lead generation website houston"],
+    slug: "google-business-profile-guide-houston",
+    title: "Google Business Profile Guide for Houston Businesses",
+    excerpt: "How to set up, verify, and optimize your Google Business Profile so you show up in local searches and the map pack — without breaking Google's rules.",
+    category: "Growth Marketing",
+    pillar: "growth",
+    priority: 9,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "8 min read",
+    featured: true,
+    keywords: ["Google Business Profile Houston", "Google Business Profile optimization", "local SEO Houston", "Google Maps ranking", "Google My Business Houston"],
+    relatedService: "/services/seo-analytics",
+    sources: [SRC.brightlocal, SRC.gbpGuidelines],
     content: {
       sections: [
         {
-          heading: "What Is Conversion Optimization?",
-          body: "Conversion Rate Optimization (CRO) is the systematic process of increasing the percentage of website visitors who take a desired action — whether that's filling out a form, making a purchase, calling your business, or signing up for a newsletter. For Houston businesses, effective conversion optimization can dramatically increase the ROI of your website without increasing traffic.",
-          highlight: "The average website conversion rate is just 2.35%. The top 25% of websites convert at 5.31% or higher — more than double the average."
+          heading: "Why your profile matters as much as your website",
+          body: "When someone searches for a service near them, Google often shows a map with three businesses before any website results. Those listings come from Google Business Profile. Reviews play a big role in which business gets the call — BrightLocal's 2025 survey found only 4% of consumers say they never read online reviews when choosing a local business.",
         },
         {
-          heading: "Key Conversion Optimization Strategies",
-          body: "Effective conversion optimization involves a combination of design, psychology, and data analysis. Here are the most impactful strategies we use at Cardinal Consulting to help Houston businesses convert more visitors into customers.",
+          heading: "Set it up correctly",
+          body: "Getting the basics right avoids most problems later:",
           bullets: [
-            "Strategic call-to-action (CTA) placement that guides users naturally through the conversion funnel",
-            "Form optimization with minimal fields, clear labels, and error handling that doesn't frustrate users",
-            "Trust signals including testimonials, case studies, certifications, and security badges",
-            "Social proof elements that show other customers have had positive experiences",
-            "Urgency and scarcity tactics (limited-time offers, low-stock alerts) that drive action",
-            "A/B testing of headlines, CTAs, images, and layouts to continuously improve results",
-            "Heat mapping and user session recording to identify friction points"
-          ]
+            "Use your real business name — no added keywords or locations",
+            "Choose the most specific primary category, then add relevant secondary categories",
+            "Enter your address exactly as it appears on your website and other listings",
+            "If you serve customers at their location and don't have a storefront, hide your address and set your service areas (for example Houston, Katy, Sugar Land, The Woodlands, Pearland)",
+            "Add hours, phone, website, and services with descriptions",
+            "Complete verification as Google requests",
+          ],
+          highlight: "Adding keywords to your business name (\"Smith Plumbing — Best Houston Plumber\") violates Google's guidelines and can get your profile suspended.",
         },
         {
-          heading: "Design Principles That Drive Conversions",
-          body: "The visual design of your website has a profound impact on conversion rates. Certain design principles are consistently shown to improve conversion performance across industries and audiences.",
+          heading: "Optimize what customers see",
+          body: "After setup, focus on the details that help customers choose you:",
           bullets: [
-            "Visual hierarchy that directs attention to the most important elements",
-            "White space that improves readability and focuses attention on key content",
-            "Directional cues (arrows, gaze patterns) that guide users toward CTAs",
-            "Contrasting colors for buttons and important elements",
-            "Progressive disclosure that reveals information at the right time",
-            "Consistent branding that builds familiarity and trust"
-          ]
+            "Upload real photos of your team, location, and work — and add new ones regularly",
+            "List every service with a short, clear description",
+            "Publish posts with updates, offers, and recent projects",
+            "Keep holiday and special hours current",
+            "Make sure your website's contact page uses the same name, address, and phone",
+          ],
         },
         {
-          heading: "The CRO Checklist for Houston Businesses",
-          body: "Follow this checklist to identify quick wins and long-term improvements for your website's conversion performance. Even small changes can lead to significant improvements in conversion rates and revenue.",
-          bullets: [
-            "✓ Is your value proposition clear within 5 seconds of landing on your site?",
-            "✓ Are your CTAs visually distinct and action-oriented?",
-            "✓ Is your contact form short (5 fields or fewer is ideal)?",
-            "✓ Do you have testimonials or case studies visible on key pages?",
-            "✓ Is your site loading in under 2 seconds?",
-            "✓ Is your mobile experience fully functional?",
-            "✓ Are you tracking conversions with proper analytics setup?"
-          ]
+          heading: "Build a steady flow of genuine reviews",
+          body: "Ask every satisfied customer, make it easy with a direct review link, and reply to every review — positive or negative — professionally. Never buy reviews, offer incentives for positive ones, or post reviews for your own business; Google prohibits these practices.",
         },
         {
-          heading: "Start Converting More Visitors Today",
-          body: "Conversion optimization is an ongoing process, not a one-time fix. Cardinal Consulting helps Houston businesses implement and continuously improve conversion strategies that turn more website visitors into paying customers. Let us help you unlock the full potential of your website.",
-        }
+          heading: "Keep your listings consistent everywhere",
+          body: "Search engines compare your business information across the web. Keep your name, address, and phone identical on your website, Google, Bing Places, Apple Business Connect, Yelp, industry directories, and social profiles.",
+        },
+        {
+          heading: "Measure what's working",
+          body: "Your profile's Performance section shows searches, views, calls, website clicks, and direction requests. Review it monthly alongside your website analytics to see which actions bring in customers.",
+        },
       ],
-      cta: "Turn more visitors into customers. Contact Cardinal Consulting for a free conversion optimization assessment."
-    }
+      cta: "Want help showing up in Houston's local results? Our SEO plans include Google Business Profile optimization and monthly reporting.",
+    },
   },
+
+  // 10 ───────────────────────────────────────────────────────────────
   {
-    slug: "houston-web-design-trends-2026",
-    title: "Houston Web Design Trends 2026: What's Working for Local Businesses Right Now",
-    excerpt: "Stay ahead of the curve with the latest Houston web design trends. From AI-powered personalization to immersive experiences, discover what's driving results for local businesses in 2026.",
-    category: "Business & ROI",
-    pillar: "business-roi",
-    priority: 4,
-    author: "Hunain Qureshi",
-    date: "2026-04-01",
+    slug: "how-to-choose-an-app-development-company",
+    title: "How to Choose an App Development Company in Houston",
+    excerpt: "A practical guide to scoping your app, comparing development partners, protecting your ownership, and avoiding the mistakes that sink app projects.",
+    category: "Industry Guides",
+    pillar: "industry",
+    priority: 10,
+    author: AUTHOR,
+    date: DATE,
     readTime: "8 min read",
     featured: false,
-    keywords: ["houston web design trends 2026", "website trends houston", "modern web design houston", "2026 web design trends houston"],
+    keywords: ["app development company Houston", "how to choose an app developer", "mobile app development Houston", "hire app developers", "MVP app development"],
+    relatedService: "/services/mobile-apps",
+    sources: [SRC.sensortower],
     content: {
       sections: [
         {
-          heading: "Web Design in 2026: The Year of Experience",
-          body: "Web design continues to evolve at a rapid pace. In 2026, the focus has shifted from simply looking good to creating memorable, personalized experiences that engage visitors and drive conversions. Houston businesses that embrace these trends are seeing significant advantages over competitors who stick with outdated approaches.",
-          highlight: "Businesses that adopt modern web design trends see 3x higher engagement rates and 2x higher conversion rates compared to those using outdated designs."
+          heading: "Why the decision matters",
+          body: "Mobile apps are where people spend their time: Sensor Tower's State of Mobile 2025 reported 4.2 trillion hours spent in apps worldwide in 2024, and $150 billion in consumer spending. But apps are also expensive to build and maintain, so the partner you choose shapes both the product and your long-term costs.",
         },
         {
-          heading: "Top Web Design Trends for 2026",
-          body: "From AI-powered personalization to immersive micro-interactions, these are the web design trends driving real results for Houston businesses in 2026:",
+          heading: "Define the first version before you shop",
+          body: "Write down the problem the app solves, who it's for, and the smallest set of features that delivers that value. This minimum viable product (MVP) lets developers quote accurately and keeps your first release focused. Decide early whether you need iPhone, Android, or both.",
+        },
+        {
+          heading: "What to evaluate in a development partner",
+          body: "Look past the sales pitch to these essentials:",
           bullets: [
-            "AI-Powered Personalization: Content and product recommendations tailored to individual users based on behavior and preferences",
-            "Micro-Interactions: Subtle animations and feedback that delight users and improve perceived quality",
-            "Dark Mode Design: Sleek dark themes that reduce eye strain and look premium",
-            "Minimalist Aesthetics: Clean, focused designs with plenty of white space and intentional typography",
-            "Performance-First Design: Speed and Core Web Vitals as primary design considerations, not afterthoughts",
-            "Accessibility-First: WCAG-compliant designs that work for everyone, including users with disabilities",
-            "Voice Search Optimization: Content structured for voice search queries and AI assistants"
-          ]
+            "Live apps in the App Store or Google Play that you can download and try",
+            "Experience with apps similar in complexity to yours",
+            "A clear process — short development cycles with regular demos",
+            "Design capability, not just coding",
+            "How they handle security and data protection",
+            "Who will actually work on your project",
+            "Post-launch support for bugs and new operating-system versions",
+          ],
         },
         {
-          heading: "The Rise of AI in Web Design",
-          body: "Artificial intelligence is transforming web design in 2026. From AI-powered chatbots that provide instant customer support to personalized content recommendations based on user behavior, AI is enabling levels of personalization and efficiency that were impossible just a few years ago.",
+          heading: "Protect your ownership",
+          body: "Before signing, confirm in writing that you own the source code, designs, and intellectual property; that code lives in a repository you control; and that you hold the App Store and Google Play developer accounts. This protects you if you ever change partners.",
+          highlight: "If a company won't put code ownership in the contract, keep looking.",
+        },
+        {
+          heading: "Understand pricing models",
+          body: "Fixed-price quotes work for well-defined MVPs. Time-and-materials pricing suits evolving products where requirements will change. For reference, Cardinal's MVP apps start at $5,000+, with typical timelines of 6–8 weeks for an MVP, 12–16 weeks for a full-featured app, and 16–24 weeks for enterprise apps. Full-featured and enterprise apps are quoted after scoping.",
+        },
+        {
+          heading: "Questions to ask before you sign",
+          body: "Use these to compare finalists:",
           bullets: [
-            "AI chatbots handling up to 80% of customer inquiries without human intervention",
-            "Personalized content that adapts based on user behavior, location, and preferences",
-            "AI-driven A/B testing that continuously optimizes conversion rates",
-            "Automated accessibility checks and improvements",
-            "Predictive analytics that anticipate user needs and guide them toward conversion"
-          ]
+            "Should we build native or cross-platform, and why?",
+            "What's included in the quote — design, backend, testing, app store submission?",
+            "How often will we see working builds?",
+            "What happens after launch, and what does ongoing support cost?",
+            "Who owns the code and accounts?",
+          ],
         },
-        {
-          heading: "The Enduring Importance of Fundamentals",
-          body: "While trends come and go, some fundamentals never change. The most successful Houston websites in 2026 combine cutting-edge trends with rock-solid fundamentals: fast load times, intuitive navigation, clear calls-to-action, and exceptional performance on all devices.",
-        },
-        {
-          heading: "Future-Proof Your Houston Website",
-          body: "Don't let your website fall behind. Cardinal Consulting stays at the forefront of web design trends, ensuring every site we build is modern, effective, and ready for the future. Contact us to learn how we can help your Houston business stay ahead of the curve.",
-        }
       ],
-      cta: "Stay ahead of the competition with modern web design. Contact Cardinal Consulting to future-proof your Houston website."
-    }
+      cta: "Planning an app? Book a free consultation and we'll help you scope an MVP with a clear timeline and price.",
+    },
+  },
+
+  // 11 ───────────────────────────────────────────────────────────────
+  {
+    slug: "cloud-cost-optimization-guide",
+    title: "Cloud Cost Optimization: Where Mid-Size Companies Overspend",
+    excerpt: "The most common sources of cloud waste, a practical 30-day plan to find savings, and the habits that keep costs under control.",
+    category: "AI & Technology",
+    pillar: "ai-technology",
+    priority: 11,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "7 min read",
+    featured: false,
+    keywords: ["cloud cost optimization", "reduce AWS costs", "cloud cost management", "FinOps", "cloud consulting Houston"],
+    relatedService: "/services/technical-consulting",
+    sources: [SRC.flexera],
+    content: {
+      sections: [
+        {
+          heading: "Cloud spend is the top cloud challenge",
+          body: "In Flexera's 2025 State of the Cloud report, 84% of organizations said managing cloud spend is their top cloud challenge. The cloud makes it easy to start resources and just as easy to forget them. Most savings come from a handful of predictable places.",
+        },
+        {
+          heading: "Where the money usually goes",
+          body: "Check these areas first:",
+          bullets: [
+            "Idle or oversized servers and databases sized for peak load that never comes",
+            "Development and test environments running 24/7",
+            "Unattached storage volumes, old snapshots, and forgotten backups",
+            "Data transfer charges between regions and out to the internet",
+            "Steady workloads paying on-demand rates instead of committed-use discounts",
+            "Logs and metrics kept far longer than anyone needs",
+            "Premium tiers of managed services that a standard tier would handle",
+          ],
+        },
+        {
+          heading: "A 30-day plan",
+          body: "You don't need a large project to find meaningful savings:",
+          bullets: [
+            "Week 1: Turn on cost reporting by service, account, and tag; identify the top ten cost drivers",
+            "Week 2: Delete or stop unused resources; schedule non-production environments to shut down after hours",
+            "Week 3: Right-size the largest servers and databases based on actual usage",
+            "Week 4: Evaluate committed-use discounts for steady workloads; set budgets and alerts",
+          ],
+        },
+        {
+          heading: "Make it a habit, not a one-time cleanup",
+          body: "Costs drift back without ownership. Tag every resource with an owner and project, review spend monthly, set budget alerts, and include cost in architecture decisions. Many teams call this practice FinOps — shared accountability for cloud spending between engineering and finance.",
+          highlight: "Never trade reliability or security for savings. Confirm backups, redundancy, and monitoring before downsizing anything critical.",
+        },
+      ],
+      cta: "Want an independent review of your cloud costs? Our technical assessment includes a cloud cost and performance review with prioritized recommendations.",
+    },
+  },
+
+  // 12 ───────────────────────────────────────────────────────────────
+  {
+    slug: "hipaa-ready-website-checklist",
+    title: "HIPAA-Ready Website Checklist for Houston Medical Practices",
+    excerpt: "How to handle forms, tracking tools, vendors, and accessibility on a healthcare website — with the latest regulatory developments explained in plain language.",
+    category: "Industry Guides",
+    pillar: "industry",
+    priority: 12,
+    author: AUTHOR,
+    date: DATE,
+    readTime: "9 min read",
+    featured: true,
+    keywords: ["HIPAA compliant website", "HIPAA website checklist", "medical website design Houston", "healthcare website tracking HIPAA", "HIPAA web forms"],
+    relatedService: "/houston-medical-website-design",
+    sources: [SRC.ahaBecerra, SRC.hhs504],
+    content: {
+      sections: [
+        {
+          heading: "First, a note on what this is",
+          body: "This checklist explains common website considerations for healthcare organizations. It isn't legal advice. Your compliance officer or healthcare attorney should review your specific setup.\n\nAlso note that there's no such thing as a \"HIPAA-certified\" website. HIPAA applies to how protected health information (PHI) is collected, stored, and shared — so what matters is how your site and its vendors handle that information.",
+        },
+        {
+          heading: "Map where your website touches patient information",
+          body: "List every place information enters or leaves your site:",
+          bullets: [
+            "Contact and appointment-request forms",
+            "Patient-portal and online-scheduling links",
+            "Live chat or AI assistants",
+            "Email notifications sent from forms",
+            "Analytics, advertising pixels, and session-recording tools",
+          ],
+        },
+        {
+          heading: "Forms and vendors",
+          body: "If a form collects PHI — symptoms, conditions, medications, insurance details — it should be processed by a HIPAA-eligible service that will sign a Business Associate Agreement (BAA). Standard form tools and regular email often won't. When a BAA isn't in place, limit forms to contact details and move clinical questions into your secure systems.",
+          highlight: "A simple rule: if you wouldn't put it on a postcard, don't collect it through a standard website form.",
+        },
+        {
+          heading: "Tracking technologies",
+          body: "In December 2022 the HHS Office for Civil Rights issued guidance warning that analytics and advertising trackers on healthcare websites can disclose PHI. In June 2024, a federal court in American Hospital Association v. Becerra vacated part of that guidance — specifically the position that an IP address combined with a visit to an unauthenticated public page is PHI — and HHS later withdrew its appeal.\n\nOther parts of the guidance were not vacated. Tracking on authenticated pages such as patient portals, and on pages that reveal why someone is visiting, remains high-risk without a BAA. A conservative approach:",
+          bullets: [
+            "Keep advertising pixels off patient portals, scheduling flows, and condition-specific pages",
+            "Configure analytics to collect the minimum necessary",
+            "Review every third-party script on the site",
+            "Document your decisions with your compliance team",
+          ],
+        },
+        {
+          heading: "Accessibility",
+          body: "HHS's 2024 Section 504 rule adopted WCAG 2.1 Level AA as the web accessibility standard for recipients of HHS federal financial assistance. In 2026, HHS extended the compliance dates: recipients with 15 or more employees now have until May 2027, with a later date for smaller recipients. Check current HHS guidance for the exact deadline that applies to you — and remember accessible design also simply makes your site easier for every patient to use.",
+        },
+        {
+          heading: "Security basics",
+          body: "Every healthcare website should also have:",
+          bullets: [
+            "HTTPS on every page",
+            "Regular software updates and security monitoring",
+            "Strong passwords and multi-factor authentication for website admins",
+            "Backups you've tested restoring",
+            "A clear privacy policy that matches what the site actually does",
+          ],
+        },
+      ],
+      cta: "Building or updating a practice website? We design patient-friendly sites with privacy-conscious forms and analytics — talk with us.",
+    },
   },
 ];

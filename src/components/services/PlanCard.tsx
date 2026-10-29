@@ -2,14 +2,17 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Check, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ServiceTier } from "@/lib/services-catalog";
+import { contactHref } from "@/lib/contact-intent";
 
 interface PlanCardProps {
   tier: ServiceTier;
   /** Service pages present engagement models without prices; the Pricing page shows them. */
   showPrice?: boolean;
+  /** Carries the service and plan into the contact form */
+  serviceSlug?: string;
 }
 
-export function PlanCard({ tier, showPrice = true }: PlanCardProps) {
+export function PlanCard({ tier, showPrice = true, serviceSlug }: PlanCardProps) {
   const isQuote = !/\d/.test(tier.price);
   const cta = !showPrice ? "Discuss this engagement" : isQuote ? "Request a quote" : "Get started";
 
@@ -54,7 +57,7 @@ export function PlanCard({ tier, showPrice = true }: PlanCardProps) {
       </ul>
 
       <Link
-        to="/contact"
+        to={contactHref({ service: serviceSlug, plan: tier.name })}
         className={cn(
           "mt-8 inline-flex h-12 items-center justify-center gap-2 text-sm font-semibold transition-colors",
           tier.popular ? "bg-ink text-ink-foreground hover:bg-primary" : "border border-foreground text-foreground hover:bg-foreground hover:text-background",

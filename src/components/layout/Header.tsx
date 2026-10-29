@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { serviceGroups, services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
+import { ScrollProgress } from "@/components/site/motion";
 
 type PanelId = "services" | "industries";
 
@@ -192,6 +193,8 @@ export function Header() {
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+
+        <ScrollProgress />
 
         {/* Desktop mega panels */}
         <AnimatePresence>

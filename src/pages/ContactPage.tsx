@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import { services } from "@/lib/services-catalog";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -12,7 +14,7 @@ import { generateContactPageSchema, generateBreadcrumbSchema, generateWebPageSch
 
 const details = [
   { icon: Phone, label: "Phone", value: "(281) 901-7016", href: "tel:281-901-7016" },
-  { icon: Mail, label: "Email", value: "hello@visitcardinal.com", href: "mailto:hello@visitcardinal.com" },
+  { icon: Mail, label: "Email", value: "Hunain@visitcardinal.com", href: "mailto:Hunain@visitcardinal.com" },
   { icon: MapPin, label: "Headquarters", value: "2100 West Loop S Fwy, Houston, TX 77027" },
   { icon: Clock, label: "Hours", value: "Mon–Fri 9AM–6PM CST · Weekends by appointment" },
 ];
@@ -25,6 +27,8 @@ const faqs = [
 ];
 
 export default function ContactPage() {
+  const { search } = useLocation();
+  const selected = services.find((s) => s.slug === new URLSearchParams(search).get("service"));
   const schemas = [
     generateContactPageSchema(),
     generateLocalBusinessSchema(),
@@ -42,7 +46,7 @@ export default function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Us"
+        title="Contact Us — Free Consultation | Houston Web & Digital Agency"
         description="Contact Cardinal Consulting. Call (281) 901-7016 or send a message — we respond within 24 hours. Houston-headquartered web, app, and digital growth firm."
         url={`${siteConfig.url}/contact`}
         schemas={schemas}
@@ -57,9 +61,11 @@ export default function ContactPage() {
               <Breadcrumbs items={[{ label: "Contact" }]} />
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="max-w-3xl">
                 <Eyebrow className="mb-6">Contact us</Eyebrow>
-                <h1 className="font-display text-4xl leading-[1.05] text-foreground md:text-5xl lg:text-6xl">Let's talk about your goals</h1>
+                <h1 className="font-display text-4xl leading-[1.05] text-foreground md:text-5xl lg:text-6xl">
+                  {selected ? `Let's talk about ${selected.name.toLowerCase().startsWith("seo") ? "SEO" : selected.name}` : "Let's talk about your goals"}
+                </h1>
                 <p className="mt-6 text-lg leading-relaxed text-text-secondary md:text-xl">
-                  Share a few details and a member of our team will respond within 24 hours.
+                  Tell us what you need — it takes about a minute. A member of our team will respond within 24 hours.
                 </p>
               </motion.div>
             </Container>

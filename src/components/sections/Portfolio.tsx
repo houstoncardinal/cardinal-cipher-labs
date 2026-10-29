@@ -21,7 +21,13 @@ export function Portfolio() {
 
         {lead && (
           <motion.article {...reveal} className="grid items-center gap-10 border-b border-border pb-16 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-            <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+            {lead.detail ? (
+              <Link to={`/portfolio/${lead.slug}`} data-cursor="View case study" aria-label={`Read the ${lead.client} case study`} className="block">
+                <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+              </Link>
+            ) : (
+              <BrowserFrame src={lead.image} alt={`${lead.client} website`} />
+            )}
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{lead.industry}</p>
               <h3 className="mt-3 font-display text-3xl text-foreground md:text-4xl">{lead.client}</h3>

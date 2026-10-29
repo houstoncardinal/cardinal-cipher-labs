@@ -68,7 +68,7 @@ const faqs = [
   },
   {
     question: "How do I find a web developer near me in Houston?",
-    answer: "Cardinal Consulting is a Houston-based web development company located at 2100 West Loop S Fwy, Houston, TX 77027. We serve all Houston neighborhoods including The Woodlands, Sugar Land, Katy, Pearland, Cypress, Spring, League City, Pasadena, Conroe, and all of Greater Houston. Call us at (281) 901-7016 or email hello@visitcardinal.com to schedule a free in-person or virtual consultation."
+    answer: "Cardinal Consulting is a Houston-based web development company located at 2100 West Loop S Fwy, Houston, TX 77027. We serve all Houston neighborhoods including The Woodlands, Sugar Land, Katy, Pearland, Cypress, Spring, League City, Pasadena, Conroe, and all of Greater Houston. Call us at (281) 901-7016 or email Hunain@visitcardinal.com to schedule a free in-person or virtual consultation."
   },
   {
     question: "What technologies do Houston web developers use?",
@@ -109,7 +109,7 @@ const generateSchemas = () => {
     "description": "Houston's best web developers. Full-stack React, Next.js, Node.js development for Houston businesses. 500+ projects delivered. Expert web developers serving all Houston neighborhoods.",
     "url": "https://visitcardinal.com/houston-web-developer",
     "telephone": "+12819017016",
-    "email": "hello@visitcardinal.com",
+    "email": "Hunain@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2100 West Loop S Fwy",
@@ -383,7 +383,7 @@ export function HoustonWebDeveloperPage() {
                 </div>
                 <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400 text-sm">
                   <span className="flex items-center gap-2"><MapPin className="w-4 h-4" />2100 West Loop S Fwy, Houston, TX 77027</span>
-                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />hello@visitcardinal.com</span>
+                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />Hunain@visitcardinal.com</span>
                   <span className="flex items-center gap-2"><Clock className="w-4 h-4" />Mon–Fri 9AM–6PM CST</span>
                 </div>
               </motion.div>

@@ -1,17 +1,21 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Clock } from "lucide-react";
+import {
+  ArrowRight, Check, ChevronDown, Clock, ClipboardList, Hammer, Mail, MapPin, MessageSquare, Phone, Rocket, ShieldCheck,
+} from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { PlanCard } from "@/components/services/PlanCard";
-import { BrowserFrame, Container, Eyebrow, SectionHeader, reveal, revealDelay } from "@/components/site/primitives";
+import { ContactForm } from "@/components/site/ContactForm";
 import { generateServicePageSchemas } from "@/lib/service-schema-generators";
 import { siteConfig } from "@/lib/seo-config";
 import { getService, type ServiceDefinition } from "@/lib/services-catalog";
 import { getCaseStudies } from "@/lib/case-studies";
+import { contactHref, rememberService } from "@/lib/contact-intent";
+import { cn } from "@/lib/utils";
+
+const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } } as const;
 
 function buildSchemas(service: ServiceDefinition) {
   const serviceUrl = `${siteConfig.url}${service.path}`;
@@ -29,30 +33,62 @@ function buildSchemas(service: ServiceDefinition) {
     faqs: service.faqs,
     offers: service.tiers.map((t) => ({ name: t.name, price: t.price, description: t.bestFor, features: t.features })),
     process: service.process.map((p) => ({ name: p.title, description: p.description })),
-    reviews: (service.testimonials ?? []).map((t) => ({
-      author: t.author,
-      authorTitle: t.title.split(",")[0],
-      company: t.title.split(",").slice(1).join(",").trim(),
-      rating: t.rating,
-      body: t.body,
-      date: service.seo.reviewDate,
-    })),
-    aggregateRating: service.seo.aggregateRating,
     duration: service.seo.duration,
     keywords: service.seo.keywords,
     features: service.included.map((f) => ({ title: f.title, description: f.description })),
   });
 }
 
+const STEP_ICONS = [MessageSquare, ClipboardList, Hammer, Rocket];
+const STEP_OUTPUTS = ["Free · no obligation", "Written scope, timeline & price", "Reviews at every milestone", "Launch, reporting & support"];
+
+/** "SEO" stays uppercase when a service name is used mid-sentence. */
+const inSentence = (name: string) => (name.startsWith("SEO") || name.startsWith("UX") || name.startsWith("AI") ? name : name.toLowerCase());
+
+function Headline({ service }: { service: ServiceDefinition }) {
+  const { headline, accent } = service;
+  if (!accent || !headline.includes(accent)) return <>{headline}</>;
+  const [before, after] = headline.split(accent);
+  return (
+    <>
+      {before}
+      <span className="text-red-600">{accent}</span>
+      {after}
+    </>
+  );
+}
+
+const SectionTitle = ({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) => (
+  <motion.div {...fadeUp} className="mx-auto mb-14 max-w-3xl text-center">
+    <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-red-600">{eyebrow}</span>
+    <h2 className="font-serif text-3xl leading-tight text-gray-900 lg:text-5xl">{title}</h2>
+    {intro && <p className="mt-4 text-lg text-gray-500">{intro}</p>}
+  </motion.div>
+);
+
 /**
- * Shared layout for every /services/* page. Fixed order:
- * Hero → Stats → Where we help / Capabilities → Selected work → Engagement models
- * → Approach → Client perspective → FAQ → Related. Content lives in services-catalog.ts.
+ * Service pages share one structure, customized by services-catalog.ts:
+ * Hero + plans at a glance → Facts → Fit → What's included → Visual process → Plans
+ * → Research → Work → FAQ → Start a conversation (inline form) → Related.
  */
 export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const related = service.related.map(getService);
   const work = getCaseStudies(service.caseStudies ?? []);
-  const [featured, ...otherQuotes] = service.testimonials ?? [];
+  useEffect(() => rememberService(service.slug), [service.slug]);
+
+  const monthly = service.startingBilling === "per month";
+  const priced = /\d/.test(service.startingAt);
+  const timeline = service.tiers.find((t) => t.popular)?.timeline ?? service.tiers.find((t) => t.timeline)?.timeline;
+  const facts = [
+    { value: priced ? `${service.startingAt}${monthly ? "/mo" : ""}` : "Custom", label: priced ? "Starting price" : "Quoted after a free consultation" },
+    {
+      value: timeline ? timeline.replace(/^Typically /, "") : monthly ? "Monthly" : "Scoped",
+      label: timeline ? "Typical timeline" : monthly ? "Month-to-month, no long contract" : "Timeline set in your proposal",
+    },
+    { value: "3 plans", label: "Foundation · Growth · Enterprise" },
+    { value: "24 hrs", label: "Reply to every inquiry" },
+  ];
 
   return (
     <>
@@ -63,119 +99,216 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
         schemas={buildSchemas(service)}
         url={`${siteConfig.url}${service.path}`}
       />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-white">
         <Header />
-        <main className="pt-[72px]">
-          {/* Hero */}
-          <section className="border-b border-border bg-secondary">
-            <Container className="pb-20 pt-10 lg:pb-24 lg:pt-12">
-              <Breadcrumbs items={[{ label: "Services", href: "/services" }, { label: service.name }]} />
-              <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                  <Eyebrow className="mb-6">{service.name}</Eyebrow>
-                  <h1 className="font-display text-4xl leading-[1.05] text-foreground md:text-5xl lg:text-6xl">{service.headline}</h1>
-                  <p className="service-description mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">{service.summary}</p>
-                  <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-                    <Link to="/contact" className="inline-flex h-12 items-center gap-2 bg-ink px-6 font-semibold text-ink-foreground transition-colors hover:bg-primary">
-                      Talk to our team <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <a href="#engagements" className="inline-flex items-center gap-2 font-semibold text-foreground underline-offset-4 hover:underline">
-                      View engagement models <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
+        <main>
+          {/* HERO */}
+          <section className="relative overflow-hidden pb-20 pt-32 lg:pb-28 lg:pt-40">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-red-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-red-50/40 blur-3xl" />
+            </div>
+            <div className="container relative mx-auto grid items-center gap-12 px-6 lg:grid-cols-[1.35fr_1fr] lg:px-12">
+              <div>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-red-100 bg-red-50 px-4 py-2">
+                  <service.icon className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-semibold text-gray-900">{service.name} · Free consultation</span>
                 </motion.div>
-
-                <motion.aside
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="self-end border border-border bg-background p-8"
-                  aria-label="Engagement models at a glance"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Ways to engage</p>
-                  <ul className="mt-4 divide-y divide-border">
-                    {service.tiers.map((tier) => (
-                      <li key={tier.name} className="py-4">
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{tier.level}</p>
-                        <p className="mt-1 font-medium text-foreground">{tier.name}</p>
-                        {tier.timeline && (
-                          <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
-                            <Clock className="h-3.5 w-3.5" /> {tier.timeline}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.aside>
+                <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-6 font-serif text-4xl leading-[1.1] text-gray-900 sm:text-5xl lg:text-6xl">
+                  <Headline service={service} />
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="service-description mb-10 max-w-2xl text-lg text-gray-500 lg:text-xl">
+                  {service.summary}
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-10 flex flex-wrap gap-4">
+                  <a href="#start" className="inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-red-700">
+                    Start a conversation <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a href="#plans" className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-8 py-4 font-semibold text-white transition-colors hover:bg-gray-800">
+                    See plans &amp; pricing
+                  </a>
+                </motion.div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-500">
+                  {["Free consultation", "Written scope & price before work starts", "Reply within 24 hours"].map((b) => (
+                    <span key={b} className="flex items-center gap-2"><Check className="h-4 w-4 text-green-500" />{b}</span>
+                  ))}
+                </motion.div>
               </div>
-            </Container>
+
+              {/* Plans at a glance */}
+              <motion.a
+                href="#plans"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="block rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_30px_60px_-30px_rgba(17,24,39,0.35)] transition-transform hover:-translate-y-1 lg:p-8"
+                aria-label="Plans at a glance — jump to plans and pricing"
+              >
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400">Plans at a glance</p>
+                <ul className="mt-4 divide-y divide-gray-100">
+                  {service.tiers.map((t) => (
+                    <li key={t.name} className="flex items-center justify-between gap-4 py-4">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold uppercase tracking-wider text-red-600">{t.level}</span>
+                          {t.popular && <span className="rounded-full bg-red-600 px-2 py-0.5 text-[10px] font-bold uppercase text-white">Popular</span>}
+                        </div>
+                        <p className="mt-1 font-semibold text-gray-900">{t.name}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-serif text-2xl font-bold text-gray-900">{t.price}</p>
+                        <p className="text-xs text-gray-500">{t.billing}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red-600">Compare plans <ArrowRight className="h-4 w-4" /></span>
+              </motion.a>
+            </div>
           </section>
 
-          {/* Stats */}
-          {service.stats && service.stats.length > 0 && (
-            <section className="bg-ink text-ink-foreground">
-              <Container className="grid grid-cols-2 gap-y-10 py-14 md:grid-cols-4">
-                {service.stats.map((s, i) => (
-                  <div key={s.label} className={i > 0 ? "md:border-l md:border-white/10 md:pl-8" : ""}>
-                    <div className="font-display text-4xl font-semibold lg:text-5xl">{s.value}</div>
-                    <div className="mt-2 text-sm text-ink-muted">{s.label}</div>
-                  </div>
-                ))}
-              </Container>
-            </section>
-          )}
-
-          {/* Where we help + capabilities */}
-          <section className="py-24 lg:py-32">
-            <Container>
-              <div className="grid gap-16 lg:grid-cols-[1fr_2fr]">
-                <motion.div {...reveal}>
-                  <Eyebrow className="mb-5">Where we help</Eyebrow>
-                  <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">The challenges we solve</h2>
-                  <ol className="mt-8 space-y-6">
-                    {service.whoItsFor.map((item, i) => (
-                      <li key={item} className="flex gap-5 border-t border-border pt-6">
-                        <span className="font-display text-sm font-semibold text-primary">0{i + 1}</span>
-                        <span className="text-lg leading-snug text-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </motion.div>
-                <div>
-                  <motion.div {...reveal}>
-                    <Eyebrow className="mb-5">Capabilities</Eyebrow>
-                    <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">What's included</h2>
+          {/* FACTS */}
+          <section className="bg-gray-900 py-12">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
+                {facts.map((f, i) => (
+                  <motion.div key={f.label} {...fadeUp} transition={{ delay: i * 0.08 }}>
+                    <div className="mb-2 font-serif text-3xl font-bold text-white lg:text-4xl">{f.value}</div>
+                    <div className="text-sm text-gray-400">{f.label}</div>
                   </motion.div>
-                  <div className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2">
-                    {service.included.map((f, i) => (
-                      <motion.div key={f.title} {...revealDelay(i)} className="border-t border-border pt-6">
-                        <f.icon className="mb-4 h-6 w-6 text-primary" strokeWidth={1.75} />
-                        <h3 className="text-lg font-semibold text-foreground">{f.title}</h3>
-                        <p className="mt-2 leading-relaxed text-muted-foreground">{f.description}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
-            </Container>
+            </div>
           </section>
 
-          {/* Industry research — every figure cites its source */}
+          {/* FIT */}
+          <section className="bg-white py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="Is this right for you?" title={`${service.name} is a great fit if…`} />
+              <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
+                {service.whoItsFor.map((c, i) => (
+                  <motion.div key={c} {...fadeUp} transition={{ delay: i * 0.08 }} className="rounded-2xl border border-gray-100 bg-gray-50 p-8">
+                    <span className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-red-600 font-bold text-white">{i + 1}</span>
+                    <p className="text-lg leading-snug text-gray-800">{c}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* INCLUDED */}
+          <section className="bg-gray-50 py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="What's included" title="Everything you get" intro="Delivered by our team and tailored to your goals." />
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {service.included.map((f, i) => (
+                  <motion.div key={f.title} {...fadeUp} transition={{ delay: i * 0.08 }} className="rounded-2xl border border-gray-100 bg-white p-8 transition-all hover:-translate-y-1 hover:border-red-100 hover:shadow-lg">
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-red-50">
+                      <f.icon className="h-6 w-6 text-red-600" />
+                    </div>
+                    <h3 className="mb-3 font-serif text-xl font-bold text-gray-900">{f.title}</h3>
+                    <p className="text-sm leading-relaxed text-gray-500">{f.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* VISUAL PROCESS */}
+          <section className="bg-white py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="How it works" title="Your path from first call to results" intro="Four clear steps. You always know what happens next — and what you receive at each stage." />
+              <ol className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-4 lg:gap-6">
+                <div aria-hidden className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-0.5 bg-gradient-to-r from-red-200 via-red-400 to-red-200 lg:block" />
+                <div aria-hidden className="absolute bottom-8 left-8 top-8 w-0.5 bg-red-200 lg:hidden" />
+                {service.process.map((step, i) => {
+                  const Icon = STEP_ICONS[i] ?? Rocket;
+                  return (
+                    <motion.li key={step.title} {...fadeUp} transition={{ delay: i * 0.12 }} className="relative flex gap-6 lg:flex-col lg:items-center lg:gap-0 lg:text-center">
+                      <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-4 border-white bg-red-600 text-white shadow-lg">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="lg:mt-6">
+                        <p className="text-xs font-bold uppercase tracking-wider text-red-600">Step {i + 1}</p>
+                        <h3 className="mt-2 font-serif text-xl font-bold text-gray-900">{step.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-500">{step.description}</p>
+                        <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
+                          <Check className="h-3.5 w-3.5" /> {STEP_OUTPUTS[i]}
+                        </span>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ol>
+            </div>
+          </section>
+
+          {/* PLANS */}
+          <section id="plans" className="scroll-mt-24 bg-gray-50 py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="Plans & pricing" title="Choose the plan that fits today" intro="Start where it makes sense and upgrade any time. Your final scope and price are confirmed in writing before work begins." />
+              <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-3 lg:gap-8">
+                {service.tiers.map((t, i) => (
+                  <motion.div
+                    key={t.name}
+                    {...fadeUp}
+                    transition={{ delay: i * 0.1 }}
+                    className={cn(
+                      "relative flex flex-col rounded-2xl bg-white p-8",
+                      t.popular ? "border-2 border-red-600 shadow-[0_30px_60px_-30px_rgba(220,38,38,0.45)] lg:-my-4 lg:py-12" : "border border-gray-100",
+                    )}
+                  >
+                    {t.popular && (
+                      <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-red-600 px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">Most popular</span>
+                    )}
+                    <span className="text-xs font-bold uppercase tracking-wider text-red-600">{t.level}</span>
+                    <h3 className="mt-2 font-serif text-2xl font-bold text-gray-900">{t.name}</h3>
+                    <p className="mt-2 text-sm text-gray-500">{t.bestFor}</p>
+                    <div className="mt-6 flex items-baseline gap-2 border-t border-gray-100 pt-6">
+                      <span className="font-serif text-4xl font-bold text-gray-900">{t.price}</span>
+                      <span className="text-sm text-gray-500">{t.billing}</span>
+                    </div>
+                    {t.timeline && <p className="mt-2 flex items-center gap-1.5 text-sm text-gray-500"><Clock className="h-4 w-4" /> {t.timeline}</p>}
+                    <ul className="mt-6 flex-1 space-y-3">
+                      {t.features.map((f) => (
+                        <li key={f} className="flex items-start gap-3 text-sm text-gray-700">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" /> {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      to={contactHref({ service: service.slug, plan: t.name, from: service.path })}
+                      className={cn(
+                        "mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-center font-semibold transition-colors",
+                        t.popular ? "bg-red-600 text-white hover:bg-red-700" : "border border-gray-200 text-gray-900 hover:border-gray-900",
+                      )}
+                    >
+                      {/\d/.test(t.price) ? `Start with ${t.name}` : `Request a ${t.name} quote`} <ArrowRight className="h-4 w-4 shrink-0" />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+              <p className="mt-12 text-center text-sm text-gray-500">
+                Not sure which plan is right? <a href="#start" className="font-semibold text-red-600 hover:text-red-700">Tell us about your goals</a> and we'll recommend one ·{" "}
+                <Link to="/pricing" className="font-semibold text-gray-900 underline underline-offset-4">Compare all services</Link>
+              </p>
+            </div>
+          </section>
+
+          {/* RESEARCH */}
           {service.research && service.research.length > 0 && (
-            <section className="border-t border-border bg-ink py-20 text-ink-foreground lg:py-24">
-              <Container>
-                <SectionHeader inverted eyebrow="What the research says" title={`Why ${service.name} matters`} />
-                <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-2">
+            <section className="bg-white py-24">
+              <div className="container mx-auto px-6 lg:px-12">
+                <SectionTitle eyebrow="What the research says" title={`Why ${inSentence(service.name)} matters`} />
+                <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
                   {service.research.map((r, i) => (
-                    <motion.figure key={r.label} {...revealDelay(i)} className="flex flex-col bg-ink p-8 lg:p-10">
-                      <p className="font-display text-5xl font-semibold leading-none lg:text-6xl">{r.value}</p>
-                      <p className="mt-5 flex-1 text-lg leading-relaxed text-ink-foreground/85">{r.label}</p>
-                      <figcaption className="mt-6 border-t border-white/10 pt-4 text-sm text-ink-muted">
+                    <motion.figure key={r.label} {...fadeUp} transition={{ delay: i * 0.1 }} className="rounded-2xl border border-gray-100 bg-gray-50 p-8">
+                      <div className="font-serif text-5xl font-bold text-red-600">{r.value}</div>
+                      <p className="mt-4 text-gray-700">{r.label}</p>
+                      <figcaption className="mt-5 border-t border-gray-200 pt-4 text-xs text-gray-500">
                         Source:{" "}
                         {r.url ? (
-                          <a href={r.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-ink-foreground">
-                            {r.source}
-                          </a>
+                          <a href={r.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-red-600">{r.source}</a>
                         ) : (
                           r.source
                         )}
@@ -184,171 +317,119 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
                     </motion.figure>
                   ))}
                 </div>
-              </Container>
+              </div>
             </section>
           )}
 
-          {/* Selected work */}
+          {/* WORK */}
           {work.length > 0 && (
-            <section className="border-t border-border bg-secondary py-24 lg:py-32">
-              <Container>
-                <SectionHeader
-                  eyebrow="Selected work"
-                  title="Recent client outcomes"
-                  action={
-                    <Link to="/portfolio" className="inline-flex items-center gap-2 font-semibold text-foreground hover:text-primary">
-                      View all work <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  }
-                />
-                <div className="grid gap-8 md:grid-cols-3">
+            <section className="bg-gray-50 py-24">
+              <div className="container mx-auto px-6 lg:px-12">
+                <SectionTitle eyebrow="Selected work" title="Built by our team" />
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {work.map((c, i) => (
-                    <motion.article key={c.slug} {...revealDelay(i)}>
-                      <BrowserFrame src={c.image} alt={`${c.client} website`} />
-                      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{c.industry}</p>
-                      <h3 className="mt-2 text-xl font-semibold text-foreground">{c.client}</h3>
-                      <p className="mt-2 leading-relaxed text-muted-foreground">{c.summary}</p>
-                      {c.detail && (
-                        <Link to={`/portfolio/${c.slug}`} className="mt-4 inline-flex items-center gap-2 font-semibold text-foreground hover:text-primary">
-                          Read the case study <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      )}
-                    </motion.article>
+                    <motion.div key={c.slug} {...fadeUp} transition={{ delay: i * 0.1 }} className="overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all hover:-translate-y-1 hover:shadow-lg">
+                      <div className="aspect-[16/9] w-full bg-[#eef1f5]">
+                        <img src={c.image} alt={`${c.client} website`} loading="lazy" className="block h-full w-full object-contain" />
+                      </div>
+                      <div className="p-6">
+                        <span className="mb-3 inline-block rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-600">{c.industry}</span>
+                        <h3 className="font-serif text-xl font-bold text-gray-900">{c.client}</h3>
+                        <p className="mt-2 text-sm text-gray-500">{c.summary}</p>
+                        {c.detail && (
+                          <Link to={`/portfolio/${c.slug}`} data-cursor="View case study" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-700">
+                            Read the case study <ArrowRight className="h-4 w-4" />
+                          </Link>
+                        )}
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
-              </Container>
-            </section>
-          )}
-
-          {/* Engagement models */}
-          <section id="engagements" className="scroll-mt-24 border-t border-border py-24 lg:py-32">
-            <Container>
-              <SectionHeader
-                eyebrow="Engagement models"
-                title="Three ways to work with us"
-                description="Every engagement is scoped to your goals after an initial consultation. Start where it makes sense and expand as you grow."
-              />
-              <div className="grid gap-6 md:grid-cols-3">
-                {service.tiers.map((tier, i) => (
-                  <motion.div key={tier.name} {...revealDelay(i)}>
-                    <PlanCard tier={tier} showPrice={false} />
-                  </motion.div>
-                ))}
               </div>
-              <p className="mt-10 text-muted-foreground">
-                Looking for budget guidance?{" "}
-                <Link to={`/pricing#${service.slug}`} className="font-semibold text-foreground underline underline-offset-4 hover:text-primary">
-                  See our pricing guide
-                </Link>
-                .
-              </p>
-            </Container>
-          </section>
-
-          {/* Approach */}
-          <section className="border-t border-border bg-secondary py-24 lg:py-32">
-            <Container>
-              <SectionHeader eyebrow="Our approach" title="A clear path from first conversation to results" />
-              <ol className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-                {service.process.map((step, i) => (
-                  <motion.li key={step.title} {...revealDelay(i)} className="border-t-2 border-foreground pt-6">
-                    <p className="font-display text-sm font-semibold text-primary">Step {i + 1}</p>
-                    <h3 className="mt-3 text-xl font-semibold text-foreground">{step.title}</h3>
-                    <p className="mt-3 leading-relaxed text-muted-foreground">{step.description}</p>
-                  </motion.li>
-                ))}
-              </ol>
-            </Container>
-          </section>
-
-          {/* Client perspective */}
-          {featured && (
-            <section className="border-t border-border py-24 lg:py-32">
-              <Container>
-                <Eyebrow className="mb-10">Client perspective</Eyebrow>
-                <motion.figure {...reveal} className="max-w-4xl">
-                  <blockquote className="font-display text-2xl font-medium leading-snug text-foreground md:text-3xl lg:text-4xl">
-                    “{featured.body}”
-                  </blockquote>
-                  <figcaption className="mt-8 flex items-center gap-4">
-                    <span className="h-px w-10 bg-primary" />
-                    <span>
-                      <span className="block font-semibold text-foreground">{featured.author}</span>
-                      <span className="text-sm text-muted-foreground">{featured.title}</span>
-                    </span>
-                  </figcaption>
-                </motion.figure>
-                {otherQuotes.length > 0 && (
-                  <div className="mt-16 grid gap-10 border-t border-border pt-12 md:grid-cols-2">
-                    {otherQuotes.map((t) => (
-                      <motion.figure key={t.author} {...reveal}>
-                        <blockquote className="text-lg leading-relaxed text-text-secondary">“{t.body}”</blockquote>
-                        <figcaption className="mt-5">
-                          <span className="block font-semibold text-foreground">{t.author}</span>
-                          <span className="text-sm text-muted-foreground">{t.title}</span>
-                        </figcaption>
-                      </motion.figure>
-                    ))}
-                  </div>
-                )}
-              </Container>
             </section>
           )}
 
           {/* FAQ */}
-          <section className="border-t border-border bg-secondary py-24 lg:py-32">
-            <Container className="grid gap-12 lg:grid-cols-[1fr_2fr]">
-              <motion.div {...reveal}>
-                <Eyebrow className="mb-5">FAQ</Eyebrow>
-                <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">Common questions</h2>
-                <p className="mt-4 text-muted-foreground">
-                  Don't see your question?{" "}
-                  <Link to="/contact" className="font-semibold text-foreground underline underline-offset-4">Ask our team</Link>.
-                </p>
-              </motion.div>
-              <Accordion type="single" collapsible className="border-t border-border">
+          <section className="bg-white py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="FAQ" title="Questions, answered" />
+              <div className="mx-auto max-w-3xl space-y-4">
                 {service.faqs.map((faq, i) => (
-                  <AccordionItem key={faq.question} value={`faq-${i}`} className="border-border">
-                    <AccordionTrigger className="py-6 text-left text-lg font-semibold text-foreground hover:no-underline">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground">{faq.answer}</AccordionContent>
-                  </AccordionItem>
+                  <div key={faq.question} className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50">
+                    <button type="button" aria-expanded={openFaq === i} onClick={() => setOpenFaq(openFaq === i ? null : i)} className="flex w-full items-center justify-between p-6 text-left">
+                      <span className="pr-4 font-semibold text-gray-900">{faq.question}</span>
+                      <ChevronDown className={cn("h-5 w-5 flex-shrink-0 text-gray-400 transition-transform", openFaq === i && "rotate-180")} />
+                    </button>
+                    <div className={openFaq === i ? "px-6 pb-6" : "hidden"}>
+                      <p className="text-sm leading-relaxed text-gray-600">{faq.answer}</p>
+                    </div>
+                  </div>
                 ))}
-              </Accordion>
-            </Container>
+              </div>
+            </div>
           </section>
 
-          {/* Related */}
-          <section className="border-t border-border py-24">
-            <Container>
-              <SectionHeader eyebrow="Related services" title="Often paired with" />
-              <div className="grid border-l border-t border-border md:grid-cols-3">
-                {related.map((r) => (
-                  <Link key={r.slug} to={r.path} className="group flex flex-col border-b border-r border-border p-8 transition-colors hover:bg-secondary">
-                    <div className="flex items-start justify-between">
-                      <r.icon className="h-6 w-6 text-primary" strokeWidth={1.75} />
-                      <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-foreground" />
+          {/* START A CONVERSATION */}
+          <section id="start" className="scroll-mt-20 bg-gray-50 py-24">
+            <div className="container mx-auto px-6 lg:px-12">
+              <div className="mx-auto grid max-w-6xl overflow-hidden rounded-3xl bg-white shadow-[0_40px_80px_-40px_rgba(17,24,39,0.35)] lg:grid-cols-[1fr_1.35fr]">
+                <div className="relative overflow-hidden bg-gray-900 p-8 text-white lg:p-12">
+                  <div aria-hidden className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(circle at 20% 20%, rgba(220,38,38,0.45), transparent 55%)" }} />
+                  <div className="relative">
+                    <span className="text-sm font-semibold uppercase tracking-wider text-red-400">Start a conversation</span>
+                    <h2 className="mt-3 font-serif text-3xl leading-tight lg:text-4xl">Let's talk about your {inSentence(service.name)} goals</h2>
+                    <p className="mt-4 text-gray-400">It takes about a minute. Here's what happens next:</p>
+                    <ol className="mt-8 space-y-5">
+                      {["We reply within 24 hours to set up a free consultation", "We learn your goals and recommend the right plan", "You receive a written scope, timeline, and price"].map((s, i) => (
+                        <li key={s} className="flex gap-4">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-600 text-sm font-bold">{i + 1}</span>
+                          <span className="pt-1 text-gray-200">{s}</span>
+                        </li>
+                      ))}
+                    </ol>
+                    <div className="mt-10 space-y-3 border-t border-white/10 pt-8 text-sm text-gray-300">
+                      <a href="tel:+12819017016" className="flex items-center gap-3 hover:text-white"><Phone className="h-4 w-4 text-red-400" /> (281) 901-7016</a>
+                      <a href="mailto:Hunain@visitcardinal.com" className="flex items-center gap-3 break-all hover:text-white"><Mail className="h-4 w-4 shrink-0 text-red-400" /> Hunain@visitcardinal.com</a>
+                      <p className="flex items-center gap-3"><MapPin className="h-4 w-4 shrink-0 text-red-400" /> 2100 West Loop S Fwy, Houston, TX</p>
+                      <p className="flex items-center gap-3"><ShieldCheck className="h-4 w-4 shrink-0 text-red-400" /> No obligation · Your information stays private</p>
                     </div>
-                    <h3 className="mt-6 text-xl font-semibold text-foreground">{r.name}</h3>
-                    <p className="mt-2 leading-relaxed text-muted-foreground">{r.summary}</p>
-                  </Link>
+                  </div>
+                </div>
+                <div className="p-6 sm:p-8 lg:p-12">
+                  <ContactForm formName="service-inquiry" defaultService={service.slug} />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* RELATED */}
+          <section className="bg-white py-20">
+            <div className="container mx-auto px-6 lg:px-12">
+              <SectionTitle eyebrow="Keep exploring" title="Services that work well together" />
+              <div className="grid gap-6 md:grid-cols-3">
+                {related.map((s, i) => (
+                  <motion.div key={s.slug} {...fadeUp} transition={{ delay: i * 0.1 }}>
+                    <Link to={s.path} className="group block h-full rounded-2xl border border-gray-100 bg-gray-50 p-6 transition-all hover:border-red-100 hover:bg-white hover:shadow-lg">
+                      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-red-50"><s.icon className="h-5 w-5 text-red-600" /></div>
+                      <h3 className="mb-2 font-serif text-lg font-bold text-gray-900 transition-colors group-hover:text-red-600">{s.name}</h3>
+                      <p className="text-sm text-gray-500">{s.summary}</p>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
               {service.localLinks.length > 0 && (
-                <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-                  <span className="font-semibold text-foreground">In Houston:</span>
+                <div className="mt-10 flex flex-wrap justify-center gap-3">
                   {service.localLinks.map((l) => (
-                    <Link key={l.href} to={l.href} className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                    <Link key={l.href} to={l.href} className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all hover:border-red-300 hover:text-red-600">
                       {l.label}
                     </Link>
                   ))}
                 </div>
               )}
-            </Container>
+            </div>
           </section>
         </main>
-        <Footer />
+        <Footer showCta={false} />
       </div>
     </>
   );

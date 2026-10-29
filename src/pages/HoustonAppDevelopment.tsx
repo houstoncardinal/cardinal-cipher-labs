@@ -136,7 +136,7 @@ const generateSchemas = () => {
     "description": "Houston's top-rated mobile app development company. iOS apps, Android apps, React Native cross-platform, and enterprise apps for Houston businesses. 500+ projects delivered.",
     "url": "https://visitcardinal.com/houston-app-development",
     "telephone": "+12819017016",
-    "email": "hello@visitcardinal.com",
+    "email": "Hunain@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2100 West Loop S Fwy",
@@ -462,7 +462,7 @@ export function HoustonAppDevelopmentPage() {
                 </div>
                 <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400 text-sm">
                   <span className="flex items-center gap-2"><MapPin className="w-4 h-4" />2100 West Loop S Fwy, Houston, TX 77027</span>
-                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />hello@visitcardinal.com</span>
+                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />Hunain@visitcardinal.com</span>
                   <span className="flex items-center gap-2"><Clock className="w-4 h-4" />Mon–Fri 9AM–6PM CST</span>
                 </div>
               </motion.div>

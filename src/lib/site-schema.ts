@@ -3,6 +3,7 @@
 // guidelines treat markup for content that isn't on the page as spam.)
 import { siteConfig } from "@/lib/seo-config";
 import { services } from "@/lib/services-catalog";
+import { industries } from "@/lib/industries";
 
 const ORG_ID = `${siteConfig.url}#organization`;
 const SITE_ID = `${siteConfig.url}#website`;
@@ -35,6 +36,22 @@ export function organizationSchema() {
       { "@type": "Country", name: "United States" },
     ],
     founder: { "@type": "Person", name: siteConfig.team[0].name, jobTitle: siteConfig.team[0].role },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      telephone: contact.phone,
+      email: contact.email,
+      areaServed: "US",
+      availableLanguage: "English",
+    },
+    knowsAbout: [
+      ...services.map((s) => s.name),
+      ...industries.map((i) => `${i.name} websites and marketing`),
+      "Local SEO",
+      "Google Business Profile",
+      "Fractional CTO",
+      "Cloud cost optimization",
+    ],
     sameAs: Object.values(links),
     hasOfferCatalog: {
       "@type": "OfferCatalog",

@@ -7,7 +7,6 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { Process } from "@/components/sections/Process";
 import { Industries } from "@/components/sections/Industries";
 import { FAQ } from "@/components/sections/FAQ";
-import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
@@ -72,7 +71,6 @@ const Index = () => {
           <section id="industries"><Industries /></section>
           <section id="advantage"><Advantage /></section>
           <section id="process"><Process /></section>
-          <section id="reviews"><GoogleReviews /></section>
           <section id="faq"><FAQ /></section>
           <section id="contact"><Contact /></section>
 

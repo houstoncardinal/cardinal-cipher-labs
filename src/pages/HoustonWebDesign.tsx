@@ -187,7 +187,7 @@ const generateSchemas = () => {
     "description": "Houston's #1 rated web design company. Custom websites, SEO-first design, and digital marketing for Houston businesses. 500+ projects delivered. Serving all Houston neighborhoods.",
     "url": "https://visitcardinal.com/houston-web-design",
     "telephone": "+12819017016",
-    "email": "hello@visitcardinal.com",
+    "email": "Hunain@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2100 West Loop S Fwy",
@@ -716,7 +716,7 @@ export function HoustonWebDesignPage() {
                 </div>
                 <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400 text-sm">
                   <span className="flex items-center gap-2"><MapPin className="w-4 h-4" />2100 West Loop S Fwy, Houston, TX 77027</span>
-                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />hello@visitcardinal.com</span>
+                  <span className="flex items-center gap-2"><Mail className="w-4 h-4" />Hunain@visitcardinal.com</span>
                   <span className="flex items-center gap-2"><Clock className="w-4 h-4" />Mon–Fri 9AM–6PM CST</span>
                 </div>
               </motion.div>

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { BrowserFrame, Container, Eyebrow, SectionHeader, reveal, revealDelay } from "@/components/site/primitives";
+import { CountUp, Parallax } from "@/components/site/motion";
 import { siteConfig } from "@/lib/seo-config";
 import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
@@ -100,27 +101,29 @@ export default function CaseStudyPage() {
             </Container>
           </section>
 
-          {/* Results band */}
+          {/* Results band — only when the client has confirmed figures */}
+          {d.results.length > 0 && (
           <section className="bg-ink text-ink-foreground">
             <Container className="grid gap-10 py-16 lg:grid-cols-[1fr_2fr] lg:items-center">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">The result</p>
               <div className="flex flex-wrap items-end gap-x-16 gap-y-8">
                 {d.results.map((r) => (
                   <div key={r.label}>
-                    <p className="font-display text-7xl font-semibold leading-none md:text-8xl">{r.value}</p>
+                    <p className="font-display text-7xl font-semibold leading-none md:text-8xl"><CountUp value={r.value} /></p>
                     <p className="mt-3 text-lg text-ink-muted">{r.label}</p>
                   </div>
                 ))}
               </div>
             </Container>
           </section>
+          )}
 
           {/* Challenge + client facts */}
           <section className="py-24 lg:py-32">
             <Container className="grid gap-16 lg:grid-cols-[2fr_1fr]">
               <motion.div {...reveal}>
                 <Eyebrow className="mb-5">The challenge</Eyebrow>
-                <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">Making a deep technical offer easy for enterprise buyers to trust</h2>
+                <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">{d.challengeHeading ?? "The challenge"}</h2>
                 <p className="mt-6 text-lg leading-relaxed text-text-secondary">{d.challenge}</p>
               </motion.div>
               <motion.aside {...reveal} className="self-start border border-border p-8" aria-label={`About ${study.client}`}>
@@ -160,7 +163,9 @@ export default function CaseStudyPage() {
                 {d.gallery.map((g, i) => (
                   <motion.figure key={g.src} {...reveal} className={i % 2 === 1 ? "lg:pl-24" : "lg:pr-24"}>
                     <div className="overflow-hidden border border-border bg-secondary shadow-[0_24px_60px_-32px_rgba(15,23,42,0.35)]">
-                      <img src={g.src} alt={g.alt} loading="lazy" className="block w-full" />
+                      <Parallax distance={24}>
+                        <img src={g.src} alt={g.alt} loading="lazy" className="block w-full scale-[1.06]" />
+                      </Parallax>
                     </div>
                     <figcaption className="mt-5 flex gap-4 text-muted-foreground">
                       <span className="font-display font-semibold text-foreground">0{i + 1}</span>

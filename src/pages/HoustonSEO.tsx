@@ -148,7 +148,7 @@ const generateSchemas = () => {
     "description": "Houston's premier web design and SEO agency. Custom websites, local SEO, and digital marketing services for Houston businesses.",
     "url": "https://visitcardinal.com/houston-seo",
     "telephone": "+12819017016",
-    "email": "hello@visitcardinal.com",
+    "email": "Hunain@visitcardinal.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "2100 West Loop S Fwy",
@@ -645,7 +645,7 @@ export function HoustonSEOPage() {
                     <MapPin className="w-4 h-4" />2100 West Loop S, Houston, TX
                   </span>
                   <span className="flex items-center gap-2">
-                    <Mail className="w-4 h-4" />hello@visitcardinal.com
+                    <Mail className="w-4 h-4" />Hunain@visitcardinal.com
                   </span>
                   <span className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />Mon-Fri 9AM-6PM

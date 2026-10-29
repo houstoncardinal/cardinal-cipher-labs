@@ -75,6 +75,8 @@ export interface ServiceDefinition {
   name: string;
   /** Hero headline: what the customer gets, in plain words */
   headline: string;
+  /** Phrase within the headline shown in red */
+  accent?: string;
   /** One sentence: what we do and why it matters */
   summary: string;
   /** Short line used in menus */
@@ -91,7 +93,6 @@ export interface ServiceDefinition {
   research?: ResearchStat[];
   capabilities?: string[];
   highlights?: string[];
-  testimonials?: ServiceTestimonial[];
   faqs: ServiceFAQ[];
   related: string[];
   /** Slugs from case-studies.ts shown as "Selected work" */
@@ -184,6 +185,7 @@ export const services: ServiceDefinition[] = [
     group: "Build",
     name: "Web Development",
     headline: "Websites that win customers and scale with you",
+    accent: "win customers",
     summary: "We design and engineer fast, secure websites and web platforms — from marketing sites to customer portals — that turn visitors into revenue.",
     menuBlurb: "Custom websites & online stores",
     startingAt: "$1,500",
@@ -271,11 +273,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["Small Business Sites", "E-commerce Stores", "Custom Platforms", "CMS Integration"],
     highlights: ["99.9% Uptime", "90+ Lighthouse", "WCAG 2.1 AA"],
-    testimonials: [
-      { author: "Michael Chen", title: "CTO, Tech Innovations Inc.", body: "Cardinal Consulting delivered our corporate website 2 weeks ahead of schedule. The performance scores are incredible — 98 on Lighthouse across all metrics. Their attention to SEO and accessibility is unmatched.", rating: 5 },
-      { author: "Sarah Martinez", title: "VP Marketing, Global Retail Solutions", body: "Our new e-commerce platform increased online sales by 340% in the first quarter. The website is blazing fast and beautifully designed. Best investment we've made.", rating: 5 },
-      { author: "David Thompson", title: "Director of IT, Healthcare Systems Group", body: "The HIPAA-compliant patient portal Cardinal built handles over 50,000 monthly users with zero downtime. Their security-first approach gave us complete confidence.", rating: 5 },
-    ],
     faqs: [
       { question: "How long does it take to build my website?", answer: "Most marketing websites take 72 hours to 2 weeks. E-commerce stores and larger platforms usually take 4–8 weeks. Need it faster? Ask about rush delivery. You'll get an exact timeline before we start." },
       { question: "What's the difference between the Marketing Website and Commerce & Integrations?", answer: "A Marketing Website is a fast, professional site that explains what you do and turns visitors into leads. Commerce & Integrations adds online sales — products, checkout, payments, shipping, and tax — and connects your site to systems like your CRM or inventory." },
@@ -285,12 +282,12 @@ export const services: ServiceDefinition[] = [
       { question: "What happens after launch?", answer: "Every plan includes support after launch (30 days to 12 months depending on the plan). After that, a Website Care Plan keeps your site updated, backed up, and secure." },
     ],
     related: ["ux-ui", "seo-analytics", "digital-marketing"],
-    caseStudies: ["axiomio", "vargas", "unitedccr"],
+    caseStudies: ["cwx", "axiomio", "veloratek"],
     localLinks: [
       { label: "Web Design Houston", href: "/houston-web-design" },
-      { label: "Web Developer Houston", href: "/houston-web-developer" },
-      { label: "App Development Houston", href: "/houston-app-development" },
-      { label: "SEO Company Houston", href: "/houston-seo-company" },
+      { label: "Law Firm Websites", href: "/houston-law-firm-website-design" },
+      { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
+      { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
     ],
     seo: {
       title: "Web Development Services Houston TX | Custom Website Development",
@@ -324,6 +321,7 @@ export const services: ServiceDefinition[] = [
     group: "Build",
     name: "Mobile Apps",
     headline: "Mobile apps your customers and teams rely on",
+    accent: "rely on",
     summary: "We design, build, and launch iPhone and Android apps — and help you get them into the App Store and Google Play.",
     menuBlurb: "iPhone & Android apps",
     startingAt: "$5K+",
@@ -411,11 +409,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["iOS & Android", "Web Applications", "Cross-Platform", "App Deployment"],
     highlights: ["60fps Native", "2M+ Downloads", "4.8 App Rating"],
-    testimonials: [
-      { author: "Jennifer Williams", title: "CEO, Startup Accelerate", body: "Cardinal helped us launch our MVP in just 8 weeks. The app now has over 200,000 downloads and a 4.9-star rating. Their agile approach made all the difference.", rating: 5 },
-      { author: "Robert Garcia", title: "Head of Digital, Financial Services Corp", body: "The fintech app Cardinal built handles over $50M in monthly transactions with zero security incidents. Their security-first approach is truly enterprise-grade.", rating: 5 },
-      { author: "Lisa Park", title: "Product Manager, HealthTech Solutions", body: "Our patient management app reduced appointment no-shows by 65%. The offline-first architecture means doctors in rural areas can still access critical data.", rating: 5 },
-    ],
     faqs: [
       { question: "Should I build for iPhone, Android, or both?", answer: "Most businesses should build one app that runs on both — it's faster and costs less. We recommend a native build only when your app needs heavy device features like AR or advanced camera work. We'll help you decide on your free consultation." },
       { question: "How long does it take to build an app?", answer: "An MVP usually takes 6–8 weeks, a full-featured app 12–16 weeks, and enterprise apps 16–24 weeks. You'll see working progress every two weeks." },
@@ -426,10 +419,9 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["web-development", "ux-ui", "brand-identity"],
     localLinks: [
-      { label: "App Development Houston", href: "/houston-app-development" },
-      { label: "Web Developer Houston", href: "/houston-web-developer" },
       { label: "Web Design Houston", href: "/houston-web-design" },
-      { label: "Rush Prototyping", href: "/rush-prototyping" },
+      { label: "Technology & SaaS", href: "/industry/technology" },
+      { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
     ],
     seo: {
       title: "App Development Company Houston TX | iOS, Android & Cross-Platform Apps",
@@ -463,6 +455,7 @@ export const services: ServiceDefinition[] = [
     group: "Design",
     name: "Brand Identity",
     headline: "A brand that commands trust",
+    accent: "commands trust",
     summary: "We create your logo, colors, fonts, and brand guidelines so your business looks professional and consistent everywhere.",
     menuBlurb: "Logos, colors & brand guidelines",
     startingAt: "$5,000",
@@ -546,11 +539,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["Logo Design", "Brand Guidelines", "Visual Identity", "Print Collateral"],
     highlights: ["200+ Brands", "25+ Awards", "98% Satisfaction"],
-    testimonials: [
-      { author: "Alexandra Rivera", title: "Founder, Bloom Wellness Co.", body: "Cardinal created a brand identity that perfectly captures our philosophy. Our brand book is stunning.", rating: 5 },
-      { author: "Marcus Thompson", title: "CEO, NovaTech Solutions", body: "The rebrand helped us close 3x more enterprise deals. Prospects immediately see us as market leaders.", rating: 5 },
-      { author: "Elena Vasquez", title: "CMO, GreenPath Organics", body: "Our packaging stands out on every shelf. Cardinal understood our sustainability values perfectly.", rating: 5 },
-    ],
     faqs: [
       { question: "How long does branding take?", answer: "Essentials takes about 3–4 weeks, Professional 6–8 weeks, and Enterprise 10–14 weeks." },
       { question: "What do I get at the end?", answer: "Your logo in every format you'll need, your color palette, fonts, brand guidelines, and all source files — plus the extras in your plan, like stationery or social templates." },
@@ -560,7 +548,8 @@ export const services: ServiceDefinition[] = [
     related: ["ux-ui", "web-development", "digital-marketing"],
     localLinks: [
       { label: "Web Design Houston", href: "/houston-web-design" },
-      { label: "Custom Design", href: "/custom-design" },
+      { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
+      { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
     ],
     seo: {
       title: "Brand Identity & Logo Design Agency Houston TX",
@@ -593,6 +582,7 @@ export const services: ServiceDefinition[] = [
     group: "Design",
     name: "UX/UI Design",
     headline: "Digital experiences that are easy to use",
+    accent: "easy to use",
     summary: "We study how your customers use your site or app, then redesign it so more of them sign up, book, or buy.",
     menuBlurb: "Easier-to-use websites & apps",
     startingAt: "$3,500",
@@ -678,11 +668,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["User Research", "Interface Design", "Conversion Optimization", "A/B Testing"],
     highlights: ["40% Conv. Lift", "60% Task Success", "35% Less Bounce"],
-    testimonials: [
-      { author: "Rachel Chen", title: "VP Product, CloudScale Platform", body: "Cardinal's UX redesign increased our SaaS trial-to-paid conversion by 129%. Their research-driven approach uncovered user pain points we never knew existed. The design system they built saves our team hundreds of hours.", rating: 5 },
-      { author: "Michael Torres", title: "CTO, FinanceFlow App", body: "Our mobile app's user satisfaction score went from 3.2 to 4.7 after Cardinal's redesign. They reduced our key user flow from 12 steps to 4. Brilliantly simple.", rating: 5 },
-      { author: "Karen Walsh", title: "Head of Digital, Metro Health Network", body: "The patient portal redesign reduced support calls by 73%. Cardinal made complex medical workflows feel intuitive. Their accessibility expertise meant we exceeded WCAG compliance.", rating: 5 },
-    ],
     faqs: [
       { question: "What's the difference between UX and UI?", answer: "UX (user experience) is how something works: is it easy to find things and get tasks done? UI (user interface) is how it looks: colors, fonts, buttons, and layout. We do both, so your product works well and looks great." },
       { question: "How do you measure success?", answer: "We record your numbers before we start — like conversion rate, task completion, and support tickets — and measure them again after launch, so you can see the improvement." },
@@ -695,8 +680,8 @@ export const services: ServiceDefinition[] = [
     caseStudies: ["clearledger", "apnclinic", "axiomio"],
     localLinks: [
       { label: "Web Design Houston", href: "/houston-web-design" },
-      { label: "Custom Design", href: "/custom-design" },
-      { label: "App Development Houston", href: "/houston-app-development" },
+      { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
+      { label: "Technology & SaaS", href: "/industry/technology" },
     ],
     seo: {
       title: "UX/UI Design Agency Houston TX | User Experience & Interface Design",
@@ -729,6 +714,7 @@ export const services: ServiceDefinition[] = [
     group: "Grow",
     name: "SEO",
     headline: "Be found first when buyers search",
+    accent: "found first",
     summary: "We improve your website and Google Business Profile so you rank higher, get more calls, and see the results in a monthly report.",
     menuBlurb: "Rank higher on Google",
     startingAt: "$1,500",
@@ -808,11 +794,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["Technical SEO", "Local SEO", "Content Strategy", "Ranking Reports"],
     highlights: ["250% Avg Traffic", "Page 1 Rankings", "180+ #1 Keywords"],
-    testimonials: [
-      { author: "Dr. Amanda Foster", title: "Practice Owner, Houston Medical Center", body: "Cardinal's SEO work tripled our organic patient inquiries in 6 months. Their schema markup implementation made us the featured snippet for our top 10 keywords. Incredible ROI.", rating: 5 },
-      { author: "Mark Davidson", title: "CMO, TechScale SaaS", body: "We went from page 3 to position 1 for our highest-value keyword. The content strategy they built generates 200+ qualified leads per month from organic search alone.", rating: 5 },
-      { author: "Patricia Nguyen", title: "CEO, E-commerce Direct", body: "Our organic revenue increased 420% in the first year. Cardinal's technical SEO expertise fixed issues we didn't even know existed. Best marketing investment we've made.", rating: 5 },
-    ],
     faqs: [
       { question: "How long until I see results?", answer: "Most clients see measurable improvement in 3–4 months and strong results at 6–12 months. Technical fixes can show results within weeks. SEO compounds — the longer you invest, the stronger it gets." },
       { question: "Do you guarantee first-page rankings?", answer: "No honest SEO company can guarantee rankings — Google uses 200+ factors. What we guarantee is a proven process and transparent reporting. 85% of our clients reach page one for their target keywords within 6–12 months." },
@@ -823,9 +804,10 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["digital-marketing", "web-development", "ux-ui"],
     localLinks: [
-      { label: "SEO Company Houston", href: "/houston-seo-company" },
-      { label: "Houston SEO Services", href: "/houston-seo" },
       { label: "Web Design Houston", href: "/houston-web-design" },
+      { label: "Law Firm Websites", href: "/houston-law-firm-website-design" },
+      { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
+      { label: "Construction", href: "/industry/construction" },
     ],
     seo: {
       title: "SEO Company Houston TX | Local SEO, Technical SEO & Content",
@@ -858,6 +840,7 @@ export const services: ServiceDefinition[] = [
     group: "Grow",
     name: "Digital Marketing",
     headline: "Campaigns that generate measurable pipeline",
+    accent: "measurable pipeline",
     summary: "We run your Google ads, social media, and email marketing — and show you exactly which dollars turned into customers.",
     menuBlurb: "Ads, social media & email",
     startingAt: "$2,500",
@@ -941,11 +924,6 @@ export const services: ServiceDefinition[] = [
     ],
     capabilities: ["Google Ads", "Social Media", "Email Marketing", "Content Strategy"],
     highlights: ["3x–5x Avg ROI", "100+ Campaigns", "45% Lower Cost/Lead"],
-    testimonials: [
-      { author: "James Mitchell", title: "CEO, E-commerce Direct", body: "Cardinal's marketing team generated $1.2M in revenue from a $200K ad spend. Their attribution modeling showed us exactly which channels were driving sales. Game-changing.", rating: 5 },
-      { author: "Dr. Sarah Lee", title: "Practice Owner, Premier Dental Group", body: "We went from 15 new patients per month to 85. Cardinal's Google Ads and local marketing strategy completely transformed our practice growth.", rating: 5 },
-      { author: "Tom Henderson", title: "VP Marketing, CloudScale Tech", body: "Our LinkedIn content strategy generates 50+ qualified demo requests per month. Cardinal understands B2B marketing at a deep level.", rating: 5 },
-    ],
     faqs: [
       { question: "How fast will I see results?", answer: "Ads can bring in leads within the first week. Email usually shows results in the first month, and social media growth in 2–3 months. You'll get updates from day one." },
       { question: "Is ad spend included in the price?", answer: "The plan price covers our management, content, and reporting. Your ad budget is separate and goes directly to the ad platforms. Each plan lists how much ad spend it covers." },
@@ -956,9 +934,9 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["seo-analytics", "web-development", "brand-identity"],
     localLinks: [
-      { label: "SEO Company Houston", href: "/houston-seo-company" },
-      { label: "Houston SEO Services", href: "/houston-seo" },
       { label: "Web Design Houston", href: "/houston-web-design" },
+      { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
+      { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
     ],
     seo: {
       title: "Digital Marketing Agency Houston TX | PPC & Social Media Marketing",
@@ -987,6 +965,7 @@ export const services: ServiceDefinition[] = [
     group: "Grow",
     name: "Social Media Management",
     headline: "Social media that builds trust and brings in business",
+    accent: "brings in business",
     summary: "We plan, create, publish, and manage your social channels — and answer your audience — so your brand stays active, consistent, and visible where customers spend their time.",
     menuBlurb: "Content, community & paid social",
     startingAt: "Custom",
@@ -1073,7 +1052,8 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["digital-marketing", "brand-identity", "seo-analytics"],
     localLinks: [
-      { label: "Houston SEO Services", href: "/houston-seo" },
+      { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },
+      { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
       { label: "Web Design Houston", href: "/houston-web-design" },
     ],
     seo: {
@@ -1100,6 +1080,7 @@ export const services: ServiceDefinition[] = [
     group: "Build",
     name: "AI & Automation",
     headline: "Practical AI that removes manual work",
+    accent: "removes manual work",
     summary: "We find where AI and automation will genuinely pay off, then build secure assistants, workflow automations, and integrations that connect to the systems you already use.",
     menuBlurb: "AI assistants & workflow automation",
     startingAt: "Custom",
@@ -1184,8 +1165,8 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["technical-consulting", "web-development", "mobile-apps"],
     localLinks: [
-      { label: "AI & Automation for Industry", href: "/industry/ai-automation" },
-      { label: "App Development Houston", href: "/houston-app-development" },
+      { label: "AI & Automation Companies", href: "/industry/ai-automation" },
+      { label: "Technology & SaaS", href: "/industry/technology" },
     ],
     seo: {
       title: "AI & Automation Consulting Houston TX | AI Assistants & Workflow Automation",
@@ -1211,6 +1192,7 @@ export const services: ServiceDefinition[] = [
     group: "Advise",
     name: "Technical Consulting",
     headline: "Senior technical guidance for confident decisions",
+    accent: "confident decisions",
     summary: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership — so you invest in the right technology and avoid expensive mistakes.",
     menuBlurb: "Fractional CTO, architecture & cloud",
     startingAt: "Custom",
@@ -1295,8 +1277,8 @@ export const services: ServiceDefinition[] = [
     ],
     related: ["ai-automation", "web-development", "website-maintenance"],
     localLinks: [
-      { label: "Web Developer Houston", href: "/houston-web-developer" },
-      { label: "App Development Houston", href: "/houston-app-development" },
+      { label: "Technology & SaaS", href: "/industry/technology" },
+      { label: "Financial Services", href: "/industry/financial" },
     ],
     seo: {
       title: "Technical Consulting & Fractional CTO Houston TX | Cloud, Architecture & Security",
@@ -1322,6 +1304,7 @@ export const services: ServiceDefinition[] = [
     group: "Advise",
     name: "Website Care & Maintenance",
     headline: "Your website, always fast, secure, and up to date",
+    accent: "fast, secure, and up to date",
     summary: "Monthly care plans covering updates, backups, security monitoring, uptime, and content changes — so your site keeps performing without taking up your time.",
     menuBlurb: "Care plans, security & updates",
     startingAt: "$299",
@@ -1360,7 +1343,8 @@ export const services: ServiceDefinition[] = [
     related: ["web-development", "technical-consulting", "seo-analytics"],
     localLinks: [
       { label: "Web Design Houston", href: "/houston-web-design" },
-      { label: "Web Developer Houston", href: "/houston-web-developer" },
+      { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
+      { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
     ],
     seo: {
       title: "Website Maintenance & Care Plans Houston TX | Updates, Security & Support",

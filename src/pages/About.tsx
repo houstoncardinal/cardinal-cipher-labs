@@ -6,11 +6,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SEOHead } from "@/components/SEOHead";
 import { Container, Eyebrow, SectionHeader, reveal, revealDelay } from "@/components/site/primitives";
+import { CountUp } from "@/components/site/motion";
+import { services } from "@/lib/services-catalog";
+import { industries } from "@/lib/industries";
 import { siteConfig } from "@/lib/seo-config";
-import {
-  generateOrganizationSchema, generatePersonSchemas,
-  generateBreadcrumbSchema, generateWebPageSchema, generateReviewSchemas,
-} from "@/lib/schema-generators";
+import { generatePersonSchemas, generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
+import { organizationSchema } from "@/lib/site-schema";
 
 const values = [
   { title: "Integrity first", description: "We recommend what's right for your business — even when it's the smaller engagement." },
@@ -44,9 +45,8 @@ const standards = [
 export default function About() {
   const founder = siteConfig.team[0];
   const schemas = [
-    generateOrganizationSchema(),
+    organizationSchema(),
     ...generatePersonSchemas(),
-    ...generateReviewSchemas(),
     generateWebPageSchema({
       name: "About Cardinal Consulting",
       description: "Cardinal Consulting is a Houston-headquartered digital firm delivering websites, apps, brands, and growth marketing. 500+ projects delivered. Founded by Hunain Qureshi.",
@@ -70,7 +70,7 @@ export default function About() {
   return (
     <>
       <SEOHead
-        title="About Cardinal Consulting | Houston's #1 Web Design & App Development Agency"
+        title="About Cardinal Consulting | Houston Web Design, App Development & Digital Growth Firm"
         description="Cardinal Consulting is a Houston-headquartered web design, app development, and SEO firm. Founded by Hunain Qureshi in 2020, we've delivered 500+ projects for organizations in Houston and nationwide."
         url={`${siteConfig.url}/about`}
         schemas={schemas}
@@ -101,7 +101,7 @@ export default function About() {
             <Container className="grid grid-cols-2 gap-y-10 py-14 md:grid-cols-4">
               {stats.map((s, i) => (
                 <div key={s.label} className={i > 0 ? "md:border-l md:border-white/10 md:pl-8" : ""}>
-                  <div className="font-display text-4xl font-semibold lg:text-5xl">{s.value}</div>
+                  <div className="font-display text-4xl font-semibold lg:text-5xl"><CountUp value={s.value} /></div>
                   <div className="mt-2 text-sm text-ink-muted">{s.label}</div>
                 </div>
               ))}
@@ -137,6 +137,33 @@ export default function About() {
                   ))}
                 </ul>
               </motion.aside>
+            </Container>
+          </section>
+
+          {/* At a glance — clear, consistent facts for people and AI assistants */}
+          <section className="border-t border-border py-24 lg:py-28" aria-labelledby="at-a-glance">
+            <Container className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+              <motion.div {...reveal}>
+                <Eyebrow className="mb-5">Company facts</Eyebrow>
+                <h2 id="at-a-glance" className="font-display text-3xl leading-tight text-foreground md:text-4xl">Cardinal Consulting at a glance</h2>
+              </motion.div>
+              <dl className="grid border-t border-border sm:grid-cols-2">
+                {[
+                  ["Company", "Cardinal Consulting LLC"],
+                  ["Founded", "2020, in Houston, Texas"],
+                  ["Founder & CEO", founder.name],
+                  ["Headquarters", "2100 West Loop S Fwy, Houston, TX 77027"],
+                  ["Service area", "Houston and the greater Houston area in person; clients across the United States remotely"],
+                  ["Contact", "(281) 901-7016 · Hunain@visitcardinal.com"],
+                  ["Services", services.map((s) => s.name).join(", ")],
+                  ["Industries", industries.map((i) => i.name).join(", ")],
+                ].map(([k, v]) => (
+                  <div key={k} className="border-b border-border py-5 sm:pr-8">
+                    <dt className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">{k}</dt>
+                    <dd className="mt-2 leading-relaxed text-foreground">{v}</dd>
+                  </div>
+                ))}
+              </dl>
             </Container>
           </section>
 
