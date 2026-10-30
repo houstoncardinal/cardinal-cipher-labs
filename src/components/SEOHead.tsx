@@ -2,6 +2,7 @@
 // Rendered into static HTML at build time by scripts/prerender.mjs.
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/lib/seo-config';
+import { organizationSchema, websiteSchema, ORG_ID } from '@/lib/site-schema';
 
 export interface SEOProps {
   title?: string;
@@ -29,25 +30,37 @@ export function canonicalUrl(url?: string): string {
 
 /**
  * Structured data must describe only what is visible and verifiable on the page.
- * Strip, site-wide, the patterns Google treats as spammy or ineligible:
+ * Every page gets ONE canonical Organization (ProfessionalService) and WebSite entity,
+ * injected here. Page-level schemas may still contain older inline copies of our company;
+ * those are collapsed to an @id reference so Google sees a single, consistent entity.
+ * Also stripped site-wide:
  * - self-published ratings/reviews of our own business or services
- * - awards and credentials we have not verified
+ * - awards, credentials, fax numbers and social profiles we have not verified
  * - "SoftwareApplication" markup on service pages (we sell services, not apps)
- * Also rewrites any legacy www/http URLs to the canonical origin.
+ * - retired HowTo markup
+ * Legacy www/http URLs are rewritten to the canonical origin.
  */
-const STRIPPED_KEYS = new Set(['aggregateRating', 'review', 'award', 'hasCredential']);
+const STRIPPED_KEYS = new Set(['aggregateRating', 'review', 'award', 'hasCredential', 'faxNumber', 'sameAs']);
+const ORG_TYPES = new Set(['Organization', 'ProfessionalService', 'LocalBusiness', 'Corporation']);
 
-function sanitize(node: unknown): unknown {
-  if (Array.isArray(node)) return node.map(sanitize).filter((n) => n !== undefined);
+const typesOf = (n: Record<string, unknown>) => ([] as unknown[]).concat(n['@type'] ?? []).map(String);
+const isOurOrg = (n: Record<string, unknown>) =>
+  typesOf(n).some((t) => ORG_TYPES.has(t)) &&
+  (String(n.name ?? '').startsWith(siteConfig.name) || n.name === siteConfig.legalName || String(n['@id'] ?? '').includes('#organization') || String(n['@id'] ?? '').includes('#professional-service'));
+
+function sanitize(node: unknown, depth = 0): unknown {
+  if (Array.isArray(node)) return node.map((n) => sanitize(n, depth)).filter((n) => n !== undefined);
   if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>;
+    if (isOurOrg(obj)) return depth === 0 ? undefined : { '@id': ORG_ID };
+    if (depth === 0 && typesOf(obj).includes('WebSite')) return undefined; // injected once below
     if (obj['@type'] === 'SoftwareApplication' && String(obj['@id'] ?? '').includes('#software')) return undefined;
     // HowTo rich results were retired by Google in 2023; a service process isn't a how-to guide.
     if (obj['@type'] === 'HowTo') return undefined;
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(obj)) {
       if (STRIPPED_KEYS.has(k)) continue;
-      const clean = sanitize(v);
+      const clean = sanitize(v, depth + 1);
       if (clean !== undefined) out[k] = clean;
     }
     return out;
@@ -76,17 +89,22 @@ export function SEOHead({
 }: SEOProps) {
   // Prevent double brand name: only append if not already present
   const brandSuffix = ` | ${siteConfig.name}`;
+  // Brand suffix only when the result still fits in a search result (~60 characters)
   const pageTitle = title
-    ? title.includes(siteConfig.name)
+    ? title.includes(siteConfig.name) || title.length + brandSuffix.length > 62
       ? title
       : `${title}${brandSuffix}`
-    : `${siteConfig.name} - ${siteConfig.business.slogan}`;
+    : `${siteConfig.name} — Houston Web Design & Development`;
 
   const pageDescription = description || siteConfig.description;
   const pageImage = (image || siteConfig.ogImage).replace(LEGACY_ORIGIN, siteConfig.url);
   const pageUrl = canonicalUrl(url);
   const pageImageAlt = `${siteConfig.name} — web design, app development and digital growth, Houston TX`;
-  const cleanSchemas = schemas.filter((s) => !isStandaloneReview(s)).map(sanitize).filter(Boolean);
+  const cleanSchemas = [
+    organizationSchema(),
+    websiteSchema(),
+    ...schemas.filter((s) => !isStandaloneReview(s)).map((s) => sanitize(s)).filter(Boolean),
+  ];
 
   return (
     <Helmet>

@@ -8,7 +8,15 @@ export const siteConfig = {
   description: "Cardinal Consulting designs, builds, and grows digital businesses from Houston, TX: websites, mobile apps, branding, SEO, social media, AI automation, and technical consulting.",
   url: 'https://visitcardinal.com',
   ogImage: 'https://visitcardinal.com/og-image.jpg',
-  logo: 'https://visitcardinal.com/logo.png',
+  /** Square brand mark (Google prefers a square logo of at least 112×112) */
+  logo: 'https://visitcardinal.com/brand/cardinal-consulting-mark-512.png',
+  /** Full-color wordmark, used on light backgrounds */
+  wordmark: 'https://visitcardinal.com/brand/cardinal-consulting-logo.png',
+  /**
+   * Official profiles emitted as schema.org `sameAs`. Only add URLs for accounts that exist
+   * and that you control — Google uses these to connect your Knowledge Panel.
+   */
+  verifiedProfiles: [] as string[],
   
   links: {
     twitter: 'https://twitter.com/cardinalconsult',

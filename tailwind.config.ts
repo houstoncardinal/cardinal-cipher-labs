@@ -54,6 +54,10 @@ export default {
           tertiary: "hsl(var(--text-tertiary))",
         },
         divider: "hsl(var(--divider))",
+        // Per-page accent scale (see src/lib/accents.ts); defaults to the logo crimson
+        brand: Object.fromEntries(
+          [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((n) => [n, `rgb(var(--brand-${n}) / <alpha-value>)`]),
+        ),
         ink: {
           DEFAULT: "hsl(var(--ink))",
           foreground: "hsl(var(--ink-foreground))",
@@ -321,7 +325,7 @@ export default {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "grid-pattern": "linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px)",
         "metallic-gold": "linear-gradient(135deg, hsl(45 60% 60% / 0.3), hsl(45 80% 80% / 0.5), hsl(45 60% 60% / 0.3), hsl(45 40% 40% / 0.2))",
-        "metallic-crimson": "linear-gradient(135deg, hsl(25 85% 50% / 0.3), hsl(25 85% 50% / 0.6), hsl(25 85% 50% / 0.8), hsl(25 85% 50% / 0.4))",
+        "metallic-crimson": "linear-gradient(135deg, hsl(352 71% 36% / 0.3), hsl(352 71% 36% / 0.6), hsl(352 71% 36% / 0.8), hsl(352 71% 36% / 0.4))",
         "metallic-platinum": "linear-gradient(135deg, hsl(220 10% 40% / 0.3), hsl(220 10% 60% / 0.5), hsl(220 10% 80% / 0.3), hsl(220 10% 40% / 0.2))",
       },
     },

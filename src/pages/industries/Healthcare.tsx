@@ -222,7 +222,7 @@ export default function Healthcare() {
         <main>
           {/* Hero Section */}
           <section className="pt-28 pb-14 lg:pt-32 lg:pb-20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-50/60 via-transparent to-transparent" />
             <div className="container mx-auto px-6 lg:px-12 relative">
               <Breadcrumbs items={[{ label: "Industries", href: "/#industries" }, { label: "Healthcare" }]} />
               <motion.div
@@ -232,10 +232,10 @@ export default function Healthcare() {
                 className="max-w-4xl"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-14 h-14 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center">
-                    <HeartPulse className="w-7 h-7 text-orange-500" />
+                  <div className="w-14 h-14 bg-brand-50 border border-brand-100 rounded-xl flex items-center justify-center">
+                    <HeartPulse className="w-7 h-7 text-brand-500" />
                   </div>
-                  <span className="text-xs tracking-[0.3em] uppercase text-orange-500 font-medium">Healthcare Industry</span>
+                  <span className="text-xs tracking-[0.3em] uppercase text-brand-500 font-medium">Healthcare Industry</span>
                 </div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-6">
                   Healthcare Digital Solutions
@@ -274,7 +274,7 @@ export default function Healthcare() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <div className="font-serif text-4xl lg:text-5xl text-orange-500 mb-2">{stat.value}</div>
+                    <div className="font-serif text-4xl lg:text-5xl text-brand-500 mb-2">{stat.value}</div>
                     <div className="text-sm text-gray-500">{stat.label}</div>
                   </motion.div>
                 ))}
@@ -308,8 +308,8 @@ export default function Healthcare() {
                     transition={{ delay: i * 0.05 }}
                   >
                     <div className="bg-white rounded-2xl border border-gray-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 h-full hover:shadow-md transition-shadow">
-                      <div className="w-12 h-12 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center mb-4">
-                        <service.icon className="w-6 h-6 text-orange-500" />
+                      <div className="w-12 h-12 bg-brand-50 border border-brand-100 rounded-xl flex items-center justify-center mb-4">
+                        <service.icon className="w-6 h-6 text-brand-500" />
                       </div>
                       <h3 className="font-serif text-xl text-gray-900 mb-2">{service.title}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
@@ -346,8 +346,8 @@ export default function Healthcare() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <div className="bg-white rounded-2xl border border-gray-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-8 h-full">
-                      <div className="w-12 h-12 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center mb-4">
-                        <diff.icon className="w-6 h-6 text-orange-500" />
+                      <div className="w-12 h-12 bg-brand-50 border border-brand-100 rounded-xl flex items-center justify-center mb-4">
+                        <diff.icon className="w-6 h-6 text-brand-500" />
                       </div>
                       <h3 className="font-serif text-xl text-gray-900 mb-3">{diff.title}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{diff.description}</p>
@@ -384,7 +384,7 @@ export default function Healthcare() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <div className="bg-white rounded-2xl border border-gray-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-8 h-full flex flex-col">
-                      <div className="font-serif text-4xl text-orange-500 mb-1">{study.metric}</div>
+                      <div className="font-serif text-4xl text-brand-500 mb-1">{study.metric}</div>
                       <div className="text-sm font-medium text-gray-900 mb-4">{study.metricLabel}</div>
                       <h3 className="font-serif text-lg text-gray-900 mb-3">{study.title}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed mb-6 flex-1">{study.description}</p>
@@ -392,7 +392,7 @@ export default function Healthcare() {
                         {study.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-xs bg-orange-50 text-orange-500 border border-orange-100 px-3 py-1 rounded-full"
+                            className="text-xs bg-brand-50 text-brand-500 border border-brand-100 px-3 py-1 rounded-full"
                           >
                             {tag}
                           </span>
@@ -431,7 +431,7 @@ export default function Healthcare() {
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <div className="text-6xl font-serif text-orange-500/20 mb-2">{item.step}</div>
+                    <div className="text-6xl font-serif text-brand-500/20 mb-2">{item.step}</div>
                     <h3 className="font-serif text-xl text-gray-900 mb-2">{item.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
                   </motion.div>
@@ -490,7 +490,7 @@ export default function Healthcare() {
           </section>
 
           {/* CTA */}
-          <section className="py-14 lg:py-20 bg-orange-50/50">
+          <section className="py-14 lg:py-20 bg-brand-50/50">
             <div className="container mx-auto px-6 lg:px-12 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}

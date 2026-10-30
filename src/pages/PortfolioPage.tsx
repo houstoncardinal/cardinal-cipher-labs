@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Briefcase } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { Container } from "@/components/site/primitives";
-import { CountUp, RevealText, Spotlight } from "@/components/site/motion";
+import { CountUp } from "@/components/site/motion";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/seo-config";
 import { generatePortfolioSchemas, generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
@@ -77,8 +77,8 @@ export default function PortfolioPage() {
   return (
     <>
       <SEOHead
-        title="Our Work — Client Websites, Platforms & Case Studies"
-        description="Explore Cardinal Consulting's client work: enterprise website platforms, lead-generation sites, and luxury brands across AI consulting, enterprise IT, financial services, healthcare, legal, construction, and real estate."
+        title="Our Work — Websites & Case Studies"
+        description="Client websites, platforms and case studies from Cardinal Consulting across AI consulting, enterprise IT, finance, healthcare, legal, construction and real estate."
         url={`${siteConfig.url}/portfolio`}
         schemas={schemas}
         keywords={["web design portfolio", "website case studies", "enterprise website examples", "Houston web design portfolio", "client work"]}
@@ -87,31 +87,72 @@ export default function PortfolioPage() {
       <div className="min-h-screen bg-white">
         <Header />
         <main>
-          {/* HERO */}
-          <Spotlight className="bg-ink pb-14 pt-28 text-ink-foreground lg:pb-24 lg:pt-44">
-            <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
-            <Container className="relative">
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-ink-muted">Our work</p>
-              <h1 className="max-w-4xl font-display text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
-                <RevealText text="Work that moves organizations forward" trigger="mount" />
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted md:text-xl">
-                Enterprise website platforms, lead-generation engines, and premium brand experiences — designed, built, and optimized by our team.
-              </p>
-              <dl className="mt-14 grid max-w-3xl grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                {[
-                  { value: `${caseStudies.length}`, label: "Client projects shown" },
-                  { value: `${industryCount}`, label: "Industries represented" },
-                  { value: `${caseStudies.filter((c) => c.detail).length}`, label: "In-depth case studies" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <dd className="font-display text-4xl font-semibold md:text-5xl"><CountUp value={s.value} /></dd>
-                    <dt className="mt-2 text-sm text-ink-muted">{s.label}</dt>
-                  </div>
-                ))}
-              </dl>
+          {/* HERO — light, two-column, matching the service pages */}
+          <section className="relative overflow-hidden border-b border-gray-100 pb-12 pt-24 lg:pb-16 lg:pt-28">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-brand-50/70 blur-3xl" />
+              <div className="absolute -bottom-48 -left-40 h-[460px] w-[460px] rounded-full bg-brand-50/40 blur-3xl" />
+            </div>
+            <Container className="relative grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+              <div>
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-2">
+                  <Briefcase className="h-4 w-4 text-brand-600" />
+                  <span className="text-sm font-semibold text-gray-900">Our work · {industryCount} industries</span>
+                </motion.div>
+                <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="font-display text-4xl leading-[1.08] text-gray-900 sm:text-5xl lg:text-6xl">
+                  Work that moves <span className="text-brand-600">organizations forward</span>
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-5 max-w-xl text-lg leading-relaxed text-gray-600">
+                  Enterprise website platforms, lead-generation engines, and premium brand experiences — designed, built, and optimized by our team.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-8 flex flex-wrap gap-3">
+                  <a href="#all-work" className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-600 px-7 font-semibold text-white transition-colors hover:bg-brand-700">
+                    Browse all work <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <Link to="/contact" className="inline-flex h-12 items-center rounded-full bg-gray-900 px-7 font-semibold text-white transition-colors hover:bg-gray-800">
+                    Start your project
+                  </Link>
+                </motion.div>
+                <motion.dl initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.32 }} className="mt-8 grid max-w-md grid-cols-3 gap-4 border-t border-gray-200 pt-5">
+                  {[
+                    { value: `${caseStudies.length}`, label: "Client projects" },
+                    { value: `${industryCount}`, label: "Industries" },
+                    { value: `${caseStudies.filter((c) => c.detail).length}`, label: "Case studies" },
+                  ].map((st) => (
+                    <div key={st.label}>
+                      <dd className="font-display text-2xl font-semibold text-gray-900 md:text-3xl"><CountUp value={st.value} /></dd>
+                      <dt className="mt-0.5 text-sm text-gray-500">{st.label}</dt>
+                    </div>
+                  ))}
+                </motion.dl>
+              </div>
+
+              {/* A fanned stack of real client sites */}
+              <div className="group relative mx-auto hidden h-[340px] w-full max-w-[520px] md:block xl:h-[380px]" aria-hidden>
+                {caseStudies.slice(0, 3).map((c, i) => {
+                  const place = ["left-0 top-10", "right-0 top-0", "left-[11%] top-20 z-10"][i];
+                  const pose = [
+                    "-rotate-6 group-hover:-translate-x-6 group-hover:-rotate-[9deg]",
+                    "rotate-[5deg] group-hover:translate-x-6 group-hover:rotate-[8deg]",
+                    "group-hover:-translate-y-3",
+                  ][i];
+                  return (
+                    <motion.div
+                      key={c.slug}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                      className={cn("absolute w-[78%]", place)}
+                    >
+                      <div className={cn("transition-transform duration-700 ease-out", pose)}>
+                        <Shot study={c} />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </Container>
-          </Spotlight>
+          </section>
 
           {/* SPOTLIGHT */}
           <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-14 lg:py-20">
@@ -158,7 +199,7 @@ export default function PortfolioPage() {
           </section>
 
           {/* FILTER + GRID */}
-          <section className="pb-14 lg:pb-24">
+          <section id="all-work" className="scroll-mt-20 pb-14 lg:pb-24">
             <div className="sticky top-[72px] z-30 border-b border-gray-100 bg-white/90 backdrop-blur">
               <Container>
                 <div role="group" aria-label="Filter by industry" className="-mx-1 flex gap-2 overflow-x-auto px-1 py-4 [scrollbar-width:none]">

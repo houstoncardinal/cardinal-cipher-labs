@@ -48,33 +48,26 @@ export default function About() {
     organizationSchema(),
     ...generatePersonSchemas(),
     generateWebPageSchema({
+      type: "AboutPage",
       name: "About Cardinal Consulting",
-      description: "Cardinal Consulting is a Houston-headquartered digital firm delivering websites, apps, brands, and growth marketing. 500+ projects delivered. Founded by Hunain Qureshi.",
+      description: "Cardinal Consulting is a Houston-headquartered digital firm founded by Hunain Qureshi, delivering websites, apps, brands, and growth marketing.",
       url: `${siteConfig.url}/about`,
+      mainEntity: { "@id": `${siteConfig.url}#organization` },
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: siteConfig.url },
       { name: "About", url: `${siteConfig.url}/about` },
     ]),
-    {
-      "@context": "https://schema.org",
-      "@type": "AboutPage",
-      "@id": `${siteConfig.url}/about`,
-      name: "About Cardinal Consulting",
-      description: "Our story, values, and the team behind Cardinal Consulting.",
-      url: `${siteConfig.url}/about`,
-      mainEntity: { "@id": `${siteConfig.url}#organization` },
-    },
   ];
 
   return (
     <>
       <SEOHead
-        title="About Cardinal Consulting | Houston Web Design, App Development & Digital Growth Firm"
-        description="Cardinal Consulting is a Houston-headquartered web design, app development, and SEO firm. Founded by Hunain Qureshi in 2020, we've delivered 500+ projects for organizations in Houston and nationwide."
+        title="About Us — Houston Web & Digital Agency"
+        description="Meet Cardinal Consulting, a Houston web design, app development and digital growth firm founded in 2020 by Hunain Qureshi. One senior team, start to finish."
         url={`${siteConfig.url}/about`}
         schemas={schemas}
-        keywords={["about cardinal consulting", "Houston web design agency", "Houston app development company", "best web design agency Houston", "Hunain Qureshi Cardinal Consulting", "Houston digital agency", "web design company Houston Texas", "top SEO company Houston"]}
+        keywords={["about cardinal consulting", "Houston web design agency", "Houston app development company", "Hunain Qureshi Cardinal Consulting", "Houston digital agency", "web design company Houston Texas"]}
       />
 
       <div className="min-h-screen bg-background">

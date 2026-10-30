@@ -19,7 +19,7 @@ export function HeroDitheringCard() {
           <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-multiply">
             <Dithering
               colorBack="#00000000" // Transparent
-              colorFront="#EA580C"  // Orange accent
+              colorFront="#9E1B2C"  // Brand crimson
               shape="warp"
               type="4x4"
               speed={isHovered ? 0.6 : 0.2}

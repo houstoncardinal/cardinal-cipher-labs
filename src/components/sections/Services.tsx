@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { Container, SectionHeader } from "@/components/site/primitives";
 import { serviceGroups, services, type ServiceDefinition, type ServiceGroup, type ServiceTier } from "@/lib/services-catalog";
 import { contactHref } from "@/lib/contact-intent";
@@ -71,7 +71,7 @@ function TierCard({ s, t, i }: { s: ServiceDefinition; t: ServiceTier; i: number
       <ul className={cn("mt-4 space-y-2 border-t pt-4", featured ? "border-white/10" : "border-border")}>
         {t.features.slice(0, FEATURES_SHOWN).map((f) => (
           <li key={f} className="flex items-start gap-2 text-sm leading-snug">
-            <Check className={cn("mt-0.5 h-4 w-4 shrink-0", featured ? "text-primary" : "text-foreground")} />
+            <Check className={cn("mt-0.5 h-4 w-4 shrink-0", featured ? "text-brand-300" : "text-foreground")} />
             <span className={featured ? "text-ink-foreground/90" : "text-foreground/90"}>{f}</span>
           </li>
         ))}
@@ -102,10 +102,120 @@ function TierCard({ s, t, i }: { s: ServiceDefinition; t: ServiceTier; i: number
   );
 }
 
-/** Phones: every package price visible at once, synced with a swipeable deck. */
+/** Phones: a dropdown for the services in a category — everything visible in one panel, nothing off screen. */
+function ServicePicker({ options, active, onSelect }: { options: ServiceDefinition[]; active: ServiceDefinition; onSelect: (slug: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const list = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    list.current?.querySelector<HTMLElement>("[aria-selected=true]")?.focus();
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const moveFocus = (e: KeyboardEvent<HTMLUListElement>) => {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const items = Array.from(e.currentTarget.querySelectorAll<HTMLElement>("[role=option]"));
+    const i = items.indexOf(document.activeElement as HTMLElement);
+    items[(i + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length]?.focus();
+  };
+
+  return (
+    <div ref={ref} className="relative md:hidden">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={cn(
+          "flex w-full items-center gap-3 border bg-background px-3 py-2.5 text-left shadow-[0_8px_20px_-14px_rgba(15,23,42,0.35)] transition-colors",
+          open ? "border-foreground" : "border-foreground/25",
+        )}
+      >
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-ink text-ink-foreground">
+          <active.icon className="h-4 w-4" strokeWidth={1.7} />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-[15px] font-semibold text-foreground">{active.name}</span>
+          <span className="block truncate text-xs text-muted-foreground">{priceRange(active)}</span>
+        </span>
+        <span className="flex h-6 min-w-6 shrink-0 items-center justify-center rounded-full bg-secondary px-1.5 text-[11px] font-bold tabular-nums text-foreground" aria-label={`${options.length} options`}>
+          {options.length}
+        </span>
+        <ChevronDown className={cn("h-5 w-5 shrink-0 text-foreground transition-transform duration-300", open && "rotate-180")} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            ref={list}
+            role="listbox"
+            aria-label="Services"
+            onKeyDown={moveFocus}
+            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.98, transition: { duration: 0.15 } }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="absolute inset-x-0 top-full z-30 mt-2 origin-top border border-border bg-background p-1.5 shadow-[0_28px_56px_-20px_rgba(15,23,42,0.5)]"
+          >
+            {options.map((s, i) => {
+              const selected = s.slug === active.slug;
+              return (
+                <motion.li
+                  key={s.slug}
+                  role="none"
+                  initial={{ opacity: 0, x: -6 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.04 * i, ease: EASE }}
+                >
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selected}
+                    onClick={() => {
+                      onSelect(s.slug);
+                      setOpen(false);
+                    }}
+                    className={cn(
+                      "flex w-full items-center gap-3 px-3 py-3 text-left outline-none transition-colors focus-visible:bg-secondary",
+                      selected ? "bg-secondary" : "active:bg-secondary",
+                    )}
+                  >
+                    <s.icon className={cn("h-4 w-4 shrink-0", selected ? "text-primary" : "text-muted-foreground")} strokeWidth={1.7} />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] font-semibold text-foreground">{s.name}</span>
+                      <span className="block text-xs text-muted-foreground">{s.tiers.length} packages · {priceRange(s)}</span>
+                    </span>
+                    {selected && <Check className="h-4 w-4 shrink-0 text-primary" />}
+                  </button>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/** Phones: every package price visible at once, big wrap-around arrows, and a swipeable deck — all kept in sync. */
 function MobileDeck({ s }: { s: ServiceDefinition }) {
   const deck = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
+  const count = s.tiers.length;
 
   useEffect(() => {
     setIndex(0);
@@ -114,49 +224,67 @@ function MobileDeck({ s }: { s: ServiceDefinition }) {
 
   const go = (i: number) => {
     const el = deck.current;
-    const card = el?.children[i] as HTMLElement | undefined;
+    const next = (i + count) % count; // wrap around, so the arrows always work
+    const card = el?.children[next] as HTMLElement | undefined;
     if (!el || !card) return;
     // Align the card with the deck's left padding (20px), measured on screen so nesting never skews it
     const delta = card.getBoundingClientRect().left - el.getBoundingClientRect().left - 20;
     el.scrollTo({ left: el.scrollLeft + delta, behavior: "smooth" });
-    setIndex(i);
+    setIndex(next);
   };
   const onScroll = () => {
     const el = deck.current;
     const card = el?.firstElementChild as HTMLElement | null;
-    if (el && card) setIndex(Math.min(s.tiers.length - 1, Math.round(el.scrollLeft / (card.offsetWidth + 12))));
+    if (el && card) setIndex(Math.min(count - 1, Math.round(el.scrollLeft / (card.offsetWidth + 12))));
   };
+  const arrow =
+    "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-ink-foreground shadow-[0_12px_28px_-10px_rgba(15,23,42,0.65)] ring-4 ring-background transition-transform active:scale-90";
 
   return (
     <div className="min-w-0 md:hidden">
       <div role="tablist" aria-label={`${s.name} packages`} onKeyDown={onArrowKeys} className="grid grid-cols-3 border border-border bg-secondary/60 p-1">
-        {s.tiers.map((t, i) => {
-          const selected = i === index;
-          return (
-            <button
-              key={t.name}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => go(i)}
-              className="relative px-1.5 py-2 text-center"
-            >
-              {selected && <motion.span layoutId="tier-seg" className="absolute inset-0 bg-background shadow-[0_6px_16px_-10px_rgba(15,23,42,0.45)]" transition={{ duration: 0.4, ease: EASE }} />}
-              <span className={cn("relative block text-[10px] font-semibold uppercase tracking-[0.12em]", selected ? "text-primary" : "text-muted-foreground")}>
-                {t.level}
-                {t.popular && " ★"}
-              </span>
-              <span className={cn("relative mt-0.5 block font-display text-[15px] font-semibold", selected ? "text-foreground" : "text-foreground/70")}>{t.price}</span>
-            </button>
-          );
-        })}
+          {s.tiers.map((t, i) => {
+            const selected = i === index;
+            return (
+              <button
+                key={t.name}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => go(i)}
+                className="relative min-w-0 px-1 py-1.5 text-center"
+              >
+                {selected && <motion.span layoutId="tier-seg" className="absolute inset-0 bg-background shadow-[0_6px_16px_-10px_rgba(15,23,42,0.45)]" transition={{ duration: 0.4, ease: EASE }} />}
+                <span className={cn("relative block truncate text-[10px] font-semibold uppercase tracking-[0.08em]", selected ? "text-primary" : "text-muted-foreground")}>
+                  {t.level}
+                  {t.popular && " ★"}
+                </span>
+                <span className={cn("relative mt-0.5 block truncate font-display text-[15px] font-semibold", selected ? "text-foreground" : "text-foreground/70")}>{t.price}</span>
+              </button>
+            );
+          })}
       </div>
 
+      {/* Deck with arrows floating on its edges — always reachable, wrap around */}
+      <div className="relative mt-4">
+        <button type="button" onClick={() => go(index - 1)} aria-label="Previous package" className={cn(arrow, "-left-3")}>
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button type="button" onClick={() => go(index + 1)} aria-label="Next package" className={cn(arrow, "-right-3")}>
+          <ChevronRight className="h-5 w-5" />
+        </button>
       <div
         ref={deck}
         onScroll={onScroll}
-        className="-mx-5 mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        tabIndex={0}
+        aria-label={`${s.name} packages — swipe or use arrow keys`}
+        onKeyDown={(e) => {
+          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+          e.preventDefault();
+          go(index + (e.key === "ArrowRight" ? 1 : -1));
+        }}
+        className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-5 px-5 pb-1 outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {s.tiers.map((t, i) => (
           <div key={t.name} className="w-[88%] shrink-0 snap-start sm:w-[62%]">
@@ -164,31 +292,24 @@ function MobileDeck({ s }: { s: ServiceDefinition }) {
           </div>
         ))}
       </div>
+      </div>
 
-      <div className="mt-3 flex items-center justify-between">
-        <button
-          type="button"
-          onClick={() => go(Math.max(0, index - 1))}
-          disabled={index === 0}
-          aria-label="Previous package"
-          className="flex h-9 w-9 items-center justify-center border border-border text-foreground transition-opacity disabled:opacity-30"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </button>
-        <div aria-hidden className="flex gap-1.5">
+      <div className="mt-3 flex items-center justify-center gap-3 text-xs font-medium text-muted-foreground">
+        <span className="tabular-nums">
+          {index + 1} of {count}
+        </span>
+        <span aria-hidden className="flex gap-1.5">
           {s.tiers.map((t, i) => (
-            <span key={t.name} className={cn("h-1 transition-all duration-500", i === index ? "w-7 bg-foreground" : "w-2.5 bg-border")} />
+            <button
+              key={t.name}
+              type="button"
+              tabIndex={-1}
+              onClick={() => go(i)}
+              className={cn("h-1.5 transition-all duration-500", i === index ? "w-7 bg-foreground" : "w-2.5 bg-border")}
+            />
           ))}
-        </div>
-        <button
-          type="button"
-          onClick={() => go(Math.min(s.tiers.length - 1, index + 1))}
-          disabled={index === s.tiers.length - 1}
-          aria-label="Next package"
-          className="flex h-9 w-9 items-center justify-center border border-border text-foreground transition-opacity disabled:opacity-30"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </button>
+        </span>
+        <span>Swipe for more</span>
       </div>
     </div>
   );
@@ -242,37 +363,40 @@ export function Services() {
             })}
           </div>
 
-          {/* Level 2: services in the category */}
-          <div
-            role="tablist"
-            aria-label={`${serviceGroups[groupIndex].title} services`}
-            onKeyDown={onArrowKeys}
-            className="flex gap-2 overflow-x-auto border-b border-border px-4 py-3 [scrollbar-width:none] md:px-6 [&::-webkit-scrollbar]:hidden"
-          >
-            {chips.map((s) => {
-              const selected = s.slug === active.slug;
-              return (
-                <button
-                  key={s.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={selected}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActiveSlug(s.slug)}
-                  className={cn(
-                    "relative flex shrink-0 items-center gap-2.5 border px-3.5 py-2 text-left transition-colors",
-                    selected ? "border-ink text-ink-foreground" : "border-border text-foreground hover:border-foreground/40",
-                  )}
-                >
-                  {selected && <motion.span layoutId="svc-chip" className="absolute inset-0 bg-ink" transition={{ duration: 0.4, ease: EASE }} />}
-                  <s.icon className={cn("relative h-4 w-4 shrink-0", selected ? "text-primary" : "text-muted-foreground")} strokeWidth={1.7} />
-                  <span className="relative">
-                    <span className="block whitespace-nowrap text-sm font-semibold leading-tight">{s.name}</span>
-                    <span className={cn("hidden whitespace-nowrap text-[11px] leading-tight md:block", selected ? "text-ink-muted" : "text-muted-foreground")}>{priceRange(s)}</span>
-                  </span>
-                </button>
-              );
-            })}
+          {/* Level 2: services in the category — a dropdown on phones, a chip row from tablets up */}
+          <div className="border-b border-border px-4 py-3 md:px-6">
+            <ServicePicker options={chips} active={active} onSelect={setActiveSlug} />
+            <div
+              role="tablist"
+              aria-label={`${serviceGroups[groupIndex].title} services`}
+              onKeyDown={onArrowKeys}
+              className="hidden gap-2 md:flex md:flex-wrap"
+            >
+              {chips.map((s) => {
+                const selected = s.slug === active.slug;
+                return (
+                  <button
+                    key={s.slug}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    tabIndex={selected ? 0 : -1}
+                    onClick={() => setActiveSlug(s.slug)}
+                    className={cn(
+                      "relative flex shrink-0 items-center gap-2.5 border px-3.5 py-2 text-left transition-colors",
+                      selected ? "border-ink text-ink-foreground" : "border-foreground/20 bg-background text-foreground hover:border-foreground/50",
+                    )}
+                  >
+                    {selected && <motion.span layoutId="svc-chip" className="absolute inset-0 bg-ink" transition={{ duration: 0.4, ease: EASE }} />}
+                    <s.icon className={cn("relative h-4 w-4 shrink-0", selected ? "text-brand-300" : "text-muted-foreground")} strokeWidth={1.7} />
+                    <span className="relative min-w-0">
+                      <span className="block whitespace-nowrap text-sm font-semibold leading-tight">{s.name}</span>
+                      <span className={cn("mt-0.5 block whitespace-nowrap text-[11px] leading-tight", selected ? "text-ink-muted" : "text-muted-foreground")}>{priceRange(s)}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Selected service and its packages */}

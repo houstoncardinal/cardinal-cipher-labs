@@ -286,10 +286,10 @@ export default function EnterpriseSecurity() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-8"
                 >
-                  <Shield className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <Shield className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Enterprise Website Security — Houston TX
                   </span>
                 </motion.div>
@@ -301,7 +301,7 @@ export default function EnterpriseSecurity() {
                   className="font-serif text-5xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6"
                 >
                   Enterprise-Grade Website Security for{" "}
-                  <span className="text-orange-600">Houston Businesses</span>
+                  <span className="text-brand-600">Houston Businesses</span>
                 </motion.h1>
 
                 <motion.p
@@ -332,7 +332,7 @@ export default function EnterpriseSecurity() {
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                   <Link to="/contact">
-                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
+                    <Button size="lg" className="bg-brand-600 hover:bg-brand-700">
                       Get a Security Assessment <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -364,7 +364,7 @@ export default function EnterpriseSecurity() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <stat.icon className="w-7 h-7 text-orange-400 mx-auto mb-2" />
+                    <stat.icon className="w-7 h-7 text-brand-400 mx-auto mb-2" />
                     <div className="font-serif text-2xl md:text-3xl font-bold text-white">
                       {stat.value}
                     </div>
@@ -406,13 +406,13 @@ export default function EnterpriseSecurity() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <LuxuryCard className="p-8 h-full">
-                      <feature.icon className="w-10 h-10 text-orange-600 mb-4" />
+                      <feature.icon className="w-10 h-10 text-brand-600 mb-4" />
                       <h3 className="font-serif text-xl text-gray-900 mb-3">{feature.title}</h3>
                       <p className="text-gray-600 text-sm leading-relaxed mb-4">{feature.description}</p>
                       <ul className="space-y-2">
                         {feature.perks.map((perk) => (
                           <li key={perk} className="flex items-start gap-2 text-sm text-gray-600">
-                            <Check className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                            <Check className="w-4 h-4 text-brand-600 mt-0.5 flex-shrink-0" />
                             {perk}
                           </li>
                         ))}
@@ -456,8 +456,8 @@ export default function EnterpriseSecurity() {
                 className="text-center mb-10"
               >
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <MapPin className="w-5 h-5 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Houston Industry Expertise
                   </span>
                 </div>
@@ -487,7 +487,7 @@ export default function EnterpriseSecurity() {
                         {industry.examples.map((ex) => (
                           <span
                             key={ex}
-                            className="px-3 py-1 bg-orange-50 text-orange-700 text-xs rounded-full font-medium"
+                            className="px-3 py-1 bg-brand-50 text-brand-700 text-xs rounded-full font-medium"
                           >
                             {ex}
                           </span>
@@ -510,8 +510,8 @@ export default function EnterpriseSecurity() {
                 className="text-center mb-12"
               >
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <MapPin className="w-5 h-5 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Local Houston Coverage
                   </span>
                 </div>
@@ -536,7 +536,7 @@ export default function EnterpriseSecurity() {
                     transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm"
                   >
-                    <MapPin className="w-3 h-3 text-orange-600" />
+                    <MapPin className="w-3 h-3 text-brand-600" />
                     {hood}
                   </motion.div>
                 ))}
@@ -634,7 +634,7 @@ export default function EnterpriseSecurity() {
                   >
                     <LuxuryCard className="p-8">
                       <div className="flex items-start gap-4">
-                        <Shield className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
+                        <Shield className="w-5 h-5 text-brand-600 mt-1 flex-shrink-0" />
                         <div>
                           <h3 className="font-serif text-xl text-gray-900 mb-3">{faq.question}</h3>
                           <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
@@ -656,7 +656,7 @@ export default function EnterpriseSecurity() {
                 viewport={{ once: true }}
                 className="max-w-3xl mx-auto text-center"
               >
-                <Globe className="w-8 h-8 text-orange-600 mx-auto mb-4" />
+                <Globe className="w-8 h-8 text-brand-600 mx-auto mb-4" />
                 <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-4">
                   Based in Houston TX — Securing Clients Everywhere
                 </h2>
@@ -686,10 +686,10 @@ export default function EnterpriseSecurity() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-orange-200 hover:bg-orange-50 text-sm font-medium text-gray-700 transition-all text-center"
+                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-brand-200 hover:bg-brand-50 text-sm font-medium text-gray-700 transition-all text-center"
                   >
                     {link.label}{" "}
-                    <ArrowRight className="ml-1 w-3 h-3 text-orange-600 flex-shrink-0" />
+                    <ArrowRight className="ml-1 w-3 h-3 text-brand-600 flex-shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -704,7 +704,7 @@ export default function EnterpriseSecurity() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <Shield className="w-10 h-10 text-orange-400 mx-auto mb-6" />
+                <Shield className="w-10 h-10 text-brand-400 mx-auto mb-6" />
                 <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">
                   Secure Your Houston Website Today
                 </h2>
@@ -715,7 +715,7 @@ export default function EnterpriseSecurity() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a href="tel:281-901-7016">
-                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
+                    <Button size="lg" className="bg-brand-600 hover:bg-brand-700 text-white">
                       Call (281) 901-7016
                     </Button>
                   </a>

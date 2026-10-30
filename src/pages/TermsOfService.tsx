@@ -374,7 +374,7 @@ We will respond to your inquiry as soon as possible.`
     <>
       <SEOHead
         title="Terms of Service"
-        description="Cardinal Consulting's terms of service outline payment terms, intellectual property rights, and the legal agreement for our web development, app development, and digital marketing services."
+        description="The terms that govern Cardinal Consulting projects and website use, including payment terms, revisions, intellectual property and confidentiality."
         url={`${siteConfig.url}/terms-of-service`}
         schemas={schemas}
         keywords={["terms of service", "terms and conditions", "payment terms", "web development contract", "digital agency terms"]}

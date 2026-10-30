@@ -10,10 +10,9 @@ import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Container, reveal, revealDelay } from "@/components/site/primitives";
-import { RevealText, Spotlight } from "@/components/site/motion";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/seo-config";
-import { generateBreadcrumbSchema, generateWebPageSchema, generateServiceSchemas } from "@/lib/schema-generators";
+import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
 import { priceToNumber, serviceGroups, services, type ServiceDefinition, type ServiceTier } from "@/lib/services-catalog";
 import { contactHref } from "@/lib/contact-intent";
 
@@ -89,11 +88,11 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
   const shown = open ? tier.features : tier.features.slice(0, 4);
   const hidden = tier.features.length - 4;
   return (
-    <div className={cn("relative flex h-full flex-col rounded-2xl border bg-white p-6", tier.popular ? "border-orange-600 shadow-[0_20px_50px_-28px_rgba(234,88,12,0.55)]" : "border-gray-200")}>
+    <div className={cn("relative flex h-full flex-col rounded-2xl border bg-white p-6", tier.popular ? "border-brand-600 shadow-[0_20px_50px_-28px_rgb(var(--brand-600) / 0.55)]" : "border-gray-200")}>
       {tier.popular && (
-        <span className="absolute -top-3 left-6 rounded-full bg-orange-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Most popular</span>
+        <span className="absolute -top-3 left-6 rounded-full bg-brand-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">Most popular</span>
       )}
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-orange-600">{tier.level}</p>
+      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-600">{tier.level}</p>
       <h4 className="mt-1 text-lg font-bold text-gray-900">{tier.name}</h4>
       <div className="mt-3"><Price tier={tier} /></div>
       <p className="mt-2 text-sm leading-relaxed text-gray-600">{tier.bestFor}</p>
@@ -106,7 +105,7 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
         ))}
       </ul>
       {hidden > 0 && (
-        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-gray-900 hover:text-orange-600">
+        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-gray-900 hover:text-brand-600">
           {open ? "Show less" : `Show all ${tier.features.length} features`}
           <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
         </button>
@@ -116,7 +115,7 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
         to={contactHref({ service: service.slug, plan: tier.name, from: "pricing" })}
         className={cn(
           "mt-auto inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition",
-          tier.popular ? "bg-orange-600 text-white hover:bg-orange-700" : "border border-gray-300 text-gray-900 hover:border-gray-900",
+          tier.popular ? "bg-brand-600 text-white hover:bg-brand-700" : "border border-gray-300 text-gray-900 hover:border-gray-900",
         )}
       >
         {priceToNumber(tier.price) === undefined ? "Request a quote" : `Choose ${tier.level}`} <ArrowRight className="h-4 w-4" />
@@ -130,7 +129,6 @@ export default function Pricing() {
   const publishedPrices = allOffers.filter((t) => priceToNumber(t.price) !== undefined).length;
 
   const schemas = [
-    ...generateServiceSchemas(),
     generateWebPageSchema({
       name: "Pricing — Cardinal Consulting",
       description: "Plans and pricing for every Cardinal Consulting service: web development, mobile apps, brand identity, UX/UI, SEO, digital marketing, social media, AI automation, technical consulting, and website care.",
@@ -143,7 +141,7 @@ export default function Pricing() {
     {
       "@context": "https://schema.org",
       "@type": "OfferCatalog",
-      "@id": `${siteConfig.url}/pricing`,
+      "@id": `${siteConfig.url}/pricing#catalog`,
       name: "Cardinal Consulting Pricing",
       description: "Plans and pricing for every Cardinal Consulting service.",
       provider: { "@id": `${siteConfig.url}#organization` },
@@ -171,8 +169,8 @@ export default function Pricing() {
   return (
     <>
       <SEOHead
-        title="Pricing — Web Design, SEO, Apps & Marketing | Cardinal Consulting Houston"
-        description="Every Cardinal Consulting price in one place: websites from $1,500, mobile apps from $5K, branding from $1,500, UX/UI from $1,000, SEO from $1,500/mo, and website care from $299/mo. Written quote before any work begins."
+        title="Pricing: Websites, Apps, SEO & More"
+        description="Transparent pricing for every service: websites from $1,500, apps from $5K, branding from $1,500, SEO from $1,500/mo and website care from $299/mo."
         url={`${siteConfig.url}/pricing`}
         schemas={schemas}
         keywords={["web design pricing houston", "website cost houston", "SEO pricing", "mobile app development cost", "branding agency pricing", "website maintenance pricing", "digital marketing agency pricing"]}
@@ -181,55 +179,85 @@ export default function Pricing() {
       <div className="min-h-screen bg-white">
         <Header />
         <main>
-          {/* HERO */}
-          <Spotlight className="bg-ink pb-16 pt-28 text-ink-foreground lg:pb-20 lg:pt-44">
-            <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
-            <Container className="relative">
-              <nav aria-label="Breadcrumb" className="mb-8 text-sm text-ink-muted">
-                <Link to="/" className="hover:text-white">Home</Link> <span className="mx-2">/</span> <span className="text-white">Pricing</span>
-              </nav>
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-ink-muted">Pricing</p>
-              <h1 className="max-w-4xl font-display text-4xl leading-[1.05] md:text-6xl lg:text-7xl">
-                <RevealText text="Clear pricing for every service" trigger="mount" />
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted md:text-xl">
-                Every plan for every service, in one place. Use this guide to budget — your final scope and price are always confirmed in writing before work begins.
-              </p>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <a href="#overview" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-orange-600 px-7 font-semibold text-white transition hover:bg-orange-700">
-                  Compare all prices <ArrowRight className="h-4 w-4" />
-                </a>
-                <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-7 font-semibold text-white transition hover:bg-white/10">
-                  Get a recommended plan
-                </Link>
+          {/* HERO — light, two-column, matching the service pages */}
+          <section className="relative overflow-hidden border-b border-gray-100 pb-12 pt-24 lg:pb-16 lg:pt-28">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-brand-50/70 blur-3xl" />
+              <div className="absolute -bottom-48 -left-40 h-[460px] w-[460px] rounded-full bg-brand-50/40 blur-3xl" />
+            </div>
+            <Container className="relative grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+              <div>
+                <nav aria-label="Breadcrumb" className="mb-5 text-sm text-gray-500">
+                  <Link to="/" className="hover:text-gray-900">Home</Link> <span className="mx-1.5">/</span> <span className="text-gray-900">Pricing</span>
+                </nav>
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-2">
+                  <Receipt className="h-4 w-4 text-brand-600" />
+                  <span className="text-sm font-semibold text-gray-900">{services.length} services · {publishedPrices} published prices</span>
+                </motion.div>
+                <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="font-display text-4xl leading-[1.08] text-gray-900 sm:text-5xl lg:text-6xl">
+                  Clear pricing for <span className="text-brand-600">every service</span>
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-5 max-w-xl text-lg leading-relaxed text-gray-600">
+                  Every plan for every service, in one place. Use this guide to budget — your final scope and price are always confirmed in writing before work begins.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }} className="mt-8 flex flex-wrap gap-3">
+                  <a href="#overview" className="inline-flex h-12 items-center gap-2 rounded-full bg-brand-600 px-7 font-semibold text-white transition-colors hover:bg-brand-700">
+                    Compare all prices <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center rounded-full bg-gray-900 px-7 font-semibold text-white transition-colors hover:bg-gray-800">
+                    Get a recommended plan
+                  </Link>
+                </motion.div>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.32 }} className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
+                  {["Free consultation", "Written quote at no cost", "Month-to-month on monthly plans"].map((b) => (
+                    <span key={b} className="flex items-center gap-2"><Check className="h-4 w-4 text-green-500" />{b}</span>
+                  ))}
+                </motion.div>
               </div>
-              <dl className="mt-14 grid max-w-3xl grid-cols-3 gap-6 border-t border-white/10 pt-8">
-                {[
-                  { value: `${services.length}`, label: "Services" },
-                  { value: `${publishedPrices}`, label: "Published prices" },
-                  { value: "$0", label: "To get a written quote" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <dd className="font-display text-3xl font-semibold md:text-5xl">{s.value}</dd>
-                    <dt className="mt-2 text-sm text-ink-muted">{s.label}</dt>
-                  </div>
-                ))}
-              </dl>
+
+              {/* Starting prices at a glance */}
+              <motion.a
+                href="#overview"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                aria-label="Starting prices — jump to the full price overview"
+                className="block rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_30px_60px_-30px_rgba(17,24,39,0.35)] transition-transform hover:-translate-y-1 lg:p-7"
+              >
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400">Starting prices</p>
+                <ul className="mt-3 divide-y divide-gray-100">
+                  {services.slice(0, 6).map((s, i) => (
+                    <li key={s.slug} className={cn("items-center justify-between gap-4 py-3", i < 3 ? "flex" : "hidden sm:flex")}>
+                      <span className="flex min-w-0 items-center gap-3">
+                        <s.icon className="h-4 w-4 shrink-0 text-brand-600" />
+                        <span className="truncate font-semibold text-gray-900">{s.name}</span>
+                      </span>
+                      <span className="shrink-0 text-right">
+                        <span className="font-display text-lg font-semibold text-gray-900">{s.startingAt}</span>
+                        <span className="ml-1.5 text-xs text-gray-500">{s.startingAt === "Custom" ? "quote" : s.startingBilling === "per month" ? "/ mo" : s.startingBilling}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+                  See all {services.length} services <ArrowRight className="h-4 w-4" />
+                </span>
+              </motion.a>
             </Container>
-          </Spotlight>
+          </section>
 
           {/* HOW PRICING WORKS */}
           <section className="border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white py-14 lg:py-24">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">How pricing works</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">How pricing works</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">Three simple ways we price</h2>
                 <p className="mt-4 text-lg text-gray-600">Every service has three plans — Foundation, Growth, and Enterprise — priced one of three ways.</p>
               </motion.div>
               <div className="mt-14 grid gap-6 md:grid-cols-3">
                 {MODELS.map((m, i) => (
                   <motion.div key={m.title} {...revealDelay(i)} className="flex flex-col rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600"><m.icon className="h-6 w-6" /></span>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600"><m.icon className="h-6 w-6" /></span>
                     <h3 className="mt-5 text-xl font-bold text-gray-900">{m.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-gray-600">{m.body}</p>
                     <ul className="mt-5 flex flex-wrap gap-2 border-t border-gray-100 pt-5">
@@ -250,11 +278,11 @@ export default function Pricing() {
             <Container>
               <motion.div {...reveal} className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">At a glance</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">At a glance</p>
                   <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">Every plan, side by side</h2>
                   <p className="mt-4 text-lg text-gray-600">Select any service for the full plan details below.</p>
                 </div>
-                <p className="text-sm text-gray-500"><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-orange-600 align-middle" />Most popular plan</p>
+                <p className="text-sm text-gray-500"><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-brand-600 align-middle" />Most popular plan</p>
               </motion.div>
 
               {/* Desktop table */}
@@ -272,27 +300,27 @@ export default function Pricing() {
                   {serviceGroups.map((g) => (
                     <tbody key={g.group} className="border-t border-gray-200">
                       <tr className="bg-gray-900/[0.03]">
-                        <th colSpan={5} scope="colgroup" className="px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-600">{g.title}</th>
+                        <th colSpan={5} scope="colgroup" className="px-6 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-600">{g.title}</th>
                       </tr>
                       {services.filter((s) => s.group === g.group).map((s) => (
-                        <tr key={s.slug} className="group border-t border-gray-100 transition hover:bg-orange-50/40">
+                        <tr key={s.slug} className="group border-t border-gray-100 transition hover:bg-brand-50/40">
                           <th scope="row" className="px-6 py-5 align-top">
                             <a href={`#${s.slug}`} className="flex items-center gap-3">
-                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><s.icon className="h-4 w-4" /></span>
-                              <span className="font-semibold text-gray-900 group-hover:text-orange-600">{s.name}</span>
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600"><s.icon className="h-4 w-4" /></span>
+                              <span className="font-semibold text-gray-900 group-hover:text-brand-600">{s.name}</span>
                             </a>
                           </th>
                           {s.tiers.map((t) => (
                             <td key={t.level} className="px-6 py-5 align-top">
                               <div className="flex items-center gap-2">
                                 <Price tier={t} size="sm" />
-                                {t.popular && <span className="h-2 w-2 rounded-full bg-orange-600" aria-label="Most popular" />}
+                                {t.popular && <span className="h-2 w-2 rounded-full bg-brand-600" aria-label="Most popular" />}
                               </div>
                               <p className="mt-0.5 text-sm text-gray-500">{t.name}</p>
                             </td>
                           ))}
                           <td className="px-6 py-5 text-right align-top">
-                            <a href={`#${s.slug}`} aria-label={`${s.name} plan details`} className="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 group-hover:bg-orange-600 group-hover:text-white">
+                            <a href={`#${s.slug}`} aria-label={`${s.name} plan details`} className="inline-flex h-8 w-8 items-center justify-center rounded-full text-gray-400 group-hover:bg-brand-600 group-hover:text-white">
                               <ArrowRight className="h-4 w-4" />
                             </a>
                           </td>
@@ -307,13 +335,13 @@ export default function Pricing() {
               <div className="mt-10 space-y-10 lg:hidden">
                 {serviceGroups.map((g) => (
                   <div key={g.group}>
-                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-600">{g.title}</p>
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-600">{g.title}</p>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       {services.filter((s) => s.group === g.group).map((s) => (
                         <a key={s.slug} href={`#${s.slug}`} className="block min-w-0 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
                           <div className="flex items-center justify-between gap-3">
                             <span className="flex items-center gap-3">
-                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-orange-600"><s.icon className="h-4 w-4" /></span>
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600"><s.icon className="h-4 w-4" /></span>
                               <span className="font-semibold text-gray-900">{s.name}</span>
                             </span>
                             <ArrowRight className="h-4 w-4 shrink-0 text-gray-400" />
@@ -323,7 +351,7 @@ export default function Pricing() {
                               <div key={t.level} className="flex items-center justify-between gap-3 py-2.5">
                                 <dt className="min-w-0 text-sm">
                                   <span className="block text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
-                                    {t.level}{t.popular && <span className="ml-1.5 text-orange-600">· Popular</span>}
+                                    {t.level}{t.popular && <span className="ml-1.5 text-brand-600">· Popular</span>}
                                   </span>
                                   <span className="block truncate text-gray-700">{t.name}</span>
                                 </dt>
@@ -359,7 +387,7 @@ export default function Pricing() {
               <Container>
                 <motion.div {...reveal} className="flex flex-col gap-2 border-b border-gray-200 pb-8 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <p className="font-display text-sm font-semibold text-orange-600">{String(gi + 1).padStart(2, "0")} — {g.title}</p>
+                    <p className="font-display text-sm font-semibold text-brand-600">{String(gi + 1).padStart(2, "0")} — {g.title}</p>
                     <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">{g.description}</h2>
                   </div>
                 </motion.div>
@@ -368,7 +396,7 @@ export default function Pricing() {
                   {services.filter((s) => s.group === g.group).map((s) => (
                     <article key={s.slug} id={s.slug} className="scroll-mt-36 grid gap-8 py-14 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-12">
                       <motion.div {...reveal} className="lg:sticky lg:top-36 lg:self-start">
-                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-600 text-white shadow-lg shadow-orange-600/20"><s.icon className="h-6 w-6" /></span>
+                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600 text-white shadow-lg shadow-brand-600/20"><s.icon className="h-6 w-6" /></span>
                         <h3 className="mt-5 font-display text-2xl font-semibold text-gray-900 md:text-3xl">{s.name}</h3>
                         <p className="mt-3 leading-relaxed text-gray-600">{s.summary}</p>
                         <div className="mt-6 rounded-xl border border-gray-200 bg-white p-4">
@@ -378,8 +406,8 @@ export default function Pricing() {
                           </p>
                         </div>
                         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                          <Link to={s.path} className="inline-flex items-center gap-1.5 text-gray-900 hover:text-orange-600">Service details <ArrowRight className="h-4 w-4" /></Link>
-                          <Link to={contactHref({ service: s.slug, from: "pricing" })} className="inline-flex items-center gap-1.5 text-orange-600 hover:text-orange-700">Ask a question <ArrowRight className="h-4 w-4" /></Link>
+                          <Link to={s.path} className="inline-flex items-center gap-1.5 text-gray-900 hover:text-brand-600">Service details <ArrowRight className="h-4 w-4" /></Link>
+                          <Link to={contactHref({ service: s.slug, from: "pricing" })} className="inline-flex items-center gap-1.5 text-brand-600 hover:text-brand-700">Ask a question <ArrowRight className="h-4 w-4" /></Link>
                         </div>
                       </motion.div>
                       <div className="grid gap-5 pt-3 md:grid-cols-3">
@@ -400,17 +428,17 @@ export default function Pricing() {
           <section className="bg-ink py-14 text-ink-foreground lg:py-20">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400">How billing works</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-400">How billing works</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight md:text-5xl">No surprises, start to finish</h2>
                 <p className="mt-4 text-lg text-ink-muted">You always know what you're paying for and when.</p>
               </motion.div>
               <ol className="relative mt-12 grid gap-10 md:grid-cols-4 md:gap-6">
-                <div aria-hidden className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-orange-600/60 via-white/20 to-orange-600/60 md:block" />
+                <div aria-hidden className="absolute left-6 top-6 hidden h-px w-[calc(100%-3rem)] bg-gradient-to-r from-brand-600/60 via-white/20 to-brand-600/60 md:block" />
                 {BILLING_STEPS.map((step, i) => (
                   <motion.li key={step.title} {...revealDelay(i)} className="relative flex gap-5 md:block">
-                    <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white ring-8 ring-ink"><step.icon className="h-5 w-5" /></span>
+                    <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-600 text-white ring-8 ring-ink"><step.icon className="h-5 w-5" /></span>
                     <div className="md:mt-6">
-                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-orange-400">Step {i + 1}</p>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-400">Step {i + 1}</p>
                       <h3 className="mt-1 text-lg font-bold">{step.title}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.body}</p>
                     </div>
@@ -424,13 +452,13 @@ export default function Pricing() {
           <section className="py-14 lg:py-20">
             <Container>
               <motion.div {...reveal} className="mx-auto max-w-2xl text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">Every engagement</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">Every engagement</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-5xl">What you can count on</h2>
               </motion.div>
               <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {PROMISES.map((p, i) => (
                   <motion.div key={p.title} {...revealDelay(i)} className="flex gap-4 rounded-2xl border border-gray-200 bg-gray-50/60 p-6">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-orange-600 shadow-sm"><p.icon className="h-5 w-5" /></span>
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand-600 shadow-sm"><p.icon className="h-5 w-5" /></span>
                     <div>
                       <h3 className="font-bold text-gray-900">{p.title}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-gray-600">{p.body}</p>
@@ -445,9 +473,9 @@ export default function Pricing() {
           <section className="border-t border-gray-100 bg-gray-50 py-14 lg:py-20">
             <Container className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
               <motion.div {...reveal}>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">FAQ</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">FAQ</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">Pricing questions, answered</h2>
-                <p className="mt-4 text-gray-600">Still unsure? <Link to={contactHref({ from: "pricing" })} className="font-semibold text-orange-600 hover:underline">Ask us directly</Link> — we reply within 24 hours.</p>
+                <p className="mt-4 text-gray-600">Still unsure? <Link to={contactHref({ from: "pricing" })} className="font-semibold text-brand-600 hover:underline">Ask us directly</Link> — we reply within 24 hours.</p>
               </motion.div>
               <Accordion type="single" collapsible className="space-y-3">
                 {faqs.map((faq, i) => (
@@ -463,14 +491,14 @@ export default function Pricing() {
           {/* CTA */}
           <section className="py-14 lg:py-24">
             <Container>
-              <motion.div {...reveal} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 to-orange-700 px-6 py-14 text-center text-white sm:px-12 lg:py-20">
+              <motion.div {...reveal} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-700 px-6 py-14 text-center text-white sm:px-12 lg:py-20">
                 <div aria-hidden className="pointer-events-none absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
                 <div className="relative">
                   <Sparkles className="mx-auto h-8 w-8 text-white/80" />
                   <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight md:text-5xl">Not sure which plan fits?</h2>
                   <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">Tell us your goals and budget. We'll recommend the right plan and send a written quote — free, with no obligation.</p>
                   <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                    <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 font-semibold text-orange-700 transition hover:bg-gray-100">
+                    <Link to={contactHref({ from: "pricing" })} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 font-semibold text-brand-700 transition hover:bg-gray-100">
                       Get a recommended plan <ArrowRight className="h-4 w-4" />
                     </Link>
                     <a href="tel:281-901-7016" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/40 px-7 font-semibold text-white transition hover:bg-white/10">

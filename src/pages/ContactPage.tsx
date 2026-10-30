@@ -10,7 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ContactForm } from "@/components/site/ContactForm";
 import { Container, Eyebrow, reveal } from "@/components/site/primitives";
 import { siteConfig } from "@/lib/seo-config";
-import { generateContactPageSchema, generateBreadcrumbSchema, generateWebPageSchema, generateLocalBusinessSchema } from "@/lib/schema-generators";
+import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
 
 const details = [
   { icon: Phone, label: "Phone", value: "(281) 901-7016", href: "tel:281-901-7016" },
@@ -30,9 +30,9 @@ export default function ContactPage() {
   const { search } = useLocation();
   const selected = services.find((s) => s.slug === new URLSearchParams(search).get("service"));
   const schemas = [
-    generateContactPageSchema(),
-    generateLocalBusinessSchema(),
     generateWebPageSchema({
+      type: "ContactPage",
+      mainEntity: { "@id": `${siteConfig.url}#organization` },
       name: "Contact Cardinal Consulting",
       description: "Talk to Cardinal Consulting about your website, app, brand, or growth program.",
       url: `${siteConfig.url}/contact`,
@@ -46,8 +46,8 @@ export default function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Us — Free Consultation | Houston Web & Digital Agency"
-        description="Contact Cardinal Consulting. Call (281) 901-7016 or send a message — we respond within 24 hours. Houston-headquartered web, app, and digital growth firm."
+        title="Contact Us — Free Consultation"
+        description="Contact Cardinal Consulting in Houston. Call (281) 901-7016 or send a quick request — we reply within 24 hours, or the same business day if it's urgent."
         url={`${siteConfig.url}/contact`}
         schemas={schemas}
         keywords={["contact cardinal consulting", "free consultation", "Houston software company", "digital transformation consultation"]}

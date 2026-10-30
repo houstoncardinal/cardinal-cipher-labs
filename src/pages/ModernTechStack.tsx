@@ -80,25 +80,25 @@ const performanceMetrics = [
     value: "95+",
     label: "PageSpeed Score",
     sub: "Google Lighthouse",
-    icon: <Zap className="w-6 h-6 text-orange-600" />,
+    icon: <Zap className="w-6 h-6 text-brand-600" />,
   },
   {
     value: "99.9%",
     label: "Uptime SLA",
     sub: "Enterprise-grade reliability",
-    icon: <Shield className="w-6 h-6 text-orange-600" />,
+    icon: <Shield className="w-6 h-6 text-brand-600" />,
   },
   {
     value: "<2s",
     label: "Page Load Time",
     sub: "On 4G mobile connections",
-    icon: <Zap className="w-6 h-6 text-orange-600" />,
+    icon: <Zap className="w-6 h-6 text-brand-600" />,
   },
   {
     value: "A+",
     label: "Core Web Vitals",
     sub: "LCP · FID · CLS",
-    icon: <CheckCircle2 className="w-6 h-6 text-orange-600" />,
+    icon: <CheckCircle2 className="w-6 h-6 text-brand-600" />,
   },
 ];
 
@@ -331,10 +331,10 @@ export default function ModernTechStack() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-8"
                 >
-                  <MapPin className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <MapPin className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Houston's #1 React & Next.js Development Agency
                   </span>
                 </motion.div>
@@ -346,7 +346,7 @@ export default function ModernTechStack() {
                   className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-6"
                 >
                   Modern Tech Stack Web Development in Houston Texas —{" "}
-                  <span className="text-orange-600">React, Next.js & TypeScript</span>
+                  <span className="text-brand-600">React, Next.js & TypeScript</span>
                 </motion.h1>
 
                 <motion.p
@@ -368,7 +368,7 @@ export default function ModernTechStack() {
                   className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
                 >
                   <Link to="/contact">
-                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8">
+                    <Button size="lg" className="bg-brand-600 hover:bg-brand-700 text-white px-8">
                       Get a Free Tech Consultation <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -376,7 +376,7 @@ export default function ModernTechStack() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-orange-200 text-orange-600 hover:bg-orange-50"
+                      className="border-brand-200 text-brand-600 hover:bg-brand-50"
                     >
                       Call (281) 901-7016
                     </Button>
@@ -396,7 +396,7 @@ export default function ModernTechStack() {
           </section>
 
           {/* Stats Bar */}
-          <section className="py-10 bg-orange-600">
+          <section className="py-10 bg-brand-600">
             <div className="container mx-auto px-6 lg:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
                 {[
@@ -413,7 +413,7 @@ export default function ModernTechStack() {
                     transition={{ delay: i * 0.1 }}
                   >
                     <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                    <div className="text-orange-100 text-sm">{stat.label}</div>
+                    <div className="text-brand-100 text-sm">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -428,10 +428,10 @@ export default function ModernTechStack() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-6"
                 >
-                  <Code2 className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <Code2 className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Our Technology Stack
                   </span>
                 </motion.div>
@@ -455,14 +455,14 @@ export default function ModernTechStack() {
                   >
                     <LuxuryCard className="p-7 h-full">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center">
+                        <div className="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center">
                           <Code2 className="w-5 h-5 text-white" />
                         </div>
                         <div>
                           <h3 className="font-serif text-lg text-gray-900 leading-tight">
                             {tech.name}
                           </h3>
-                          <span className="text-xs text-orange-600 font-semibold uppercase tracking-wide">
+                          <span className="text-xs text-brand-600 font-semibold uppercase tracking-wide">
                             {tech.badge}
                           </span>
                         </div>
@@ -524,10 +524,10 @@ export default function ModernTechStack() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-6"
                 >
-                  <Zap className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <Zap className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     The Switch
                   </span>
                 </motion.div>
@@ -557,10 +557,10 @@ export default function ModernTechStack() {
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.08 }}
-                          className="flex items-start gap-3 p-4 rounded-xl bg-orange-50 border border-orange-100"
+                          className="flex items-start gap-3 p-4 rounded-xl bg-brand-50 border border-brand-100"
                         >
-                          <div className="w-5 h-5 rounded-full bg-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <span className="text-orange-700 text-xs font-bold">✕</span>
+                          <div className="w-5 h-5 rounded-full bg-brand-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-brand-700 text-xs font-bold">✕</span>
                           </div>
                           <p className="text-gray-700 text-sm">{row.issue}</p>
                         </motion.div>
@@ -569,7 +569,7 @@ export default function ModernTechStack() {
                   </div>
 
                   <div>
-                    <div className="bg-orange-600 rounded-xl p-4 mb-4 text-center">
+                    <div className="bg-brand-600 rounded-xl p-4 mb-4 text-center">
                       <span className="font-semibold text-white text-sm uppercase tracking-wide">
                         Modern Tech Stack Solutions
                       </span>
@@ -620,7 +620,7 @@ export default function ModernTechStack() {
                     <LuxuryCard className="p-7 h-full flex flex-col">
                       <div className="flex gap-1 mb-4">
                         {Array.from({ length: t.stars }).map((_, s) => (
-                          <Star key={s} className="w-4 h-4 fill-orange-600 text-orange-600" />
+                          <Star key={s} className="w-4 h-4 fill-brand-600 text-brand-600" />
                         ))}
                       </div>
                       <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-6 italic">
@@ -647,10 +647,10 @@ export default function ModernTechStack() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-6"
                 >
-                  <MapPin className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <MapPin className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Greater Houston Service Area
                   </span>
                 </motion.div>
@@ -673,7 +673,7 @@ export default function ModernTechStack() {
                     transition={{ delay: i * 0.05 }}
                     className="flex items-center gap-2 p-3 rounded-xl bg-gray-50 border border-gray-100"
                   >
-                    <Check className="w-4 h-4 text-orange-600 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-brand-600 flex-shrink-0" />
                     <span className="text-gray-700 text-sm font-medium">{neighborhood}</span>
                   </motion.div>
                 ))}
@@ -682,7 +682,7 @@ export default function ModernTechStack() {
               <div className="text-center mt-8">
                 <p className="text-gray-500 text-sm">
                   Don't see your area?{" "}
-                  <a href="tel:281-901-7016" className="text-orange-600 font-semibold hover:underline">
+                  <a href="tel:281-901-7016" className="text-brand-600 font-semibold hover:underline">
                     Call (281) 901-7016
                   </a>{" "}
                   — we serve all of Greater Houston and beyond.
@@ -730,10 +730,10 @@ export default function ModernTechStack() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-6"
                 >
-                  <Globe className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                  <Globe className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Our Reach
                   </span>
                 </motion.div>
@@ -749,19 +749,19 @@ export default function ModernTechStack() {
               <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                 {[
                   {
-                    icon: <MapPin className="w-8 h-8 text-orange-600" />,
+                    icon: <MapPin className="w-8 h-8 text-brand-600" />,
                     title: "Houston & Greater Texas",
                     description:
                       "Deep roots in Houston's tech, energy, medical, and legal communities. We serve businesses across Harris County, Fort Bend, Montgomery, Galveston, and Brazoria counties. From Downtown Houston's skyscrapers to The Woodlands' growing tech corridor — we know what Houston businesses need to win online.",
                   },
                   {
-                    icon: <Shield className="w-8 h-8 text-orange-600" />,
+                    icon: <Shield className="w-8 h-8 text-brand-600" />,
                     title: "Nationwide United States",
                     description:
                       "Our remote-capable workflow delivers the same Houston-quality React and Next.js development to clients in every state. From New York law firms to Los Angeles e-commerce brands to Chicago SaaS startups — we build modern web applications for businesses that demand the best, regardless of geography.",
                   },
                   {
-                    icon: <Globe className="w-8 h-8 text-orange-600" />,
+                    icon: <Globe className="w-8 h-8 text-brand-600" />,
                     title: "International & Worldwide",
                     description:
                       "Modern tech stack development for international businesses, European enterprises, Asia Pacific companies, and global SaaS platforms. We've delivered React and Next.js applications for clients in the UK, Germany, UAE, Singapore, and across Latin America. Modern technology has no borders.",
@@ -803,9 +803,9 @@ export default function ModernTechStack() {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-orange-200 hover:bg-orange-50 text-sm font-medium text-gray-700 transition-all text-center"
+                    className="flex items-center justify-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-brand-200 hover:bg-brand-50 text-sm font-medium text-gray-700 transition-all text-center"
                   >
-                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-orange-600 flex-shrink-0" />
+                    {link.label} <ArrowRight className="ml-1 w-3 h-3 text-brand-600 flex-shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -821,9 +821,9 @@ export default function ModernTechStack() {
                 viewport={{ once: true }}
                 className="max-w-3xl mx-auto text-center"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 rounded-full mb-6">
-                  <Zap className="w-4 h-4 text-orange-600" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-orange-600 font-semibold">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-50 rounded-full mb-6">
+                  <Zap className="w-4 h-4 text-brand-600" />
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-brand-600 font-semibold">
                     Get Started Today
                   </span>
                 </div>
@@ -837,7 +837,7 @@ export default function ModernTechStack() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                   <Link to="/contact">
-                    <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-10">
+                    <Button size="lg" className="bg-brand-600 hover:bg-brand-700 text-white px-10">
                       Start Your Modern Project <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -845,7 +845,7 @@ export default function ModernTechStack() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-orange-200 text-orange-600 hover:bg-orange-50"
+                      className="border-brand-200 text-brand-600 hover:bg-brand-50"
                     >
                       Call (281) 901-7016
                     </Button>

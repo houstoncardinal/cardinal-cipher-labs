@@ -35,7 +35,8 @@ export function Contact() {
             ))}
           </ol>
 
-          <dl className="mt-8 grid gap-x-6 gap-y-3 border-t border-border pt-6 text-sm sm:grid-cols-2 lg:mt-auto">
+          <div aria-hidden className="lg:flex-1" />
+          <dl className="mt-8 grid gap-x-6 gap-y-3 border-t border-border pt-6 text-sm sm:grid-cols-2">
             <div className="flex items-center gap-2.5">
               <Phone className="h-4 w-4 shrink-0 text-primary" strokeWidth={1.75} />
               <dt className="sr-only">Phone</dt>

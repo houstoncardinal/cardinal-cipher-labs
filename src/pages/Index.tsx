@@ -19,7 +19,7 @@ import { VelocityMarquee } from "@/components/site/canvas";
 const Index = () => {
   // Generate all comprehensive E-E-A-T compliant schemas
   const description =
-    "Cardinal Consulting designs, builds, and grows digital businesses from Houston, TX: custom websites, mobile apps, branding, SEO, social media, AI automation, and technical consulting. 500+ projects delivered.";
+    "Houston web design, app development, SEO and digital marketing. Cardinal Consulting builds websites and systems that help businesses grow. Free consultation.";
   const schemas = [
     organizationSchema(),
     websiteSchema(),
@@ -30,21 +30,17 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="Houston Web Design & App Development Company"
+        title="Houston Web Design & App Development"
         description={description}
         url={siteConfig.url}
         schemas={schemas}
         keywords={[
           'web design company Houston',
-          'best web design company Houston',
-          '#1 web design company Houston',
           'web design company near me Houston',
           'app development company Houston',
           'app development company near me',
-          'best web developer Houston',
           'web developer near me Houston',
           'SEO company Houston',
-          'best SEO company Houston',
           'Houston web design agency',
           'Houston app development',
           'web design Houston TX',
@@ -56,8 +52,6 @@ const Index = () => {
           'local SEO Houston',
           'Houston web developer',
           'website design near me Houston',
-          'top web design company Houston',
-          'best website designer Houston',
           'web development company Houston Texas',
         ]}
       />

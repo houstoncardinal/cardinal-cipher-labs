@@ -239,19 +239,19 @@ export default function HoustonEcommerceWebDesignPage() {
           {/* HERO */}
           <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-brand-50/40 blur-3xl" />
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-8">
-                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />)}</div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 rounded-full px-4 py-2 mb-8">
+                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-brand-500 text-brand-500" />)}</div>
                 <span className="text-sm font-semibold text-gray-900">Houston's #1 eCommerce Website Design Agency — 4.9★ (127 Reviews)</span>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-gray-900 leading-[1.1] mb-6">
                 eCommerce Website Design Houston —{' '}
-                <span className="text-orange-600">Shopify, WooCommerce & Custom Online Stores</span>
+                <span className="text-brand-600">Shopify, WooCommerce & Custom Online Stores</span>
               </motion.h1>
 
               <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg lg:text-xl text-gray-500 max-w-2xl mb-4">
@@ -263,7 +263,7 @@ export default function HoustonEcommerceWebDesignPage() {
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-4 mb-12">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-colors">
                   Get Free eCommerce Audit <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors">
@@ -302,16 +302,16 @@ export default function HoustonEcommerceWebDesignPage() {
           <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">eCommerce Services</span>
+                <span className="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-3 block">eCommerce Services</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Everything Your Houston Online Store Needs</h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">From Galleria boutiques to B2B industrial suppliers — we build ecommerce for every type of Houston business.</p>
               </motion.div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {features.map((feature, i) => (
-                  <motion.div key={feature.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all">
-                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5">
-                      <feature.icon className="w-6 h-6 text-orange-600" />
+                  <motion.div key={feature.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-100 hover:shadow-lg transition-all">
+                    <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-5">
+                      <feature.icon className="w-6 h-6 text-brand-600" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
                     <p className="text-gray-500 text-sm mb-5">{feature.description}</p>
@@ -332,13 +332,13 @@ export default function HoustonEcommerceWebDesignPage() {
           <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Houston eCommerce Results</span>
+                <span className="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Houston eCommerce Results</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Houston Online Stores Cardinal Helped Scale</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 gap-6">
                 {caseStudies.map((study, i) => (
                   <motion.div key={study.store} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-8 border border-gray-100">
-                    <span className="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{study.industry}</span>
+                    <span className="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{study.industry}</span>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-4">{study.store}</h3>
                     <div className="space-y-3 mb-5">
                       <div className="bg-gray-50 rounded-xl p-4">
@@ -373,7 +373,7 @@ export default function HoustonEcommerceWebDesignPage() {
                     <div className="flex mb-3">{[...Array(t.rating)].map((_, j) => <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />)}</div>
                     <p className="text-gray-600 text-sm mb-4">"{t.text}"</p>
                     <div className="font-semibold text-gray-900 text-sm">{t.name}</div>
-                    <div className="text-orange-600 text-xs font-medium">{t.role}</div>
+                    <div className="text-brand-600 text-xs font-medium">{t.role}</div>
                     <div className="text-gray-500 text-xs">{t.company}</div>
                   </motion.div>
                 ))}
@@ -414,7 +414,7 @@ export default function HoustonEcommerceWebDesignPage() {
               </motion.div>
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="flex flex-wrap justify-center gap-3">
                 {neighborhoods.map(n => (
-                  <span key={n} className="bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 transition-colors">{n}</span>
+                  <span key={n} className="bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-brand-50 hover:border-brand-100 hover:text-brand-600 transition-colors">{n}</span>
                 ))}
               </motion.div>
             </div>
@@ -429,9 +429,9 @@ export default function HoustonEcommerceWebDesignPage() {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {relatedServices.map((s, i) => (
                   <motion.div key={s.href} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                    <Link to={s.href} className="block bg-white rounded-2xl p-6 border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all group">
-                      <span className="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{s.label}</span>
-                      <h3 className="font-serif text-lg font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">{s.title}</h3>
+                    <Link to={s.href} className="block bg-white rounded-2xl p-6 border border-gray-100 hover:border-brand-100 hover:shadow-lg transition-all group">
+                      <span className="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{s.label}</span>
+                      <h3 className="font-serif text-lg font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">{s.title}</h3>
                       <p className="text-gray-500 text-sm">{s.description}</p>
                     </Link>
                   </motion.div>
@@ -442,13 +442,13 @@ export default function HoustonEcommerceWebDesignPage() {
 
           {/* CTA */}
           <section className="py-16 bg-gray-900 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(234,88,12,0.3), transparent 50%)' }} />
+            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgb(var(--brand-600) / 0.3), transparent 50%)' }} />
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl lg:text-5xl text-white mb-6">Ready to Grow Your Houston Online Store?</h2>
                 <p className="text-gray-400 max-w-2xl mx-auto mb-10">Get a free ecommerce audit. We'll identify exactly what's holding your Houston store back from its full revenue potential.</p>
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-colors">
                     Get Free eCommerce Audit <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors">

@@ -48,8 +48,8 @@ export default function Careers() {
   return (
     <>
       <SEOHead
-        title="Careers"
-        description="Join Cardinal Consulting — we're hiring engineers, designers, and strategists to build enterprise-grade digital solutions. Remote-friendly, competitive benefits."
+        title="Careers at a Houston Digital Agency"
+        description="Explore careers at Cardinal Consulting, a Houston web design, app development and digital growth firm, with roles in engineering, design and marketing."
         url={`${siteConfig.url}/careers`}
         schemas={schemas}
         keywords={["careers at cardinal consulting", "software developer jobs Houston", "remote tech jobs", "UX designer jobs"]}

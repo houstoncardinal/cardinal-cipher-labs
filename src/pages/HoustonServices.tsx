@@ -616,8 +616,8 @@ export default function HoustonServices() {
           {/* ========================================= */}
           <section className="relative overflow-hidden bg-white py-14 lg:py-20">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-brand-50/40 blur-3xl" />
             </div>
 
             <div className="relative container mx-auto px-6 lg:px-12">
@@ -625,7 +625,7 @@ export default function HoustonServices() {
               <nav aria-label="Breadcrumb" className="mb-8">
                 <ol className="flex items-center gap-2 text-sm text-gray-500">
                   <li>
-                    <Link to="/" className="hover:text-orange-500 transition-colors">
+                    <Link to="/" className="hover:text-brand-500 transition-colors">
                       Home
                     </Link>
                   </li>
@@ -640,11 +640,11 @@ export default function HoustonServices() {
                   initial="hidden"
                   animate="visible"
                   variants={fadeUp}
-                  className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-6"
+                  className="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 rounded-full px-4 py-2 mb-6"
                 >
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
+                      <Star key={i} className="w-4 h-4 fill-brand-500 text-brand-500" />
                     ))}
                   </div>
                   <span className="text-sm font-medium text-gray-900">
@@ -660,8 +660,8 @@ export default function HoustonServices() {
                   className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6"
                 >
                   Houston's Premier{" "}
-                  <span className="text-orange-500">Web Design</span> &{" "}
-                  <span className="text-orange-500">Digital Marketing</span> Agency
+                  <span className="text-brand-500">Web Design</span> &{" "}
+                  <span className="text-brand-500">Digital Marketing</span> Agency
                 </motion.h1>
 
                 <motion.p
@@ -710,19 +710,19 @@ export default function HoustonServices() {
                   className="flex flex-wrap items-center gap-6 text-sm text-gray-500"
                 >
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
+                    <Check className="w-4 h-4 text-brand-500" />
                     500+ Houston Projects
                   </span>
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
+                    <Check className="w-4 h-4 text-brand-500" />
                     98% Client Retention
                   </span>
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
+                    <Check className="w-4 h-4 text-brand-500" />
                     Free Houston Consultation
                   </span>
                   <span className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-orange-500" />
+                    <Check className="w-4 h-4 text-brand-500" />
                     No Long-Term Contracts
                   </span>
                 </motion.div>
@@ -742,7 +742,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Our Houston Services
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -766,8 +766,8 @@ export default function HoustonServices() {
                     custom={i}
                     className="bg-white rounded-2xl border border-gray-200/70 shadow p-8 hover:shadow-lg transition-shadow"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-5">
-                      <service.icon className="w-6 h-6 text-orange-500" />
+                    <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5">
+                      <service.icon className="w-6 h-6 text-brand-500" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">
                       {service.title}
@@ -781,14 +781,14 @@ export default function HoustonServices() {
                           key={b}
                           className="flex items-start gap-2 text-sm text-gray-600"
                         >
-                          <Check className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <Check className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
                           {b}
                         </li>
                       ))}
                     </ul>
                     <Link
                       to={service.link}
-                      className="inline-flex items-center gap-1 text-sm font-medium text-orange-500 hover:text-orange-600 transition-colors"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-brand-500 hover:text-brand-600 transition-colors"
                     >
                       Learn More <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -810,7 +810,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Why Cardinal
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -833,8 +833,8 @@ export default function HoustonServices() {
                     custom={i}
                     className="text-center p-8"
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center mx-auto mb-5">
-                      <reason.icon className="w-7 h-7 text-orange-500" />
+                    <div className="w-14 h-14 rounded-2xl bg-brand-50 flex items-center justify-center mx-auto mb-5">
+                      <reason.icon className="w-7 h-7 text-brand-500" />
                     </div>
                     <h3 className="font-serif text-lg font-bold text-gray-900 mb-3">
                       {reason.title}
@@ -860,7 +860,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-12"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Service Areas
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -884,9 +884,9 @@ export default function HoustonServices() {
                 {houstonAreas.map((area) => (
                   <span
                     key={area}
-                    className="inline-flex items-center gap-1.5 bg-white border border-gray-200/70 rounded-full px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:border-orange-200 hover:bg-orange-50 transition-colors cursor-default"
+                    className="inline-flex items-center gap-1.5 bg-white border border-gray-200/70 rounded-full px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:border-brand-200 hover:bg-brand-50 transition-colors cursor-default"
                   >
-                    <MapPin className="w-3.5 h-3.5 text-orange-500" />
+                    <MapPin className="w-3.5 h-3.5 text-brand-500" />
                     {area}
                   </span>
                 ))}
@@ -906,7 +906,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Proven Results
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -930,7 +930,7 @@ export default function HoustonServices() {
                     className="bg-white rounded-2xl border border-gray-200/70 shadow p-8"
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <span className="bg-orange-50 text-orange-500 text-xs font-semibold px-3 py-1 rounded-full">
+                      <span className="bg-brand-50 text-brand-500 text-xs font-semibold px-3 py-1 rounded-full">
                         {study.industry}
                       </span>
                       <h3 className="font-serif text-lg font-bold text-gray-900">
@@ -954,7 +954,7 @@ export default function HoustonServices() {
                             <span className="font-bold text-gray-900">
                               {metric.after}
                             </span>
-                            <span className="text-orange-500 font-semibold text-xs bg-orange-50 px-2 py-0.5 rounded-full">
+                            <span className="text-brand-500 font-semibold text-xs bg-brand-50 px-2 py-0.5 rounded-full">
                               {metric.change}
                             </span>
                           </div>
@@ -1005,7 +1005,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Industries
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -1030,10 +1030,10 @@ export default function HoustonServices() {
                   >
                     <Link
                       to={ind.link}
-                      className="block bg-white rounded-2xl border border-gray-200/70 shadow p-8 hover:shadow-lg hover:border-orange-200 transition-all group"
+                      className="block bg-white rounded-2xl border border-gray-200/70 shadow p-8 hover:shadow-lg hover:border-brand-200 transition-all group"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-5 group-hover:bg-orange-100 transition-colors">
-                        <ind.icon className="w-6 h-6 text-orange-500" />
+                      <div className="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5 group-hover:bg-brand-100 transition-colors">
+                        <ind.icon className="w-6 h-6 text-brand-500" />
                       </div>
                       <h3 className="font-serif text-lg font-bold text-gray-900 mb-2">
                         {ind.title} in Houston
@@ -1041,7 +1041,7 @@ export default function HoustonServices() {
                       <p className="text-gray-500 text-sm leading-relaxed mb-4">
                         {ind.description}
                       </p>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-orange-500 group-hover:text-orange-600 transition-colors">
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-brand-500 group-hover:text-brand-600 transition-colors">
                         View Houston {ind.title} Services{" "}
                         <ArrowRight className="w-4 h-4" />
                       </span>
@@ -1064,7 +1064,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Testimonials
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -1091,7 +1091,7 @@ export default function HoustonServices() {
                       {[...Array(t.rating)].map((_, j) => (
                         <Star
                           key={j}
-                          className="w-4 h-4 fill-orange-500 text-orange-500"
+                          className="w-4 h-4 fill-brand-500 text-brand-500"
                         />
                       ))}
                     </div>
@@ -1124,7 +1124,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-10"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   FAQs
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -1187,7 +1187,7 @@ export default function HoustonServices() {
                 variants={fadeUp}
                 className="text-center max-w-3xl mx-auto mb-12"
               >
-                <span className="text-orange-500 font-medium text-sm uppercase tracking-wider mb-3 block">
+                <span className="text-brand-500 font-medium text-sm uppercase tracking-wider mb-3 block">
                   Visit Us
                 </span>
                 <h2 className="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -1214,14 +1214,14 @@ export default function HoustonServices() {
                         <h3 className="font-serif text-xl font-bold text-gray-900 mb-1">
                           Cardinal Consulting
                         </h3>
-                        <p className="text-orange-500 text-sm font-medium">
+                        <p className="text-brand-500 text-sm font-medium">
                           Houston Web Design & Digital Marketing Agency
                         </p>
                       </div>
 
                       <div className="space-y-4">
                         <div className="flex items-start gap-3">
-                          <MapPin className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <MapPin className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <div className="text-sm font-medium text-gray-900">
                               Address
@@ -1235,14 +1235,14 @@ export default function HoustonServices() {
                         </div>
 
                         <div className="flex items-start gap-3">
-                          <Phone className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <Phone className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <div className="text-sm font-medium text-gray-900">
                               Phone
                             </div>
                             <a
                               href="tel:+12819017016"
-                              className="text-sm text-gray-500 hover:text-orange-500 transition-colors"
+                              className="text-sm text-gray-500 hover:text-brand-500 transition-colors"
                             >
                               (281) 901-7016
                             </a>
@@ -1250,14 +1250,14 @@ export default function HoustonServices() {
                         </div>
 
                         <div className="flex items-start gap-3">
-                          <Mail className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <Mail className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <div className="text-sm font-medium text-gray-900">
                               Email
                             </div>
                             <a
                               href="mailto:Hunain@visitcardinal.com"
-                              className="text-sm text-gray-500 hover:text-orange-500 transition-colors"
+                              className="text-sm text-gray-500 hover:text-brand-500 transition-colors"
                             >
                               Hunain@visitcardinal.com
                             </a>
@@ -1265,7 +1265,7 @@ export default function HoustonServices() {
                         </div>
 
                         <div className="flex items-start gap-3">
-                          <Clock className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                          <Clock className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" />
                           <div>
                             <div className="text-sm font-medium text-gray-900">
                               Hours
@@ -1283,8 +1283,8 @@ export default function HoustonServices() {
                     </div>
 
                     <div className="flex flex-col justify-center">
-                      <div className="bg-orange-50 rounded-2xl p-8 text-center">
-                        <Building2 className="w-10 h-10 text-orange-500 mx-auto mb-4" />
+                      <div className="bg-brand-50 rounded-2xl p-8 text-center">
+                        <Building2 className="w-10 h-10 text-brand-500 mx-auto mb-4" />
                         <h4 className="font-serif text-lg font-bold text-gray-900 mb-2">
                           Schedule a Houston Consultation
                         </h4>

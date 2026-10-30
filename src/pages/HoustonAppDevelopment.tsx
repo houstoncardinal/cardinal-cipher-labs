@@ -250,19 +250,19 @@ export function HoustonAppDevelopmentPage() {
           {/* HERO */}
           <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-50/60 blur-3xl" />
-              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-orange-50/40 blur-3xl" />
+              <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-brand-50/60 blur-3xl" />
+              <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-brand-50/40 blur-3xl" />
             </div>
 
             <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-orange-50 border border-orange-100 rounded-full px-4 py-2 mb-8">
-                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />)}</div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-brand-50 border border-brand-100 rounded-full px-4 py-2 mb-8">
+                <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-brand-500 text-brand-500" />)}</div>
                 <span className="text-sm font-semibold text-gray-900">Houston's #1 App Development Company — 4.9★ (127 Reviews)</span>
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-gray-900 leading-[1.1] mb-6">
                 Houston's Best{' '}
-                <span className="text-orange-600">App Development</span>{' '}
+                <span className="text-brand-600">App Development</span>{' '}
                 Company
               </motion.h1>
 
@@ -276,7 +276,7 @@ export function HoustonAppDevelopmentPage() {
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="flex flex-wrap gap-4 mb-12">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-colors">
                   Get Free App Estimate <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors">
@@ -315,16 +315,16 @@ export function HoustonAppDevelopmentPage() {
           <section className="py-16 bg-white">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston App Development Services</span>
+                <span className="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Our Houston App Development Services</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Every Type of App, Built in Houston</h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">Whether you need a consumer app, enterprise platform, or MVP — we've built it for Houston businesses.</p>
               </motion.div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {appTypes.map((app, i) => (
-                  <motion.div key={app.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-orange-100 hover:shadow-lg transition-all">
-                    <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5">
-                      <app.icon className="w-6 h-6 text-orange-600" />
+                  <motion.div key={app.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-brand-100 hover:shadow-lg transition-all">
+                    <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-5">
+                      <app.icon className="w-6 h-6 text-brand-600" />
                     </div>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{app.title}</h3>
                     <p className="text-gray-500 text-sm mb-5">{app.description}</p>
@@ -345,13 +345,13 @@ export function HoustonAppDevelopmentPage() {
           <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">How We Build</span>
+                <span className="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-3 block">How We Build</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Our Houston App Development Process</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {process.map((step, i) => (
                   <motion.div key={step.step} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-8 border border-gray-100">
-                    <div className="text-5xl font-bold text-orange-100 font-serif mb-4">{step.step}</div>
+                    <div className="text-5xl font-bold text-brand-100 font-serif mb-4">{step.step}</div>
                     <h3 className="font-serif text-lg font-bold text-gray-900 mb-3">{step.title}</h3>
                     <p className="text-gray-500 text-sm leading-relaxed">{step.description}</p>
                   </motion.div>
@@ -368,7 +368,7 @@ export function HoustonAppDevelopmentPage() {
               </motion.div>
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="flex flex-wrap justify-center gap-3">
                 {industries.map(ind => (
-                  <span key={ind} className="bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 transition-colors">{ind}</span>
+                  <span key={ind} className="bg-gray-50 border border-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-brand-50 hover:border-brand-100 hover:text-brand-600 transition-colors">{ind}</span>
                 ))}
               </motion.div>
             </div>
@@ -378,13 +378,13 @@ export function HoustonAppDevelopmentPage() {
           <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-6 lg:px-12">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <span className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Houston App Results</span>
+                <span className="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-3 block">Houston App Results</span>
                 <h2 className="font-serif text-3xl lg:text-5xl text-gray-900 mb-4">Apps That Changed Houston Businesses</h2>
               </motion.div>
               <div className="grid md:grid-cols-2 gap-6">
                 {caseStudies.map((study, i) => (
                   <motion.div key={study.app} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white rounded-2xl p-8 border border-gray-100">
-                    <span className="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{study.industry}</span>
+                    <span className="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">{study.industry}</span>
                     <h3 className="font-serif text-xl font-bold text-gray-900 mb-3">{study.app}</h3>
                     <p className="text-gray-600 text-sm mb-5">{study.result}</p>
                     <div className="flex flex-wrap gap-3">
@@ -443,7 +443,7 @@ export function HoustonAppDevelopmentPage() {
 
           {/* CTA */}
           <section className="py-16 bg-gray-900 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(234,88,12,0.3), transparent 50%)' }} />
+            <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 30% 50%, rgb(var(--brand-600) / 0.3), transparent 50%)' }} />
             <div className="container mx-auto px-6 lg:px-12 relative text-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h2 className="font-serif text-3xl lg:text-5xl text-white mb-6">
@@ -453,7 +453,7 @@ export function HoustonAppDevelopmentPage() {
                   Get a free consultation and app estimate. We'll help you go from idea to launch — faster than any other app development company in Houston.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
-                  <Link to="/contact" className="inline-flex items-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-orange-700 transition-colors">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-brand-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-brand-700 transition-colors">
                     Get Free App Estimate <ArrowRight className="w-4 h-4" />
                   </Link>
                   <a href="tel:+12819017016" className="inline-flex items-center gap-2 bg-white/10 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-colors">
@@ -479,9 +479,9 @@ export function HoustonAppDevelopmentPage() {
                   { title: "No-Code vs. Custom Development in 2026", slug: "no-code-vs-custom-development", tag: "App Development" },
                   { title: "Custom Website vs. Template: Real Cost Breakdown", slug: "custom-website-vs-template-cost", tag: "Web Development" },
                 ].map((a) => (
-                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-orange-200 hover:shadow-sm transition-all duration-200 group">
-                    <span className="text-xs font-semibold text-orange-600 uppercase tracking-wider">{a.tag}</span>
-                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-orange-600 transition-colors leading-snug">{a.title}</h3>
+                  <Link key={a.slug} to={`/blog/${a.slug}`} className="block p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-brand-200 hover:shadow-sm transition-all duration-200 group">
+                    <span className="text-xs font-semibold text-brand-600 uppercase tracking-wider">{a.tag}</span>
+                    <h3 className="font-semibold text-gray-900 mt-2 group-hover:text-brand-600 transition-colors leading-snug">{a.title}</h3>
                     <span className="text-sm text-gray-500 mt-2 inline-block">Read article →</span>
                   </Link>
                 ))}
@@ -500,7 +500,7 @@ export function HoustonAppDevelopmentPage() {
                   { label: "Houston SEO Agency", href: "/houston-seo" },
                   { label: "Rush Prototyping", href: "/rush-prototyping" },
                 ].map((link) => (
-                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-orange-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-orange-600 transition-all duration-200">
+                  <Link key={link.href} to={link.href} className="block text-center px-4 py-4 bg-white rounded-xl border border-gray-200 hover:border-brand-300 hover:shadow-sm text-sm font-semibold text-gray-700 hover:text-brand-600 transition-all duration-200">
                     {link.label}
                   </Link>
                 ))}

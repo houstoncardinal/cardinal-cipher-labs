@@ -5,11 +5,11 @@ import { siteConfig } from "@/lib/seo-config";
 import { services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
 
-const ORG_ID = `${siteConfig.url}#organization`;
-const SITE_ID = `${siteConfig.url}#website`;
+export const ORG_ID = `${siteConfig.url}#organization`;
+export const SITE_ID = `${siteConfig.url}#website`;
 
 export function organizationSchema() {
-  const { contact, business, links } = siteConfig;
+  const { contact, business } = siteConfig;
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -17,13 +17,21 @@ export function organizationSchema() {
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     url: siteConfig.url,
-    logo: siteConfig.logo,
-    image: siteConfig.ogImage,
+    logo: {
+      "@type": "ImageObject",
+      "@id": `${siteConfig.url}#logo`,
+      url: siteConfig.logo,
+      contentUrl: siteConfig.logo,
+      width: 512,
+      height: 512,
+      caption: siteConfig.name,
+    },
+    image: [siteConfig.ogImage, siteConfig.wordmark],
     description:
       "Cardinal Consulting is a Houston-based digital firm offering web development, mobile apps, brand identity, UX/UI design, SEO, digital marketing, social media management, AI & automation, technical consulting, and website maintenance.",
     telephone: contact.phone,
     email: contact.email,
-    foundingDate: business.foundingDate,
+    foundingDate: business.foundingDate.slice(0, 4),
     priceRange: business.priceRange,
     address: { "@type": "PostalAddress", ...contact.address },
     geo: { "@type": "GeoCoordinates", latitude: contact.geo.latitude, longitude: contact.geo.longitude },
@@ -35,7 +43,7 @@ export function organizationSchema() {
       { "@type": "State", name: "Texas" },
       { "@type": "Country", name: "United States" },
     ],
-    founder: { "@type": "Person", name: siteConfig.team[0].name, jobTitle: siteConfig.team[0].role },
+    founder: { "@type": "Person", "@id": `${siteConfig.url}#person-hunain-qureshi`, name: siteConfig.team[0].name, jobTitle: siteConfig.team[0].role },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
@@ -52,7 +60,7 @@ export function organizationSchema() {
       "Fractional CTO",
       "Cloud cost optimization",
     ],
-    sameAs: Object.values(links),
+    ...(siteConfig.verifiedProfiles.length ? { sameAs: siteConfig.verifiedProfiles } : {}),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Services",
@@ -71,6 +79,8 @@ export function websiteSchema() {
     "@id": SITE_ID,
     name: siteConfig.name,
     url: siteConfig.url,
+    alternateName: "Cardinal",
+    description: siteConfig.description,
     publisher: { "@id": ORG_ID },
     inLanguage: "en-US",
   };

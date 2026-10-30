@@ -227,7 +227,7 @@ export default function Technology() {
 
           {/* Hero */}
           <section className="pt-28 pb-14 lg:pt-32 lg:pb-20 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-50/60 via-transparent to-transparent" />
             <div className="container mx-auto px-6 lg:px-12 relative">
               <Breadcrumbs items={[{ label: "Industries", href: "/industries" }, { label: "Technology" }]} />
               <motion.div
@@ -237,10 +237,10 @@ export default function Technology() {
                 className="max-w-4xl"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-14 h-14 bg-orange-50 flex items-center justify-center rounded-lg">
-                    <Cpu className="w-7 h-7 text-orange-600" />
+                  <div className="w-14 h-14 bg-brand-50 flex items-center justify-center rounded-lg">
+                    <Cpu className="w-7 h-7 text-brand-600" />
                   </div>
-                  <span className="text-xs tracking-[0.3em] uppercase text-orange-600 font-medium">Technology Industry</span>
+                  <span className="text-xs tracking-[0.3em] uppercase text-brand-600 font-medium">Technology Industry</span>
                 </div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-gray-900 leading-tight mb-6">
                   Technology Company Website Development & Digital Marketing
@@ -279,7 +279,7 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <div className="font-serif text-4xl lg:text-5xl text-orange-600 mb-2">{stat.value}</div>
+                    <div className="font-serif text-4xl lg:text-5xl text-brand-600 mb-2">{stat.value}</div>
                     <div className="text-sm text-gray-500">{stat.label}</div>
                   </motion.div>
                 ))}
@@ -311,9 +311,9 @@ export default function Technology() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="bg-white border border-gray-200 rounded-lg p-6 h-full shadow-sm hover:shadow-md hover:border-orange-200 transition-all"
+                    className="bg-white border border-gray-200 rounded-lg p-6 h-full shadow-sm hover:shadow-md hover:border-brand-200 transition-all"
                   >
-                    <service.icon className="w-10 h-10 text-orange-600 mb-4" />
+                    <service.icon className="w-10 h-10 text-brand-600 mb-4" />
                     <h3 className="font-serif text-xl text-gray-900 mb-2">{service.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{service.description}</p>
                   </motion.div>
@@ -348,8 +348,8 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="flex gap-5"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-orange-50 flex items-center justify-center rounded-lg">
-                      <diff.icon className="w-6 h-6 text-orange-600" />
+                    <div className="flex-shrink-0 w-12 h-12 bg-brand-50 flex items-center justify-center rounded-lg">
+                      <diff.icon className="w-6 h-6 text-brand-600" />
                     </div>
                     <div>
                       <h3 className="font-serif text-xl text-gray-900 mb-2">{diff.title}</h3>
@@ -387,14 +387,14 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm"
                   >
-                    <div className="font-serif text-5xl text-orange-600 mb-3">{result.metric}</div>
+                    <div className="font-serif text-5xl text-brand-600 mb-3">{result.metric}</div>
                     <h3 className="font-serif text-lg text-gray-900 mb-3">{result.company}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed mb-5">{result.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {result.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-3 py-1 bg-orange-50 text-orange-600 rounded-full font-medium"
+                          className="text-xs px-3 py-1 bg-brand-50 text-brand-600 rounded-full font-medium"
                         >
                           {tag}
                         </span>
@@ -432,7 +432,7 @@ export default function Technology() {
                     transition={{ delay: i * 0.1 }}
                     className="relative"
                   >
-                    <div className="text-6xl font-serif text-orange-600/20 mb-2">{item.step}</div>
+                    <div className="text-6xl font-serif text-brand-600/20 mb-2">{item.step}</div>
                     <h3 className="font-serif text-xl text-gray-900 mb-2">{item.title}</h3>
                     <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
                   </motion.div>
@@ -505,7 +505,7 @@ export default function Technology() {
                 </p>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 text-white text-sm font-medium hover:bg-orange-700 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 transition-colors"
                 >
                   Schedule Free Consultation <ArrowRight className="w-4 h-4" />
                 </Link>

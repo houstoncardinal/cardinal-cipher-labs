@@ -10,6 +10,7 @@ import { Container, Eyebrow, revealDelay } from "@/components/site/primitives";
 import { RevealText } from "@/components/site/motion";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/seo-config";
+import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
 import { articles, pillars } from "@/lib/blog-data";
 
 const ALL = "all";
@@ -21,6 +22,17 @@ export default function Blog() {
   const url = `${siteConfig.url}/blog`;
 
   const schemas = [
+    generateWebPageSchema({
+      type: "CollectionPage",
+      name: "Cardinal Consulting Insights",
+      description: "Practical, sourced guides on websites, SEO, AI automation, social media and technology for growing businesses.",
+      url,
+      mainEntity: { "@id": `${url}#blog` },
+    }),
+    generateBreadcrumbSchema([
+      { name: "Home", url: siteConfig.url },
+      { name: "Insights", url },
+    ]),
     {
       "@context": "https://schema.org",
       "@type": "Blog",
@@ -42,8 +54,8 @@ export default function Blog() {
   return (
     <>
       <SEOHead
-        title="Insights — Websites, Marketing, AI & Technology Guides"
-        description="Practical, sourced guides from Cardinal Consulting on website costs, social media, Google Business Profile, AI automation, fractional CTOs, cloud costs, and more."
+        title="Insights: Web, SEO, AI & Growth Guides"
+        description="Practical, sourced guides on website costs, SEO, Google Business Profile, AI automation, social media, fractional CTOs and cloud costs from our Houston team."
         url={url}
         schemas={schemas}
         keywords={["website cost guide", "social media management guide", "AI automation guide", "fractional CTO", "Google Business Profile guide"]}

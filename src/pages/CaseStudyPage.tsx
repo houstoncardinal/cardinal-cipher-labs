@@ -48,7 +48,7 @@ export default function CaseStudyPage() {
     <>
       <SEOHead
         title={`${study.client} Case Study | Cardinal Consulting`}
-        description={`${d.headline}. ${study.summary}`}
+        description={`${d.headline}. A Cardinal Consulting case study: what we designed and built for ${study.client}.`.slice(0, 160)}
         url={url}
         schemas={schemas}
         keywords={[`${study.client} case study`, "enterprise website case study", "B2B website design", "web development case study"]}

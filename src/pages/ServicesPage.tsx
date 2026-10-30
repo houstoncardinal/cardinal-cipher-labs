@@ -27,8 +27,8 @@ export default function ServicesPage() {
   return (
     <>
       <SEOHead
-        title="Services — Web Development, Apps, SEO, Social Media, AI & Consulting"
-        description="Web development, mobile apps, AI & automation, brand identity, UX/UI, SEO, digital marketing, social media management, technical consulting, and website care — from one team in Houston."
+        title="Web, App, SEO & Marketing Services"
+        description="Web development, mobile apps, AI automation, branding, UX/UI, SEO, marketing, social media and IT consulting from one Houston team — each in three clear packages."
         url={`${siteConfig.url}/services`}
         schemas={schemas}
         keywords={["web development services", "mobile app development", "SEO services", "digital marketing agency", "brand identity design", "UX UI design services"]}

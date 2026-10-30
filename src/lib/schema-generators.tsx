@@ -587,7 +587,8 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    '@id': `${siteConfig.url}#breadcrumb`,
+    // One breadcrumb per page: the @id is anchored to the page it describes
+    '@id': `${items[items.length - 1]?.url ?? siteConfig.url}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -640,17 +641,21 @@ export function generateWebPageSchema(page: {
   name: string;
   description: string;
   url: string;
+  /** Page subtype, so each URL is described by exactly one page entity */
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
+  mainEntity?: { '@id': string };
   datePublished?: string;
   dateModified?: string;
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': page.url,
+    '@type': page.type ?? 'WebPage',
+    '@id': `${page.url}#webpage`,
     name: page.name,
     description: page.description,
     url: page.url,
-    datePublished: page.datePublished || siteConfig.business.foundingDate,
+    ...(page.mainEntity ? { mainEntity: page.mainEntity } : {}),
+    ...(page.datePublished ? { datePublished: page.datePublished } : {}),
     dateModified: page.dateModified || new Date().toISOString().split('T')[0],
     inLanguage: 'en-US',
     isPartOf: {
@@ -663,7 +668,7 @@ export function generateWebPageSchema(page: {
       '@id': `${siteConfig.url}#organization`,
     },
     breadcrumb: {
-      '@id': `${siteConfig.url}#breadcrumb`,
+      '@id': `${page.url}#breadcrumb`,
     },
     potentialAction: {
       '@type': 'ReadAction',

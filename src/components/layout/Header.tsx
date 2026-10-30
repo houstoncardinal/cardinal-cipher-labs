@@ -16,14 +16,19 @@ const simpleLinks = [
   { label: "About", href: "/about" },
 ];
 
-export function Logo({ inverted = false }: { inverted?: boolean }) {
+/** Brand wordmark. The white version is for dark backgrounds (footer, dark bands). */
+export function Logo({ inverted = false, className }: { inverted?: boolean; className?: string }) {
   return (
-    <Link to="/" className="flex items-center gap-3" aria-label="Cardinal Consulting home">
-      <span className="flex h-9 w-9 items-center justify-center bg-primary font-display text-lg font-semibold text-primary-foreground">C</span>
-      <span className="flex flex-col leading-none">
-        <span className={cn("font-display text-[19px] font-semibold tracking-tight", inverted ? "text-ink-foreground" : "text-foreground")}>Cardinal</span>
-        <span className={cn("mt-1 text-[10px] font-medium uppercase tracking-[0.22em]", inverted ? "text-ink-muted" : "text-muted-foreground")}>Consulting</span>
-      </span>
+    <Link to="/" className={cn("flex shrink-0 items-center", className)} aria-label="Cardinal Consulting home">
+      <img
+        src={inverted ? "/brand/cardinal-consulting-logo-white.png" : "/brand/cardinal-consulting-logo.png"}
+        alt="Cardinal Consulting"
+        width={1200}
+        height={138}
+        decoding="async"
+        fetchPriority={inverted ? "low" : "high"}
+        className="h-7 w-auto sm:h-8"
+      />
     </Link>
   );
 }

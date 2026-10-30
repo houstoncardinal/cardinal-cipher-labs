@@ -192,7 +192,7 @@ We will respond to your inquiry as soon as possible.`
     <>
       <SEOHead
         title="Privacy Policy"
-        description="Cardinal Consulting's privacy policy explains how we collect, use, and protect your personal information when you use our web development, app development, and digital marketing services."
+        description="How Cardinal Consulting collects, uses and protects your personal information when you visit our website, contact us or work with us on a project."
         url={`${siteConfig.url}/privacy-policy`}
         schemas={schemas}
         keywords={["privacy policy", "data protection", "personal information", "cookie policy", "Cardinal Consulting privacy"]}

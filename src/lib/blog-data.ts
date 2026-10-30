@@ -5,7 +5,11 @@
 export interface BlogArticle {
   slug: string;
   title: string;
+  /** Shorter title for search results when `title` runs past ~60 characters */
+  seoTitle?: string;
   excerpt: string;
+  /** Search snippet when `excerpt` runs past ~160 characters */
+  seoDescription?: string;
   category: string;
   pillar: string;
   priority: number;
@@ -69,7 +73,9 @@ export const articles: BlogArticle[] = [
   // 1 ────────────────────────────────────────────────────────────────
   {
     slug: "how-much-does-a-website-cost-houston",
+    seoTitle: "How Much Does a Website Cost in Houston? (Pricing Guide)",
     title: "How Much Does a Website Cost in Houston? A Transparent Pricing Guide",
+    seoDescription: "Real Houston website prices for marketing sites, online stores and custom platforms, plus the ongoing costs most quotes leave out.",
     excerpt: "Real numbers for marketing websites, e-commerce stores, and custom platforms — plus the ongoing costs most quotes leave out and the questions to ask before you sign.",
     category: "Websites & Costs",
     pillar: "websites",
@@ -149,6 +155,7 @@ export const articles: BlogArticle[] = [
   // 2 ────────────────────────────────────────────────────────────────
   {
     slug: "social-media-management-whats-included",
+    seoTitle: "What's Included in Social Media Management (and Cost)",
     title: "What's Included in Social Media Management — and How to Budget for It",
     excerpt: "A clear breakdown of strategy, content, community management, paid social, and reporting, so you know exactly what you're paying for.",
     category: "Growth Marketing",
@@ -211,6 +218,7 @@ export const articles: BlogArticle[] = [
   // 3 ────────────────────────────────────────────────────────────────
   {
     slug: "in-house-vs-agency-social-media-management",
+    seoTitle: "In-House vs. Agency Social Media Management",
     title: "In-House vs. Agency Social Media Management: An Honest Comparison",
     excerpt: "The skills social media really requires, the trade-offs of hiring versus outsourcing, and the hybrid model many growing companies use.",
     category: "Growth Marketing",
@@ -274,6 +282,7 @@ export const articles: BlogArticle[] = [
   // 4 ────────────────────────────────────────────────────────────────
   {
     slug: "what-is-a-fractional-cto",
+    seoTitle: "What Is a Fractional CTO and When Do You Need One?",
     title: "What Is a Fractional CTO, and When Does Your Company Need One?",
     excerpt: "How part-time technology leadership works, the signs you need it, and how it compares to a full-time hire, a consultant, or an agency.",
     category: "AI & Technology",
@@ -408,6 +417,7 @@ export const articles: BlogArticle[] = [
   // 6 ────────────────────────────────────────────────────────────────
   {
     slug: "ai-assistant-for-your-website",
+    seoTitle: "Adding an AI Assistant to Your Website: Cost & ROI",
     title: "Adding an AI Assistant to Your Website: Costs, Risks, and ROI",
     excerpt: "What an AI assistant can realistically do for your customers, what drives the cost, the risks to plan for, and how to tell whether it's paying off.",
     category: "AI & Technology",
@@ -471,6 +481,7 @@ export const articles: BlogArticle[] = [
   // 7 ────────────────────────────────────────────────────────────────
   {
     slug: "website-maintenance-checklist",
+    seoTitle: "Website Maintenance Checklist: Monthly to Yearly",
     title: "The Website Maintenance Checklist: Monthly, Quarterly, and Yearly",
     excerpt: "Everything a business website needs to stay secure, fast, and accurate — organized into a simple schedule you can follow or hand off.",
     category: "Websites & Costs",

@@ -65,8 +65,8 @@ export default function BlogArticle() {
   return (
     <>
       <SEOHead
-        title={article.title}
-        description={article.excerpt}
+        title={article.seoTitle ?? article.title}
+        description={article.seoDescription ?? article.excerpt}
         url={url}
         type="article"
         author={article.author}

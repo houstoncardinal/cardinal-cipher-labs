@@ -323,7 +323,7 @@ export default function Legal() {
         <section className="relative overflow-hidden bg-white pt-28 pb-14 lg:pt-32 lg:pb-20">
           {/* subtle background accent */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-orange-50/60 blur-3xl" />
+            <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-brand-50/60 blur-3xl" />
             <div className="absolute -bottom-60 -left-40 h-[500px] w-[500px] rounded-full bg-gray-100/80 blur-3xl" />
           </div>
 
@@ -341,14 +341,14 @@ export default function Legal() {
               variants={fadeUp}
               className="max-w-3xl"
             >
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-1.5 text-sm font-medium text-orange-600">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-sm font-medium text-brand-600">
                 <Scale className="h-4 w-4" />
                 Legal Industry
               </span>
 
               <h1 className="mt-4 font-serif text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
                 Legal Website Development
-                <span className="text-orange-500"> & Digital Marketing</span>
+                <span className="text-brand-500"> & Digital Marketing</span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
@@ -411,7 +411,7 @@ export default function Legal() {
               variants={fadeUp}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-500">
                 What We Deliver
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -435,7 +435,7 @@ export default function Legal() {
                   variants={fadeUp}
                   className="group rounded-2xl border border-gray-200/70 bg-white p-8 shadow transition hover:shadow-lg"
                 >
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
+                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
                     <svc.icon className="h-6 w-6" />
                   </div>
                   <h3 className="font-serif text-xl font-semibold text-gray-900">
@@ -460,7 +460,7 @@ export default function Legal() {
               variants={fadeUp}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-500">
                 Our Advantage
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -484,7 +484,7 @@ export default function Legal() {
                   className="flex gap-5 rounded-2xl border border-gray-200/70 bg-white p-8 shadow"
                 >
                   <div className="flex-shrink-0">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
                       <item.icon className="h-6 w-6" />
                     </div>
                   </div>
@@ -512,7 +512,7 @@ export default function Legal() {
               variants={fadeUp}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-500">
                 Proven Results
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -535,7 +535,7 @@ export default function Legal() {
                   variants={fadeUp}
                   className="rounded-2xl border border-gray-200/70 bg-white p-8 shadow"
                 >
-                  <p className="font-serif text-4xl font-bold text-orange-500">
+                  <p className="font-serif text-4xl font-bold text-brand-500">
                     {r.metric}
                   </p>
                   <p className="mt-1 text-sm font-semibold text-gray-900">
@@ -562,7 +562,7 @@ export default function Legal() {
               variants={fadeUp}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-500">
                 How We Work
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -585,7 +585,7 @@ export default function Legal() {
                   variants={fadeUp}
                   className="rounded-2xl border border-gray-200/70 bg-white p-8 shadow"
                 >
-                  <span className="font-serif text-3xl font-bold text-orange-500/20">
+                  <span className="font-serif text-3xl font-bold text-brand-500/20">
                     {p.step}
                   </span>
                   <h3 className="mt-3 font-serif text-lg font-semibold text-gray-900">
@@ -610,7 +610,7 @@ export default function Legal() {
               variants={fadeUp}
               className="mx-auto max-w-2xl text-center"
             >
-              <span className="text-sm font-semibold uppercase tracking-widest text-orange-500">
+              <span className="text-sm font-semibold uppercase tracking-widest text-brand-500">
                 FAQs
               </span>
               <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -674,9 +674,9 @@ export default function Legal() {
               className="relative overflow-hidden rounded-2xl bg-gray-900 px-8 py-16 text-center text-white shadow-xl sm:px-16 lg:px-24"
             >
               {/* accent glow */}
-              <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl" />
+              <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-brand-500/10 blur-3xl" />
 
-              <Scale className="mx-auto h-10 w-10 text-orange-400" />
+              <Scale className="mx-auto h-10 w-10 text-brand-400" />
               <h2 className="mt-6 font-serif text-3xl font-bold sm:text-4xl">
                 Ready to Grow Your Legal Practice?
               </h2>
@@ -689,7 +689,7 @@ export default function Legal() {
               <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-8 py-3.5 text-sm font-semibold text-white shadow transition hover:bg-orange-600"
+                  className="inline-flex items-center gap-2 rounded-xl bg-brand-500 px-8 py-3.5 text-sm font-semibold text-white shadow transition hover:bg-brand-600"
                 >
                   Get Your Free Audit
                   <ArrowRight className="h-4 w-4" />

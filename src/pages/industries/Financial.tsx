@@ -311,7 +311,7 @@ export default function Financial() {
         <section className="relative pt-28 pb-14 lg:pt-32 lg:pb-20 overflow-hidden">
           {/* subtle grid background */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,.02)_1px,transparent_1px)] bg-[size:48px_48px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-50 rounded-full blur-[120px] opacity-40 -translate-y-1/2 translate-x-1/3" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-50 rounded-full blur-[120px] opacity-40 -translate-y-1/2 translate-x-1/3" />
 
           <div className="relative container mx-auto px-6 lg:px-12">
             <Breadcrumbs
@@ -327,7 +327,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-4xl"
             >
-              <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-200 bg-orange-50 text-orange-700 text-sm font-medium mb-6">
+              <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-200 bg-brand-50 text-brand-700 text-sm font-medium mb-6">
                 <TrendingUp className="w-4 h-4" />
                 Financial Services Industry
               </motion.div>
@@ -338,7 +338,7 @@ export default function Financial() {
                 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.08] mb-6"
               >
                 Financial Services{" "}
-                <span className="text-orange-600">Website Development</span>{" "}
+                <span className="text-brand-600">Website Development</span>{" "}
                 & Digital Marketing
               </motion.h1>
 
@@ -415,7 +415,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mb-10"
             >
-              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
                 What We Build
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">
@@ -440,9 +440,9 @@ export default function Financial() {
                   key={svc.title}
                   variants={fadeUp}
                   custom={i}
-                  className="group relative bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300"
+                  className="group relative bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:border-brand-200 transition-all duration-300"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-orange-50 text-orange-600 mb-5 group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600 mb-5 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
                     <svc.icon className="w-6 h-6" />
                   </div>
                   <h3 className="font-serif text-xl font-bold mb-3">
@@ -467,7 +467,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mb-10"
             >
-              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
                 Why Cardinal
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">
@@ -494,7 +494,7 @@ export default function Financial() {
                   custom={i}
                   className="flex gap-5 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
                 >
-                  <div className="flex-shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-orange-50 text-orange-600">
+                  <div className="flex-shrink-0 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 text-brand-600">
                     <d.icon className="w-7 h-7" />
                   </div>
                   <div>
@@ -521,7 +521,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mb-10"
             >
-              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
                 Proven Results
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">
@@ -547,7 +547,7 @@ export default function Financial() {
                   custom={i}
                   className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm"
                 >
-                  <div className="font-serif text-5xl font-bold text-orange-600 mb-2">
+                  <div className="font-serif text-5xl font-bold text-brand-600 mb-2">
                     {r.metric}
                   </div>
                   <div className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
@@ -575,7 +575,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mb-10"
             >
-              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
                 Our Process
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">
@@ -629,7 +629,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mb-10"
             >
-              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-orange-600 uppercase tracking-wider mb-3">
+              <motion.p variants={fadeUp} custom={0} className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">
                 FAQ
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-5">
@@ -699,7 +699,7 @@ export default function Financial() {
               variants={stagger}
               className="max-w-3xl mx-auto text-center"
             >
-              <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-200 bg-orange-50 text-orange-700 text-sm font-medium mb-6">
+              <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-200 bg-brand-50 text-brand-700 text-sm font-medium mb-6">
                 <Star className="w-4 h-4" />
                 Trusted by 40+ Financial Firms
               </motion.div>

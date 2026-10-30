@@ -291,11 +291,10 @@ export const services: ServiceDefinition[] = [
       { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
     ],
     seo: {
-      title: "Web Development Services Houston TX | Custom Website Development",
-      description: "Custom website development in Houston: fast, secure, SEO-ready websites, e-commerce, and web platforms built with React and Next.js. 500+ projects delivered. Free consultation: (281) 901-7016.",
+      title: "Web Development Company in Houston, TX",
+      description: "Custom website development in Houston: fast, secure, SEO-ready marketing sites, portals and web platforms. Websites from $1,500 with a written quote.",
       keywords: [
-        "web development Houston TX", "web development agency Houston", "custom website development Houston", "Houston web developer",
-        "best web development company Houston", "web design and development Houston", "React web development Houston", "Next.js development Houston",
+        "web development Houston TX", "web development agency Houston", "custom website development Houston", "Houston web developer", "web design and development Houston", "React web development Houston", "Next.js development Houston",
         "enterprise web development Houston", "responsive web design Houston", "e-commerce website development Houston", "HIPAA compliant web development Houston",
         "full stack web development Houston", "website redesign Houston", "affordable web development Houston", "professional website development Houston",
         "small business website Houston", "web developer near me Houston", "custom web application Houston", "Houston website design and development",
@@ -425,11 +424,10 @@ export const services: ServiceDefinition[] = [
       { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
     ],
     seo: {
-      title: "App Development Company Houston TX | iOS, Android & Cross-Platform Apps",
-      description: "Houston app development company building iOS, Android, and cross-platform apps — from MVPs to enterprise apps, including App Store launch. 150+ apps delivered. Call (281) 901-7016.",
+      title: "App Development Company in Houston, TX",
+      description: "iPhone, Android and cross-platform app development in Houston, from MVPs to enterprise apps, including App Store launch. App projects from $5K.",
       keywords: [
-        "app development company Houston", "app development company near me Houston", "mobile app development Houston", "#1 app development company Houston",
-        "best app development company Houston", "iOS app development Houston", "Android app development Houston", "app development agency Houston",
+        "app development company Houston", "app development company near me Houston", "mobile app development Houston", "iOS app development Houston", "Android app development Houston", "app development agency Houston",
         "React Native development Houston", "HIPAA compliant app development Houston", "enterprise mobile app development Houston", "cross-platform app development Houston",
         "iPhone app developer Houston", "Android app developer Houston", "app developer near me Houston", "startup app development Houston",
         "MVP app development Houston", "custom app development Houston TX", "mobile app developer Houston Texas", "app development services Houston",
@@ -553,12 +551,12 @@ export const services: ServiceDefinition[] = [
       { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
     ],
     seo: {
-      title: "Brand Identity & Logo Design Agency Houston TX",
-      description: "Brand identity and logo design in Houston: brand strategy, logos, color, typography, and brand guidelines for growing companies. Free consultation: (281) 901-7016.",
+      title: "Brand Identity & Logo Design, Houston",
+      description: "Logo design, color, typography and brand guidelines for growing Houston companies. Brand identity packages from $1,500, with a written scope up front.",
       keywords: [
         "brand identity design Houston", "logo design Houston", "branding agency Houston TX", "Houston logo designer", "brand guidelines Houston",
         "visual identity Houston", "Houston branding company", "logo design company Houston", "brand strategy Houston", "startup branding Houston",
-        "rebranding agency Houston", "corporate branding Houston", "best logo designer Houston", "brand design near me Houston", "brand consulting Houston TX",
+        "rebranding agency Houston", "corporate branding Houston", "brand design near me Houston", "brand consulting Houston TX",
         "brand identity package Houston", "Houston brand design agency", "professional logo design Houston", "brand positioning Houston", "brand book design Houston",
       ],
       serviceName: "Brand Identity Design Services",
@@ -685,8 +683,8 @@ export const services: ServiceDefinition[] = [
       { label: "Technology & SaaS", href: "/industry/technology" },
     ],
     seo: {
-      title: "UX/UI Design Agency Houston TX | User Experience & Interface Design",
-      description: "UX/UI design in Houston: user research, wireframes, Figma prototypes, usability testing, and design systems that make websites and apps easier to use and convert better.",
+      title: "UX/UI Design Agency in Houston, TX",
+      description: "UX research, audits and interface design that help more of your visitors sign up, book or buy. Houston UX/UI design projects start at $1,000.",
       keywords: [
         "UX design agency Houston", "UI design Houston TX", "user experience design Houston", "UX designer Houston", "Houston UX UI agency",
         "web design UX Houston", "app UX design Houston", "Figma designer Houston", "UX research Houston", "interface design Houston",
@@ -811,10 +809,10 @@ export const services: ServiceDefinition[] = [
       { label: "Construction", href: "/industry/construction" },
     ],
     seo: {
-      title: "SEO Company Houston TX | Local SEO, Technical SEO & Content",
-      description: "SEO services for Houston businesses: Google Business Profile, technical SEO, content, and link building with transparent monthly reporting. Month-to-month plans from $1,500/mo.",
+      title: "Houston SEO Company — Local & Technical",
+      description: "Local SEO, technical SEO, content and Google Business Profile optimization for Houston businesses, with a monthly report. Plans from $1,500/mo.",
       keywords: [
-        "SEO company Houston", "best SEO company Houston", "#1 SEO company Houston", "Houston SEO company", "local SEO Houston",
+        "SEO company Houston", "Houston SEO company", "local SEO Houston",
         "SEO services Houston TX", "Houston SEO agency", "technical SEO Houston", "schema markup Houston", "link building Houston",
         "Google Business Profile Houston", "Houston SEO specialist", "SEO optimization Houston", "organic traffic Houston", "keyword research Houston",
         "on-page SEO Houston", "SEO audit Houston", "SEO services near me Houston", "search engine optimization Houston TX", "Houston local SEO company",
@@ -940,12 +938,12 @@ export const services: ServiceDefinition[] = [
       { label: "Real Estate Websites", href: "/houston-real-estate-website-design" },
     ],
     seo: {
-      title: "Digital Marketing Agency Houston TX | PPC & Social Media Marketing",
-      description: "Digital marketing agency in Houston: Google Ads, paid social, email marketing, and landing pages — with reporting that ties every campaign to leads and revenue. Call (281) 901-7016.",
+      title: "Digital Marketing Agency in Houston",
+      description: "Google Ads, paid social and email marketing for Houston businesses, with reporting that shows which dollars became customers. From $2,500/mo.",
       keywords: [
         "digital marketing agency Houston", "Houston digital marketing company", "PPC agency Houston", "Google Ads Houston", "social media marketing Houston",
         "email marketing Houston", "content marketing Houston", "paid advertising Houston TX", "digital marketing services Houston", "Houston marketing agency",
-        "Facebook Ads Houston", "Instagram marketing Houston", "online marketing Houston", "digital marketing near me Houston", "best digital marketing agency Houston",
+        "Facebook Ads Houston", "Instagram marketing Houston", "online marketing Houston", "digital marketing near me Houston",
         "Houston PPC management", "performance marketing Houston", "digital advertising Houston", "inbound marketing Houston TX", "marketing ROI Houston",
       ],
       serviceName: "Digital Marketing Services",
@@ -1058,8 +1056,8 @@ export const services: ServiceDefinition[] = [
       { label: "Web Design Houston", href: "/houston-web-design" },
     ],
     seo: {
-      title: "Social Media Management Houston TX | Content, Community & Paid Social",
-      description: "Social media management for Houston businesses: strategy, custom content, publishing, community management, and paid social — with monthly reporting tied to leads. Call (281) 901-7016.",
+      title: "Social Media Management in Houston",
+      description: "Strategy, content creation, publishing, community management and paid social for Houston brands, scoped to your channels with a custom quote.",
       keywords: [
         "social media management Houston", "social media marketing agency Houston", "social media agency Houston TX", "social media manager Houston",
         "Instagram marketing Houston", "Facebook marketing Houston", "LinkedIn marketing Houston", "TikTok marketing Houston",
@@ -1170,8 +1168,8 @@ export const services: ServiceDefinition[] = [
       { label: "Technology & SaaS", href: "/industry/technology" },
     ],
     seo: {
-      title: "AI & Automation Consulting Houston TX | AI Assistants & Workflow Automation",
-      description: "AI and automation services for Houston businesses: opportunity assessments, custom AI assistants, workflow automation, and secure integrations with your existing systems.",
+      title: "AI & Automation Consulting in Houston",
+      description: "AI assistants, workflow automation and system integrations for Houston businesses, built around the tools you already use. Free consultation.",
       keywords: [
         "AI consulting Houston", "AI automation agency Houston", "business process automation Houston", "AI chatbot development Houston",
         "workflow automation services", "AI integration services", "custom AI assistant development", "AI consultant for small business",
@@ -1282,8 +1280,8 @@ export const services: ServiceDefinition[] = [
       { label: "Financial Services", href: "/industry/financial" },
     ],
     seo: {
-      title: "Technical Consulting & Fractional CTO Houston TX | Cloud, Architecture & Security",
-      description: "Independent technical consulting in Houston: technology roadmaps, architecture and code reviews, cloud cost and security assessments, and fractional CTO leadership.",
+      title: "Fractional CTO & IT Consulting, Houston",
+      description: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership for Houston companies. Custom quotes.",
       keywords: [
         "technical consulting Houston", "fractional CTO Houston", "IT consulting Houston", "technology consultant Houston",
         "software architecture review", "code audit services", "cloud cost optimization consulting", "cloud consulting Houston",
@@ -1348,8 +1346,8 @@ export const services: ServiceDefinition[] = [
       { label: "E-commerce Websites", href: "/houston-ecommerce-website-design" },
     ],
     seo: {
-      title: "Website Maintenance & Care Plans Houston TX | Updates, Security & Support",
-      description: "Website maintenance plans for Houston businesses from $299/month: updates, daily backups, 24/7 uptime monitoring, security scanning, speed optimization, and content changes.",
+      title: "Website Maintenance Plans in Houston",
+      description: "Monthly website care plans: updates, backups, security monitoring, uptime checks and content changes. Houston website maintenance from $299/mo.",
       keywords: [
         "website maintenance Houston", "website maintenance services", "website care plans", "WordPress maintenance Houston",
         "website support Houston", "website security monitoring", "website management services", "monthly website maintenance cost",

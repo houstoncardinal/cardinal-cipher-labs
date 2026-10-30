@@ -369,7 +369,7 @@ function CityScene() {
       
       {/* Cars */}
       <Car position={[-30, 0, 3]} color="#2563eb" />
-      <Car position={[20, 0, -3]} color="#EA580C" />
+      <Car position={[20, 0, -3]} color="#9E1B2C" />
       <Car position={[40, 0, 3]} color="#059669" />
       
       {/* Ambient and directional lighting */}
