@@ -93,9 +93,9 @@ export const articles: BlogArticle[] = [
           heading: "The short answer",
           body: "Website pricing in Houston ranges from a few hundred dollars for a do-it-yourself template to six figures for a custom platform. The honest answer depends on what the site needs to do for your business.\n\nFor reference, here is what Cardinal Consulting charges, so you have real numbers to compare against other quotes:",
           bullets: [
-            "Marketing website (up to 10 custom pages): from $1,500, one-time",
-            "Custom website with portals, integrations, AI features, or online sales (up to 30 pages): from $3,500, one-time",
-            "Websites over 30 pages and custom platforms: quoted after a free consultation",
+            "Marketing website (up to 10 custom pages): from $3,500, one-time",
+            "Business growth website with portals, integrations, AI features, or online sales (up to 30 pages): from $6,500, one-time",
+            "Websites over 30 pages and custom platforms: from $15,000, with a fixed price agreed in writing",
             "Website care plans: $299, $499, or $799 per month",
             "Payment terms: typically 50% at kickoff and 50% at launch",
           ],
@@ -595,7 +595,7 @@ export const articles: BlogArticle[] = [
         },
         {
           heading: "What it costs",
-          body: "For reference, Cardinal's brand identity packages start at $1,500 (Essentials, about 2–3 weeks), $3,500 (Professional, about 4–6 weeks), and $7,500+ (Enterprise, about 6–10 weeks). You own all files and intellectual property at the end.",
+          body: "For reference, Cardinal's brand identity packages are $3,000 (Essentials, about 2–3 weeks), $6,000 (Professional, about 4–6 weeks), and $12,000+ (Enterprise, about 6–10 weeks). You own all files and intellectual property at the end.",
         },
       ],
       cta: "Not sure whether you need a logo or a full identity? Book a free consultation and we'll recommend the right scope for your stage.",
@@ -709,7 +709,7 @@ export const articles: BlogArticle[] = [
         },
         {
           heading: "Understand pricing models",
-          body: "Fixed-price quotes work for well-defined MVPs. Time-and-materials pricing suits evolving products where requirements will change. For reference, Cardinal's MVP apps start at $5,000+ and full-featured apps at $10,000+, with typical timelines of 6–8 weeks for an MVP, 12–16 weeks for a full-featured app, and 16–24 weeks for enterprise apps. Enterprise apps are quoted after scoping.",
+          body: "Fixed-price quotes work for well-defined MVPs. Time-and-materials pricing suits evolving products where requirements will change. For reference, Cardinal starts many app projects with a $5,000 Product Blueprint & Prototype Sprint (2–3 weeks), so you can test the idea with real users before funding the build. MVP apps start at $15,000+ (typically 6–8 weeks), and full-featured and enterprise apps at $40,000+ (typically 12–24 weeks), each with a fixed price agreed in writing.",
         },
         {
           heading: "Questions to ask before you sign",

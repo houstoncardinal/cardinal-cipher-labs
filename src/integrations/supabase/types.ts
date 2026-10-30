@@ -131,6 +131,107 @@ export type Database = {
           },
         ]
       }
+      leads: {
+        Row: {
+          id: string
+          created_at: string
+          updated_at: string
+          name: string
+          email: string
+          phone: string | null
+          company: string | null
+          preferred_contact: string | null
+          best_time: string | null
+          expedited: boolean
+          service: string | null
+          plan: string | null
+          needs: string | null
+          timeline: string | null
+          budget: string | null
+          message: string | null
+          form_name: string | null
+          source_page: string | null
+          landing_page: string | null
+          referrer: string | null
+          utm_source: string | null
+          utm_medium: string | null
+          utm_campaign: string | null
+          status: string
+          value: number | null
+          notes: string | null
+          client_id: string | null
+          contacted_at: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          updated_at?: string
+          name: string
+          email: string
+          phone?: string | null
+          company?: string | null
+          preferred_contact?: string | null
+          best_time?: string | null
+          expedited?: boolean
+          service?: string | null
+          plan?: string | null
+          needs?: string | null
+          timeline?: string | null
+          budget?: string | null
+          message?: string | null
+          form_name?: string | null
+          source_page?: string | null
+          landing_page?: string | null
+          referrer?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          status?: string
+          value?: number | null
+          notes?: string | null
+          client_id?: string | null
+          contacted_at?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          updated_at?: string
+          name?: string
+          email?: string
+          phone?: string | null
+          company?: string | null
+          preferred_contact?: string | null
+          best_time?: string | null
+          expedited?: boolean
+          service?: string | null
+          plan?: string | null
+          needs?: string | null
+          timeline?: string | null
+          budget?: string | null
+          message?: string | null
+          form_name?: string | null
+          source_page?: string | null
+          landing_page?: string | null
+          referrer?: string | null
+          utm_source?: string | null
+          utm_medium?: string | null
+          utm_campaign?: string | null
+          status?: string
+          value?: number | null
+          notes?: string | null
+          client_id?: string | null
+          contacted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       milestones: {
         Row: {
           completed: boolean | null
@@ -178,6 +279,7 @@ export type Database = {
           end_date: string | null
           id: string
           name: string
+          service: string | null
           start_date: string | null
           status: string | null
           updated_at: string
@@ -190,6 +292,7 @@ export type Database = {
           end_date?: string | null
           id?: string
           name: string
+          service?: string | null
           start_date?: string | null
           status?: string | null
           updated_at?: string
@@ -202,6 +305,7 @@ export type Database = {
           end_date?: string | null
           id?: string
           name?: string
+          service?: string | null
           start_date?: string | null
           status?: string | null
           updated_at?: string

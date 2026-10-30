@@ -17,6 +17,7 @@ import { faqSchema, webPageSchema } from "@/lib/site-schema";
 import { contactHref, rememberService } from "@/lib/contact-intent";
 import { houstonLinks, type LandingPage } from "@/lib/landing-pages";
 import { cn } from "@/lib/utils";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const fadeUp = {
@@ -443,9 +444,10 @@ export function LandingLayout({ page }: { page: LandingPage }) {
           )}
 
           {/* ── EXPLORE ──────────────────────────────────────────────────── */}
-          <section className="border-t border-gray-100 py-14 lg:py-20">
+          <section className="relative isolate overflow-hidden border-t border-gray-100 py-14 lg:py-20">
             <Container>
               <Heading eyebrow="Explore further" title="Related services" />
+            <CardinalMark />
               <div className="grid gap-4 md:grid-cols-3">
                 {related.map((s, i) => (
                   <motion.div key={s.slug} {...stagger(i)}>

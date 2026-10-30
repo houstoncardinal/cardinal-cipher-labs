@@ -6,6 +6,7 @@ import { services } from "@/lib/services-catalog";
 import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, PROMPTS, TIMELINES } from "@/lib/contact-options";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution, lastViewedService } from "@/lib/contact-intent";
+import { recordLead } from "@/lib/leads";
 
 /**
  * Netlify Forms: every field name below must also appear in the static form copies in
@@ -73,6 +74,7 @@ export function ContactForm({
     setStatus("submitting");
     try {
       await submitToNetlify(form);
+      void recordLead(Object.fromEntries(new FormData(form)) as Record<string, string>);
       // GA4 recommended lead event — mark "generate_lead" as a key event in GA4 to count conversions.
       trackEvent("generate_lead", {
         form_name: formName,

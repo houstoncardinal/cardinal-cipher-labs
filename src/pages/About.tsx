@@ -12,6 +12,7 @@ import { industries } from "@/lib/industries";
 import { siteConfig } from "@/lib/seo-config";
 import { generatePersonSchemas, generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
 import { organizationSchema } from "@/lib/site-schema";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
 const values = [
   { title: "Integrity first", description: "We recommend what's right for your business — even when it's the smaller engagement." },
@@ -176,7 +177,8 @@ export default function About() {
           </section>
 
           {/* Timeline */}
-          <section className="border-t border-border py-16 lg:py-24">
+          <section className="relative isolate overflow-hidden border-t border-border py-16 lg:py-24">
+            <CardinalMark />
             <Container>
               <SectionHeader eyebrow="Our journey" title="Milestones" />
               <ol className="border-t border-border">

@@ -1,160 +1,114 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { motion, useAnimationControls } from 'framer-motion';
+import { Loader2, Lock } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { LuxuryCard } from '@/components/ui/luxury-card';
-import { Shield, Lock, Mail } from 'lucide-react';
+import { ThemeToggle } from '@/components/site/ThemeToggle';
+import { cn } from '@/lib/utils';
 
+const LENGTH = 6;
+
+/** PIN-only admin sign-in. The PIN is verified server-side (netlify/functions/admin-pin). */
 export function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { signIn, user } = useAuth();
+  const { signInWithPin, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [pin, setPin] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const input = useRef<HTMLInputElement>(null);
+  const shake = useAnimationControls();
+  const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || '/admin/dashboard';
 
-  // Redirect if already logged in
-  if (user) {
-    const from = (location.state as any)?.from?.pathname || '/admin/dashboard';
-    navigate(from, { replace: true });
-    return null;
-  }
+  // Refocus whenever the field becomes usable again (first load and after a failed attempt)
+  useEffect(() => {
+    if (!busy) input.current?.focus();
+  }, [busy]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const { error } = await signIn(email, password);
-
-    if (!error) {
-      const from = (location.state as any)?.from?.pathname || '/admin/dashboard';
-      navigate(from, { replace: true });
+  const submit = async (value: string) => {
+    setBusy(true);
+    setError(null);
+    const { error } = await signInWithPin(value);
+    setBusy(false);
+    if (error) {
+      setError(error);
+      setPin('');
+      void shake.start({ x: [0, -10, 10, -8, 8, -4, 0], transition: { duration: 0.45 } });
+      return;
     }
-
-    setLoading(false);
+    navigate(from, { replace: true });
   };
 
+  const onChange = (v: string) => {
+    const digits = v.replace(/\D/g, '').slice(0, LENGTH);
+    setPin(digits);
+    setError(null);
+    if (digits.length === LENGTH && !busy) void submit(digits);
+  };
+
+  if (user) return <Navigate to={from} replace />;
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-card/30 to-background relative overflow-hidden p-4">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-      <motion.div
-        className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{ duration: 10, repeat: Infinity, delay: 2 }}
-      />
+    <div className="relative flex min-h-screen items-center justify-center bg-background px-6">
+      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" style={{ backgroundImage: 'linear-gradient(hsl(var(--border)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
+      <div className="absolute right-5 top-5">
+        <ThemeToggle />
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md relative z-10"
-      >
-        <LuxuryCard
-          elevation={4}
-          borderStyle="metallic-platinum"
-          glassStrength="strong"
-          className="p-8"
-        >
-          {/* Header */}
-          <div className="text-center mb-8">
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4"
-            >
-              <Shield size={32} className="text-primary" />
-            </motion.div>
-            <h1 className="font-serif text-3xl text-foreground mb-2">Admin Dashboard</h1>
-            <p className="text-sm text-muted-foreground">
-              Sign in to access Cardinal Consulting's admin panel
-            </p>
-          </div>
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="relative w-full max-w-sm text-center">
+        <img src="/brand/cardinal-consulting-logo.png" alt="Cardinal Consulting" className="mx-auto h-8 w-auto dark:hidden" />
+        <img src="/brand/cardinal-consulting-logo-white.png" alt="" aria-hidden className="mx-auto hidden h-8 w-auto dark:block" />
 
-          {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="flex items-center gap-2">
-                <Mail size={16} className="text-primary" />
-                Email Address
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@cardinalconsulting.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="h-12"
-              />
-            </div>
+        <div className="mt-10 border border-border bg-card p-8 shadow-[0_40px_80px_-50px_rgba(15,23,42,0.5)]">
+          <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Lock className="h-5 w-5" />
+          </span>
+          <h1 className="mt-5 font-display text-2xl text-foreground">Admin access</h1>
+          <p className="mt-1.5 text-sm text-muted-foreground">Enter your 6-digit PIN</p>
 
-            <div className="space-y-2">
-              <Label htmlFor="password" className="flex items-center gap-2">
-                <Lock size={16} className="text-primary" />
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="h-12"
-              />
-            </div>
+          <motion.label animate={shake} className="relative mt-7 flex cursor-text justify-center gap-2" onClick={() => input.current?.focus()}>
+            <span className="sr-only">PIN</span>
+            {Array.from({ length: LENGTH }).map((_, i) => {
+              const filled = i < pin.length;
+              const active = i === pin.length && !busy;
+              return (
+                <span
+                  key={i}
+                  className={cn(
+                    'flex h-14 w-11 items-center justify-center border text-xl transition-colors',
+                    error ? 'border-destructive' : active ? 'border-foreground' : 'border-border',
+                    filled ? 'bg-secondary' : 'bg-background',
+                  )}
+                >
+                  {filled ? <span className="h-2.5 w-2.5 rounded-full bg-foreground" /> : active ? <span className="h-6 w-px animate-pulse bg-foreground" /> : null}
+                </span>
+              );
+            })}
+            <input
+              ref={input}
+              value={pin}
+              onChange={(e) => onChange(e.target.value)}
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              pattern="\d*"
+              maxLength={LENGTH}
+              disabled={busy}
+              aria-invalid={!!error}
+              aria-describedby="pin-status"
+              className="absolute inset-0 h-full w-full cursor-text opacity-0"
+            />
+          </motion.label>
 
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full h-12 text-base font-medium"
-            >
-              {loading ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 border-2 border-background border-t-transparent rounded-full animate-spin" />
-                  Signing in...
-                </div>
-              ) : (
-                'Sign In to Dashboard'
-              )}
-            </Button>
-          </form>
-
-          {/* Footer */}
-          <div className="mt-6 pt-6 border-t border-border/50">
-            <p className="text-xs text-center text-muted-foreground">
-              Protected area. Authorized personnel only.
-            </p>
-          </div>
-        </LuxuryCard>
-
-        {/* Quick Setup Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-6 p-4 bg-card/50 border border-border/50 rounded-lg backdrop-blur-sm"
-        >
-          <p className="text-xs text-muted-foreground text-center">
-            <strong className="text-primary">First time setup:</strong> Configure your Supabase credentials in .env.local and run the schema.sql file
+          <p id="pin-status" role="status" className={cn('mt-5 min-h-[1.25rem] text-sm', error ? 'text-destructive' : 'text-muted-foreground')}>
+            {busy ? (
+              <span className="inline-flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Verifying…</span>
+            ) : (
+              error ?? 'Signs in automatically after the 6th digit'
+            )}
           </p>
-        </motion.div>
+        </div>
+
+        <a href="/" className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground">← Back to website</a>
       </motion.div>
     </div>
   );

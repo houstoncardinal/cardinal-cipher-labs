@@ -17,6 +17,9 @@ import { AdminProjects } from "./pages/admin/Projects";
 import { AdminDocuments } from "./pages/admin/Documents";
 import { AdminActivityLogs } from "./pages/admin/ActivityLogs";
 import { AdminSEOSchemas } from "./pages/admin/SEOSchemas";
+import { AdminLeads } from "./pages/admin/Leads";
+import { AdminServices } from "./pages/admin/Services";
+import { AdminAnalytics } from "./pages/admin/Analytics";
 import About from "./pages/About";
 import PortfolioPage from "./pages/PortfolioPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
@@ -86,8 +89,11 @@ export function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<AdminDashboard />} />
+        <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="leads" element={<AdminLeads />} />
+        <Route path="services" element={<AdminServices />} />
+        <Route path="analytics" element={<AdminAnalytics />} />
         <Route path="clients" element={<AdminClients />} />
         <Route path="projects" element={<AdminProjects />} />
         <Route path="documents" element={<AdminDocuments />} />

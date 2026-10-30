@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import type { Tables, TablesInsert } from '@/integrations/supabase/types';
 import { format } from 'date-fns';
+import { services } from '@/lib/services-catalog';
 
 type Project = Tables<'projects'>;
 type ProjectInsert = TablesInsert<'projects'>;
@@ -144,6 +145,7 @@ export function AdminProjects() {
       start_date: formData.get('start_date') as string || null,
       end_date: formData.get('end_date') as string || null,
       budget: formData.get('budget') ? parseFloat(formData.get('budget') as string) : null,
+      service: (formData.get('service') as string) || null,
     };
 
     projectMutation.mutate(projectData);
@@ -250,6 +252,20 @@ export function AdminProjects() {
                     rows={3}
                     defaultValue={editingProject?.description || ''}
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="service">Service</Label>
+                  <Select name="service" defaultValue={editingProject?.service || undefined}>
+                    <SelectTrigger id="service">
+                      <SelectValue placeholder="Which Cardinal service?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {services.map((s) => (
+                        <SelectItem key={s.slug} value={s.slug}>{s.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="space-y-2">

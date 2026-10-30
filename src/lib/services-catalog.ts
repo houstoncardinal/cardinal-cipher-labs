@@ -130,11 +130,11 @@ export const carePlans: [ServiceTier, ServiceTier, ServiceTier] = [
     name: "Care Essentials",
     price: "$299",
     billing: "per month",
-    bestFor: "Keeping your site secure, backed up, and running.",
+    bestFor: "Insurance for your digital revenue engine — secure, backed up, and watched around the clock.",
     features: [
+      "24/7 uptime monitoring — downtime caught within minutes, before it costs you leads",
+      "Daily cloud backups of your site and content",
       "Monthly software updates",
-      "Daily cloud backups",
-      "24/7 uptime monitoring",
       "Security scanning & malware removal",
       "1 hour of content updates/mo",
     ],
@@ -144,13 +144,13 @@ export const carePlans: [ServiceTier, ServiceTier, ServiceTier] = [
     name: "Care Plus",
     price: "$499",
     billing: "per month",
-    bestFor: "Proactive upkeep with faster support.",
+    bestFor: "Proactive upkeep, faster support, and a site that stays fast.",
     popular: true,
     features: [
+      "Priority 24-hour support response",
       "Everything in Essentials",
       "3 hours of content updates/mo",
-      "Priority 24-hour support response",
-      "Core Web Vitals monitoring",
+      "Core Web Vitals monitoring — speed protects rankings and conversions",
       "Monthly analytics review",
       "Quarterly design refreshes",
     ],
@@ -160,12 +160,12 @@ export const carePlans: [ServiceTier, ServiceTier, ServiceTier] = [
     name: "Care Pro",
     price: "$799",
     billing: "per month",
-    bestFor: "A site that keeps improving every month.",
+    bestFor: "A site that keeps improving every month — a growth partner, not just maintenance.",
     features: [
+      "Continuous conversion improvements & A/B testing",
       "Everything in Plus",
       "6 hours of development/mo",
       "New feature development",
-      "A/B testing & conversion ideas",
       "Dedicated account manager",
       "Quarterly strategy sessions",
     ],
@@ -188,7 +188,7 @@ export const services: ServiceDefinition[] = [
     accent: "win customers",
     summary: "We design and engineer fast, secure websites and web platforms — from marketing sites to customer portals — that turn visitors into revenue.",
     menuBlurb: "Custom websites, portals & online stores",
-    startingAt: "$1,500",
+    startingAt: "$3,500",
     startingBilling: "one-time",
     whoItsFor: [
       "Your website no longer reflects the size or quality of your company",
@@ -207,51 +207,52 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "Marketing Website",
-        price: "$1,500",
+        price: "$3,500",
         billing: "one-time",
-        bestFor: "A fast, credible site that generates qualified leads.",
+        bestFor: "A credible, fast website that turns local searches into qualified leads.",
         timeline: "Typically 72 hours – 2 weeks",
         features: [
-          "Up to 10 custom pages",
-          "Mobile-friendly design",
-          "Google-ready SEO setup",
-          "Contact form & Google Maps",
-          "Google Analytics setup",
-          "SSL certificate & hosting setup",
+          "Built to turn visitors into calls, bookings, and form leads",
+          "Up to 10 custom-designed pages — no templates",
+          "Mobile-first, fast-loading build",
+          "Google-ready SEO foundation & analytics",
+          "Lead capture: forms, click-to-call & Google Maps",
+          "SSL, hosting setup & launch",
           "2 rounds of revisions",
-          "30 days of support after launch",
+          "30 days of post-launch support",
         ],
       },
       {
         level: "Growth",
-        name: "Custom Website & Integrations",
-        price: "$3,500",
+        name: "Business Growth Website",
+        price: "$6,500",
         billing: "one-time",
-        bestFor: "Larger custom websites (about 20–30 pages) with portals, integrations, AI features, or online sales.",
+        bestFor: "Growing companies that need their website to sell, book, and integrate — not just inform.",
         timeline: "Typically 4 – 8 weeks",
         popular: true,
         features: [
+          "Conversion-led page structure that turns more traffic into revenue",
           "Everything in Marketing Website",
           "Up to 30 custom pages",
+          "CRM, booking, payment & system integrations",
           "Customer portals & secure logins",
-          "CRM, payment & system integrations",
-          "AI features & automations (chat assistants, smart forms)",
+          "AI features & automations (assistants, smart forms)",
           "Online store: catalog, checkout, payments, shipping & tax",
-          "Sales & conversion tracking",
-          "3 rounds of revisions",
-          "90 days of support after launch",
+          "Conversion & revenue tracking",
+          "3 rounds of revisions · 90 days of support",
         ],
       },
       {
         level: "Enterprise",
         name: "Custom Platform",
-        price: "Custom",
-        billing: "custom quote",
-        bestFor: "Websites over 30 pages and complex platforms, dashboards, or applications.",
+        price: "$15,000+",
+        billing: "starting price",
+        bestFor: "Complex platforms, dashboards, and applications that run core parts of your business.",
         timeline: "Scoped on your consultation",
         features: [
+          "A platform built around how your business actually operates",
           "30+ pages & fully custom features",
-          "Customer portals & dashboards",
+          "Customer portals, dashboards & internal tools",
           "Custom backend & API integrations",
           "Multi-language support",
           "Security audit & compliance review",
@@ -276,7 +277,7 @@ export const services: ServiceDefinition[] = [
     highlights: ["99.9% Uptime", "90+ Lighthouse", "WCAG 2.1 AA"],
     faqs: [
       { question: "How long does it take to build my website?", answer: "Most marketing websites take 72 hours to 2 weeks. Larger custom websites, portals, and stores usually take 4–8 weeks. Need it faster? Ask about rush delivery. You'll get an exact timeline before we start." },
-      { question: "Which website plan is right for me?", answer: "A Marketing Website (up to 10 pages) is a fast, professional site that explains what you do and turns visitors into leads. Custom Website & Integrations is for larger custom sites of up to 30 pages that need customer portals, integrations with your CRM or other systems, AI features and automations, or online sales. Websites over 30 pages, and complex platforms, are a Custom Platform project quoted after a free consultation." },
+      { question: "Which website plan is right for me?", answer: "A Marketing Website (up to 10 pages) is a fast, professional site that explains what you do and turns visitors into leads. The Business Growth Website is for companies that need their site to sell, book, and integrate — up to 30 pages with customer portals, CRM and payment integrations, AI features, or online sales. Websites over 30 pages and complex platforms are Custom Platform projects, starting at $15,000. Every plan is scoped in writing with a fixed-price guarantee." },
       { question: "Will my website show up on Google?", answer: "Yes. Every site we build includes SEO setup: page titles, descriptions, structured data, a sitemap, and fast load times. To keep climbing in search results over time, pair your site with an SEO plan." },
       { question: "Can I update the website myself?", answer: "Yes. We can set up an easy editor so you can change text, photos, and products. Prefer to have us do it? A Website Care Plan covers monthly updates for you." },
       { question: "Can you connect my website to the tools I already use?", answer: "Yes. We connect websites to CRMs (like HubSpot or Salesforce), payment providers (like Stripe or PayPal), booking tools, email marketing, inventory systems, and custom APIs." },
@@ -292,7 +293,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Web Development Company in Houston, TX",
-      description: "Custom website development in Houston: fast, secure, SEO-ready marketing sites, portals and web platforms. Websites from $1,500 with a written quote.",
+      description: "Custom website development in Houston: conversion-focused marketing sites, portals and platforms. Websites from $3,500 with a fixed-price guarantee.",
       keywords: [
         "web development Houston TX", "web development agency Houston", "custom website development Houston", "Houston web developer", "web design and development Houston", "React web development Houston", "Next.js development Houston",
         "enterprise web development Houston", "responsive web design Houston", "e-commerce website development Houston", "HIPAA compliant web development Houston",
@@ -324,8 +325,8 @@ export const services: ServiceDefinition[] = [
     accent: "rely on",
     summary: "We design, build, and launch iPhone and Android apps — and help you get them into the App Store and Google Play.",
     menuBlurb: "iPhone & Android apps",
-    startingAt: "$5K+",
-    startingBilling: "starting price",
+    startingAt: "$5,000",
+    startingBilling: "one-time",
     whoItsFor: [
       "You're launching a new digital product or customer app",
       "Your customers or field teams need a faster way to book, order, or report",
@@ -342,56 +343,56 @@ export const services: ServiceDefinition[] = [
     tiers: [
       {
         level: "Foundation",
-        name: "MVP App",
-        price: "$5K+",
-        billing: "starting price",
-        bestFor: "Validating a new product with a focused first release.",
-        timeline: "Typically 6 – 8 weeks",
+        name: "Product Blueprint & Prototype Sprint",
+        price: "$5,000",
+        billing: "one-time",
+        bestFor: "De-risking your app idea before you invest in full development.",
+        timeline: "Typically 2 – 3 weeks",
         features: [
-          "Core features (up to 8 screens)",
-          "One platform: iPhone or Android",
-          "Clean, simple design",
-          "Backend & API setup",
-          "Push notifications",
-          "App Store / Google Play submission",
-          "Analytics setup",
-          "30 days of bug fixes",
+          "Validate the idea with real users before you fund the build",
+          "Product strategy & feature-prioritization workshop",
+          "User flows & information architecture",
+          "Clickable, high-fidelity prototype",
+          "Testing with 5 real users",
+          "Technical architecture & build estimate",
+          "Fixed-price MVP proposal",
         ],
       },
       {
         level: "Growth",
-        name: "Full-Featured App",
-        price: "$10K+",
+        name: "MVP App",
+        price: "$15,000+",
         billing: "starting price",
-        bestFor: "Launching a full product on iPhone and Android.",
-        timeline: "Typically 12 – 16 weeks",
+        bestFor: "Launching a focused, production-ready first release to real customers.",
+        timeline: "Typically 6 – 8 weeks",
         popular: true,
         features: [
-          "Everything in MVP App",
-          "Up to 20 screens",
+          "Get to market fast and start learning from paying users",
+          "Everything in the Blueprint Sprint",
+          "Core features, production-ready",
           "iPhone & Android from one codebase",
-          "Custom design with animations",
-          "Admin dashboard to manage content",
-          "In-app purchases & subscriptions",
-          "Crash reporting",
-          "3 months of support after launch",
+          "Backend, user accounts & API",
+          "Push notifications & analytics",
+          "App Store & Google Play submission",
+          "30 days of bug fixes after launch",
         ],
       },
       {
         level: "Enterprise",
-        name: "Enterprise App",
-        price: "Custom",
-        billing: "custom quote",
-        bestFor: "Complex, business-critical apps for larger teams.",
-        timeline: "Typically 16 – 24 weeks",
+        name: "Full-Featured & Enterprise App",
+        price: "$40,000+",
+        billing: "starting price",
+        bestFor: "Full products and business-critical apps for growing and enterprise teams.",
+        timeline: "Typically 12 – 24 weeks",
         features: [
-          "Unlimited screens & features",
-          "iPhone, Android & web app",
-          "Company single sign-on (SSO)",
-          "Works offline, syncs when back online",
+          "A complete product your customers and team rely on every day",
+          "Everything in MVP App",
+          "Custom design with animations",
+          "Admin dashboard, in-app purchases & subscriptions",
+          "Company single sign-on (SSO) & offline sync",
           "Security audit & penetration testing",
           "Dedicated development team",
-          "12 months of support & maintenance",
+          "3–12 months of support & maintenance",
         ],
       },
     ],
@@ -411,11 +412,11 @@ export const services: ServiceDefinition[] = [
     highlights: ["60fps Native", "2M+ Downloads", "4.8 App Rating"],
     faqs: [
       { question: "Should I build for iPhone, Android, or both?", answer: "Most businesses should build one app that runs on both — it's faster and costs less. We recommend a native build only when your app needs heavy device features like AR or advanced camera work. We'll help you decide on your free consultation." },
-      { question: "How long does it take to build an app?", answer: "An MVP usually takes 6–8 weeks, a full-featured app 12–16 weeks, and enterprise apps 16–24 weeks. You'll see working progress every two weeks." },
+      { question: "How long does it take to build an app?", answer: "A Blueprint & Prototype Sprint takes 2–3 weeks, an MVP usually 6–8 weeks, and full-featured or enterprise apps 12–24 weeks. You'll see working progress every two weeks." },
       { question: "Do you handle the App Store and Google Play?", answer: "Yes. We prepare screenshots, descriptions, and compliance documents, submit the app, and handle communication with Apple and Google's review teams." },
       { question: "Can you update an app someone else built?", answer: "Yes. We'll review the existing code, tell you honestly what shape it's in, and recommend the best path: fix, extend, or rebuild." },
       { question: "How do you keep my app secure?", answer: "We use encrypted storage, secure login (including Face ID and fingerprint), encrypted data in transit, and follow OWASP mobile security guidelines." },
-      { question: "What happens after my app launches?", answer: "Every plan includes post-launch support (30 days to 12 months). That covers crash monitoring, bug fixes, and updates for new iOS and Android versions." },
+      { question: "What happens after my app launches?", answer: "Every build plan includes post-launch support (30 days to 12 months). That covers crash monitoring, bug fixes, and updates for new iOS and Android versions." },
     ],
     related: ["web-development", "ux-ui", "brand-identity"],
     localLinks: [
@@ -425,7 +426,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "App Development Company in Houston, TX",
-      description: "iPhone, Android and cross-platform app development in Houston, from MVPs to enterprise apps, including App Store launch. App projects from $5K.",
+      description: "iPhone and Android app development in Houston: prototype sprints from $5,000, MVP apps from $15,000, and full products with App Store launch.",
       keywords: [
         "app development company Houston", "app development company near me Houston", "mobile app development Houston", "iOS app development Houston", "Android app development Houston", "app development agency Houston",
         "React Native development Houston", "HIPAA compliant app development Houston", "enterprise mobile app development Houston", "cross-platform app development Houston",
@@ -457,7 +458,7 @@ export const services: ServiceDefinition[] = [
     accent: "commands trust",
     summary: "We create your logo, colors, fonts, and brand guidelines so your business looks professional and consistent everywhere.",
     menuBlurb: "Logos, colors & brand guidelines",
-    startingAt: "$1,500",
+    startingAt: "$3,000",
     startingBilling: "one-time",
     whoItsFor: [
       "You're launching a company, product, or new division",
@@ -476,14 +477,14 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "Essentials",
-        price: "$1,500",
+        price: "$3,000",
         billing: "one-time",
-        bestFor: "New ventures and products that need a strong identity.",
+        bestFor: "New ventures that need to look established from day one.",
         timeline: "Typically 2 – 3 weeks",
         features: [
+          "Look established and trustworthy from the first impression",
           "3 logo concepts",
-          "Color palette",
-          "Typography",
+          "Color palette & typography",
           "Brand style guide",
           "Business card design",
           "All source files — you own them",
@@ -492,16 +493,16 @@ export const services: ServiceDefinition[] = [
       {
         level: "Growth",
         name: "Professional",
-        price: "$3,500",
+        price: "$6,000",
         billing: "one-time",
-        bestFor: "Companies that need a complete, scalable brand system.",
+        bestFor: "Companies that need one brand system that scales across every channel.",
         timeline: "Typically 4 – 6 weeks",
         popular: true,
         features: [
+          "One consistent brand across web, sales, and social — easier to recognize and trust",
           "Everything in Essentials",
           "5 logo concepts",
-          "Full color system",
-          "Custom typography",
+          "Full color system & custom typography",
           "Complete brand guidelines",
           "All stationery",
           "Social media templates",
@@ -510,11 +511,12 @@ export const services: ServiceDefinition[] = [
       {
         level: "Enterprise",
         name: "Enterprise",
-        price: "$7,500+",
+        price: "$12,000+",
         billing: "starting price",
-        bestFor: "Full rebrands and established companies.",
+        bestFor: "Full rebrands and established companies repositioning for growth.",
         timeline: "Typically 6 – 10 weeks",
         features: [
+          "Positioning that sets you apart and supports premium pricing",
           "Everything in Professional",
           "Brand strategy & positioning",
           "In-depth brand book",
@@ -552,7 +554,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Brand Identity & Logo Design, Houston",
-      description: "Logo design, color, typography and brand guidelines for growing Houston companies. Brand identity packages from $1,500, with a written scope up front.",
+      description: "Logo design, color, typography and brand guidelines for growing Houston companies. Brand identity packages from $3,000, with a fixed-price written scope.",
       keywords: [
         "brand identity design Houston", "logo design Houston", "branding agency Houston TX", "Houston logo designer", "brand guidelines Houston",
         "visual identity Houston", "Houston branding company", "logo design company Houston", "brand strategy Houston", "startup branding Houston",
@@ -584,7 +586,7 @@ export const services: ServiceDefinition[] = [
     accent: "easy to use",
     summary: "We study how your customers use your site or app, then redesign it so more of them sign up, book, or buy.",
     menuBlurb: "Easier-to-use websites & apps",
-    startingAt: "$1,000",
+    startingAt: "$2,500",
     startingBilling: "one-time",
     whoItsFor: [
       "Visitors reach your site but don't sign up, book, or buy",
@@ -603,15 +605,15 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "UX Audit",
-        price: "$1,000",
+        price: "$2,500",
         billing: "one-time",
-        bestFor: "Finding out exactly what's hurting your conversions.",
+        bestFor: "Finding exactly what's costing you conversions — and what to fix first.",
         features: [
+          "Find the friction that's costing you sign-ups and sales",
           "Expert review of your site or app",
-          "User flow analysis",
+          "User flow & analytics review",
           "Accessibility check (WCAG 2.1)",
           "Competitor comparison",
-          "Analytics review",
           "Prioritized fix list",
           "1-hour walkthrough & Q&A",
           "30 days of follow-up support",
@@ -620,29 +622,30 @@ export const services: ServiceDefinition[] = [
       {
         level: "Growth",
         name: "Design Sprint",
-        price: "$3,500",
+        price: "$5,000",
         billing: "one-time",
-        bestFor: "Designing and testing a new feature or product, fast.",
+        bestFor: "Designing and testing a new feature or product before you build it.",
         timeline: "5-day sprint",
         popular: true,
         features: [
+          "Test ideas with real users before you spend on development",
           "Everything in UX Audit",
           "5-day design sprint",
           "User research & personas",
           "Customer journey mapping",
           "Clickable prototype",
           "Testing with 5 real users",
-          "Implementation roadmap",
-          "2 months of implementation support",
+          "Implementation roadmap & 2 months of support",
         ],
       },
       {
         level: "Enterprise",
         name: "Full Redesign",
-        price: "$7,500+",
+        price: "$12,000+",
         billing: "starting price",
         bestFor: "Complete redesigns of a site, app, or platform.",
         features: [
+          "A redesign grounded in research — built to convert, not just look new",
           "Everything in Design Sprint",
           "In-depth user research & interviews",
           "Full design system & component library",
@@ -684,7 +687,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "UX/UI Design Agency in Houston, TX",
-      description: "UX research, audits and interface design that help more of your visitors sign up, book or buy. Houston UX/UI design projects start at $1,000.",
+      description: "UX research, audits and interface design that help more of your visitors sign up, book or buy. Houston UX audits from $2,500.",
       keywords: [
         "UX design agency Houston", "UI design Houston TX", "user experience design Houston", "UX designer Houston", "Houston UX UI agency",
         "web design UX Houston", "app UX design Houston", "Figma designer Houston", "UX research Houston", "interface design Houston",
@@ -739,12 +742,12 @@ export const services: ServiceDefinition[] = [
         billing: "per month",
         bestFor: "Single-market companies building a search foundation.",
         features: [
+          "More calls and map-pack visibility in your core market",
           "Google Business Profile optimization",
           "On-page SEO (up to 10 pages/mo)",
           "Local citation building",
           "Technical SEO audits",
-          "Monthly keyword rank tracking",
-          "Monthly performance report",
+          "Monthly rankings, traffic & leads report",
         ],
       },
       {
@@ -752,9 +755,10 @@ export const services: ServiceDefinition[] = [
         name: "SEO Growth",
         price: "$2,500",
         billing: "per month",
-        bestFor: "Businesses ready to outrank competitors.",
+        bestFor: "Businesses ready to outrank competitors for buyer searches.",
         popular: true,
         features: [
+          "Outrank competitors for the searches that bring in buyers",
           "Everything in Foundation",
           "4 blog posts per month",
           "Link building & authority growth",
@@ -770,6 +774,7 @@ export const services: ServiceDefinition[] = [
         billing: "per month",
         bestFor: "Multi-location businesses that want to own their market.",
         features: [
+          "Own your market across every location and service line",
           "Everything in Growth",
           "8 long-form articles per month",
           "PR & digital outreach",
@@ -865,10 +870,11 @@ export const services: ServiceDefinition[] = [
         billing: "per month",
         bestFor: "Building a steady, measurable flow of leads.",
         features: [
+          "A steady flow of leads — with every dollar tracked to results",
           "2 marketing channels managed",
+          "Ads management (up to $2K/mo ad spend)",
           "Social media on 3 platforms",
           "4 email campaigns per month",
-          "Ads management (up to $2K/mo ad spend)",
           "4 pieces of content per month",
           "Monthly report & strategy call",
           "Dedicated account manager",
@@ -882,14 +888,14 @@ export const services: ServiceDefinition[] = [
         bestFor: "Businesses ready to scale what's working.",
         popular: true,
         features: [
+          "Scale what's working with constant testing and optimization",
           "Everything in Starter",
           "4 marketing channels managed",
           "Ads management (up to $10K/mo ad spend)",
-          "8 pieces of content per month",
-          "Automated email sequences",
           "A/B testing & landing page optimization",
-          "Custom results dashboard",
-          "Strategy calls every 2 weeks",
+          "Automated email sequences",
+          "8 pieces of content per month",
+          "Custom results dashboard · calls every 2 weeks",
         ],
       },
       {
@@ -899,11 +905,12 @@ export const services: ServiceDefinition[] = [
         billing: "per month",
         bestFor: "Established brands running every channel.",
         features: [
+          "Full-funnel growth across every channel, with clear attribution",
           "Everything in Growth",
           "Unlimited channels & ad spend",
+          "Advanced attribution tracking",
           "Video production & editing",
           "Influencer partnerships",
-          "Advanced attribution tracking",
           "Dedicated marketing team",
           "Weekly reports & strategy calls",
         ],
@@ -967,7 +974,7 @@ export const services: ServiceDefinition[] = [
     accent: "brings in business",
     summary: "We plan, create, publish, and manage your social channels — and answer your audience — so your brand stays active, consistent, and visible where customers spend their time.",
     menuBlurb: "Content, community & paid social",
-    startingAt: "Custom",
+    startingAt: "$1,500",
     startingBilling: "per month",
     research: [
       { value: "73%", label: "of consumers expect brands to respond on social media within 24 hours or sooner.", source: "Sprout Social Index", year: "2025", url: "https://sproutsocial.com/insights/social-media-response-time/" },
@@ -990,27 +997,28 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "Social Essentials",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$1,500+",
+        billing: "per month",
         bestFor: "A consistent, professional presence on your most important channels.",
         features: [
+          "A professional presence that builds trust with buyers who check you out",
           "2 platforms managed",
           "12 posts per month",
           "Monthly content calendar",
           "Branded graphics & copy",
-          "Publishing & scheduling",
-          "Business-day community management",
+          "Publishing & business-day community management",
           "Monthly performance report",
         ],
       },
       {
         level: "Growth",
         name: "Social Growth",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$2,500+",
+        billing: "per month",
         bestFor: "Growing reach and turning followers into leads.",
         popular: true,
         features: [
+          "Turn followers into leads with content and paid social",
           "Everything in Social Essentials",
           "Up to 4 platforms managed",
           "20 posts per month, including short-form video",
@@ -1022,17 +1030,17 @@ export const services: ServiceDefinition[] = [
       {
         level: "Enterprise",
         name: "Social Program",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$4,500+",
+        billing: "per month",
         bestFor: "Multi-brand or multi-location organizations.",
         features: [
+          "One coordinated voice across every brand and location",
           "Everything in Social Growth",
           "All relevant platforms",
           "Video production & editing",
           "Social listening & reputation monitoring",
           "Influencer & creator partnerships",
-          "Dedicated social media manager",
-          "Weekly reporting",
+          "Dedicated social media manager · weekly reporting",
         ],
       },
     ],
@@ -1057,7 +1065,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Social Media Management in Houston",
-      description: "Strategy, content creation, publishing, community management and paid social for Houston brands, scoped to your channels with a custom quote.",
+      description: "Strategy, content creation, publishing, community management and paid social for Houston brands, month-to-month. Plans from $1,500/mo.",
       keywords: [
         "social media management Houston", "social media marketing agency Houston", "social media agency Houston TX", "social media manager Houston",
         "Instagram marketing Houston", "Facebook marketing Houston", "LinkedIn marketing Houston", "TikTok marketing Houston",
@@ -1082,8 +1090,8 @@ export const services: ServiceDefinition[] = [
     accent: "removes manual work",
     summary: "We find where AI and automation will genuinely pay off, then build secure assistants, workflow automations, and integrations that connect to the systems you already use.",
     menuBlurb: "AI assistants & workflow automation",
-    startingAt: "Custom",
-    startingBilling: "custom quote",
+    startingAt: "$1,500",
+    startingBilling: "starting price",
     research: [
       { value: "88%", label: "of organizations now use AI regularly in at least one business function, up from 78% a year earlier.", source: "McKinsey, The State of AI", year: "2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
       { value: "~1 in 3", label: "organizations have begun scaling AI across the enterprise — most are still stuck in pilots.", source: "McKinsey, The State of AI", year: "2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
@@ -1105,26 +1113,27 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "AI Opportunity Assessment",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$1,500+",
+        billing: "starting price",
         bestFor: "Knowing exactly where AI will pay off before you invest.",
         features: [
+          "Know where AI will save time and money before you spend on a build",
           "Workflow & data review",
           "Prioritized list of automation opportunities",
           "Estimated time and cost savings",
           "Risk, privacy & compliance review",
-          "Recommended tools and build plan",
-          "Executive readout",
+          "Recommended tools, build plan & executive readout",
         ],
       },
       {
         level: "Growth",
         name: "Automation Build",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$4,000–$12,000",
+        billing: "per build",
         bestFor: "Launching one or two high-impact automations or assistants.",
         popular: true,
         features: [
+          "Reclaim hours every week by automating high-volume work",
           "Everything in the Assessment",
           "Custom AI assistant or workflow automation",
           "Integration with your existing systems",
@@ -1136,10 +1145,11 @@ export const services: ServiceDefinition[] = [
       {
         level: "Enterprise",
         name: "AI Program",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$15,000+",
+        billing: "starting price",
         bestFor: "Rolling out AI across departments with governance.",
         features: [
+          "AI adopted safely across departments, with measurable ROI",
           "Everything in Automation Build",
           "Multiple assistants & automations",
           "AI usage policy & governance framework",
@@ -1169,7 +1179,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "AI & Automation Consulting in Houston",
-      description: "AI assistants, workflow automation and system integrations for Houston businesses, built around the tools you already use. Free consultation.",
+      description: "AI assistants, workflow automation and system integrations for Houston businesses, built around your tools. Assessments from $1,500; builds $4K–$12K.",
       keywords: [
         "AI consulting Houston", "AI automation agency Houston", "business process automation Houston", "AI chatbot development Houston",
         "workflow automation services", "AI integration services", "custom AI assistant development", "AI consultant for small business",
@@ -1194,8 +1204,8 @@ export const services: ServiceDefinition[] = [
     accent: "confident decisions",
     summary: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership — so you invest in the right technology and avoid expensive mistakes.",
     menuBlurb: "Fractional CTO, architecture & cloud",
-    startingAt: "Custom",
-    startingBilling: "custom quote",
+    startingAt: "$2,500",
+    startingBilling: "starting price",
     research: [
       { value: "84%", label: "of organizations say managing cloud spend is their top cloud challenge.", source: "Flexera, State of the Cloud Report", year: "2025", url: "https://www.flexera.com/about-us/press-center/new-flexera-report-finds-84-percent-of-organizations-struggle-to-manage-cloud-spend" },
       { value: "$10.22M", label: "average cost of a data breach for U.S. organizations — a record high (global average: $4.44M).", source: "IBM, Cost of a Data Breach Report", year: "2025", url: "https://www.ibm.com/reports/data-breach" },
@@ -1217,26 +1227,27 @@ export const services: ServiceDefinition[] = [
       {
         level: "Foundation",
         name: "Technical Assessment",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$2,500+",
+        billing: "starting price",
         bestFor: "An independent, written review of one platform or decision.",
         features: [
+          "An independent answer before you make a costly technology decision",
           "Stakeholder interviews",
           "Architecture, code, or cloud review",
           "Security & risk findings, ranked by severity",
           "Cost and performance recommendations",
-          "Written report & prioritized roadmap",
-          "Executive readout",
+          "Written report, prioritized roadmap & executive readout",
         ],
       },
       {
         level: "Growth",
         name: "Advisory Retainer",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$3,000+",
+        billing: "per month",
         bestFor: "Ongoing senior guidance for your team and vendors.",
         popular: true,
         features: [
+          "Senior technical judgment on call — without a full-time hire",
           "Everything in the Assessment",
           "Monthly advisory hours",
           "Architecture & vendor decision support",
@@ -1248,10 +1259,11 @@ export const services: ServiceDefinition[] = [
       {
         level: "Enterprise",
         name: "Fractional CTO",
-        price: "Custom",
-        billing: "custom quote",
+        price: "$6,000+",
+        billing: "per month",
         bestFor: "Part-time executive technology leadership.",
         features: [
+          "Executive technology leadership for a fraction of a full-time CTO's cost",
           "Everything in Advisory Retainer",
           "Technology leadership & team guidance",
           "Hiring & vendor management",
@@ -1281,7 +1293,7 @@ export const services: ServiceDefinition[] = [
     ],
     seo: {
       title: "Fractional CTO & IT Consulting, Houston",
-      description: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership for Houston companies. Custom quotes.",
+      description: "Architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership. Assessments from $2,500; retainers from $3,000/mo.",
       keywords: [
         "technical consulting Houston", "fractional CTO Houston", "IT consulting Houston", "technology consultant Houston",
         "software architecture review", "code audit services", "cloud cost optimization consulting", "cloud consulting Houston",
@@ -1387,6 +1399,40 @@ export function priceToNumber(price: string): number | undefined {
   const match = price.replace(/,/g, "").match(/(\d+(?:\.\d+)?)\s*(k)?/i);
   if (!match) return undefined;
   return parseFloat(match[1]) * (match[2] ? 1000 : 1);
+}
+
+/** All dollar amounts in a price string: "$4,000–$12,000" → { min: 4000, max: 12000 }; "$15,000+" → { min: 15000, open: true }. */
+export function priceBounds(price: string): { min?: number; max?: number; open: boolean } {
+  const nums = [...price.replace(/,/g, "").matchAll(/(\d+(?:\.\d+)?)\s*(k)?/gi)].map((m) => parseFloat(m[1]) * (m[2] ? 1000 : 1));
+  return { min: nums[0], max: nums.length > 1 ? nums[nums.length - 1] : undefined, open: price.trim().endsWith("+") };
+}
+
+/** schema.org price fields for a tier: exact price, a range, or a starting minimum. */
+export function priceSpecification(t: Pick<ServiceTier, "price" | "billing">) {
+  const { min, max, open } = priceBounds(t.price);
+  if (min === undefined) return undefined;
+  return {
+    "@type": t.billing === "per month" ? "UnitPriceSpecification" : "PriceSpecification",
+    priceCurrency: "USD",
+    ...(max !== undefined ? { minPrice: min, maxPrice: max } : open || t.billing === "starting price" ? { minPrice: min } : { price: min }),
+    ...(t.billing === "per month" && { unitText: "MONTH" }),
+  };
+}
+
+/** What happens next for a package — shown on every pricing card. */
+export function tierAssurance(t: Pick<ServiceTier, "billing">): string {
+  return t.billing === "per month"
+    ? "Month-to-month · no long-term contract"
+    : "Free consultation → written scope → fixed-price guarantee";
+}
+
+/** "$3,500 – $15,000+", "$1,500 – $4,000 / mo", or "From $2,500" when billing models differ. */
+export function packageRange(s: ServiceDefinition): string {
+  const first = s.tiers[0];
+  const last = s.tiers[s.tiers.length - 1];
+  const low = first.price.replace(/\+$/, "").split(/[–-]/)[0].trim();
+  if (first.billing !== last.billing && (first.billing === "per month" || last.billing === "per month")) return `From ${low}`;
+  return `${low} – ${last.price}${last.billing === "per month" ? " / mo" : ""}`;
 }
 
 export function formatStartingAt(service: ServiceDefinition): string {

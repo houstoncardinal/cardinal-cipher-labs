@@ -7,6 +7,7 @@ import { services } from "@/lib/services-catalog";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution, lastViewedService } from "@/lib/contact-intent";
 import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, postNetlifyForm, PROMPTS, TIMELINES } from "@/lib/contact-options";
+import { recordLead } from "@/lib/leads";
 
 /**
  * Guided three-step version of the "contact" Netlify form for the homepage:
@@ -121,7 +122,7 @@ export function GuidedContactForm() {
     if (!contactValid) return;
     setStatus("submitting");
     try {
-      await postNetlifyForm({
+      const payload = {
         "form-name": FORM_NAME,
         "bot-field": honeypot.current?.value ?? "",
         name,
@@ -143,7 +144,9 @@ export function GuidedContactForm() {
         utm_source: attribution.utmSource,
         utm_medium: attribution.utmMedium,
         utm_campaign: attribution.utmCampaign,
-      });
+      };
+      await postNetlifyForm(payload);
+      void recordLead(payload);
       trackEvent("generate_lead", {
         form_name: FORM_NAME,
         service: service?.name ?? "Not sure yet",

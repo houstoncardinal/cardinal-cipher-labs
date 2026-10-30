@@ -8,6 +8,8 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
+  /** PIN login: verified server-side by netlify/functions/admin-pin, which returns a session */
+  signInWithPin: (pin: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
 }
@@ -73,6 +75,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const signInWithPin = async (pin: string) => {
+    try {
+      const res = await fetch('/.netlify/functions/admin-pin', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ pin }),
+      });
+      if (res.status === 429) return { error: 'Too many attempts. Wait a minute and try again.' };
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || !body.access_token) return { error: body.error ?? 'Incorrect PIN' };
+      const { error } = await supabase.auth.setSession({ access_token: body.access_token, refresh_token: body.refresh_token });
+      return { error: error ? error.message : null };
+    } catch {
+      return { error: 'Admin login is unavailable. Check your connection and try again.' };
+    }
+  };
+
   const signUp = async (email: string, password: string) => {
     try {
       const { error } = await supabase.auth.signUp({
@@ -129,6 +148,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         session,
         loading,
         signIn,
+        signInWithPin,
         signUp,
         signOut,
       }}

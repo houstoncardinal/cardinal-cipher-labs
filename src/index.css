@@ -169,7 +169,8 @@
      their white text, hairlines and glass cards look exactly as designed. */
   .dark :is(section, div, aside, article, footer, figure, li, dl, ol, ul, span, p, nav, header):is(
       .bg-gray-900, .bg-gray-950, .bg-gray-800, .bg-ink, .bg-black, .bg-ink\/25
-    ) {
+    ),
+  .dark .ink-island {
     --c-white: 255 255 255;
     --c-gray-50: 249 250 251;
     --c-gray-100: 243 244 246;
@@ -213,10 +214,10 @@
   html {
     scroll-behavior: smooth;
   }
-
-  /* Lenis drives smooth scrolling itself; native smoothing would fight it */
-  html.lenis {
-    scroll-behavior: auto;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   /* Smooth theme transitions */

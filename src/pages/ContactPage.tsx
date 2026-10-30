@@ -11,6 +11,7 @@ import { ContactForm } from "@/components/site/ContactForm";
 import { Container, Eyebrow, reveal } from "@/components/site/primitives";
 import { siteConfig } from "@/lib/seo-config";
 import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
 const details = [
   { icon: Phone, label: "Phone", value: "(281) 901-7016", href: "tel:281-901-7016" },
@@ -71,7 +72,8 @@ export default function ContactPage() {
             </Container>
           </section>
 
-          <section className="py-14 lg:py-24">
+          <section className="relative isolate overflow-hidden py-14 lg:py-24">
+            <CardinalMark />
             <Container className="grid gap-16 lg:grid-cols-[1.5fr_1fr]">
               <motion.div {...reveal} className="border border-border p-8 lg:p-10">
                 <h2 className="mb-8 font-display text-2xl text-foreground">Send us a message</h2>

@@ -58,7 +58,8 @@ function useThreeScene(container: RefObject<HTMLDivElement>, create: (ctx: Scene
       } catch {
         return; // no WebGL: the section still reads perfectly without its art
       }
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      // 1.5× is visually identical for point art and saves ~45% GPU fill on Retina screens
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
       renderer.setClearColor(0x000000, 0);
       renderer.domElement.style.cssText = "display:block;width:100%;height:100%";
       el.appendChild(renderer.domElement);
@@ -138,13 +139,15 @@ function useThreeScene(container: RefObject<HTMLDivElement>, create: (ctx: Scene
 const easeTo = (current: number, target: number, dt: number, speed: number) => current + (target - current) * Math.min(1, dt * speed);
 
 // ── System sculpture ─────────────────────────────────────────────────────────
-// One particle field that tells the "we build systems" story in five states:
+// One particle field that tells the "we build systems" story in five scenes:
 //   0 dust → 1 your business in orbit → 2 a living workflow → 3 the platform we build → 4 a conversion funnel
-// HTML labels are pinned to points in the scene and projected to screen every frame.
+// Scenes change as discrete, timed transitions (never scrubbed), always morphing directly from
+// the current scene to the requested one. The camera re-frames per scene, the dashboard
+// assembles itself, and labels arrive in sequence once a scene settles.
 
 export interface SculptureAnchor {
   id: string;
-  /** Morph state (1–4) during which the label is shown */
+  /** Scene (1–4) during which the label is shown */
   stage: number;
   label: string;
   pos: [number, number, number];
@@ -160,59 +163,79 @@ const SCULPTURE_VERT = /* glsl */ `
   attribute float aRand;
   attribute float aAccent;
   attribute float aPacket;
-  uniform float uMorph;
+  attribute float aSeq;  // dashboard build order (0..1), -1 = always visible
+  attribute float aBarBase; // dashboard bar baseline (y), or -99
+  uniform float uFrom;
+  uniform float uTo;
+  uniform float uT;
   uniform float uTime;
   uniform float uSize;
   uniform float uPixelRatio;
   uniform float uMotion;
+  uniform float uBuild;  // dashboard assembly 0..1
   uniform vec3 uPointer;
   uniform float uPointerStrength;
   varying float vAccent;
-  varying float vDepth;
+  varying float vAlpha;
 
-  float stage(float k) {
-    float x = clamp((uMorph - k) * 1.4 - aRand * 0.4, 0.0, 1.0);
-    return x * x * (3.0 - 2.0 * x);
-  }
+  float h01;
 
   vec3 funnel(float t) {
-    float h = fract(aE.y - t * 0.05);
+    float h = fract(aE.y - t * 0.06);
+    h01 = h;
     float y = mix(1.55, -1.65, h);
-    float r = mix(1.8, 0.16, smoothstep(0.0, 0.88, h)) * (1.0 + (aE.z - 0.5) * 0.14);
-    float a = aE.x + t * 0.25 + h * 2.6;
+    float r = mix(1.8, 0.14, smoothstep(0.0, 0.9, h)) * (1.0 + (aE.z - 0.5) * 0.14);
+    float a = aE.x + t * 0.28 + h * 2.8;
     return vec3(cos(a) * r, y, sin(a) * r);
+  }
+
+  vec3 shapeAt(float i, float t) {
+    if (i < 0.5) return position + vec3(sin(t * 0.2 + aRand * 20.0), cos(t * 0.17 + aRand * 13.0), sin(t * 0.13 + aRand * 7.0)) * 0.18;
+    if (i < 1.5) return aB;
+    if (i < 2.5) return mix(aC0, aC1, fract(aRand * 7.31 + t * 0.14));
+    if (i < 3.5) {
+      vec3 d = aD;
+      if (aBarBase > -50.0) d.y = aBarBase + (d.y - aBarBase) * smoothstep(aSeq - 0.25, aSeq + 0.05, uBuild);
+      return d;
+    }
+    return funnel(t);
   }
 
   void main() {
     float t = uTime * uMotion;
-    vec3 dust = position + vec3(sin(t * 0.2 + aRand * 20.0), cos(t * 0.17 + aRand * 13.0), sin(t * 0.13 + aRand * 7.0)) * 0.18;
-    // Data packets travel the workflow edges (node particles have start == end and stay put)
-    vec3 flow = mix(aC0, aC1, fract(aRand * 7.31 + t * 0.14));
+    h01 = 0.0;
+    // Per-particle stagger, eased: particles leave and arrive in a wave rather than all at once
+    float k = clamp(uT * 1.45 - aRand * 0.45, 0.0, 1.0);
+    k = k < 0.5 ? 4.0 * k * k * k : 1.0 - pow(-2.0 * k + 2.0, 3.0) / 2.0;
+    vec3 a = shapeAt(uFrom, t);
+    vec3 b = shapeAt(uTo, t);
+    vec3 p = mix(a, b, k);
 
-    float s0 = stage(0.0);
-    float s1 = stage(1.0);
-    float s2 = stage(2.0);
-    float s3 = stage(3.0);
-    vec3 p = mix(dust, aB, s0);
-    p = mix(p, flow, s1);
-    p = mix(p, aD, s2);
-    p = mix(p, funnel(t), s3);
-
-    // Swirl outward mid-transition, then settle into the next form
-    float flight = sin(s0 * 3.14159) + sin(s1 * 3.14159) + sin(s2 * 3.14159) + sin(s3 * 3.14159);
-    p += aDir * flight * 0.42;
-    p += normalize(p + 1e-4) * sin(t * 0.9 + aRand * 6.2831 + p.y * 1.7) * 0.014;
+    // Mid-flight: drift outward and swirl around the vertical axis
+    float flight = sin(k * 3.14159);
+    p += aDir * flight * 0.55;
+    float sw = flight * 0.9 * (aRand - 0.5);
+    p.xz = mat2(cos(sw), -sin(sw), sin(sw), cos(sw)) * p.xz;
+    p += normalize(p + 1e-4) * sin(t * 0.9 + aRand * 6.2831 + p.y * 1.7) * 0.012;
 
     // Particles part around the pointer
-    vec3 d = p - uPointer;
-    float push = uPointerStrength * smoothstep(0.85, 0.0, length(d));
-    p += normalize(d + 1e-4) * push * 0.32;
+    vec3 dp = p - uPointer;
+    float push = uPointerStrength * smoothstep(0.85, 0.0, length(dp));
+    p += normalize(dp + 1e-4) * push * 0.3;
 
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
     gl_PointSize = uSize * uPixelRatio * (0.55 + aRand * 0.9) / -mv.z;
-    vAccent = max(max(aAccent, aPacket * s1 * (1.0 - s2)), push * 0.9);
-    vDepth = smoothstep(-8.5, -4.5, mv.z);
+
+    float wFlow = (uFrom > 1.5 && uFrom < 2.5 ? 1.0 - k : 0.0) + (uTo > 1.5 && uTo < 2.5 ? k : 0.0);
+    float wDash = (uFrom > 2.5 && uFrom < 3.5 ? 1.0 - k : 0.0) + (uTo > 2.5 && uTo < 3.5 ? k : 0.0);
+    float wFunnel = (uFrom > 3.5 ? 1.0 - k : 0.0) + (uTo > 3.5 ? k : 0.0);
+    // Converted leads glow at the bottom of the funnel
+    float converted = wFunnel * smoothstep(0.82, 0.97, h01);
+    vAccent = max(max(aAccent, aPacket * wFlow), max(converted, push * 0.9));
+    // Dashboard elements fade in following their build order
+    float reveal = aSeq < 0.0 ? 1.0 : mix(1.0, smoothstep(aSeq - 0.2, aSeq, uBuild), wDash);
+    vAlpha = smoothstep(-8.5, -4.2, mv.z) * reveal * (1.0 - flight * 0.25);
   }
 `;
 
@@ -220,18 +243,17 @@ const SCULPTURE_FRAG = /* glsl */ `
   uniform vec3 uInk;
   uniform vec3 uAccent;
   varying float vAccent;
-  varying float vDepth;
+  varying float vAlpha;
   void main() {
     float d = length(gl_PointCoord - 0.5);
     if (d > 0.5) discard;
-    float a = smoothstep(0.5, 0.15, d);
-    gl_FragColor = vec4(mix(uInk, uAccent, vAccent), a * mix(0.2, 0.9, vDepth));
+    float a = smoothstep(0.5, 0.12, d);
+    gl_FragColor = vec4(mix(uInk, uAccent, vAccent), a * mix(0.18, 0.92, vAlpha));
   }
 `;
 
 type V3 = [number, number, number];
 
-// Orbits: tilted rings around a core — the parts of your business we study first
 const RINGS = [
   { r: 0.95, tx: 1.15, tz: 0.15, label: "Your business" },
   { r: 1.25, tx: 1.35, tz: -0.55, label: "Your workflow" },
@@ -240,14 +262,12 @@ const RINGS = [
 ];
 const ringPoint = (ring: (typeof RINGS)[number], a: number, lift = 0): V3 => {
   const x = Math.cos(a) * ring.r;
-  const y = lift;
   const z = Math.sin(a) * ring.r;
-  const y1 = y * Math.cos(ring.tx) - z * Math.sin(ring.tx);
-  const z1 = y * Math.sin(ring.tx) + z * Math.cos(ring.tx);
+  const y1 = lift * Math.cos(ring.tx) - z * Math.sin(ring.tx);
+  const z1 = lift * Math.sin(ring.tx) + z * Math.cos(ring.tx);
   return [x * Math.cos(ring.tz) - y1 * Math.sin(ring.tz), x * Math.sin(ring.tz) + y1 * Math.cos(ring.tz), z1];
 };
 
-// Workflow: how a lead moves through the system we build
 const NODES: { label: string; pos: V3 }[] = [
   { label: "Website", pos: [-2.0, 0.25, 0] },
   { label: "Lead captured", pos: [-0.95, 0.95, 0.3] },
@@ -263,11 +283,21 @@ export const SCULPTURE_ANCHORS: SculptureAnchor[] = [
   ...NODES.map((n, i) => ({ id: `flow-${i}`, stage: 2, label: n.label, pos: n.pos })),
   { id: "dash-0", stage: 3, label: "Custom website", pos: [-1.2, 0.98, 0] },
   { id: "dash-1", stage: 3, label: "Client portal", pos: [-1.42, -0.2, 0.08] },
-  { id: "dash-2", stage: 3, label: "CRM pipeline", pos: [0.25, -0.78, 0.15] },
-  { id: "dash-3", stage: 3, label: "Automations", pos: [1.42, 1.0, 0.6] },
+  { id: "dash-2", stage: 3, label: "Live KPIs", pos: [-0.2, 0.5, 0.18] },
+  { id: "dash-3", stage: 3, label: "CRM pipeline", pos: [0.25, -0.78, 0.15] },
+  { id: "dash-4", stage: 3, label: "Automations", pos: [1.42, 1.0, 0.6] },
   { id: "funnel-0", stage: 4, label: "Visitors", pos: [1.85, 1.5, 0] },
   { id: "funnel-1", stage: 4, label: "Qualified leads", pos: [0.95, -0.05, 0] },
   { id: "funnel-2", stage: 4, label: "Loyal clients", pos: [0.3, -1.62, 0] },
+];
+
+/** Camera framing per scene: distance, tilt, yaw. */
+const SHOTS = [
+  { z: 7.4, rx: 0.2, ry: 0 },
+  { z: 6.4, rx: 0.3, ry: 0 },
+  { z: 6.2, rx: 0.18, ry: 0 },
+  { z: 6.5, rx: 0.1, ry: -0.18 },
+  { z: 6.7, rx: 0.36, ry: 0 },
 ];
 
 function buildSystemShapes(count: number) {
@@ -281,17 +311,19 @@ function buildSystemShapes(count: number) {
   const rand = new Float32Array(count);
   const accent = new Float32Array(count);
   const packet = new Float32Array(count);
+  const seq = new Float32Array(count).fill(-1);
+  const barBase = new Float32Array(count).fill(-99);
   const R = Math.random;
+  const set = (arr: Float32Array, i: number, v: V3) => {
+    arr[i * 3] = v[0];
+    arr[i * 3 + 1] = v[1];
+    arr[i * 3 + 2] = v[2];
+  };
   const ball = (r: number): V3 => {
     const u = R() * 2 - 1;
     const a = R() * Math.PI * 2;
     const s = Math.sqrt(1 - u * u) * r * Math.cbrt(R());
     return [Math.cos(a) * s, Math.sin(a) * s, u * r * Math.cbrt(R())];
-  };
-  const set = (arr: Float32Array, i: number, v: V3) => {
-    arr[i * 3] = v[0];
-    arr[i * 3 + 1] = v[1];
-    arr[i * 3 + 2] = v[2];
   };
   const onRect = (x0: number, y0: number, x1: number, y1: number, z: number): V3 => {
     const w = x1 - x0;
@@ -308,28 +340,23 @@ function buildSystemShapes(count: number) {
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
   for (let n = 0; n < count; n++) {
-    const r = R();
-    rand[n] = r;
+    rand[n] = R();
     accent[n] = R() < 0.03 ? 1 : 0;
 
-    // 0 — dust: a wide, drifting field
     const u = R() * 2 - 1;
     const a0 = R() * Math.PI * 2;
     const s0 = Math.sqrt(1 - u * u) * Math.cbrt(R());
     set(dust, n, [Math.cos(a0) * s0 * 5.5, Math.sin(a0) * s0 * 3.2, u * 2.4]);
 
-    // 1 — orbits: a dense core and four tilted rings
     if (R() < 0.2) {
       const [x, y, z] = ball(1);
       const len = Math.hypot(x, y, z) || 1;
       const rr = 0.38 + R() * 0.06;
       set(orbit, n, [(x / len) * rr, (y / len) * rr, (z / len) * rr]);
     } else {
-      const ring = RINGS[n % RINGS.length];
-      set(orbit, n, ringPoint(ring, R() * Math.PI * 2, (R() - 0.5) * 0.05));
+      set(orbit, n, ringPoint(RINGS[n % RINGS.length], R() * Math.PI * 2, (R() - 0.5) * 0.05));
     }
 
-    // 2 — workflow: node clusters plus packets travelling each connection
     if (R() < 0.34) {
       const node = NODES[(R() * NODES.length) | 0].pos;
       const [x, y, z] = ball(0.16);
@@ -346,33 +373,44 @@ function buildSystemShapes(count: number) {
       packet[n] = R() < 0.22 ? 1 : 0;
     }
 
-    // 3 — the platform: an exploded dashboard (frame, sidebar, KPI cards, charts, pipeline, floating automation card)
+    // Dashboard, with a build order: frame → sidebar → KPI cards → bars (grow) → line (draws) → pipeline → automation card
     const k = R();
     let p: V3;
-    if (k < 0.17) p = onRect(-1.7, -1.1, 1.7, 1.1, 0);
-    else if (k < 0.21) p = [lerp(-1.7, 1.7, R()), 0.82, 0];
-    else if (k < 0.3) p = fill(-1.62, -1.02, -1.18, 0.74, 0.08);
-    else if (k < 0.44) {
+    if (k < 0.17) {
+      p = onRect(-1.7, -1.1, 1.7, 1.1, 0);
+      seq[n] = 0.05;
+    } else if (k < 0.21) {
+      p = [lerp(-1.7, 1.7, R()), 0.82, 0];
+      seq[n] = 0.12;
+    } else if (k < 0.3) {
+      p = fill(-1.62, -1.02, -1.18, 0.74, 0.08);
+      seq[n] = 0.2;
+    } else if (k < 0.44) {
       const c = (R() * 3) | 0;
       const x0 = -1.0 + c * 0.86;
       p = onRect(x0, 0.32, x0 + 0.76, 0.68, 0.18);
+      seq[n] = 0.3 + c * 0.06;
     } else if (k < 0.58) {
       const b = (R() * 7) | 0;
       const hgt = [0.25, 0.38, 0.3, 0.46, 0.4, 0.52, 0.6][b];
       const x0 = -1.0 + b * 0.17;
       p = fill(x0, -0.35, x0 + 0.11, -0.35 + hgt, 0.3);
+      seq[n] = 0.5 + b * 0.04;
+      barBase[n] = -0.35;
     } else if (k < 0.7) {
       const tt = R();
       const x = lerp(0.35, 1.55, tt);
-      const y = -0.3 + tt * 0.38 + Math.sin(tt * 9) * 0.09;
-      p = [x, y + (R() - 0.5) * 0.025, 0.3];
+      p = [x, -0.3 + tt * 0.38 + Math.sin(tt * 9) * 0.09 + (R() - 0.5) * 0.025, 0.3];
+      seq[n] = 0.55 + tt * 0.3;
     } else if (k < 0.86) {
       const row = (R() * 4) | 0;
       p = [lerp(-1.0, 1.55, R()), -0.55 - row * 0.15, 0.15];
-    } else p = R() < 0.7 ? onRect(0.9, 0.75, 1.95, 1.25, 0.6) : fill(1.0, 0.95, 1.6, 1.0, 0.6);
+      seq[n] = 0.75 + row * 0.04;
+    } else {
+      p = R() < 0.7 ? onRect(0.9, 0.75, 1.95, 1.25, 0.6) : fill(1.0, 0.95, 1.6, 1.0, 0.6);
+      seq[n] = 0.92;
+    }
     set(dash, n, p);
-
-    // 4 — funnel (animated in the shader): angle, phase, jitter
     set(fun, n, [R() * Math.PI * 2, R(), R()]);
 
     const dz = R() * 2 - 1;
@@ -380,26 +418,28 @@ function buildSystemShapes(count: number) {
     const dr = Math.sqrt(1 - dz * dz);
     set(dir, n, [Math.cos(da) * dr, Math.sin(da) * dr, dz]);
   }
-  return { dust, orbit, c0, c1, dash, fun, dir, rand, accent, packet };
+  return { dust, orbit, c0, c1, dash, fun, dir, rand, accent, packet, seq, barBase };
 }
 
+const TRANSITION_S = 1.25;
+
 /**
- * Graphite particles that flow through five forms as `morph` moves 0 → 4, with the
- * labels in `labels` (keyed by anchor id) pinned to their points on screen.
+ * Graphite particles that move between five scenes. `scene` is a MotionValue holding the
+ * requested scene index (0–4); labels in `labels` (keyed by anchor id) are pinned on screen.
  */
 export function SystemSculpture({
-  morph,
+  scene,
   labels,
   className,
 }: {
-  morph: MotionValue<number>;
+  scene: MotionValue<number>;
   labels: { current: Record<string, HTMLElement | null> };
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useThreeScene(ref, ({ THREE, scene, camera, renderer, reduce, pointer }) => {
-    const count = window.innerWidth < 768 ? 7000 : 16000;
+  useThreeScene(ref, ({ THREE, scene: world, camera, renderer, reduce, pointer }) => {
+    const count = window.innerWidth < 768 ? 7000 : 15000;
     const s = buildSystemShapes(count);
     const geometry = new THREE.BufferGeometry();
     const attr = (name: string, arr: Float32Array, size: number) => geometry.setAttribute(name, new THREE.BufferAttribute(arr, size));
@@ -413,60 +453,98 @@ export function SystemSculpture({
     attr("aRand", s.rand, 1);
     attr("aAccent", s.accent, 1);
     attr("aPacket", s.packet, 1);
-    // Shapes move in the shader, so the CPU-side bounds are meaningless
+    attr("aSeq", s.seq, 1);
+    attr("aBarBase", s.barBase, 1);
     geometry.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 50);
 
+    const start = Math.round(scene.get());
     const uniforms = {
-      uMorph: { value: morph.get() },
+      uFrom: { value: start },
+      uTo: { value: start },
+      uT: { value: 1 },
       uTime: { value: 0 },
       uSize: { value: 15 },
       uPixelRatio: { value: renderer.getPixelRatio() },
       uMotion: { value: reduce ? 0 : 1 },
+      uBuild: { value: start === 3 ? 1 : 0 },
       uPointer: { value: new THREE.Vector3(0, 0, 100) },
       uPointerStrength: { value: 0 },
       uInk: { value: new THREE.Color() },
       uAccent: { value: new THREE.Color() },
     };
-    const material = new THREE.ShaderMaterial({
-      vertexShader: SCULPTURE_VERT,
-      fragmentShader: SCULPTURE_FRAG,
-      uniforms,
-      transparent: true,
-      depthWrite: false,
-    });
+    const material = new THREE.ShaderMaterial({ vertexShader: SCULPTURE_VERT, fragmentShader: SCULPTURE_FRAG, uniforms, transparent: true, depthWrite: false });
     const points = new THREE.Points(geometry, material);
     const group = new THREE.Group();
     group.add(points);
-    scene.add(group);
-    camera.position.set(0, 0, 6.5);
+    world.add(group);
 
-    const anchors = SCULPTURE_ANCHORS.map((a) => ({ ...a, v: new THREE.Vector3(...a.pos) }));
+    const anchors = SCULPTURE_ANCHORS.map((a, i) => ({ ...a, v: new THREE.Vector3(...a.pos), order: SCULPTURE_ANCHORS.filter((b, j) => b.stage === a.stage && j < i).length }));
     const tmp = new THREE.Vector3();
     const raycaster = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
     const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
     const hit = new THREE.Vector3();
     let size = { w: 1, h: 1 };
+    let base = { x: 0, y: 0, scale: 1 };
+    const cam = { ...SHOTS[start] };
     let tiltX = 0;
     let tiltY = 0;
+    let settled = 0; // seconds since the current scene finished arriving
+    let pending: number | null = null;
 
     return {
       update(t, dt) {
         uniforms.uTime.value = t;
-        uniforms.uMorph.value = easeTo(uniforms.uMorph.value, morph.get(), dt, 4);
-        const m = uniforms.uMorph.value;
 
-        // Gentle sway instead of a full spin, so every form keeps facing the reader
+        // Scene state machine: timed transitions, retargeted early or queued late
+        const want = Math.max(0, Math.min(4, Math.round(scene.get())));
+        if (want !== uniforms.uTo.value) {
+          if (uniforms.uT.value >= 1) {
+            uniforms.uFrom.value = uniforms.uTo.value;
+            uniforms.uTo.value = want;
+            uniforms.uT.value = 0;
+            settled = 0;
+          } else if (uniforms.uT.value < 0.35) {
+            uniforms.uTo.value = want; // still leaving: just change destination
+          } else {
+            pending = want;
+          }
+        } else pending = null;
+        if (uniforms.uT.value < 1) {
+          uniforms.uT.value = reduce ? 1 : Math.min(1, uniforms.uT.value + dt / TRANSITION_S);
+        } else {
+          settled += dt;
+          if (pending !== null && pending !== uniforms.uTo.value) {
+            uniforms.uFrom.value = uniforms.uTo.value;
+            uniforms.uTo.value = pending;
+            uniforms.uT.value = 0;
+            settled = 0;
+            pending = null;
+          }
+        }
+        const to = uniforms.uTo.value;
+        // Dashboard assembles after it arrives; resets when you leave
+        if (to !== 3) uniforms.uBuild.value = easeTo(uniforms.uBuild.value, 0, dt, 3);
+        else if (reduce) uniforms.uBuild.value = 1;
+        else if (uniforms.uT.value > 0.6) uniforms.uBuild.value = Math.min(1, uniforms.uBuild.value + dt / 1.6);
+
+        // Camera choreography
+        const shot = SHOTS[to];
+        cam.z = easeTo(cam.z, shot.z, dt, 1.8);
+        cam.rx = easeTo(cam.rx, shot.rx, dt, 1.8);
+        cam.ry = easeTo(cam.ry, shot.ry, dt, 1.8);
+        camera.position.z = cam.z;
+
         const p = pointer.current;
-        tiltX = easeTo(tiltX, p && !reduce ? -p.y * 0.22 : 0, dt, 2.5);
-        tiltY = easeTo(tiltY, p && !reduce ? p.x * 0.35 : 0, dt, 2.5);
-        const sway = reduce ? 0 : Math.sin(t * 0.18) * 0.32;
-        // The dashboard sits flatter so it reads as a screen
-        const flat = Math.max(0, 1 - Math.abs(m - 3));
-        points.rotation.set(0.28 * (1 - flat) + 0.12 * flat + tiltX, sway * (1 - flat * 0.6) - 0.25 * flat + tiltY, 0);
+        tiltX = easeTo(tiltX, p && !reduce ? -p.y * 0.18 : 0, dt, 2.5);
+        tiltY = easeTo(tiltY, p && !reduce ? p.x * 0.28 : 0, dt, 2.5);
+        const sway = reduce || to === 3 ? 0 : Math.sin(t * 0.18) * 0.28;
+        points.rotation.set(cam.rx + tiltX, cam.ry + sway + tiltY, 0);
+        group.position.set(base.x, base.y, 0);
+        group.scale.setScalar(base.scale);
         group.updateMatrixWorld();
+        camera.updateMatrixWorld();
 
-        // Pointer → sculpture-local space for the parting effect
         let strength = 0;
         if (p && !reduce) {
           ndc.set(p.x, p.y);
@@ -478,37 +556,33 @@ export function SystemSculpture({
         }
         uniforms.uPointerStrength.value = easeTo(uniforms.uPointerStrength.value, strength, dt, 3);
 
-        // Pin labels to their points
+        // Labels: fade out as a scene departs; arrive one by one once the next settles
+        const leaving = uniforms.uFrom.value;
         for (const a of anchors) {
           const el = labels.current[a.id];
           if (!el) continue;
-          const vis = Math.max(0, 1 - Math.abs(m - a.stage) * 2.4);
+          let vis = 0;
+          if (a.stage === to && uniforms.uT.value >= 1) vis = Math.min(1, Math.max(0, (settled - 0.1 - a.order * 0.12) / 0.4));
+          else if (a.stage === leaving && uniforms.uT.value < 0.25) vis = 1 - uniforms.uT.value / 0.25;
           if (vis <= 0.01) {
             el.style.opacity = "0";
             continue;
           }
           tmp.copy(a.v).applyMatrix4(points.matrixWorld).project(camera);
-          // Keep every label fully on screen, however the scene is framed
           const half = el.offsetWidth / 2 + 8;
           const x = Math.min(Math.max(((tmp.x + 1) / 2) * size.w, half), size.w - half);
           const y = ((1 - tmp.y) / 2) * size.h;
-          el.style.opacity = String(vis);
-          el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${(0.85 + vis * 0.15).toFixed(3)})`;
+          const e = 1 - Math.pow(1 - vis, 3);
+          el.style.opacity = String(e);
+          el.style.transform = `translate3d(${x.toFixed(1)}px, ${(y + (1 - e) * 10).toFixed(1)}px, 0) translate(-50%, -50%) scale(${(0.92 + e * 0.08).toFixed(3)})`;
         }
       },
       resize(w, h) {
         size = { w, h };
-        const viewH = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+        const viewH = 2 * 6.5 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
         const viewW = viewH * (w / h);
-        if (w >= 1024) {
-          // Wide: sits right of the copy
-          group.position.set(viewW * 0.22, 0, 0);
-          group.scale.setScalar(Math.min(1, (viewW * 0.44) / 4.3));
-        } else {
-          // Narrow: centered in the upper half, copy below
-          group.position.set(0, viewH * 0.21, 0);
-          group.scale.setScalar(Math.min(0.8, (viewW * 0.9) / 4.3, (viewH * 0.42) / 3.6));
-        }
+        // The scene owns its own box: centre it and fit the widest form (≈4.3 × 3.6 units) with breathing room
+        base = { x: 0, y: 0, scale: Math.min(1.05, (viewW * 0.86) / 4.3, (viewH * 0.86) / 3.6) };
       },
       colors({ ink, accent }) {
         uniforms.uInk.value.copy(ink);
@@ -523,3 +597,4 @@ export function SystemSculpture({
 
   return <div ref={ref} aria-hidden className={cn("pointer-events-none absolute inset-0", className)} />;
 }
+

@@ -1,171 +1,238 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight, BarChart3, Briefcase, Check, Code2, Compass, Handshake, Mail, Palette, ShieldCheck, Sparkles } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SEOHead } from "@/components/SEOHead";
-import { LuxuryCard } from "@/components/ui/luxury-card";
-import { Button } from "@/components/ui/button";
-import { 
-  ArrowRight, Briefcase, MapPin, Clock, Code2, Palette, BarChart3, 
-  Megaphone, Heart, Zap, Globe, GraduationCap, Users, Coffee 
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import { Container } from "@/components/site/primitives";
 import { siteConfig } from "@/lib/seo-config";
 import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
-const openings = [
-  { title: "Senior Full-Stack Developer", department: "Engineering", location: "Houston, TX / Remote", type: "Full-Time", icon: Code2, description: "Build enterprise-grade applications with React, Node.js, and cloud infrastructure. Lead technical architecture decisions.", requirements: ["5+ years full-stack experience", "React/TypeScript expertise", "AWS or GCP experience", "Strong system design skills"] },
-  { title: "UX/UI Designer", department: "Design", location: "Houston, TX / Remote", type: "Full-Time", icon: Palette, description: "Craft exceptional user experiences for enterprise clients. Design interfaces that balance beauty with functionality.", requirements: ["3+ years UX/UI experience", "Figma proficiency", "Design system experience", "Portfolio required"] },
-  { title: "SEO & Analytics Specialist", department: "Marketing", location: "Remote", type: "Full-Time", icon: BarChart3, description: "Drive organic growth for our clients through advanced SEO strategies, schema markup, and data-driven analytics.", requirements: ["3+ years SEO experience", "Technical SEO knowledge", "Google Analytics expertise", "Schema markup skills"] },
-  { title: "Digital Marketing Strategist", department: "Marketing", location: "Houston, TX / Remote", type: "Full-Time", icon: Megaphone, description: "Develop and execute multi-channel marketing campaigns for enterprise clients across various industries.", requirements: ["4+ years marketing experience", "PPC & social media expertise", "Content strategy skills", "Analytics proficiency"] },
-  { title: "DevOps Engineer", department: "Engineering", location: "Remote", type: "Full-Time", icon: Zap, description: "Design and maintain CI/CD pipelines, cloud infrastructure, and deployment automation for enterprise applications.", requirements: ["3+ years DevOps experience", "Kubernetes/Docker expertise", "Terraform/IaC experience", "AWS/GCP certification preferred"] },
-  { title: "Project Manager", department: "Operations", location: "Houston, TX", type: "Full-Time", icon: Briefcase, description: "Lead cross-functional teams to deliver complex digital projects on time and within budget.", requirements: ["5+ years PM experience", "Agile/Scrum certification", "Technical project background", "Client-facing skills"] },
+const EASE = [0.16, 1, 0.3, 1] as const;
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.7, ease: EASE },
+} as const;
+
+/** Current openings. Add a role here (and JobPosting markup with a valid date) when hiring. */
+const openings: { title: string; team: string; location: string; type: string; summary: string }[] = [];
+
+/** Disciplines we typically hire for — shown so candidates know where they'd fit. */
+const teams = [
+  { icon: Code2, name: "Engineering", detail: "Web platforms, apps & integrations" },
+  { icon: Palette, name: "Design", detail: "Brand, UX & interface design" },
+  { icon: BarChart3, name: "Marketing & SEO", detail: "Search, content & paid media" },
+  { icon: Briefcase, name: "Delivery", detail: "Project & client leadership" },
 ];
 
-const perks = [
-  { icon: Heart, title: "Health & Wellness", description: "Comprehensive medical, dental, and vision coverage for you and your family." },
-  { icon: Globe, title: "Remote-First", description: "Work from anywhere. We trust our team to deliver excellence from wherever they're most productive." },
-  { icon: GraduationCap, title: "Learning Budget", description: "$3,000 annual learning stipend for courses, conferences, books, and certifications." },
-  { icon: Coffee, title: "Flexible PTO", description: "Unlimited paid time off with a minimum 3-week vacation policy. Rest fuels excellence." },
-  { icon: Zap, title: "Latest Tech", description: "Top-of-the-line equipment and tools. MacBook Pro, monitors, and any software you need." },
-  { icon: Users, title: "Team Retreats", description: "Annual company retreats and quarterly team events to build lasting connections." },
+/** The same values published on the About page. */
+const values = [
+  { icon: ShieldCheck, title: "Integrity first", description: "We recommend what's right for each client — even when it's the smaller engagement." },
+  { icon: Compass, title: "Precision", description: "Every solution is engineered for the specific problem, not adapted from a template." },
+  { icon: Sparkles, title: "Pragmatic innovation", description: "We adopt new technology when it creates a real advantage, not for its own sake." },
+  { icon: Handshake, title: "Partnership", description: "We act as an extension of our clients' teams and measure our success by theirs." },
 ];
+
+const talentMail = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent("Talent network — Cardinal Consulting")}&body=${encodeURIComponent(
+  "Hi Cardinal team,\n\nRole or discipline I'm interested in:\nPortfolio / LinkedIn / GitHub:\nLocation:\n\nA little about my work:\n",
+)}`;
 
 export default function Careers() {
+  const url = `${siteConfig.url}/careers`;
   const schemas = [
     generateWebPageSchema({
       name: "Careers at Cardinal Consulting",
-      description: "Join our team of engineers, designers, and strategists building enterprise-grade digital solutions.",
-      url: `${siteConfig.url}/careers`,
+      description: "Careers at Cardinal Consulting, a Houston web, app, and digital growth firm. No open roles right now — join the talent network.",
+      url,
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: siteConfig.url },
-      { name: "Careers", url: `${siteConfig.url}/careers` },
+      { name: "Careers", url },
     ]),
-    // JobPosting markup removed: the listings' validThrough date (2025-12-31) had passed, and Google
-    // requires expired or unconfirmed roles to be removed. Re-add per role with current dates when hiring.
+    // No JobPosting markup while there are no openings (Google requires postings to be current).
   ];
 
   return (
     <>
       <SEOHead
         title="Careers at a Houston Digital Agency"
-        description="Explore careers at Cardinal Consulting, a Houston web design, app development and digital growth firm, with roles in engineering, design and marketing."
-        url={`${siteConfig.url}/careers`}
+        description="Careers at Cardinal Consulting, a Houston web design, app development and digital growth firm. No open roles right now — join our talent network."
+        url={url}
         schemas={schemas}
-        keywords={["careers at cardinal consulting", "software developer jobs Houston", "remote tech jobs", "UX designer jobs"]}
+        keywords={["careers at cardinal consulting", "Houston web design jobs", "Houston digital agency careers"]}
       />
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-white">
         <Header />
         <main>
-          {/* Hero */}
-          <section className="pt-28 pb-14 lg:pt-32 lg:pb-24 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-            <div className="container mx-auto px-6 lg:px-12 relative">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-                <Link to="/" className="inline-flex items-center gap-2 text-sm text-primary mb-6 hover:underline">← Back to Home</Link>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-14 h-14 bg-primary/10 flex items-center justify-center"><Briefcase className="w-7 h-7 text-primary" /></div>
-                  <span className="text-xs tracking-[0.3em] uppercase text-primary">Careers</span>
+          {/* ── HERO ───────────────────────────────────────────────────── */}
+          <section className="relative overflow-hidden border-b border-gray-100 pb-12 pt-24 lg:pb-16 lg:pt-28">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-brand-50/70 blur-3xl" />
+              <div className="absolute -bottom-48 -left-40 h-[460px] w-[460px] rounded-full bg-brand-50/40 blur-3xl" />
+            </div>
+            <Container className="relative grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+              <div>
+                <nav aria-label="Breadcrumb" className="mb-5 text-sm text-gray-500">
+                  <Link to="/" className="hover:text-gray-900">Home</Link> <span className="mx-1.5">/</span> <span className="text-gray-900">Careers</span>
+                </nav>
+                <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 py-1.5 pl-1.5 pr-4">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-600 text-white">
+                    <Briefcase className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900">Careers · {openings.length} open roles</span>
+                </motion.div>
+                <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.7, ease: EASE }} className="font-display text-4xl leading-[1.08] text-gray-900 sm:text-5xl xl:text-6xl">
+                  Build what's next <span className="text-brand-600">with Cardinal</span>
+                </motion.h1>
+                <motion.p initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16, duration: 0.7, ease: EASE }} className="mt-5 max-w-xl text-lg leading-relaxed text-gray-600">
+                  We're a Houston team designing, building, and growing websites, apps, and digital systems for organizations in healthcare, legal, finance, construction, and technology.
+                </motion.p>
+                <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24, duration: 0.7, ease: EASE }} className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <a href={talentMail} className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-600 px-7 font-semibold text-white transition-colors hover:bg-brand-700">
+                    Join the talent network <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                  <a href="#openings" className="inline-flex h-12 items-center justify-center rounded-full bg-gray-900 px-7 font-semibold text-white transition-colors hover:bg-gray-800">
+                    View open positions
+                  </a>
+                </motion.div>
+              </div>
+
+              {/* Hiring status */}
+              <motion.aside
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
+                className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-[0_40px_80px_-40px_rgba(17,24,39,0.35)]"
+              >
+                <div className="flex items-end justify-between gap-4 border-b border-gray-100 bg-brand-50/60 px-6 py-5">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-700">Open roles</p>
+                    <p className="mt-1 text-sm text-gray-600">Not hiring at the moment</p>
+                  </div>
+                  <p className="font-display text-5xl font-semibold leading-none tracking-tight text-gray-900">{openings.length}</p>
                 </div>
-                <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6">Build the Future With Us</h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mb-8">We're looking for exceptional people who want to do meaningful work. If you're passionate about building technology that transforms businesses, we'd love to hear from you.</p>
-                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <a href="#openings">View Open Positions <ArrowRight className="ml-2 w-4 h-4" /></a>
-                </Button>
-              </motion.div>
-            </div>
+                <div className="px-6 py-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Teams we hire for</p>
+                  <ul className="mt-3 divide-y divide-gray-100">
+                    {teams.map((t) => (
+                      <li key={t.name} className="flex items-center gap-3 py-3">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                          <t.icon className="h-4 w-4" />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block font-semibold text-gray-900">{t.name}</span>
+                          <span className="block truncate text-xs text-gray-500">{t.detail}</span>
+                        </span>
+                        <span className="rounded-full border border-gray-200 px-2.5 py-0.5 text-[11px] font-medium text-gray-500">No openings</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.aside>
+            </Container>
           </section>
 
-          {/* Culture Stats */}
-          <section className="py-16 border-y border-border/50">
-            <div className="container mx-auto px-6 lg:px-12">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {[
-                  { value: "100%", label: "Remote-Friendly" },
-                  { value: "$3K", label: "Learning Budget" },
-                  { value: "Unlimited", label: "PTO Policy" },
-                  { value: "4.9★", label: "Client Satisfaction" },
-                ].map((stat, i) => (
-                  <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                    <div className="font-serif text-4xl lg:text-5xl text-primary mb-2">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Perks */}
-          <section className="py-16 lg:py-24">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Why Work at Cardinal</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">We believe exceptional work comes from exceptional people — and exceptional people deserve exceptional benefits.</p>
+          {/* ── OPEN POSITIONS ─────────────────────────────────────────── */}
+          <section id="openings" className="relative isolate scroll-mt-24 overflow-hidden py-14 lg:py-20">
+            <CardinalMark />
+            <Container>
+              <motion.div {...fadeUp} className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">Open positions</p>
+                  <h2 className="mt-3 font-display text-3xl leading-[1.12] text-gray-900 md:text-4xl">Current openings</h2>
+                </div>
+                <p className="text-sm text-gray-500">{openings.length} roles · updated as we hire</p>
               </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {perks.map((perk, i) => (
-                  <motion.div key={perk.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                    <LuxuryCard className="p-6 h-full">
-                      <perk.icon className="w-10 h-10 text-primary mb-4" />
-                      <h3 className="font-serif text-xl text-foreground mb-2">{perk.title}</h3>
-                      <p className="text-sm text-muted-foreground">{perk.description}</p>
-                    </LuxuryCard>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
 
-          {/* Open Positions */}
-          <section id="openings" className="py-16 lg:py-24 bg-card/50">
-            <div className="container mx-auto px-6 lg:px-12">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Open Positions</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">Find your next opportunity. All positions include competitive salary, equity, and full benefits.</p>
-              </motion.div>
-              <div className="max-w-4xl mx-auto space-y-6">
-                {openings.map((job, i) => (
-                  <motion.div key={job.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                    <LuxuryCard elevation={2} className="p-8">
-                      <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-3">
-                            <job.icon className="w-6 h-6 text-primary" />
-                            <h3 className="font-serif text-xl text-foreground">{job.title}</h3>
-                          </div>
-                          <p className="text-sm text-muted-foreground mb-4">{job.description}</p>
-                          <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
-                            <span className="flex items-center gap-1"><Briefcase size={12} />{job.department}</span>
-                            <span className="flex items-center gap-1"><MapPin size={12} />{job.location}</span>
-                            <span className="flex items-center gap-1"><Clock size={12} />{job.type}</span>
-                          </div>
-                        </div>
-                        <Button className="bg-primary hover:bg-primary/90 shrink-0" asChild>
-                          <Link to="/contact">Apply Now <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                        </Button>
+              {openings.length === 0 ? (
+                <motion.div {...fadeUp} className="mt-8 flex flex-col items-center rounded-3xl border border-dashed border-gray-200 bg-gray-50/70 px-6 py-14 text-center">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500">
+                    <Briefcase className="h-6 w-6" />
+                  </span>
+                  <h3 className="mt-5 font-display text-2xl text-gray-900">There are no open roles at the moment</h3>
+                  <p className="mt-3 max-w-lg text-gray-600">
+                    Every new role is posted here first. Share your work with us and we'll reach out when there's a fit.
+                  </p>
+                  <a href={talentMail} className="mt-7 inline-flex h-11 items-center gap-2 rounded-full border border-gray-900 px-6 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-900 hover:text-white">
+                    <Mail className="h-4 w-4" /> Send us your work
+                  </a>
+                </motion.div>
+              ) : (
+                <ul className="mt-8 divide-y divide-gray-100 border-y border-gray-100">
+                  {openings.map((o) => (
+                    <li key={o.title} className="flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <h3 className="font-display text-xl font-semibold text-gray-900">{o.title}</h3>
+                        <p className="text-sm text-gray-500">{o.team} · {o.location} · {o.type}</p>
                       </div>
-                    </LuxuryCard>
+                      <a href={talentMail} className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600">Apply <ArrowRight className="h-4 w-4" /></a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Container>
+          </section>
+
+          {/* ── HOW WE WORK ────────────────────────────────────────────── */}
+          <section className="border-t border-gray-100 bg-gray-50/70 py-14 lg:py-20">
+            <Container className="grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
+              <motion.div {...fadeUp} className="lg:sticky lg:top-28 lg:self-start">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">How we work</p>
+                <h2 className="mt-3 font-display text-3xl leading-[1.12] text-gray-900 md:text-4xl">The standards behind every project</h2>
+                <p className="mt-4 text-lg leading-relaxed text-gray-600">The values that guide our client work — and the people we look for.</p>
+              </motion.div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {values.map((v, i) => (
+                  <motion.div
+                    key={v.title}
+                    {...fadeUp}
+                    transition={{ ...fadeUp.transition, delay: i * 0.07 }}
+                    className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_30px_60px_-36px_rgba(17,24,39,0.4)]"
+                  >
+                    <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-brand-600 transition-transform duration-500 group-hover:scale-x-100" />
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors duration-500 group-hover:bg-brand-600 group-hover:text-white">
+                      <v.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mt-5 font-display text-lg font-semibold text-gray-900">{v.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-gray-600">{v.description}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </Container>
           </section>
 
-          {/* CTA */}
-          <section className="py-16 lg:py-24 bg-primary/5">
-            <div className="container mx-auto px-6 lg:px-12 text-center">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Don't See Your Role?</h2>
-                <p className="text-muted-foreground max-w-xl mx-auto mb-8">We're always looking for talented individuals. Send us your resume and we'll reach out when the right opportunity opens up.</p>
-                <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
-                  <Link to="/contact">Send Your Resume <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                </Button>
+          {/* ── TALENT NETWORK CTA ─────────────────────────────────────── */}
+          <section className="py-14 lg:py-20">
+            <Container>
+              <motion.div {...fadeUp} className="relative overflow-hidden rounded-3xl bg-gray-950 px-6 py-12 text-center sm:px-12 lg:py-16">
+                <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
+                <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-brand-500" />
+                <div className="relative">
+                  <h2 className="mx-auto max-w-3xl font-display text-3xl leading-tight text-white md:text-4xl lg:text-5xl">Be first to hear when we're hiring</h2>
+                  <p className="mx-auto mt-4 max-w-2xl text-white/60">Send your portfolio, LinkedIn, or GitHub and the kind of work you love doing. We keep every note and reach out when a role fits.</p>
+                  <ul className="mx-auto mt-7 flex max-w-2xl flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/70">
+                    {["Engineering", "Design", "Marketing & SEO", "Project delivery"].map((t) => (
+                      <li key={t} className="flex items-center gap-2"><Check className="h-4 w-4 text-brand-300" /> {t}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                    <a href={talentMail} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-500 px-7 font-semibold text-white transition-colors hover:bg-brand-600">
+                      <Mail className="h-4 w-4" /> Join the talent network
+                    </a>
+                    <Link to="/about" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 px-7 font-semibold text-white transition-colors hover:bg-white/10">
+                      About Cardinal
+                    </Link>
+                  </div>
+                </div>
               </motion.div>
-            </div>
+            </Container>
           </section>
         </main>
-        <Footer />
+        <Footer showCta={false} />
       </div>
     </>
   );

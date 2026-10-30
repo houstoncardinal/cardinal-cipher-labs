@@ -48,15 +48,15 @@ const HOUSTON_AREAS = [
 
 /** Facts drawn from Cardinal's own pricing and process — no unverifiable performance claims. */
 const WEBSITE_FACTS = [
-  { value: "$1,500", label: "Websites starting at" },
+  { value: "$3,500", label: "Websites starting at" },
   { value: "72 hrs–2 wks", label: "Typical launch time" },
   { value: "24 hrs", label: "Reply to every inquiry" },
   { value: "WCAG 2.1 AA", label: "Accessibility target" },
 ];
 
 const websiteInvestment = [
-  { label: "Marketing website", value: "From $1,500", note: "Up to 10 custom pages, typically live in 72 hours to 2 weeks." },
-  { label: "Custom website & integrations", value: "From $3,500", note: "Up to 30 pages with portals, integrations, AI features, or online sales." },
+  { label: "Marketing website", value: "From $3,500", note: "Up to 10 custom pages, typically live in 72 hours to 2 weeks." },
+  { label: "Business growth website", value: "From $6,500", note: "Up to 30 pages with CRM, booking and payment integrations, portals, or online sales." },
   { label: "Website care plans", value: "From $299/mo", note: "Updates, backups, security monitoring, and content changes." },
 ];
 
@@ -93,7 +93,7 @@ export const landingPages: LandingPage[] = [
       "Custom design — no templates",
       "Mobile-first and built for Core Web Vitals",
       "SEO setup and Google Business Profile guidance included",
-      "Marketing sites from $1,500, typically live in 72 hours to 2 weeks",
+      "Marketing sites from $3,500, typically live in 72 hours to 2 weeks",
       "Local team at 2100 West Loop S Fwy, Houston",
     ],
     challenges: [
@@ -121,7 +121,7 @@ export const landingPages: LandingPage[] = [
     ],
     investment: websiteInvestment,
     faqs: [
-      { question: "How much does a website cost in Houston?", answer: "Cardinal's marketing websites (up to 10 pages) start at $1,500, and custom websites of up to 30 pages with portals, integrations, or online sales start at $3,500 (one-time). Sites over 30 pages and custom platforms are quoted after a free consultation. Website care plans start at $299 per month. Pricing across Houston agencies varies widely, so compare what's included: custom design, mobile performance, SEO setup, and post-launch support." },
+      { question: "How much does a website cost in Houston?", answer: "Cardinal's marketing websites (up to 10 pages) start at $3,500, and business growth websites of up to 30 pages with portals, integrations, or online sales start at $6,500 (one-time). Sites over 30 pages and custom platforms start at $15,000. Every project is scoped in writing with a fixed-price guarantee. Website care plans start at $299 per month. Pricing across Houston agencies varies widely, so compare what's included: custom design, mobile performance, SEO setup, and post-launch support." },
       { question: "How long does it take to build a website?", answer: "Most marketing websites go live in 72 hours to 2 weeks after content is ready. E-commerce stores usually take 4–8 weeks. You get a written timeline before we start." },
       { question: "Do you only work with Houston businesses?", answer: "Our office is in Houston and we're glad to meet in person around the metro area, but we also work with clients across the U.S. remotely." },
       { question: "Will my new website rank on Google?", answer: "Every site launches with technical SEO, structured data, and fast load times — the foundation Google needs. Ranking for competitive Houston searches also depends on content, reviews, and links over time, which is what our SEO plans are for. No honest company can guarantee a specific ranking." },
@@ -131,7 +131,7 @@ export const landingPages: LandingPage[] = [
     caseStudies: ["hda-studio", "svrlawfirm", "unitedccr"],
     seo: {
       title: "Web Design Houston — Custom Websites",
-      description: "Custom website design in Houston for businesses that need more leads: mobile-first, SEO-ready and fast. Websites from $1,500, often live in 2 weeks.",
+      description: "Custom website design in Houston for businesses that need more leads: mobile-first, SEO-ready and fast. Websites from $3,500 with a fixed-price guarantee.",
       keywords: ["web design Houston", "Houston web design company", "website design Houston TX", "Houston web designer", "small business website design Houston", "website redesign Houston", "custom website design Houston", "web design agency Houston"],
     },
   },
@@ -154,7 +154,7 @@ export const landingPages: LandingPage[] = [
       "Consultation and intake forms routed to your team",
       "Local SEO for Houston practice areas",
       "Designed with Texas lawyer-advertising rules in mind",
-      "Marketing sites from $1,500",
+      "Marketing sites from $3,500",
     ],
     challenges: [
       "Prospective clients compare several firms online before calling anyone",
@@ -178,7 +178,7 @@ export const landingPages: LandingPage[] = [
     research: [REVIEWS_READ, LIGHTHOUSE_SPEED],
     investment: websiteInvestment,
     faqs: [
-      { question: "How much does a law firm website cost?", answer: "Cardinal's law firm websites start at $1,500 for a marketing site with up to five custom pages. Firms with many practice areas, multiple attorneys, or custom intake workflows usually need a larger build, quoted after a free consultation." },
+      { question: "How much does a law firm website cost?", answer: "Cardinal's law firm websites start at $3,500 for a marketing site with up to 10 custom pages. Firms with many practice areas, multiple attorneys, or custom intake workflows usually need a business growth website, from $6,500. Every project is scoped in writing with a fixed-price guarantee." },
       { question: "Is my website compliant with Texas State Bar advertising rules?", answer: "We build with Part VII of the Texas Disciplinary Rules of Professional Conduct in mind, but compliance is ultimately your firm's responsibility. We recommend your firm review all content before launch and handle any required filing with the State Bar's Advertising Review Department." },
       { question: "Can you help my firm rank for searches like 'personal injury lawyer Houston'?", answer: "Yes — through practice-area pages, local SEO, and an ongoing SEO plan. Legal searches in Houston are highly competitive, so rankings build over months and depend on content, reviews, and links. We don't guarantee rankings." },
       { question: "Can you connect the website to our case-management or intake software?", answer: "Usually, yes. We can route form submissions to email, your CRM, or intake software that offers an integration or API." },
@@ -187,7 +187,7 @@ export const landingPages: LandingPage[] = [
     caseStudies: ["svrlawfirm"],
     seo: {
       title: "Law Firm Website Design in Houston",
-      description: "Law firm websites for Houston attorneys: practice-area pages, attorney bios and intake forms, built with Texas advertising rules in mind. From $1,500.",
+      description: "Law firm websites for Houston attorneys: practice-area pages, attorney bios and intake forms, built with Texas advertising rules in mind. From $3,500.",
       keywords: ["law firm website design Houston", "attorney website design Houston", "lawyer website design Texas", "legal website design Houston", "law firm SEO Houston", "personal injury law firm website", "law firm web designer Houston"],
     },
   },
@@ -210,7 +210,7 @@ export const landingPages: LandingPage[] = [
       "Appointment requests and patient-portal links",
       "Accessibility built toward WCAG 2.1 AA",
       "Privacy-conscious forms and analytics setup",
-      "Marketing sites from $1,500",
+      "Marketing sites from $3,500",
     ],
     challenges: [
       "Patients research providers online and leave if they can't find what they need quickly",
@@ -236,7 +236,7 @@ export const landingPages: LandingPage[] = [
     faqs: [
       { question: "Is my practice website HIPAA compliant?", answer: "A website by itself isn't 'HIPAA certified.' What matters is how it handles protected health information. We keep PHI off standard forms and analytics, and when you need to collect health information online we use HIPAA-eligible services covered by a Business Associate Agreement. Your compliance officer should review the final setup." },
       { question: "Can patients book appointments on the website?", answer: "Yes. We can link to or embed your existing scheduling or patient-portal system, or add a simple appointment-request form that your staff confirms." },
-      { question: "How much does a medical practice website cost?", answer: "Practice websites start at $1,500 for up to five custom pages. Multi-location groups, provider directories, and portal integrations are quoted after a free consultation." },
+      { question: "How much does a medical practice website cost?", answer: "Practice websites start at $3,500 for up to 10 custom pages. Multi-location groups, provider directories, and portal integrations usually need a business growth website, from $6,500. Every project is scoped in writing with a fixed-price guarantee." },
       { question: "Can you help us get more patients from Google?", answer: "Yes. Service and location pages, structured data, and Google Business Profile optimization help patients find you. Our SEO plans continue that work monthly." },
     ],
     related: ["web-development", "seo-analytics", "ux-ui"],
@@ -266,7 +266,7 @@ export const landingPages: LandingPage[] = [
       "Connects to your ordering and reservation tools",
       "Catering, private events, and gift-card pages",
       "Google Business Profile and local search setup",
-      "Marketing sites from $1,500",
+      "Marketing sites from $3,500",
     ],
     challenges: [
       "Guests can't read your menu on a phone, or it's out of date",
@@ -287,13 +287,13 @@ export const landingPages: LandingPage[] = [
     faqs: [
       { question: "Can my website take online orders?", answer: "Yes. We connect your website to the online-ordering platform you already use or help you choose one, so guests can order directly from you instead of only through third-party marketplaces." },
       { question: "Can I update the menu myself?", answer: "Yes. Menus are built as editable text, not PDFs, so you can change items and prices yourself — or we update them on a care plan." },
-      { question: "How much does a restaurant website cost?", answer: "Restaurant websites start at $1,500 for up to five custom pages. Multi-location groups and custom ordering experiences are quoted after a free consultation." },
+      { question: "How much does a restaurant website cost?", answer: "Restaurant websites start at $3,500 for up to 10 custom pages. Multi-location groups and custom ordering experiences usually need a business growth website, from $6,500. Every project is scoped in writing with a fixed-price guarantee." },
       { question: "Do you help with Google Maps and reviews?", answer: "Yes. We align your Google Business Profile with your website and can manage it monthly through our SEO plans." },
     ],
     related: ["web-development", "social-media-management", "seo-analytics"],
     seo: {
       title: "Restaurant Website Design in Houston",
-      description: "Restaurant websites in Houston with mobile menus, online ordering and reservation links, and Google-ready local SEO. Websites start at $1,500.",
+      description: "Restaurant websites in Houston with mobile menus, online ordering and reservation links, and Google-ready local SEO. Websites start at $3,500.",
       keywords: ["restaurant website design Houston", "restaurant web design", "restaurant website with online ordering", "bar website design Houston", "cafe website design", "restaurant menu website", "catering website design Houston"],
     },
   },
@@ -303,7 +303,7 @@ export const landingPages: LandingPage[] = [
     path: "/houston-ecommerce-website-design",
     accent: "into buyers",
     facts: [
-      { value: "$3,500", label: "Online stores starting at" },
+      { value: "$6,500", label: "Online stores starting at" },
       { value: "4–8 wks", label: "Typical launch time" },
       { value: "Shopify", label: "WooCommerce, or custom" },
       { value: "PCI DSS", label: "Compliant hosted payments" },
@@ -321,7 +321,7 @@ export const landingPages: LandingPage[] = [
       "Checkout designed to reduce abandonment",
       "Payments, shipping, and tax configured",
       "Inventory, CRM, and fulfillment integrations",
-      "E-commerce stores from $3,500",
+      "E-commerce stores from $6,500",
     ],
     challenges: [
       "Shoppers add to cart but don't finish checking out",
@@ -346,13 +346,13 @@ export const landingPages: LandingPage[] = [
       { value: "8.4%", label: "more retail conversions when key mobile speed metrics improved by 0.1 seconds.", source: "Deloitte & Google, Milliseconds Make Millions", year: "2020", url: "https://web.dev/case-studies/milliseconds-make-millions" },
     ],
     investment: [
-      { label: "E-commerce store", value: "From $3,500", note: "Custom storefront, catalog, checkout, payments, shipping, and tax setup." },
-      { label: "Custom commerce platform", value: "Custom quote", note: "B2B pricing, complex catalogs, marketplaces, or deep integrations." },
+      { label: "E-commerce store", value: "From $6,500", note: "Custom storefront, catalog, checkout, payments, shipping, and tax setup." },
+      { label: "Custom commerce platform", value: "From $15,000", note: "B2B pricing, complex catalogs, marketplaces, or deep integrations." },
       { label: "Website care plans", value: "From $299/mo", note: "Updates, backups, security monitoring, and content changes." },
     ],
     faqs: [
       { question: "Should I use Shopify or WooCommerce?", answer: "Shopify is the simplest to run and scale for most retailers. WooCommerce gives more control for content-heavy WordPress sites. A custom build makes sense for complex catalogs, B2B pricing, or unusual workflows. We'll recommend the best fit after learning about your products and operations." },
-      { question: "How much does an e-commerce website cost?", answer: "Cardinal's e-commerce stores start at $3,500 (one-time), including custom storefront design, catalog and checkout setup, and payment, shipping, and tax configuration. Platform subscription and payment-processing fees are separate." },
+      { question: "How much does an e-commerce website cost?", answer: "Cardinal's e-commerce stores start at $6,500 (one-time), including custom storefront design, catalog and checkout setup, and payment, shipping, and tax configuration, with a fixed-price guarantee. Platform subscription and payment-processing fees are separate." },
       { question: "How long does it take to launch an online store?", answer: "Most stores take 4–8 weeks depending on catalog size and integrations." },
       { question: "Can you migrate my existing store?", answer: "Yes. We migrate products, customers, and order history where the platforms allow it, and redirect old URLs to protect your search rankings." },
     ],
@@ -360,7 +360,7 @@ export const landingPages: LandingPage[] = [
     caseStudies: ["hda-studio", "allhoustonproperty"],
     seo: {
       title: "Ecommerce Website Design in Houston",
-      description: "Shopify, WooCommerce and custom online stores for Houston businesses: catalog, checkout, payments, shipping and tax. Custom stores from $3,500.",
+      description: "Shopify, WooCommerce and custom online stores for Houston businesses: catalog, checkout, payments, shipping and tax. Custom stores from $6,500.",
       keywords: ["ecommerce website design Houston", "Shopify developer Houston", "WooCommerce developer Houston", "online store design Houston", "ecommerce web development", "Shopify website design", "ecommerce agency Houston"],
     },
   },
@@ -370,7 +370,7 @@ export const landingPages: LandingPage[] = [
     path: "/houston-real-estate-website-design",
     accent: "buyer and seller leads",
     facts: [
-      { value: "$1,500", label: "Websites starting at" },
+      { value: "$3,500", label: "Websites starting at" },
       { value: "IDX", label: "Listing search via your MLS" },
       { value: "TREC", label: "Required notices built in" },
       { value: "24 hrs", label: "Reply to every inquiry" },
@@ -388,7 +388,7 @@ export const landingPages: LandingPage[] = [
       "Neighborhood and community pages",
       "Buyer, seller, and valuation lead forms",
       "TREC-required notices linked from every page",
-      "Marketing sites from $1,500",
+      "Marketing sites from $3,500",
     ],
     challenges: [
       "Your website can't compete with the big listing portals on its own",
@@ -414,14 +414,14 @@ export const landingPages: LandingPage[] = [
     faqs: [
       { question: "Can my website show MLS listings?", answer: "Yes. We integrate an IDX feed through your MLS's approved provider, which typically requires your broker's participation and a separate IDX subscription. Listings are displayed according to your MLS's rules." },
       { question: "What does TREC require on a real estate website?", answer: "TREC requires license holders to link to the Information About Brokerage Services form and the Consumer Protection Notice on their websites. We include both. Your broker should confirm the site meets all current TREC and MLS requirements." },
-      { question: "How much does a real estate website cost?", answer: "Agent and team websites start at $1,500 for up to five custom pages. IDX subscription fees are separate. Brokerage platforms and property-management portals are quoted after a free consultation." },
+      { question: "How much does a real estate website cost?", answer: "Agent and team websites start at $3,500 for up to 10 custom pages. IDX subscription fees are separate. Brokerage platforms and property-management portals start at $15,000. Every project is scoped in writing with a fixed-price guarantee." },
       { question: "Can leads go straight into my CRM?", answer: "Yes. We route form submissions to email or to CRMs that offer an integration or API." },
     ],
     related: ["web-development", "seo-analytics", "social-media-management"],
     caseStudies: ["allhoustonproperty", "hougenpros"],
     seo: {
       title: "Real Estate Website Design in Houston",
-      description: "Websites for Houston agents, teams and brokerages: IDX listing search, neighborhood pages and lead capture that reaches you fast. From $1,500.",
+      description: "Websites for Houston agents, teams and brokerages: IDX listing search, neighborhood pages and lead capture that reaches you fast. From $3,500.",
       keywords: ["real estate website design Houston", "realtor website design Houston", "IDX website design", "real estate agent website", "brokerage website design Texas", "property management website design Houston"],
     },
   },
@@ -488,7 +488,7 @@ export const landingPages: LandingPage[] = [
     facts: [
       { value: "React", label: "TypeScript & Node.js" },
       { value: "AWS", label: "Azure, Google Cloud & Vercel" },
-      { value: "$1,500", label: "Marketing sites starting at" },
+      { value: "$3,500", label: "Marketing sites starting at" },
       { value: "24 hrs", label: "Reply to every inquiry" },
     ],
     kind: "industry",
@@ -523,9 +523,9 @@ export const landingPages: LandingPage[] = [
       { value: "84%", label: "of organizations say managing cloud spend is their top cloud challenge.", source: "Flexera, State of the Cloud Report", year: "2025", url: "https://www.flexera.com/about-us/press-center/new-flexera-report-finds-84-percent-of-organizations-struggle-to-manage-cloud-spend" },
     ],
     investment: [
-      { label: "Marketing website", value: "From $1,500", note: "Launch sites and focused product pages." },
-      { label: "Custom platform or web app", value: "Custom quote", note: "Product engineering, portals, and integrations." },
-      { label: "Technical consulting", value: "Custom quote", note: "Architecture reviews and fractional CTO leadership." },
+      { label: "Marketing website", value: "From $3,500", note: "Launch sites and focused product pages." },
+      { label: "Custom platform or web app", value: "From $15,000", note: "Product engineering, portals, and integrations." },
+      { label: "Technical consulting", value: "From $2,500", note: "Assessments; advisory and fractional CTO from $3,000/mo." },
     ],
     faqs: [
       { question: "Do you build SaaS products or only marketing sites?", answer: "Both. We build marketing sites and web applications, and we offer architecture reviews and fractional CTO leadership through our technical consulting practice." },
@@ -548,7 +548,7 @@ export const landingPages: LandingPage[] = [
     facts: [
       { value: "Demos", label: "Interactive product walkthroughs" },
       { value: "Trust", label: "Security & data-use pages" },
-      { value: "$1,500", label: "Marketing sites starting at" },
+      { value: "$3,500", label: "Marketing sites starting at" },
       { value: "24 hrs", label: "Reply to every inquiry" },
     ],
     kind: "industry",
@@ -586,9 +586,9 @@ export const landingPages: LandingPage[] = [
       { value: "~1 in 3", label: "organizations have begun scaling AI across the enterprise — the rest are still evaluating.", source: "McKinsey, The State of AI", year: "2025", url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" },
     ],
     investment: [
-      { label: "Marketing website", value: "From $1,500", note: "Launch sites and focused product pages." },
-      { label: "Custom platform or web app", value: "Custom quote", note: "Interactive demos, portals, and product UI." },
-      { label: "AI & automation builds", value: "Custom quote", note: "If you need AI built into your own operations." },
+      { label: "Marketing website", value: "From $3,500", note: "Launch sites and focused product pages." },
+      { label: "Custom platform or web app", value: "From $15,000", note: "Interactive demos, portals, and product UI." },
+      { label: "AI & automation builds", value: "$4,000–$12,000", note: "Typical build; assessments from $1,500." },
     ],
     faqs: [
       { question: "Is this page about building AI for my business?", answer: "This page is for companies that sell AI and automation products and need websites and marketing. If you want AI built into your own operations, see our AI & Automation service." },
@@ -621,7 +621,7 @@ export const landingPages: LandingPage[] = [
       "Bid, estimate, and emergency-service requests",
       "Service-area pages for the markets you cover",
       "Safety, licensing, and insurance information",
-      "Marketing sites from $1,500",
+      "Marketing sites from $3,500",
     ],
     challenges: [
       "Owners and general contractors check your project history before inviting you to bid",
@@ -640,7 +640,7 @@ export const landingPages: LandingPage[] = [
     research: [REVIEWS_READ, LIGHTHOUSE_SPEED],
     investment: websiteInvestment,
     faqs: [
-      { question: "How much does a construction company website cost?", answer: "Construction websites start at $1,500 for up to five custom pages. Larger portfolios, multiple divisions, and custom bid portals are quoted after a free consultation." },
+      { question: "How much does a construction company website cost?", answer: "Construction websites start at $3,500 for up to 10 custom pages. Larger portfolios, multiple divisions, and custom bid portals usually need a business growth website, from $6,500. Every project is scoped in writing with a fixed-price guarantee." },
       { question: "Can you help us get found for searches in different cities?", answer: "Yes. We build service-area pages for the markets you actually serve — supported by real projects in those areas — and align them with your Google Business Profile." },
       { question: "Can bid requests go straight to our estimator?", answer: "Yes. Forms can route by project type or location to the right person by email or to your CRM." },
     ],
@@ -648,7 +648,7 @@ export const landingPages: LandingPage[] = [
     caseStudies: ["unitedccr", "houinc"],
     seo: {
       title: "Contractor & Construction Websites",
-      description: "Websites for Houston contractors and trades: project portfolios, service-area pages and bid requests that reach the right person. From $1,500.",
+      description: "Websites for Houston contractors and trades: project portfolios, service-area pages and bid requests that reach the right person. From $3,500.",
       keywords: ["construction website design", "contractor website design Houston", "construction company website", "general contractor website design", "roofing website design Houston", "restoration company website design"],
     },
   },

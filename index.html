@@ -27,6 +27,11 @@
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" as="image" href="/brand/cardinal-consulting-logo.png" fetchpriority="high" />
     <meta name="theme-color" content="#FFFFFF" />
+    <!-- A reload starts at the top (unless the URL points at a #section), instead of
+         restoring the old scroll position mid-page -->
+    <script>
+      if ("scrollRestoration" in history && !location.hash) history.scrollRestoration = "manual";
+    </script>
     <!-- Apply the saved (or OS) theme before first paint — must match src/lib/theme.ts -->
     <script>
       (function () {

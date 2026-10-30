@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight, Check, CalendarClock, ChevronDown, Clock, FileSignature, Handshake,
-  HeartHandshake, MessageSquare, Phone, Receipt, Repeat, Rocket, Sparkles,
+  HeartHandshake, MessageSquare, Phone, Receipt, Repeat, Rocket, Sparkles, ShieldCheck,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -13,64 +13,64 @@ import { Container, reveal, revealDelay } from "@/components/site/primitives";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/seo-config";
 import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
-import { priceToNumber, serviceGroups, services, type ServiceDefinition, type ServiceTier } from "@/lib/services-catalog";
+import { priceSpecification, priceToNumber, serviceGroups, services, tierAssurance, type ServiceDefinition, type ServiceTier } from "@/lib/services-catalog";
 import { contactHref } from "@/lib/contact-intent";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
 const faqs = [
-  { q: "How is pricing structured?", a: "Every service has three plans: Foundation, Growth, and Enterprise. Websites, apps, branding, and design are project-based. SEO, marketing, and care plans are monthly. You receive a written scope and price before any work begins." },
-  { q: "Why do some plans say “Custom”?", a: "Some work — like AI automation, technical consulting, and social media programs — depends heavily on your systems, channels, and goals. Rather than publish a number that may not fit, we scope it with you on a free consultation and send a written quote." },
+  { q: "How is pricing structured?", a: "Every service has three plans: Foundation, Growth, and Enterprise. Websites, apps, branding, design, and AI builds are project-based. SEO, marketing, social media, and care plans are monthly. Technical consulting starts with a fixed-price assessment. You receive a written scope and fixed price before any work begins." },
+  { q: "What do “+” and price ranges mean?", a: "A “+” is a starting price: the final number depends on scope, and it never goes below the price shown. A range, like $4,000–$12,000 for an automation build, covers our typical projects. Either way, you get an exact fixed price in writing before any work begins." },
+  { q: "What is the fixed-price guarantee?", a: "After a free consultation we send a written scope and a fixed price. Once you approve it, that price is locked — it only changes if you ask for new work and approve the change in writing. No surprise invoices." },
   { q: "How are larger programs priced?", a: "Enterprise engagements and multi-service programs are scoped individually based on goals, timeline, integrations, and compliance requirements. We'll provide a detailed proposal after a discovery conversation." },
   { q: "What are the payment terms?", a: "Projects are typically billed 50% at kickoff and 50% at launch. For projects over $5,000 we can structure milestone-based payments." },
-  { q: "Are monthly services locked into a contract?", a: "No. SEO, marketing, and care plans are month-to-month — no long-term contracts." },
+  { q: "Are monthly services locked into a contract?", a: "No. SEO, marketing, social media, and care plans are month-to-month — no long-term contracts." },
   { q: "Can we change plans later?", a: "Yes. You can move between plans, add services, or add a care plan at any time." },
   { q: "Do you offer nonprofit pricing?", a: "Yes, we offer special pricing for qualified nonprofits. Contact us to discuss your project and budget." },
 ];
 
-const isMonthly = (s: ServiceDefinition) => s.tiers.some((t) => t.billing === "per month") || s.startingBilling === "per month";
-const isCustom = (s: ServiceDefinition) => s.tiers.every((t) => priceToNumber(t.price) === undefined);
+const monthlyTiers = (s: ServiceDefinition) => s.tiers.filter((t) => t.billing === "per month").length;
 
 const MODELS = [
   {
     icon: Receipt,
     title: "Project-based",
-    body: "A fixed price for a defined scope — paid at kickoff and launch, or by milestone on larger projects.",
-    match: (s: ServiceDefinition) => !isMonthly(s) && !isCustom(s),
+    body: "A fixed price for a defined scope, guaranteed in writing — paid at kickoff and launch, or by milestone on larger projects.",
+    match: (s: ServiceDefinition) => monthlyTiers(s) === 0,
   },
   {
     icon: Repeat,
     title: "Monthly programs",
     body: "Ongoing work billed monthly. Month-to-month — no long-term contract.",
-    match: (s: ServiceDefinition) => isMonthly(s) && !isCustom(s),
+    match: (s: ServiceDefinition) => monthlyTiers(s) === s.tiers.length,
   },
   {
     icon: Handshake,
-    title: "Custom engagements",
-    body: "Scoped to your systems and goals on a free consultation, then quoted in writing.",
-    match: (s: ServiceDefinition) => isCustom(s),
+    title: "Advisory engagements",
+    body: "A fixed-price assessment first, then optional monthly advisory or fractional CTO leadership.",
+    match: (s: ServiceDefinition) => monthlyTiers(s) > 0 && monthlyTiers(s) < s.tiers.length,
   },
 ];
 
 const BILLING_STEPS = [
   { icon: MessageSquare, title: "Free consultation", body: "Share your goals and budget. No cost, no obligation." },
-  { icon: FileSignature, title: "Written proposal", body: "Scope, price, and timeline in writing before work starts." },
+  { icon: FileSignature, title: "Written proposal", body: "Scope, fixed price, and timeline in writing before work starts." },
   { icon: Rocket, title: "Kickoff", body: "Projects: 50% to begin. Monthly programs: first month." },
   { icon: CalendarClock, title: "Launch or renew", body: "Remaining 50% at launch. Monthly plans continue month-to-month." },
 ];
 
 const PROMISES = [
   { icon: MessageSquare, title: "Free consultation", body: "Every engagement starts with a no-cost conversation." },
-  { icon: FileSignature, title: "Written scope & price", body: "You approve the plan and price before any work begins." },
+  { icon: FileSignature, title: "Fixed-price guarantee", body: "Once you approve the written scope, the price is locked. It only changes if you approve new work in writing." },
   { icon: Clock, title: "Reply within 24 hours", body: "Every inquiry gets a response from our team within a business day." },
-  { icon: Repeat, title: "No long-term contracts", body: "SEO, marketing, and care plans are month-to-month." },
+  { icon: Repeat, title: "No long-term contracts", body: "SEO, marketing, social, and care plans are month-to-month." },
   { icon: Receipt, title: "Milestone payments", body: "Projects over $5,000 can be split into milestone payments." },
   { icon: HeartHandshake, title: "Nonprofit pricing", body: "Special pricing is available for qualified nonprofits." },
 ];
 
 function billingLabel(t: ServiceTier) {
   if (t.billing === "per month") return "/ month";
-  if (t.billing === "one-time") return "one-time";
   if (t.billing === "starting price") return "starting";
-  return t.price === "Custom" ? "quote" : "custom quote";
+  return t.billing;
 }
 
 function Price({ tier, size = "md" }: { tier: ServiceTier; size?: "sm" | "md" }) {
@@ -111,6 +111,9 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
         </button>
       )}
       <div className="min-h-6 flex-1" />
+      <p className="mb-4 flex items-start gap-1.5 text-xs font-medium leading-snug text-gray-500">
+        <ShieldCheck className="mt-px h-3.5 w-3.5 shrink-0 text-brand-600" /> {tierAssurance(tier)}
+      </p>
       <Link
         to={contactHref({ service: service.slug, plan: tier.name, from: "pricing" })}
         className={cn(
@@ -118,7 +121,7 @@ function TierCard({ tier, service }: { tier: ServiceTier; service: ServiceDefini
           tier.popular ? "bg-brand-600 text-white hover:bg-brand-700" : "border border-gray-300 text-gray-900 hover:border-gray-900",
         )}
       >
-        {priceToNumber(tier.price) === undefined ? "Request a quote" : `Choose ${tier.level}`} <ArrowRight className="h-4 w-4" />
+        {tier.billing === "starting price" || tier.price.includes("–") ? "Get a fixed quote" : `Choose ${tier.level}`} <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
   );
@@ -147,20 +150,13 @@ export default function Pricing() {
       provider: { "@id": `${siteConfig.url}#organization` },
       numberOfItems: allOffers.length,
       itemListElement: allOffers.map((tier, i) => {
-        const price = priceToNumber(tier.price);
+        const spec = priceSpecification(tier);
         return {
           "@type": "Offer",
           position: i + 1,
           name: `${tier.serviceName} — ${tier.name}`,
           description: tier.bestFor,
-          ...(price !== undefined && {
-            priceSpecification: {
-              "@type": tier.billing === "per month" ? "UnitPriceSpecification" : "PriceSpecification",
-              priceCurrency: "USD",
-              ...(tier.billing === "starting price" ? { minPrice: price } : { price }),
-              ...(tier.billing === "per month" && { unitText: "MONTH" }),
-            },
-          }),
+          ...(spec && { priceSpecification: spec }),
         };
       }),
     },
@@ -170,7 +166,7 @@ export default function Pricing() {
     <>
       <SEOHead
         title="Pricing: Websites, Apps, SEO & More"
-        description="Transparent pricing for every service: websites from $1,500, apps from $5K, branding from $1,500, SEO from $1,500/mo and website care from $299/mo."
+        description="Transparent pricing with a fixed-price guarantee: websites from $3,500, app prototypes from $5,000, branding from $3,000, SEO from $1,500/mo."
         url={`${siteConfig.url}/pricing`}
         schemas={schemas}
         keywords={["web design pricing houston", "website cost houston", "SEO pricing", "mobile app development cost", "branding agency pricing", "website maintenance pricing", "digital marketing agency pricing"]}
@@ -489,7 +485,8 @@ export default function Pricing() {
           </section>
 
           {/* CTA */}
-          <section className="py-14 lg:py-24">
+          <section className="relative isolate overflow-hidden py-14 lg:py-24">
+            <CardinalMark />
             <Container>
               <motion.div {...reveal} className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-700 px-6 py-14 text-center text-white sm:px-12 lg:py-20">
                 <div aria-hidden className="pointer-events-none absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(white 1px, transparent 1px)", backgroundSize: "22px 22px" }} />

@@ -1,26 +1,37 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, Info, Mail, Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { serviceGroups, services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
 import { ScrollProgress } from "@/components/site/motion";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 
-type PanelId = "services" | "industries";
+type PanelId = "services" | "industries" | "company";
 
+// Primary nav stays short; secondary pages live under "Company"
 const simpleLinks = [
   { label: "Work", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Insights", href: "/blog" },
-  { label: "About", href: "/about" },
 ];
+const companyLinks = [
+  { label: "About", href: "/about", icon: Info, blurb: "Our story, values, and team" },
+  { label: "Insights", href: "/blog", icon: BookOpen, blurb: "Guides on web, SEO, AI & growth" },
+  { label: "Careers", href: "/careers", icon: Briefcase, blurb: "Work with Cardinal" },
+  { label: "Contact", href: "/contact", icon: Mail, blurb: "Start a conversation" },
+];
+const PANEL_LABEL: Record<PanelId, string> = { services: "Services", industries: "Industries", company: "Company" };
+const PANEL_ROOT: Record<PanelId, string[]> = {
+  services: ["/services"],
+  industries: ["/industry", "/houston-"],
+  company: companyLinks.map((l) => l.href),
+};
 
 /** Brand wordmark. The white version is for dark backgrounds (footer, dark bands). */
 /** Brand wordmark: full color on light surfaces, white on dark ones (footer, dark theme). */
 export function Logo({ inverted = false, className }: { inverted?: boolean; className?: string }) {
-  const img = "h-7 w-auto sm:h-8";
+  const img = "h-7 w-auto sm:h-[30px]";
   return (
     <Link to="/" className={cn("flex shrink-0 items-center", className)} aria-label="Cardinal Consulting home">
       {inverted ? (
@@ -94,6 +105,39 @@ function IndustriesPanel({ onNavigate }: { onNavigate: () => void }) {
   );
 }
 
+function CompanyPanel({ onNavigate }: { onNavigate: () => void }) {
+  return (
+    <div className="grid gap-10 lg:grid-cols-[1fr_2fr_1.2fr]">
+      <div>
+        <p className="font-display text-2xl font-semibold text-foreground">Company</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">A Houston web, app, and digital growth team.</p>
+      </div>
+      <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        {companyLinks.map((l) => (
+          <li key={l.href}>
+            <Link to={l.href} onClick={onNavigate} className="group flex gap-3">
+              <l.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+              <span>
+                <span className="font-medium text-foreground group-hover:text-primary">{l.label}</span>
+                <span className="mt-0.5 block text-sm text-muted-foreground">{l.blurb}</span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className="border border-border bg-secondary p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Talk to us</p>
+        <a href="tel:281-901-7016" className="mt-3 flex items-center gap-2 font-display text-xl font-semibold text-foreground hover:text-primary">
+          <Phone className="h-4 w-4" /> (281) 901-7016
+        </a>
+        <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+          <Clock className="h-4 w-4" /> Mon–Fri, 9AM–6PM CST
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [openPanel, setOpenPanel] = useState<PanelId | null>(null);
@@ -149,7 +193,7 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b bg-background/95 backdrop-blur transition-shadow",
+          "fixed inset-x-0 top-0 z-50 border-b bg-background transition-shadow",
           isScrolled || openPanel ? "border-border shadow-[0_1px_0_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.12)]" : "border-transparent",
         )}
         onMouseLeave={scheduleClose}
@@ -157,7 +201,7 @@ export function Header() {
         <div className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between px-6 lg:px-10">
           <Logo />
 
-          <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+          <nav aria-label="Main" className="hidden items-center gap-8 xl:flex 2xl:gap-9">
             {(["services", "industries"] as PanelId[]).map((id) => (
               <button
                 key={id}
@@ -166,9 +210,9 @@ export function Header() {
                 aria-controls={`panel-${id}`}
                 onMouseEnter={() => open(id)}
                 onClick={() => setOpenPanel(openPanel === id ? null : id)}
-                className={navLinkClass(openPanel === id || isActive(id === "services" ? "/services" : "/industry"))}
+                className={navLinkClass(openPanel === id || PANEL_ROOT[id].some((r) => location.pathname.startsWith(r)))}
               >
-                {id === "services" ? "Services" : "Industries"}
+                {PANEL_LABEL[id]}
                 <ChevronDown className={cn("h-4 w-4 transition-transform", openPanel === id && "rotate-180")} />
               </button>
             ))}
@@ -177,22 +221,46 @@ export function Header() {
                 {l.label}
               </Link>
             ))}
+            <button
+              type="button"
+              aria-expanded={openPanel === "company"}
+              aria-controls="panel-company"
+              onMouseEnter={() => open("company")}
+              onClick={() => setOpenPanel(openPanel === "company" ? null : "company")}
+              className={navLinkClass(openPanel === "company" || companyLinks.some((l) => isActive(l.href)))}
+            >
+              Company
+              <ChevronDown className={cn("h-4 w-4 transition-transform", openPanel === "company" && "rotate-180")} />
+            </button>
           </nav>
 
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-2 xl:flex">
             <ThemeToggle />
-            <a href="tel:281-901-7016" className="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground">
-              <Phone className="h-4 w-4" /> (281) 901-7016
+            <a
+              href="tel:281-901-7016"
+              aria-label="Call (281) 901-7016"
+              className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
+            >
+              <Phone className="h-4 w-4" />
+              <span className="pointer-events-none absolute right-0 top-full mt-2 whitespace-nowrap bg-ink px-3 py-1.5 text-xs font-medium text-ink-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                (281) 901-7016
+              </span>
             </a>
             <Link
               to="/contact"
-              className="inline-flex h-11 items-center gap-2 bg-ink px-5 text-sm font-semibold text-ink-foreground transition-colors hover:bg-primary"
+              className="group ml-2 inline-flex h-10 items-center gap-2 whitespace-nowrap bg-ink px-5 text-sm font-semibold text-ink-foreground transition-colors hover:bg-primary"
             >
-              Contact us <ArrowRight className="h-4 w-4" />
+              Start a project <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
 
-          <div className="flex items-center gap-1 lg:hidden">
+          <div className="flex items-center gap-1.5 xl:hidden">
+          <Link
+            to="/contact"
+            className="mr-1 hidden h-9 items-center gap-1.5 whitespace-nowrap bg-ink px-4 text-sm font-semibold text-ink-foreground transition-colors hover:bg-primary md:inline-flex"
+          >
+            Start a project <ArrowRight className="h-4 w-4" />
+          </Link>
           <ThemeToggle />
           <button
             type="button"
@@ -219,13 +287,15 @@ export function Header() {
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.18 }}
               onMouseEnter={() => open(openPanel)}
-              className="absolute inset-x-0 top-full hidden border-b border-border bg-background lg:block"
+              className="absolute inset-x-0 top-full hidden border-b border-border bg-background xl:block"
             >
               <div className="mx-auto w-full max-w-[1280px] px-10 py-10">
                 {openPanel === "services" ? (
                   <ServicesPanel onNavigate={() => setOpenPanel(null)} />
-                ) : (
+                ) : openPanel === "industries" ? (
                   <IndustriesPanel onNavigate={() => setOpenPanel(null)} />
+                ) : (
+                  <CompanyPanel onNavigate={() => setOpenPanel(null)} />
                 )}
               </div>
             </motion.div>
@@ -241,7 +311,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto bg-background lg:hidden"
+            className="fixed inset-x-0 bottom-0 top-[72px] z-40 overflow-y-auto bg-background xl:hidden"
           >
             <nav aria-label="Mobile" className="px-6 py-6">
               {(["services", "industries"] as PanelId[]).map((id) => (
@@ -269,14 +339,22 @@ export function Header() {
                   )}
                 </div>
               ))}
-              {[...simpleLinks, { label: "Careers", href: "/careers" }].map((l) => (
+              {simpleLinks.map((l) => (
                 <Link key={l.href} to={l.href} className="block border-b border-border py-4 text-lg font-medium text-foreground">
                   {l.label}
                 </Link>
               ))}
+              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Company</p>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {companyLinks.map((l) => (
+                  <Link key={l.href} to={l.href} className="flex items-center gap-2.5 border border-border px-3.5 py-3 text-[15px] font-medium text-foreground">
+                    <l.icon className="h-4 w-4 text-primary" /> {l.label}
+                  </Link>
+                ))}
+              </div>
               <div className="mt-8 space-y-3">
                 <Link to="/contact" className="flex h-12 items-center justify-center gap-2 bg-ink font-semibold text-ink-foreground">
-                  Contact us <ArrowRight className="h-4 w-4" />
+                  Start a project <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a href="tel:281-901-7016" className="flex h-12 items-center justify-center gap-2 border border-border font-medium text-foreground">
                   <Phone className="h-4 w-4" /> (281) 901-7016

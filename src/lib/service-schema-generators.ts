@@ -1,4 +1,5 @@
 import { siteConfig } from './seo-config';
+import { priceBounds, priceSpecification } from './services-catalog';
 
 interface ServiceFAQ {
   question: string;
@@ -8,6 +9,7 @@ interface ServiceFAQ {
 interface ServiceOffer {
   name: string;
   price: string;
+  billing?: string;
   priceCurrency?: string;
   description: string;
   features: string[];
@@ -148,8 +150,7 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
         position: i + 1,
         name: offer.name,
         description: offer.description,
-        price: offer.price.replace(/[^0-9.]/g, '') || '0',
-        priceCurrency: offer.priceCurrency || 'USD',
+        priceSpecification: priceSpecification({ price: offer.price, billing: offer.billing ?? '' }),
         availability: 'https://schema.org/InStock',
         priceValidUntil: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
         itemOffered: {
@@ -246,7 +247,7 @@ export function generateServicePageSchemas(config: ServicePageSchemaConfig) {
       estimatedCost: {
         '@type': 'MonetaryAmount',
         currency: 'USD',
-        value: config.offers[0]?.price.replace(/[^0-9.]/g, '') || 'Contact for Quote',
+        value: priceBounds(config.offers[0]?.price ?? '').min ?? 0,
       },
       step: config.process.map((step, i) => ({
         '@type': 'HowToStep',

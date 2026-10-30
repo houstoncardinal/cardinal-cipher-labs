@@ -4,10 +4,12 @@ import { ArrowUpRight } from "lucide-react";
 import { Container, SectionHeader, revealDelay } from "@/components/site/primitives";
 import { industries } from "@/lib/industries";
 import { TiltCard } from "@/components/site/canvas";
+import { CardinalMark } from "@/components/site/CardinalMark";
 
 export function Industries() {
   return (
-    <div className="py-16 lg:py-24">
+    <div className="relative isolate overflow-hidden py-16 lg:py-24">
+      <CardinalMark />
       <Container>
         <SectionHeader
           eyebrow="Industries"
