@@ -1,0 +1,121 @@
+/* Halloween layer — only active while <html> has the .halloween class (see HalloweenLayer.tsx). */
+
+.halloween ::selection {
+  background: #ec6f15;
+  color: #fff;
+}
+
+/* Bats flap */
+.hw-flap {
+  animation: hw-flap 0.22s ease-in-out infinite alternate;
+  transform-origin: 50% 40%;
+}
+@keyframes hw-flap {
+  to { transform: scaleY(0.35); }
+}
+
+/* Spider sways on its thread */
+.hw-swing {
+  animation: hw-swing 3.2s ease-in-out infinite;
+  transform-origin: 50% -40px;
+}
+@keyframes hw-swing {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+
+/* Pumpkins wobble; faces light up on hover */
+.hw-pumpkin {
+  animation: hw-wobble 2.8s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.hw-pumpkin .hw-face { transition: fill 0.25s; }
+:hover > .hw-pumpkin .hw-face,
+.hw-pumpkin:hover .hw-face,
+:focus-visible > .hw-pumpkin .hw-face { fill: #ffd76a; }
+:hover > .hw-pumpkin,
+:focus-visible > .hw-pumpkin { filter: drop-shadow(0 0 8px rgba(236, 111, 21, 0.75)); }
+@keyframes hw-wobble {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* Moon behind the homepage hero */
+.hw-moon-disc {
+  background:
+    radial-gradient(circle at 34% 30%, rgba(0, 0, 0, 0.05) 0 9%, transparent 10%),
+    radial-gradient(circle at 64% 58%, rgba(0, 0, 0, 0.05) 0 13%, transparent 14%),
+    radial-gradient(circle at 42% 70%, rgba(0, 0, 0, 0.04) 0 6%, transparent 7%),
+    radial-gradient(circle at 40% 35%, #fff7ec, #fbe3cf 60%, #f5cfb6);
+  opacity: 0.55;
+  box-shadow: 0 0 60px 10px rgba(236, 111, 21, 0.12);
+}
+.dark .hw-moon-disc {
+  opacity: 0.7;
+  box-shadow: 0 0 90px 24px rgba(255, 214, 170, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+.hw-moon-bat {
+  opacity: 0;
+  animation: hw-moon-bat 14s ease-in-out infinite 3s;
+}
+@keyframes hw-moon-bat {
+  0%, 62% { opacity: 0; transform: translate(-260%, 40%) scale(0.7); }
+  66% { opacity: 1; }
+  80% { opacity: 1; transform: translate(-50%, -60%) scale(1); }
+  86%, 100% { opacity: 0; transform: translate(180%, -150%) scale(0.8); }
+}
+
+/* Ghost drifting up out of the graveyard */
+.hw-ghost {
+  opacity: 0;
+  animation: hw-ghost 11s ease-in-out infinite 2s;
+}
+@keyframes hw-ghost {
+  0%, 55% { opacity: 0; transform: translateY(24px) scale(0.85); }
+  65% { opacity: 0.9; }
+  80% { opacity: 0.85; transform: translateY(-34px) translateX(6px) scale(1); }
+  92%, 100% { opacity: 0; transform: translateY(-60px) translateX(-4px) scale(1); }
+}
+
+.hw-bob { animation: hw-bob 1.6s ease-in-out infinite alternate; }
+@keyframes hw-bob { to { transform: translateY(-10px); } }
+
+/* Lights out: the page goes dark except for a torch around the pointer */
+.hw-lights-out {
+  --hx: 50vw;
+  --hy: 45vh;
+  background: radial-gradient(circle 170px at var(--hx) var(--hy), transparent 0, rgba(4, 7, 18, 0.55) 55%, rgba(4, 7, 18, 0.95) 100%);
+}
+
+/* The cardinal watermark dresses up: a witch hat and a glowing eye */
+.halloween [data-cardinal-mark]::before {
+  content: "";
+  position: absolute;
+  left: 49%;
+  top: 4%;
+  width: 46%;
+  aspect-ratio: 1;
+  transform: rotate(22deg);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 4c6 18 14 38 22 60H28C36 42 42 22 50 4z' fill='%230f172a'/%3E%3Crect x='42' y='54' width='16' height='6' fill='%23ec6f15'/%3E%3Cellipse cx='50' cy='66' rx='42' ry='8' fill='%230f172a'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.halloween [data-cardinal-mark]::after {
+  content: "";
+  position: absolute;
+  left: 70.5%;
+  top: 25.4%;
+  width: 4.4%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ff8a1f;
+  box-shadow: 0 0 10px 4px rgba(255, 138, 31, 0.9);
+  animation: hw-blink 6s infinite;
+}
+@keyframes hw-blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hw-flap, .hw-swing, .hw-pumpkin, .hw-bob, .halloween [data-cardinal-mark]::after { animation: none; }
+  .hw-moon-bat, .hw-ghost { animation: none; opacity: 0; }
+}

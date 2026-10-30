@@ -30,7 +30,7 @@ export function Hero() {
       <Container className="relative grid items-center gap-16 py-14 lg:grid-cols-[1.05fr_1fr] lg:py-20">
         <div>
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Eyebrow className="mb-8">Houston web design, app development &amp; SEO</Eyebrow>
+            <Eyebrow className="mb-8">Enterprise web design, app development &amp; SEO</Eyebrow>
           </motion.div>
           {/* Each phrase is its own balanced block; sizes are tuned so the accent phrase always
               sits on one line (10vw on phones; fixed steps that fit the column above that). */}
