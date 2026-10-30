@@ -1396,3 +1396,30 @@
 .theme-switching *::after {
   transition: none !important;
 }
+
+/* Flying cardinals (CardinalFlight.tsx): wings hinge at the shoulder; a burst of flaps, then a glide */
+.cc-bird { filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.18)); }
+.cc-wing {
+  transform-box: view-box;
+  transform-origin: 64px 41px;
+  animation: cc-flap 2.6s ease-in-out infinite;
+}
+.cc-wing-far { animation-name: cc-flap-far; }
+@keyframes cc-flap {
+  0%, 100% { transform: scaleY(1); }
+  9% { transform: scaleY(-0.75) skewX(-8deg); }
+  18% { transform: scaleY(1); }
+  27% { transform: scaleY(-0.75) skewX(-8deg); }
+  36% { transform: scaleY(1); }
+  45% { transform: scaleY(-0.7) skewX(-6deg); }
+  56%, 92% { transform: scaleY(0.18) skewX(-14deg); }
+}
+@keyframes cc-flap-far {
+  0%, 100% { transform: scaleY(0.9) translateX(-2px); }
+  9% { transform: scaleY(-0.5) skewX(-8deg); }
+  18% { transform: scaleY(0.9); }
+  27% { transform: scaleY(-0.5) skewX(-8deg); }
+  36% { transform: scaleY(0.9); }
+  45% { transform: scaleY(-0.45) skewX(-6deg); }
+  56%, 92% { transform: scaleY(0.12) skewX(-14deg); }
+}

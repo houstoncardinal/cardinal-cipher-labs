@@ -12,6 +12,7 @@ import { trackContactLinkClicks } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/contact-intent";
 import { MotionConfig } from "framer-motion";
 import { CursorLabel, PageFade } from "@/components/site/motion";
+import { CardinalFlight } from "@/components/site/CardinalFlight";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <CursorLabel />
+        <CardinalFlight />
         <PageFade>
           <AppRoutes />
         </PageFade>

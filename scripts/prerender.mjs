@@ -56,15 +56,32 @@ for (const url of [...new Set(publicPaths)]) {
 // Real 404 page (Netlify serves dist/404.html with a 404 status for unknown URLs)
 fs.writeFileSync(path.join(dist, "404.html"), page("/__404__"));
 
-// sitemap.xml — indexable pages only
+// sitemap.xml — indexable pages only. Blog posts carry their publish date; case studies list
+// their screenshots (image sitemap) so the work can surface in image search.
 const today = new Date().toISOString().slice(0, 10);
 const priority = (u) => (u === "/" ? "1.0" : /^\/services(\/|$)/.test(u) ? "0.9" : /^\/(portfolio|about|contact|pricing)/.test(u) ? "0.8" : "0.7");
+const xml = (v) => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const absolute = (src) => (/^https?:/.test(src) ? src : `${SITE}${src}`);
+const lastmod = (u) => articles.find((a) => `/blog/${a.slug}` === u)?.date || today;
+const images = (u) => {
+  const study = caseStudies.find((c) => c.detail && `/portfolio/${c.slug}` === u);
+  if (!study) return [];
+  return [
+    { src: study.image, title: study.client },
+    ...study.detail.gallery.map((g) => ({ src: g.src, title: g.alt })),
+  ].filter((img, i, all) => img.src && all.findIndex((x) => x.src === img.src) === i);
+};
 const urls = [...new Set(publicPaths)]
   .filter((u) => !noindexPaths.has(u))
-  .map((u) => `  <url><loc>${SITE}${u === "/" ? "/" : u}</loc><lastmod>${today}</lastmod><priority>${priority(u)}</priority></url>`);
+  .map((u) => {
+    const imgs = images(u)
+      .map((img) => `\n    <image:image><image:loc>${xml(absolute(img.src))}</image:loc><image:title>${xml(img.title)}</image:title></image:image>`)
+      .join("");
+    return `  <url>\n    <loc>${xml(SITE + u)}</loc>\n    <lastmod>${lastmod(u)}</lastmod>\n    <priority>${priority(u)}</priority>${imgs}\n  </url>`;
+  });
 fs.writeFileSync(
   path.join(dist, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`,
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join("\n")}\n</urlset>\n`,
 );
 
 // Netlify _redirects — generated from src/lib/redirects.ts so it can never drift from the app
