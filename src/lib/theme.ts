@@ -1,5 +1,5 @@
-// Light/dark theme: the visitor's choice (or their OS setting) is applied to <html> as the
-// `dark` class. index.html runs the same logic inline before first paint, so there's no flash.
+// Light/dark theme: use the visitor's saved choice, or follow their device when unset.
+// index.html applies the same rule before first paint.
 import { useEffect, useSyncExternalStore } from "react";
 
 export type ThemePreference = "light" | "dark" | "system";

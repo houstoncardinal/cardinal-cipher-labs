@@ -12,7 +12,6 @@ import { trackContactLinkClicks } from "@/lib/analytics";
 import { captureAttribution } from "@/lib/contact-intent";
 import { MotionConfig } from "framer-motion";
 import { CursorLabel, PageFade } from "@/components/site/motion";
-import { HalloweenLayer } from "@/halloween/HalloweenLayer";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +45,6 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <CursorLabel />
-        <HalloweenLayer />
         <PageFade>
           <AppRoutes />
         </PageFade>

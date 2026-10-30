@@ -10,7 +10,6 @@ export function CardinalMark({ className }: { className?: string }) {
   return (
     <div
       aria-hidden
-      data-cardinal-mark
       className={cn(
         // The wrapper sets how visible it is: present but quiet, softer on phones and the dark theme
         "pointer-events-none absolute -bottom-8 right-2 -z-10 w-40 select-none opacity-[0.12]",

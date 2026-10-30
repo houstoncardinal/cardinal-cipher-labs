@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { ServicePageLayout } from "@/components/services/ServicePageLayout";
 import { HoustonClassicLayout, IndustryClassicLayout } from "@/components/services/ClassicLandingLayouts";
@@ -83,11 +82,7 @@ export function AppRoutes() {
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route
         path="/admin"
-        element={
-          <ProtectedRoute>
-            <AdminLayout />
-          </ProtectedRoute>
-        }
+        element={<AdminLayout />}
       >
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
