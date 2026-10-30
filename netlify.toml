@@ -2,6 +2,9 @@
   publish = "dist"
   command = "npm run build"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_PATHS = "public/clients/apnclinic.png,public/clients/on-dark/apnclinic.png"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
