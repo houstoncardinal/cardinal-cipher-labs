@@ -270,7 +270,7 @@ export function GuidedContactForm() {
                           on ? "border-foreground bg-foreground text-background" : "border-input text-foreground hover:-translate-y-0.5 hover:border-foreground hover:shadow-[0_10px_24px_-16px_rgba(15,23,42,0.4)]",
                         )}
                       >
-                        <s.icon className={cn("h-4 w-4 shrink-0", on ? "text-brand-300" : "text-muted-foreground group-hover:text-primary")} strokeWidth={1.7} />
+                        <s.icon className={cn("h-4 w-4 shrink-0", on ? "text-brand-300 dark:text-brand-600" : "text-muted-foreground group-hover:text-primary")} strokeWidth={1.7} />
                         <span className="leading-tight">{s.name}</span>
                       </button>
                     );
@@ -385,7 +385,7 @@ export function GuidedContactForm() {
                             on ? "border-foreground bg-foreground text-background" : "border-input text-foreground hover:border-foreground",
                           )}
                         >
-                          <m.icon className={cn("h-4 w-4", on ? "text-brand-300" : "text-muted-foreground")} strokeWidth={1.7} />
+                          <m.icon className={cn("h-4 w-4", on ? "text-brand-300 dark:text-brand-600" : "text-muted-foreground")} strokeWidth={1.7} />
                           {m.value}
                         </button>
                       );

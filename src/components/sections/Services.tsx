@@ -384,14 +384,14 @@ export function Services() {
                     onClick={() => setActiveSlug(s.slug)}
                     className={cn(
                       "relative flex shrink-0 items-center gap-2.5 border px-3.5 py-2 text-left transition-colors",
-                      selected ? "border-ink text-ink-foreground" : "border-foreground/20 bg-background text-foreground hover:border-foreground/50",
+                      selected ? "border-foreground text-background" : "border-foreground/20 bg-background text-foreground hover:border-foreground/50",
                     )}
                   >
-                    {selected && <motion.span layoutId="svc-chip" className="absolute inset-0 bg-ink" transition={{ duration: 0.4, ease: EASE }} />}
-                    <s.icon className={cn("relative h-4 w-4 shrink-0", selected ? "text-brand-300" : "text-muted-foreground")} strokeWidth={1.7} />
+                    {selected && <motion.span layoutId="svc-chip" className="absolute inset-0 bg-foreground" transition={{ duration: 0.4, ease: EASE }} />}
+                    <s.icon className={cn("relative h-4 w-4 shrink-0", selected ? "text-brand-300 dark:text-brand-600" : "text-muted-foreground")} strokeWidth={1.7} />
                     <span className="relative min-w-0">
                       <span className="block whitespace-nowrap text-sm font-semibold leading-tight">{s.name}</span>
-                      <span className={cn("mt-0.5 block whitespace-nowrap text-[11px] leading-tight", selected ? "text-ink-muted" : "text-muted-foreground")}>{priceRange(s)}</span>
+                      <span className={cn("mt-0.5 block whitespace-nowrap text-[11px] leading-tight", selected ? "text-background/70" : "text-muted-foreground")}>{priceRange(s)}</span>
                     </span>
                   </button>
                 );

@@ -27,7 +27,7 @@ export function Clients() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={c.name}
-                className="group flex h-16 items-center justify-center sm:h-20"
+                className="group flex h-16 items-center justify-center rounded-xl transition-colors dark:bg-[#F4F6FA] dark:px-4 sm:h-20"
               >
                 <img
                   src={c.logo}

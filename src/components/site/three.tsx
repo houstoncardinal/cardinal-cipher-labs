@@ -69,7 +69,7 @@ function useThreeScene(container: RefObject<HTMLDivElement>, create: (ctx: Scene
       const inst = createRef.current({ THREE, scene, camera, renderer, reduce, pointer });
 
       const pushColors = () =>
-        inst.colors?.({ accent: cssColor(THREE, "--primary", [352, 72, 36]), ink: cssColor(THREE, "--ink", [222, 47, 11]) });
+        inst.colors?.({ accent: cssColor(THREE, "--primary", [352, 72, 36]), ink: cssColor(THREE, "--foreground", [222, 47, 11]) });
       pushColors();
       const mo = new MutationObserver(pushColors);
       mo.observe(document.documentElement, { attributes: true, attributeFilter: ["style", "class"] });

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
@@ -13,6 +14,12 @@ export default {
     },
     extend: {
       colors: {
+        // Neutrals are theme-aware: dark mode swaps these variables (see index.css),
+        // so every page built with white/gray utilities adapts without per-file changes.
+        white: "rgb(var(--c-white) / <alpha-value>)",
+        gray: Object.fromEntries(
+          [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map((n) => [n, `rgb(var(--c-gray-${n}) / <alpha-value>)`]),
+        ),
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

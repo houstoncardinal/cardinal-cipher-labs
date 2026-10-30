@@ -26,7 +26,20 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" as="image" href="/brand/cardinal-consulting-logo.png" fetchpriority="high" />
-    <meta name="theme-color" content="#0F172A" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <!-- Apply the saved (or OS) theme before first paint — must match src/lib/theme.ts -->
+    <script>
+      (function () {
+        try {
+          var p = localStorage.getItem("cc-theme");
+          var dark = p === "dark" || (p !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          var r = document.documentElement;
+          if (dark) r.classList.add("dark");
+          r.style.colorScheme = dark ? "dark" : "light";
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", dark ? "#0B1020" : "#FFFFFF");
+        } catch (e) {}
+      })();
+    </script>
     <meta name="apple-mobile-web-app-title" content="Cardinal" />
     <meta name="format-detection" content="telephone=no" />
 
@@ -34,13 +47,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
 
-  <body class="light">
-    <script>
-      // Force light mode - dark mode disabled
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    </script>
+  <body>
     <!-- Static copies of the React contact forms so Netlify can detect them at deploy time.
          Field names must match src/components/site/ContactForm.tsx. -->
     <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input type="text" name="name" /><input type="text" name="email" /><input type="text" name="phone" /><input type="text" name="company" /><input type="text" name="service" /><input type="text" name="plan" /><input type="text" name="needs" /><input type="text" name="timeline" /><input type="text" name="budget" /><input type="text" name="source_page" /><input type="text" name="landing_page" /><input type="text" name="referrer" /><input type="text" name="utm_source" /><input type="text" name="utm_medium" /><input type="text" name="utm_campaign" /><input type="text" name="preferred_contact" /><input type="text" name="best_time" /><input type="text" name="expedited" /><textarea name="message"></textarea><input name="bot-field" /></form>

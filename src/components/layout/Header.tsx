@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { serviceGroups, services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
 import { ScrollProgress } from "@/components/site/motion";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 
 type PanelId = "services" | "industries";
 
@@ -17,18 +18,19 @@ const simpleLinks = [
 ];
 
 /** Brand wordmark. The white version is for dark backgrounds (footer, dark bands). */
+/** Brand wordmark: full color on light surfaces, white on dark ones (footer, dark theme). */
 export function Logo({ inverted = false, className }: { inverted?: boolean; className?: string }) {
+  const img = "h-7 w-auto sm:h-8";
   return (
     <Link to="/" className={cn("flex shrink-0 items-center", className)} aria-label="Cardinal Consulting home">
-      <img
-        src={inverted ? "/brand/cardinal-consulting-logo-white.png" : "/brand/cardinal-consulting-logo.png"}
-        alt="Cardinal Consulting"
-        width={1200}
-        height={138}
-        decoding="async"
-        fetchPriority={inverted ? "low" : "high"}
-        className="h-7 w-auto sm:h-8"
-      />
+      {inverted ? (
+        <img src="/brand/cardinal-consulting-logo-white.png" alt="Cardinal Consulting" width={1200} height={138} decoding="async" className={img} />
+      ) : (
+        <>
+          <img src="/brand/cardinal-consulting-logo.png" alt="Cardinal Consulting" width={1200} height={138} decoding="async" fetchPriority="high" className={cn(img, "dark:hidden")} />
+          <img src="/brand/cardinal-consulting-logo-white.png" alt="" aria-hidden width={1200} height={138} decoding="async" className={cn(img, "hidden dark:block")} />
+        </>
+      )}
     </Link>
   );
 }
@@ -177,7 +179,8 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
+            <ThemeToggle />
             <a href="tel:281-901-7016" className="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground">
               <Phone className="h-4 w-4" /> (281) 901-7016
             </a>
@@ -189,15 +192,18 @@ export function Header() {
             </Link>
           </div>
 
+          <div className="flex items-center gap-1 lg:hidden">
+          <ThemeToggle />
           <button
             type="button"
-            className="-mr-2 p-2 text-foreground lg:hidden"
+            className="-mr-2 p-2 text-foreground"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
+          </div>
         </div>
 
         <ScrollProgress />

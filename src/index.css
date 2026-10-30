@@ -19,6 +19,20 @@
     /* Cardinal crimson (logo) — used for emphasis */
     --primary: 352 71% 36%;
 
+    /* Theme-aware neutrals (Tailwind gray + white); swapped in .dark */
+    --c-white: 255 255 255;
+    --c-gray-50: 249 250 251;
+    --c-gray-100: 243 244 246;
+    --c-gray-200: 229 231 235;
+    --c-gray-300: 209 213 219;
+    --c-gray-400: 156 163 175;
+    --c-gray-500: 107 114 128;
+    --c-gray-600: 75 85 99;
+    --c-gray-700: 55 65 81;
+    --c-gray-800: 31 41 55;
+    --c-gray-900: 17 24 39;
+    --c-gray-950: 3 7 18;
+
     /* Brand crimson scale (from the logo); 600 = #9E1B2C, 700 = the bird's shadow #841729 */
     --brand-50: 253 242 243;
     --brand-100: 251 224 227;
@@ -78,57 +92,116 @@
     --clients-text: 215 19% 30%;
   }
 
-  /* Dark Mode - Premium Enterprise Palette */
+  /* Dark theme — deep brand navy, not a straight inversion.
+     Surfaces step up in lightness for depth; text is warm off-white; the logo crimson is
+     lifted (same hue) so it stays rich and readable on navy. */
   .dark {
-    --background: 220 15% 5%;
-    --foreground: 40 10% 96%;
+    color-scheme: dark;
+    --background: 226 47% 7%;
+    --foreground: 220 33% 95%;
+    --card: 225 42% 10%;
+    --card-foreground: 220 33% 95%;
+    --popover: 225 42% 10%;
+    --popover-foreground: 220 33% 95%;
 
-    --card: 220 15% 7%;
-    --card-foreground: 40 10% 96%;
+    --primary: 352 66% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 40% 10%;
+    --secondary-foreground: 220 33% 95%;
+    --muted: 225 34% 14%;
+    --muted-foreground: 221 16% 66%;
+    --accent: 225 34% 14%;
+    --accent-foreground: 220 33% 95%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 225 28% 18%;
+    --input: 225 28% 22%;
+    --ring: 352 66% 54%;
 
-    --popover: 220 15% 7%;
-    --popover-foreground: 40 10% 96%;
+    /* Navy "ink" bands stay navy, lifted just above the page so they still read as a band */
+    --ink: 224 44% 12%;
+    --ink-foreground: 0 0% 100%;
+    --ink-muted: 218 22% 72%;
 
-    /* Crimson Accent - Deep Red */
-    --primary: 352 71% 36%;
-    --primary-foreground: 40 10% 96%;
+    --surface-elevated: 225 42% 10%;
+    --text-secondary: 220 18% 78%;
+    --text-tertiary: 220 13% 58%;
+    --divider: 225 28% 18%;
+    --glow-primary: 352 66% 54% / 0.18;
+    --glow-soft: 352 66% 54% / 0.06;
+    --glass-bg: 226 47% 7% / 0.8;
+    --glass-border: 225 28% 22% / 0.6;
+    --gradient-primary: linear-gradient(135deg, hsl(352 66% 54%), hsl(352 70% 44%));
+    --gradient-dark: linear-gradient(180deg, hsl(226 47% 7%), hsl(226 47% 5%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(352 66% 54% / 0.12), transparent 70%);
+    --clients-bg: 226 47% 7%;
+    --clients-text: 220 18% 78%;
 
-    --secondary: 220 15% 10%;
-    --secondary-foreground: 40 10% 96%;
+    /* Neutrals: "white" becomes the page navy; grays step from surfaces up to near-white text */
+    --c-white: 11 16 32;
+    --c-gray-50: 16 22 40;
+    --c-gray-100: 23 31 52;
+    --c-gray-200: 35 45 70;
+    --c-gray-300: 55 66 94;
+    --c-gray-400: 110 120 146;
+    --c-gray-500: 146 155 178;
+    --c-gray-600: 172 180 199;
+    --c-gray-700: 201 207 221;
+    --c-gray-800: 224 228 238;
+    --c-gray-900: 240 242 248;
+    --c-gray-950: 248 250 252;
 
-    --muted: 220 15% 13%;
-    --muted-foreground: 220 10% 50%;
+    /* Crimson scale for dark: tints become deep wine, the core is lifted for contrast */
+    --brand-50: 44 13 21;
+    --brand-100: 62 18 29;
+    --brand-200: 96 27 42;
+    --brand-300: 246 164 176;
+    --brand-400: 238 116 133;
+    --brand-500: 226 76 96;
+    --brand-600: 214 58 80;
+    --brand-700: 232 92 111;
+    --brand-800: 249 182 192;
+    --brand-900: 252 212 218;
+    --brand-950: 254 236 239;
+  }
 
-    --accent: 352 71% 36%;
-    --accent-foreground: 40 10% 96%;
+  /* Dark "islands": sections that are navy by design keep their original palette, so
+     their white text, hairlines and glass cards look exactly as designed. */
+  .dark :is(section, div, aside, article, footer, figure, li, dl, ol, ul, span, p, nav, header):is(
+      .bg-gray-900, .bg-gray-950, .bg-gray-800, .bg-ink, .bg-black, .bg-ink\/25
+    ) {
+    --c-white: 255 255 255;
+    --c-gray-50: 249 250 251;
+    --c-gray-100: 243 244 246;
+    --c-gray-200: 229 231 235;
+    --c-gray-300: 209 213 219;
+    --c-gray-400: 156 163 175;
+    --c-gray-500: 107 114 128;
+    --c-gray-600: 75 85 99;
+    --c-gray-700: 55 65 81;
+    --c-gray-800: 31 41 55;
+    --c-gray-900: 17 24 39;
+    --c-gray-950: 3 7 18;
+  }
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 10% 96%;
+  /* Dark navy buttons would vanish on a navy page: they flip to light buttons with navy text */
+  .dark :is(a, button).bg-ink {
+    --ink: 220 33% 95%;
+    --ink-foreground: 224 44% 12%;
+  }
+  .dark :is(a, button).bg-ink:hover {
+    --ink-foreground: 0 0% 100%;
+  }
 
-    --border: 220 15% 15%;
-    --input: 220 15% 15%;
-    --ring: 352 71% 36%;
+  /* Text and icons on crimson always stay white */
+  .dark :is(.bg-brand-500, .bg-brand-600, .bg-brand-700, .bg-primary) {
+    --c-white: 255 255 255;
+  }
 
-    /* Enhanced Custom tokens */
-    --surface-elevated: 220 15% 9%;
-    --text-secondary: 220 10% 65%;
-    --text-tertiary: 220 10% 40%;
-    --divider: 220 15% 18%;
-    --glow-primary: 352 71% 36% / 0.2;
-    --glow-soft: 352 71% 42% / 0.08;
-    
-    /* Glass effects */
-    --glass-bg: 220 15% 8% / 0.7;
-    --glass-border: 220 15% 20% / 0.5;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(352 71% 36%), hsl(352 70% 30%));
-    --gradient-dark: linear-gradient(180deg, hsl(220 15% 5%), hsl(220 15% 3%));
-    --gradient-radial: radial-gradient(ellipse at center, hsl(352 71% 36% / 0.15), transparent 70%);
-    
-    /* Clients section specific */
-    --clients-bg: 0 0% 100%;
-    --clients-text: 220 15% 10%;
+  /* Image frames and logo tiles keep a light surface so screenshots and dark logos stay legible */
+  .dark .keep-light {
+    --c-white: 255 255 255;
+    --background: 0 0% 100%;
   }
 }
 
@@ -180,12 +253,6 @@
     height: env(safe-area-inset-bottom, 0px);
   }
 
-  /* Hide scrollbar on mobile toolbar area */
-  @media (max-width: 1023px) {
-    body {
-      padding-bottom: 100px;
-    }
-  }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
@@ -1314,4 +1381,17 @@
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Theme switch: the new theme spreads from the toggle (see ThemeToggle.tsx) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
 }
