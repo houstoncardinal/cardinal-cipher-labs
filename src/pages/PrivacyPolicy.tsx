@@ -186,7 +186,7 @@ We will respond to your inquiry as soon as possible.`
     },
   ];
 
-  const lastUpdated = "January 15, 2025";
+  const lastUpdated = "November 1, 2026";
 
   return (
     <>

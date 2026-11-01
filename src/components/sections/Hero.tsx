@@ -7,7 +7,7 @@ import { Magnetic } from "@/components/site/canvas";
 import { HeroBuildStack } from "@/components/sections/HeroBuildStack";
 
 const stats = [
-  { value: "500+", label: "Projects delivered" },
+  { value: "750+", label: "Projects delivered" },
   { value: "98%", label: "Client satisfaction" },
   { value: "72 hrs", label: "Expedited delivery available" },
   { value: "24/7", label: "Support coverage" },

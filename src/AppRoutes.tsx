@@ -1,5 +1,5 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
-import { AdminLayout } from "@/components/admin/AdminLayout";
 import { ServicePageLayout } from "@/components/services/ServicePageLayout";
 import { HoustonClassicLayout, IndustryClassicLayout } from "@/components/services/ClassicLandingLayouts";
 import { services } from "@/lib/services-catalog";
@@ -9,16 +9,6 @@ import { articles as blogArticles } from "@/lib/blog-data";
 import { redirects } from "@/lib/redirects";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { AdminLogin } from "./pages/admin/Login";
-import { AdminDashboard } from "./pages/admin/Dashboard";
-import { AdminClients } from "./pages/admin/Clients";
-import { AdminProjects } from "./pages/admin/Projects";
-import { AdminDocuments } from "./pages/admin/Documents";
-import { AdminActivityLogs } from "./pages/admin/ActivityLogs";
-import { AdminSEOSchemas } from "./pages/admin/SEOSchemas";
-import { AdminLeads } from "./pages/admin/Leads";
-import { AdminServices } from "./pages/admin/Services";
-import { AdminAnalytics } from "./pages/admin/Analytics";
 import About from "./pages/About";
 import FounderStory from "./pages/FounderStory";
 import PortfolioPage from "./pages/PortfolioPage";
@@ -31,6 +21,19 @@ import Pricing from "./pages/Pricing";
 import ServicesPage from "./pages/ServicesPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+
+// The admin app is loaded on demand so public pages never download it.
+const AdminLogin = lazy(() => import("./pages/admin/Login").then((m) => ({ default: m.AdminLogin })));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard").then((m) => ({ default: m.AdminDashboard })));
+const AdminClients = lazy(() => import("./pages/admin/Clients").then((m) => ({ default: m.AdminClients })));
+const AdminProjects = lazy(() => import("./pages/admin/Projects").then((m) => ({ default: m.AdminProjects })));
+const AdminDocuments = lazy(() => import("./pages/admin/Documents").then((m) => ({ default: m.AdminDocuments })));
+const AdminActivityLogs = lazy(() => import("./pages/admin/ActivityLogs").then((m) => ({ default: m.AdminActivityLogs })));
+const AdminSEOSchemas = lazy(() => import("./pages/admin/SEOSchemas").then((m) => ({ default: m.AdminSEOSchemas })));
+const AdminLeads = lazy(() => import("./pages/admin/Leads").then((m) => ({ default: m.AdminLeads })));
+const AdminServices = lazy(() => import("./pages/admin/Services").then((m) => ({ default: m.AdminServices })));
+const AdminAnalytics = lazy(() => import("./pages/admin/Analytics").then((m) => ({ default: m.AdminAnalytics })));
+const AdminLayout = lazy(() => import("@/components/admin/AdminLayout").then((m) => ({ default: m.AdminLayout })));
 
 /** Hand-built pages. Service, landing, case-study and blog pages come from their data files. */
 const staticPages: { path: string; element: JSX.Element }[] = [
@@ -61,6 +64,10 @@ export const publicPaths: string[] = [
 
 export { redirects };
 
+function AdminLoading() {
+  return <div className="flex min-h-screen items-center justify-center text-sm text-muted-foreground">Loading…</div>;
+}
+
 function ServiceBySlug() {
   const { slug } = useParams();
   const service = services.find((s) => s.slug === slug);
@@ -81,10 +88,10 @@ export function AppRoutes() {
       <Route path="/portfolio/:slug" element={<CaseStudyPage />} />
       <Route path="/blog/:slug" element={<BlogArticle />} />
 
-      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin/login" element={<Suspense fallback={<AdminLoading />}><AdminLogin /></Suspense>} />
       <Route
         path="/admin"
-        element={<AdminLayout />}
+        element={<Suspense fallback={<AdminLoading />}><AdminLayout /></Suspense>}
       >
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />

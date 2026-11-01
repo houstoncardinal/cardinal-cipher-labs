@@ -268,7 +268,7 @@ export const services: ServiceDefinition[] = [
       { title: "Launch & support", description: "We test on every device, launch, set up analytics, and stay on hand to support you." },
     ],
     stats: [
-      { value: "500+", label: "Projects Delivered" },
+      { value: "750+", label: "Projects Delivered" },
       { value: "99.9%", label: "Uptime Guarantee" },
       { value: "< 2s", label: "Avg Load Time" },
       { value: "4.9★", label: "Client Rating" },

@@ -13,6 +13,8 @@ import { captureAttribution } from "@/lib/contact-intent";
 import { MotionConfig } from "framer-motion";
 import { CursorLabel, PageFade } from "@/components/site/motion";
 import { CardinalFlight } from "@/components/site/CardinalFlight";
+import { ErrorBoundary } from "@/components/site/ErrorBoundary";
+import { SkipLink } from "@/components/site/SkipLink";
 
 const queryClient = new QueryClient();
 
@@ -44,12 +46,15 @@ const App = () => {
   return (
     <AppProviders>
       <BrowserRouter>
+        <SkipLink />
         <ScrollToTop />
         <CursorLabel />
         <CardinalFlight />
-        <PageFade>
-          <AppRoutes />
-        </PageFade>
+        <ErrorBoundary>
+          <PageFade>
+            <AppRoutes />
+          </PageFade>
+        </ErrorBoundary>
       </BrowserRouter>
     </AppProviders>
   );

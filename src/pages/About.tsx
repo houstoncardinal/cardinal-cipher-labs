@@ -29,10 +29,11 @@ const milestones = [
   { year: "2023", title: "500+ projects delivered", description: "The team crosses 500 projects for clients in Houston and nationwide." },
   { year: "2024", title: "AI practice launched", description: "A dedicated AI and automation practice helps clients apply intelligent automation to operations." },
   { year: "2025", title: "International reach", description: "Clients now span North America, Europe, and Asia Pacific." },
+  { year: "2026", title: "750+ projects delivered", description: "Cardinal passes 750 websites, apps, and growth programs delivered for clients in Houston and nationwide." },
 ];
 
 const stats = [
-  { value: "500+", label: "Projects delivered" },
+  { value: "750+", label: "Projects delivered" },
   { value: "200+", label: "Clients served" },
   { value: "99.9%", label: "Client retention" },
   { value: "4.9★", label: "Average rating" },
@@ -87,6 +88,11 @@ export default function About() {
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl">
                   Cardinal Consulting is a Houston-headquartered digital firm. We help organizations build better products, earn more trust, and grow — with one senior team accountable for results.
                 </p>
+                <Link to={FOUNDER_PATH} className="group mt-8 inline-flex items-center gap-3 border border-border bg-background py-2 pl-2 pr-5 transition-colors hover:border-primary">
+                  {founderStory.photo && <img src={founderStory.photo} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />}
+                  <span className="text-sm font-semibold text-foreground">Meet our founder, Hunain Qureshi</span>
+                  <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5" />
+                </Link>
               </motion.div>
             </Container>
           </section>
@@ -103,6 +109,24 @@ export default function About() {
             </Container>
           </section>
 
+          {/* Founder story callout */}
+          <section className="border-b border-border" aria-label="Founder's story">
+            <Container className="py-10 lg:py-12">
+              <Link to={FOUNDER_PATH} className="group flex flex-col gap-6 sm:flex-row sm:items-center">
+                {founderStory.photo && (
+                  <img src={founderStory.photo} alt="" width={96} height={96} loading="lazy" className="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-primary/15 transition-shadow group-hover:ring-primary/40 lg:h-24 lg:w-24" />
+                )}
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Founder's story</p>
+                  <p className="mt-2 font-display text-2xl leading-snug text-foreground md:text-3xl">From a closet bedroom in New York to pro Counter-Strike at 13 to Cardinal Consulting.</p>
+                </div>
+                <span className="inline-flex h-12 shrink-0 items-center gap-2 self-start bg-ink px-6 font-semibold text-ink-foreground transition-colors group-hover:bg-primary sm:self-auto">
+                  Read Hunain's story <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </Container>
+          </section>
+
           {/* Story + founder */}
           <section className="py-16 lg:py-24">
             <Container className="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
@@ -111,7 +135,7 @@ export default function About() {
                 <h2 className="font-display text-3xl leading-tight text-foreground md:text-4xl">Built to give growing organizations an unfair advantage</h2>
                 <div className="mt-8 space-y-5 text-lg leading-relaxed text-text-secondary">
                   <p>
-                    Hunain Qureshi founded Cardinal Consulting in 2020 with a clear mission: give organizations the same caliber of digital strategy and engineering that the largest companies rely on. What began as a boutique consultancy has delivered more than 500 websites, apps, and growth programs.
+                    Hunain Qureshi founded Cardinal Consulting in 2020 with a clear mission: give organizations the same caliber of digital strategy and engineering that the largest companies rely on. What began as a boutique consultancy has delivered more than 750 websites, apps, and growth programs.
                   </p>
                   <p>
                     Today we partner with organizations in healthcare, legal, financial services, technology, and construction — industries where security, compliance, and trust aren't optional. Every engagement is measured against business outcomes: leads, revenue, efficiency, and customer experience.
@@ -122,6 +146,19 @@ export default function About() {
                 </div>
               </motion.div>
               <motion.aside {...reveal} className="self-start border border-border p-8 lg:p-10" aria-label="Founder">
+                {founderStory.photo && (
+                  <Link to={FOUNDER_PATH} className="group mb-8 block overflow-hidden bg-ink">
+                    <img
+                      src={founderStory.photo}
+                      alt={`${founderStory.name}, ${founderStory.role}`}
+                      loading="lazy"
+                      decoding="async"
+                      width={1200}
+                      height={1200}
+                      className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </Link>
+                )}
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Leadership</p>
                 <h3 className="mt-4 font-display text-2xl text-foreground">{founder.name}</h3>
                 <p className="text-muted-foreground">{founder.role}</p>
