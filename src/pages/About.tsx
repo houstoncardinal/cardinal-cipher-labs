@@ -13,6 +13,7 @@ import { siteConfig } from "@/lib/seo-config";
 import { generatePersonSchemas, generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
 import { organizationSchema } from "@/lib/site-schema";
 import { CardinalMark } from "@/components/site/CardinalMark";
+import { founder as founderStory, FOUNDER_PATH } from "@/lib/founder-story";
 
 const values = [
   { title: "Integrity first", description: "We recommend what's right for your business — even when it's the smaller engagement." },
@@ -124,7 +125,10 @@ export default function About() {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Leadership</p>
                 <h3 className="mt-4 font-display text-2xl text-foreground">{founder.name}</h3>
                 <p className="text-muted-foreground">{founder.role}</p>
-                <p className="mt-5 leading-relaxed text-text-secondary">{founder.description}</p>
+                <p className="mt-5 leading-relaxed text-text-secondary">{founderStory.shortBio}</p>
+                <Link to={FOUNDER_PATH} className="mt-5 inline-flex items-center gap-1.5 font-semibold text-primary hover:underline">
+                  Read Hunain's story <ArrowRight className="h-4 w-4" />
+                </Link>
                 <ul className="mt-6 space-y-2 border-t border-border pt-6">
                   {founder.credentials.map((c) => (
                     <li key={c} className="text-sm text-text-secondary">{c}</li>

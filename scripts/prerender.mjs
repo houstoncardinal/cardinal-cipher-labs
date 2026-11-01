@@ -64,6 +64,8 @@ const xml = (v) => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const absolute = (src) => (/^https?:/.test(src) ? src : `${SITE}${src}`);
 const lastmod = (u) => articles.find((a) => `/blog/${a.slug}` === u)?.date || today;
 const images = (u) => {
+  const post = articles.find((a) => `/blog/${a.slug}` === u);
+  if (post) return [{ src: `/blog/covers/${post.slug}.jpg`, title: post.cover?.kicker ?? post.title }];
   const study = caseStudies.find((c) => c.detail && `/portfolio/${c.slug}` === u);
   if (!study) return [];
   return [

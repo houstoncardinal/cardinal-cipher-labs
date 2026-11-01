@@ -29,15 +29,18 @@ export function Hero() {
 
       <Container className="relative grid items-center gap-16 py-14 lg:grid-cols-[1.05fr_1fr] lg:py-20">
         <div>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Eyebrow className="mb-8">Enterprise web design, app development &amp; SEO</Eyebrow>
-          </motion.div>
-          {/* Each phrase is its own balanced block; sizes are tuned so the accent phrase always
-              sits on one line (10vw on phones; fixed steps that fit the column above that). */}
+          {/* The H1 opens with the search phrase (the eyebrow), then the headline. Each headline phrase
+              is its own balanced block; sizes are tuned so the accent phrase always sits on one line
+              (10vw on phones; fixed steps that fit the column above that). */}
           <h1 className="font-display text-[clamp(2.25rem,10vw,3rem)] leading-[1.08] text-foreground md:text-6xl lg:text-[3.375rem] xl:text-[4.25rem]">
+            <motion.span className="mb-8 block font-sans leading-normal" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <Eyebrow>Houston enterprise web design, app development &amp; SEO</Eyebrow>
+            </motion.span>
+            <span className="sr-only">: </span>
             <span className="block">
               <RevealText trigger="mount" text="We design, build, and grow" />
             </span>
+            {" "}
             <span className="block whitespace-nowrap text-primary">
               <RevealText trigger="mount" delay={0.25} text="digital businesses." />
             </span>

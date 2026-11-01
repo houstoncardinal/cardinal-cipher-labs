@@ -84,7 +84,7 @@ export const landingPages: LandingPage[] = [
     neighborhoods: HOUSTON_AREAS,
     kind: "houston",
     name: "Web Design Houston",
-    eyebrow: "Houston web design",
+    eyebrow: "Web design company in Houston, TX",
     headline: "Web design for Houston businesses that want more customers",
     summary:
       "Cardinal Consulting is a Houston web design company headquartered in Uptown near the Galleria. We design and build fast, custom, search-ready websites for Houston companies — from five-page marketing sites to e-commerce stores and customer portals.",
@@ -123,6 +123,8 @@ export const landingPages: LandingPage[] = [
     faqs: [
       { question: "How much does a website cost in Houston?", answer: "Cardinal's marketing websites (up to 10 pages) start at $3,500, and business growth websites of up to 30 pages with portals, integrations, or online sales start at $6,500 (one-time). Sites over 30 pages and custom platforms start at $15,000. Every project is scoped in writing with a fixed-price guarantee. Website care plans start at $299 per month. Pricing across Houston agencies varies widely, so compare what's included: custom design, mobile performance, SEO setup, and post-launch support." },
       { question: "How long does it take to build a website?", answer: "Most marketing websites go live in 72 hours to 2 weeks after content is ready. E-commerce stores usually take 4–8 weeks. You get a written timeline before we start." },
+      { question: "Are you a web designer near me in Houston?", answer: "Yes. Cardinal Consulting is a Houston web design company based at 2100 West Loop S Fwy, near the Galleria. Our designers and developers work with businesses across Greater Houston, including Katy, Sugar Land, The Woodlands, Pearland, Cypress, Spring, and Bellaire, and we're glad to meet in person. The first consultation is free." },
+      { question: "Do you design websites for small businesses?", answer: "Yes. Small business websites start at $3,500 with a fixed-price guarantee: custom design (no templates), mobile-friendly, fast, and set up for Google and your Google Business Profile from day one." },
       { question: "Do you only work with Houston businesses?", answer: "Our office is in Houston and we're glad to meet in person around the metro area, but we also work with clients across the U.S. remotely." },
       { question: "Will my new website rank on Google?", answer: "Every site launches with technical SEO, structured data, and fast load times — the foundation Google needs. Ranking for competitive Houston searches also depends on content, reviews, and links over time, which is what our SEO plans are for. No honest company can guarantee a specific ranking." },
       { question: "Can you redesign my existing website?", answer: "Yes. We review what's working on your current site — pages that rank, forms that convert — keep it, and redirect old URLs so you don't lose search traffic during the redesign." },
@@ -433,7 +435,7 @@ export const landingPages: LandingPage[] = [
     facts: WEBSITE_FACTS,
     kind: "industry",
     name: "Financial Services",
-    eyebrow: "Industries · Financial services",
+    eyebrow: "Financial services website design",
     headline: "Websites and marketing for financial firms that run on trust",
     summary:
       "We build secure, credible websites and marketing for accounting firms, financial advisors, lenders, insurance agencies, and fintech companies — with content workflows designed around your compliance review.",
@@ -493,7 +495,7 @@ export const landingPages: LandingPage[] = [
     ],
     kind: "industry",
     name: "Technology & SaaS",
-    eyebrow: "Industries · Technology & SaaS",
+    eyebrow: "SaaS & technology website design",
     headline: "Marketing sites and products for technology companies",
     summary:
       "We help SaaS, IT, and technology companies explain complex products clearly, win technical buyers, and ship web applications — from launch sites and pricing pages to documentation and product engineering.",
@@ -553,7 +555,7 @@ export const landingPages: LandingPage[] = [
     ],
     kind: "industry",
     name: "AI & Automation Companies",
-    eyebrow: "Industries · AI & automation companies",
+    eyebrow: "Website design for AI & automation companies",
     headline: "Websites that make AI products easy to understand and trust",
     summary:
       "We help AI and automation companies explain what their products actually do, earn the trust of cautious buyers, and turn interest into demos — with clear messaging, product walkthroughs, and responsible claims.",
@@ -611,7 +613,7 @@ export const landingPages: LandingPage[] = [
     facts: WEBSITE_FACTS,
     kind: "industry",
     name: "Construction",
-    eyebrow: "Industries · Construction",
+    eyebrow: "Construction & contractor website design",
     headline: "Construction websites that win bids and qualified projects",
     summary:
       "We build websites for general contractors, specialty trades, remodelers, and restoration companies across Houston and Texas — with project portfolios, service-area pages, and bid and estimate requests that reach the right person.",

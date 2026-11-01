@@ -11,7 +11,7 @@ import { RevealText } from "@/components/site/motion";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/seo-config";
 import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
-import { articles, pillars } from "@/lib/blog-data";
+import { articles, coverImage, pillars } from "@/lib/blog-data";
 
 const ALL = "all";
 
@@ -85,6 +85,7 @@ export default function Blog() {
                 {featured.map((a, i) => (
                   <motion.div key={a.slug} {...revealDelay(i)}>
                     <Link to={`/blog/${a.slug}`} className={cn("group flex h-full flex-col border p-8 transition-colors", i === 0 ? "border-ink bg-ink text-ink-foreground" : "border-border hover:border-foreground")}>
+                      <img src={coverImage(a).src} alt={coverImage(a).alt} width={1200} height={630} loading={i === 0 ? "eager" : "lazy"} decoding="async" className="-mx-8 -mt-8 mb-7 block h-auto w-[calc(100%+4rem)] max-w-none" />
                       <p className={cn("text-xs font-semibold uppercase tracking-[0.18em]", i === 0 ? "text-ink-muted" : "text-primary")}>{a.category}</p>
                       <h2 className={cn("mt-4 font-display text-2xl leading-snug", i === 0 ? "text-ink-foreground" : "text-foreground group-hover:text-primary")}>{a.title}</h2>
                       <p className={cn("mt-4 flex-1 leading-relaxed", i === 0 ? "text-ink-muted" : "text-muted-foreground")}>{a.excerpt}</p>

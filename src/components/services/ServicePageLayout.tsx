@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, ArrowUpRight, Check, Clock, ClipboardList, Hammer, Mail, MapPin, MessageSquare, Phone, Plus, Rocket, ShieldCheck,
@@ -234,15 +234,19 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
                   <span className="mx-1.5">/</span>
                   <span className="text-gray-900">{service.name}</span>
                 </nav>
-                <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 py-1.5 pl-1.5 pr-4">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-600 text-white">
-                    <service.icon className="h-3.5 w-3.5" />
-                  </span>
-                  <span className="text-sm font-semibold text-gray-900">{group?.title} · {service.name}</span>
-                </motion.div>
-                <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.7, ease: EASE }} className="font-display text-4xl leading-[1.06] text-gray-900 sm:text-5xl xl:text-6xl">
-                  <Headline service={service} />
-                </motion.h1>
+                {/* The H1 opens with the search phrase (shown as the pill), then the headline */}
+                <h1>
+                  <motion.span initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 py-1.5 pl-1.5 pr-4 font-sans tracking-normal">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-600 text-white">
+                      <service.icon className="h-3.5 w-3.5" />
+                    </span>
+                    <span className="text-sm font-semibold text-gray-900">{service.seo.title}</span>
+                  </motion.span>
+                  <span className="sr-only">: </span>
+                  <motion.span initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.7, ease: EASE }} className="block font-display text-4xl leading-[1.06] text-gray-900 sm:text-5xl xl:text-6xl">
+                    <Headline service={service} />
+                  </motion.span>
+                </h1>
                 <motion.p initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16, duration: 0.7, ease: EASE }} className="service-description mt-5 max-w-xl text-lg leading-relaxed text-gray-600 lg:text-xl">
                   {service.summary}
                 </motion.p>
@@ -522,13 +526,16 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
                           <Plus className={cn("h-4 w-4 transition-transform duration-300", open && "rotate-45")} />
                         </span>
                       </button>
-                      <AnimatePresence initial={false}>
-                        {open && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: EASE }}>
-                            <p className="px-5 pb-6 pl-[3.25rem] text-[15px] leading-relaxed text-gray-600 md:px-6 md:pl-14">{faq.answer}</p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {/* Answers stay in the HTML when collapsed so search engines read every one */}
+                      <motion.div
+                        initial={false}
+                        animate={open ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: EASE }}
+                        className="overflow-hidden"
+                        aria-hidden={!open}
+                      >
+                        <p className="px-5 pb-6 pl-[3.25rem] text-[15px] leading-relaxed text-gray-600 md:px-6 md:pl-14">{faq.answer}</p>
+                      </motion.div>
                     </motion.div>
                   );
                 })}

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, Info, Mail, Menu, Phone, X } from "lucide-react";
+import { Sparkles, ArrowRight, BookOpen, Briefcase, ChevronDown, Clock, Info, Mail, Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { serviceGroups, services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
@@ -17,6 +17,7 @@ const simpleLinks = [
 ];
 const companyLinks = [
   { label: "About", href: "/about", icon: Info, blurb: "Our story, values, and team" },
+  { label: "Our founder", href: "/about/hunain-qureshi", icon: Sparkles, blurb: "Hunain Qureshi's story" },
   { label: "Insights", href: "/blog", icon: BookOpen, blurb: "Guides on web, SEO, AI & growth" },
   { label: "Careers", href: "/careers", icon: Briefcase, blurb: "Work with Cardinal" },
   { label: "Contact", href: "/contact", icon: Mail, blurb: "Start a conversation" },

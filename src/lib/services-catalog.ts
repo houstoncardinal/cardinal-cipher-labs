@@ -282,6 +282,9 @@ export const services: ServiceDefinition[] = [
       { question: "Can I update the website myself?", answer: "Yes. We can set up an easy editor so you can change text, photos, and products. Prefer to have us do it? A Website Care Plan covers monthly updates for you." },
       { question: "Can you connect my website to the tools I already use?", answer: "Yes. We connect websites to CRMs (like HubSpot or Salesforce), payment providers (like Stripe or PayPal), booking tools, email marketing, inventory systems, and custom APIs." },
       { question: "What happens after launch?", answer: "Every plan includes support after launch (30 days to 12 months depending on the plan). After that, a Website Care Plan keeps your site updated, backed up, and secure." },
+      { question: "Are you a web design company near me in Houston?", answer: "Yes. Cardinal Consulting is a Houston web design and web development company based at 2100 West Loop S Fwy, near the Galleria. We work with businesses across Greater Houston, including Katy, Sugar Land, The Woodlands, Pearland, and Cypress, in person or remotely, and with clients nationwide. Your first consultation is free." },
+      { question: "Do you build custom software and web apps, or just websites?", answer: "Both. Beyond marketing websites, we build custom web applications: customer and client portals, CRMs, quoting and booking tools, and internal dashboards, connected to the systems you already use. Custom software projects start the same way as a website: a free consultation, then a written scope and a fixed price." },
+      { question: "Do you build websites for small businesses?", answer: "Yes. Our websites start at $3,500 with a fixed-price guarantee, so a small business gets the same custom design, mobile-friendly build, and Google-ready setup as a larger company." },
     ],
     related: ["ux-ui", "seo-analytics", "digital-marketing"],
     caseStudies: ["cwx", "axiomio", "veloratek"],
@@ -417,6 +420,7 @@ export const services: ServiceDefinition[] = [
       { question: "Can you update an app someone else built?", answer: "Yes. We'll review the existing code, tell you honestly what shape it's in, and recommend the best path: fix, extend, or rebuild." },
       { question: "How do you keep my app secure?", answer: "We use encrypted storage, secure login (including Face ID and fingerprint), encrypted data in transit, and follow OWASP mobile security guidelines." },
       { question: "What happens after my app launches?", answer: "Every build plan includes post-launch support (30 days to 12 months). That covers crash monitoring, bug fixes, and updates for new iOS and Android versions." },
+      { question: "Are you an app developer near me in Houston?", answer: "Yes. We're a Houston app development company based near the Galleria, working with businesses across Greater Houston and nationwide. We design and build iOS (iPhone and iPad) and Android apps and handle App Store and Google Play submission. The first consultation is free." },
     ],
     related: ["web-development", "ux-ui", "brand-identity"],
     localLinks: [
@@ -545,6 +549,7 @@ export const services: ServiceDefinition[] = [
       { question: "What do I get at the end?", answer: "Your logo in every format you'll need, your color palette, fonts, brand guidelines, and all source files — plus the extras in your plan, like stationery or social templates." },
       { question: "Do I own the files?", answer: "Yes. You own 100% of the intellectual property and all source files." },
       { question: "Can you refresh our existing brand instead of starting over?", answer: "Absolutely. We'll keep what's working and modernize the rest so the change feels natural to your customers." },
+      { question: "Are you a branding agency in Houston?", answer: "Yes. We're a Houston branding and logo design agency. Brand identity projects start at $3,000 and cover your logo, colors, fonts, and brand guidelines. Because we also build websites and run marketing, your new brand carries straight through to everything your customers see." },
     ],
     related: ["ux-ui", "web-development", "digital-marketing"],
     localLinks: [
@@ -677,6 +682,7 @@ export const services: ServiceDefinition[] = [
       { question: "How many users do you test with?", answer: "Five users catch about 85% of usability problems, so the UX Audit and Design Sprint test with 5 people. The Full Redesign runs 3 rounds of 5–8 people each." },
       { question: "Do you design for both mobile and desktop?", answer: "Yes. We design mobile-first, then scale up to tablet and desktop, following Apple and Google's guidelines for native apps." },
       { question: "Do you hand designs off to our developers?", answer: "Yes. Your developers get detailed Figma files, specs, and documentation, and we stay available during development to answer questions." },
+      { question: "Do you offer UI/UX design services in Houston?", answer: "Yes. We're a Houston UX/UI design agency working with companies locally and nationwide. UX/UI projects start at $2,500 and cover research, user testing, and designs for both mobile and desktop that your developers (or ours) can build from." },
     ],
     related: ["web-development", "mobile-apps", "brand-identity"],
     caseStudies: ["clearledger", "apnclinic", "axiomio"],
@@ -805,6 +811,8 @@ export const services: ServiceDefinition[] = [
       { question: "What will I see in my monthly report?", answer: "Your keyword rankings, website traffic, calls and form leads from search, what we did that month, and what's planned next — in plain English." },
       { question: "Can SEO work alongside paid ads?", answer: "Yes — they work best together. Ads bring traffic right away while SEO builds long-term traffic you don't pay for per click. We can coordinate both." },
       { question: "Am I locked into a long contract?", answer: "No. Our SEO plans are month-to-month. We earn your business every month with results." },
+      { question: "Are you an SEO agency near me in Houston?", answer: "Yes. We're a Houston SEO company based near the Galleria. Our SEO services cover local SEO and your Google Business Profile (the listing that appears in map and \"near me\" results), technical SEO, on-page content, and a monthly report. Plans start at $1,500 per month." },
+      { question: "How do I show up when customers search \"near me\"?", answer: "Google ranks local and \"near me\" results on three things: relevance (how well your Google Business Profile and website match the search), distance (how close you are to the searcher), and prominence (reviews, links, and mentions of your business across the web). We optimize your profile and service pages, keep your business name, address, and phone consistent everywhere, and help you earn reviews, which are the parts you control." },
     ],
     related: ["digital-marketing", "web-development", "ux-ui"],
     localLinks: [
@@ -937,6 +945,7 @@ export const services: ServiceDefinition[] = [
       { question: "How much should I spend on ads?", answer: "We recommend at least $2,000 per month per channel for meaningful results. We'll help you split your budget where it will do the most." },
       { question: "Do you create the ads and content?", answer: "Yes. Our copywriters, designers, and video editors create the ads, social posts, emails, and landing pages." },
       { question: "Can you work with our in-house team?", answer: "Absolutely. We often handle specific areas — like ads or analytics — and fit into your team's existing workflow." },
+      { question: "Do you manage Google Ads and PPC campaigns?", answer: "Yes. We plan, build, and manage pay-per-click (PPC) campaigns on Google Ads, alongside social media marketing and email. Management starts at $2,500 per month, and your ad budget is paid directly to the ad platforms." },
     ],
     related: ["seo-analytics", "web-development", "brand-identity"],
     localLinks: [
@@ -1056,6 +1065,7 @@ export const services: ServiceDefinition[] = [
       { question: "Do you respond to comments and messages?", answer: "Yes. Community management is included in every plan. We respond to routine comments and messages on your behalf and escalate anything that needs your team, like pricing questions or complaints." },
       { question: "Is ad spend included?", answer: "No. Our fee covers strategy, creative, and campaign management. Your ad budget is paid directly to the platforms, so you always see exactly where it goes." },
       { question: "How do you measure results?", answer: "We track reach, engagement, website clicks, and leads from social each month, and connect them to your analytics so you can see which posts and campaigns drive business — not just likes." },
+      { question: "Are you a social media marketing agency in Houston?", answer: "Yes. We're a Houston social media management and marketing agency. We plan and create your content, publish it, respond to comments and messages, and report on what's working. Plans start at $1,500 per month." },
     ],
     related: ["digital-marketing", "brand-identity", "seo-analytics"],
     localLinks: [
@@ -1171,6 +1181,7 @@ export const services: ServiceDefinition[] = [
       { question: "Will AI replace our staff?", answer: "Our focus is removing low-value manual work so your people can spend time on customers and higher-value tasks. Most projects are measured in hours saved per week and faster response times." },
       { question: "Can AI connect to our existing CRM and tools?", answer: "Usually, yes. We integrate with common CRMs, email, scheduling, spreadsheets, and databases through their APIs, and build custom connectors when needed." },
       { question: "How do we know it's working?", answer: "Every build includes success measures agreed upfront — such as hours saved, response time, or accuracy — and we report against them after launch." },
+      { question: "Do you offer AI automation services for small and mid-sized businesses?", answer: "Yes. AI automation projects start at $1,500. Common first projects are an AI assistant or chatbot on your website that answers customer questions, automated lead follow-up, and workflows that move information between your CRM, email, and spreadsheets so your team stops re-typing it." },
     ],
     related: ["technical-consulting", "web-development", "mobile-apps"],
     localLinks: [
@@ -1285,6 +1296,7 @@ export const services: ServiceDefinition[] = [
       { question: "Can you review work done by another agency or developer?", answer: "Yes. Independent code and architecture reviews are a core part of our consulting. We document what's working, what's risky, and the most cost-effective path forward." },
       { question: "Do you help with HIPAA or SOC 2 readiness?", answer: "We assess your systems and practices against the relevant requirements and help you close technical gaps. Formal certification is performed by an independent auditor; we help you get ready." },
       { question: "Which cloud platforms do you work with?", answer: "AWS, Microsoft Azure, and Google Cloud, plus modern hosting platforms like Vercel, Netlify, and Supabase." },
+      { question: "Do you offer IT consulting in Houston?", answer: "Yes. Our Houston IT and technology consulting covers architecture reviews, technology roadmaps, cloud and security assessments, and fractional CTO leadership for companies that need senior technical guidance without a full-time hire. Engagements start at $2,500." },
     ],
     related: ["ai-automation", "web-development", "website-maintenance"],
     localLinks: [
@@ -1350,6 +1362,7 @@ export const services: ServiceDefinition[] = [
       { question: "What happens if my site is hacked or goes down?", answer: "Uptime monitoring alerts us immediately. We restore from a clean backup or remove the malware, then patch the cause. Security cleanup is included in every plan." },
       { question: "Are there long-term contracts?", answer: "No. Care plans are month-to-month." },
       { question: "Why do websites need ongoing maintenance?", answer: "Software, plugins, and browsers change constantly, and new vulnerabilities are discovered every day — Patchstack recorded 11,334 new WordPress-ecosystem vulnerabilities in 2025 alone. Regular updates, backups, and monitoring keep your site secure, fast, and working." },
+      { question: "Do you offer website maintenance near me in Houston?", answer: "Yes. We're based in Houston and maintain websites for businesses across Greater Houston and beyond, including sites we didn't build. Care plans start at $299 per month and cover updates, backups, security monitoring, uptime, and content changes." },
     ],
     related: ["web-development", "technical-consulting", "seo-analytics"],
     localLinks: [

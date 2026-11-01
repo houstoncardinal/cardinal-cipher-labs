@@ -20,6 +20,7 @@ import { AdminLeads } from "./pages/admin/Leads";
 import { AdminServices } from "./pages/admin/Services";
 import { AdminAnalytics } from "./pages/admin/Analytics";
 import About from "./pages/About";
+import FounderStory from "./pages/FounderStory";
 import PortfolioPage from "./pages/PortfolioPage";
 import CaseStudyPage from "./pages/CaseStudyPage";
 import ContactPage from "./pages/ContactPage";
@@ -36,6 +37,7 @@ const staticPages: { path: string; element: JSX.Element }[] = [
   { path: "/", element: <Index /> },
   { path: "/services", element: <ServicesPage /> },
   { path: "/about", element: <About /> },
+  { path: "/about/hunain-qureshi", element: <FounderStory /> },
   { path: "/portfolio", element: <PortfolioPage /> },
   { path: "/contact", element: <ContactPage /> },
   { path: "/blog", element: <Blog /> },

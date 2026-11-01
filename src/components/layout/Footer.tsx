@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { serviceAreaCities } from "@/lib/seo-config";
 import { ArrowRight } from "lucide-react";
 import { Logo } from "@/components/layout/Header";
 import { services } from "@/lib/services-catalog";
@@ -8,6 +9,7 @@ import { Spotlight } from "@/components/site/motion";
 
 const company = [
   { label: "About", href: "/about" },
+  { label: "Our Founder", href: "/about/hunain-qureshi" },
   { label: "Our Work", href: "/portfolio" },
   { label: "Insights", href: "/blog" },
   { label: "Careers", href: "/careers" },
@@ -64,6 +66,9 @@ export function Footer({ showCta = true }: { showCta?: boolean }) {
               <p><a href="mailto:Hunain@visitcardinal.com" className="hover:text-ink-foreground">Hunain@visitcardinal.com</a></p>
               <p><a href="tel:281-901-7016" className="hover:text-ink-foreground">(281) 901-7016</a></p>
             </address>
+            <p className="mt-6 max-w-xs text-xs leading-relaxed text-ink-muted">
+              Serving {serviceAreaCities.slice(0, -1).join(", ")} and {serviceAreaCities[serviceAreaCities.length - 1]}, plus clients nationwide.
+            </p>
           </div>
           <Column title="Services" links={services.map((s) => ({ label: s.name, href: s.path }))} />
           <Column title="Industries" links={industries.map((i) => ({ label: i.name, href: i.href }))} />

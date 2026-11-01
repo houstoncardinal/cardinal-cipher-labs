@@ -1,7 +1,7 @@
 // Site-level structured data. Keep it small and true: every property here must
 // match something visible on the site and be verifiable. (Google's structured-data
 // guidelines treat markup for content that isn't on the page as spam.)
-import { siteConfig } from "@/lib/seo-config";
+import { serviceAreaCities, siteConfig } from "@/lib/seo-config";
 import { services } from "@/lib/services-catalog";
 import { industries } from "@/lib/industries";
 
@@ -39,7 +39,7 @@ export function organizationSchema() {
       { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:00" },
     ],
     areaServed: [
-      { "@type": "City", name: "Houston" },
+      ...serviceAreaCities.map((name) => ({ "@type": "City", name, containedInPlace: { "@type": "State", name: "Texas" } })),
       { "@type": "State", name: "Texas" },
       { "@type": "Country", name: "United States" },
     ],

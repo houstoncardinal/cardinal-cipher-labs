@@ -2,6 +2,12 @@
 // Google E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) Compliant
 // Enhanced with LocalBusiness, Review, and Rich Snippet data
 
+/** Cities in the Greater Houston area we serve: used in LocalBusiness schema and the footer. */
+export const serviceAreaCities = [
+  "Houston", "Katy", "Sugar Land", "The Woodlands", "Pearland", "Cypress", "Spring", "Bellaire",
+  "Pasadena", "League City", "Missouri City", "Friendswood", "Tomball", "Conroe", "Humble", "Kingwood",
+];
+
 export const siteConfig = {
   name: 'Cardinal Consulting',
   legalName: 'Cardinal Consulting LLC',
