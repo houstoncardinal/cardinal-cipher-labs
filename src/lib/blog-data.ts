@@ -7,6 +7,7 @@ import { houstonGuides } from "./blog-houston-guides";
 import { serviceGuidesBuild } from "./blog-service-guides-build";
 import { serviceGuidesGrow } from "./blog-service-guides-grow";
 import { newsArticles } from "./blog-news";
+import { seoGuides } from "./blog-seo";
 
 /** "news": timely analysis, marked up as NewsArticle and listed in news-sitemap.xml */
 export type ArticleFormat = "guide" | "news";
@@ -42,6 +43,11 @@ export interface BlogArticle {
   faqs?: { question: string; answer: string }[];
   /** Last substantive update, if after `date` */
   updated?: string;
+  /**
+   * The main topics, as schema.org `about` entities. Link each to its Wikidata page so search
+   * engines and AI systems know exactly which concept the article covers (verify the ID first).
+   */
+  about?: { name: string; sameAs: string }[];
   content: {
     sections: BlogSection[];
     cta: string;
@@ -887,7 +893,7 @@ const coreArticles: BlogArticle[] = [
 ];
 
 /** Newest guides first; featured articles fill the blog's top row in this order. */
-export const articles: BlogArticle[] = [...newsArticles, ...serviceGuidesBuild, ...serviceGuidesGrow, ...houstonGuides, ...coreArticles];
+export const articles: BlogArticle[] = [...seoGuides, ...newsArticles, ...serviceGuidesBuild, ...serviceGuidesGrow, ...houstonGuides, ...coreArticles];
 
 /** Every article's share image and cover (generated from `cover`, or the title when absent). */
 export const coverImage = (a: BlogArticle) => ({

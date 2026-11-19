@@ -63,9 +63,12 @@ export default function BlogArticle() {
         url: `${siteConfig.url}${FOUNDER_PATH}`,
         ...(founder.photo ? { image: `${siteConfig.url}${founder.photo}` } : {}),
         worksFor: { "@id": `${siteConfig.url}#organization` },
+        knowsAbout: ["Web design", "Search engine optimization", "App development", "AI and automation", "Digital marketing"],
       },
       publisher: { "@id": `${siteConfig.url}#organization` },
-      mainEntityOfPage: url,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url, breadcrumb: { "@id": `${url}#breadcrumb` } },
+      isPartOf: { "@type": "Blog", "@id": `${siteConfig.url}/blog#blog`, name: "Cardinal Consulting Insights" },
+      ...(article.about?.length ? { about: article.about.map((t) => ({ "@type": "Thing", name: t.name, sameAs: t.sameAs })) } : {}),
       image: { "@type": "ImageObject", url: coverUrl, width: 1200, height: 630, caption: cover.alt },
       inLanguage: "en-US",
       keywords: article.keywords.join(", "),
@@ -78,6 +81,7 @@ export default function BlogArticle() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
         { "@type": "ListItem", position: 2, name: "Insights", item: `${siteConfig.url}/blog` },

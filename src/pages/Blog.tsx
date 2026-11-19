@@ -46,7 +46,7 @@ export default function Blog() {
         headline: a.title,
         url: `${url}/${a.slug}`,
         datePublished: a.date,
-        author: { "@type": "Person", name: a.author },
+        author: { "@type": "Person", name: a.author, ...(a.author === "Hunain Qureshi" ? { "@id": `${siteConfig.url}#person-hunain-qureshi` } : {}) },
       })),
     },
   ];
