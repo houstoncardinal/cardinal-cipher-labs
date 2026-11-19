@@ -17,9 +17,11 @@ import { Link } from "react-router-dom";
 import { VelocityMarquee } from "@/components/site/canvas";
 
 const Index = () => {
-  // Generate all comprehensive E-E-A-T compliant schemas
+  // Search targeting: the homepage is the site's strongest page, so it carries the core
+  // "Houston web design" phrase in the title, H1 and description, and links to the dedicated
+  // /houston-web-design page with that exact anchor. Keep "Houston" here.
   const description =
-    "Houston web design, app development, SEO and digital marketing. Cardinal Consulting builds websites and systems that help businesses grow. Free consultation.";
+    "Houston web design and app development company. Custom, fast websites ready for Google and AI search, from $3,500, built by a senior team near the Galleria.";
   const schemas = [
     organizationSchema(),
     websiteSchema(),
@@ -35,24 +37,18 @@ const Index = () => {
         url={siteConfig.url}
         schemas={schemas}
         keywords={[
-          'web design company Houston',
-          'web design company near me Houston',
-          'app development company Houston',
-          'app development company near me',
-          'web developer near me Houston',
-          'SEO company Houston',
-          'Houston web design agency',
-          'Houston app development',
-          'web design Houston TX',
-          'custom website development Houston',
-          'mobile app development Houston',
-          'iOS app development Houston',
-          'Android app development Houston',
-          'digital marketing Houston',
-          'local SEO Houston',
-          'Houston web developer',
-          'website design near me Houston',
-          'web development company Houston Texas',
+          "Houston web design",
+          "web design Houston",
+          "Houston web design company",
+          "web design company Houston TX",
+          "Houston web developer",
+          "app development company Houston",
+          "mobile app development Houston",
+          "SEO company Houston",
+          "AI automation Houston",
+          "custom website development",
+          "enterprise web design",
+          "fractional CTO",
         ]}
       />
 
@@ -73,8 +69,9 @@ const Index = () => {
           {/* Industry-specific web design — internal link hub */}
           <section className="border-t border-border bg-background py-10">
             <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-3 px-6 text-sm lg:px-10">
-              <span className="font-semibold text-foreground">Industry websites in Houston:</span>
+              <span className="font-semibold text-foreground">Websites in Houston:</span>
               {[
+                { label: "Houston Web Design", href: "/houston-web-design" },
                 { label: "Law Firm Websites", href: "/houston-law-firm-website-design" },
                 { label: "Medical Practice Websites", href: "/houston-medical-website-design" },
                 { label: "Restaurant Websites", href: "/houston-restaurant-website-design" },

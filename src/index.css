@@ -1467,3 +1467,66 @@
   h1, h2, h3 { page-break-after: avoid; }
   img, figure, table, blockquote { page-break-inside: avoid; }
 }
+
+/* ---------------------------------------------------------------------------
+   Industries mosaic (src/components/sections/Industries.tsx). Each tile sets --acc and
+   --acc-dark; the motif strokes, fills and wash read the active one.
+   --------------------------------------------------------------------------- */
+.ind-tile { --a: var(--acc); }
+.dark .ind-tile { --a: var(--acc-dark); }
+.ind-acc-text { color: hsl(var(--a)); }
+.ind-acc-bg { background-color: hsl(var(--a)); }
+.ind-acc-fill { fill: hsl(var(--a)); }
+.ind-acc-stroke { stroke: hsl(var(--a)); }
+.ind-wash {
+  background-image: radial-gradient(120% 90% at 100% 100%, hsl(var(--a) / 0.1), transparent 55%);
+}
+.ind-wash:hover { border-color: hsl(var(--a) / 0.5); }
+.dark .ind-wash { background-image: radial-gradient(120% 90% at 100% 100%, hsl(var(--a) / 0.16), transparent 55%); }
+
+/* Healthcare: the trace draws, holds, and fades; the dot rides it (SMIL) */
+.ind-ecg { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ind-ecg 3.6s ease-in-out infinite; }
+@keyframes ind-ecg {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  70% { stroke-dashoffset: 0; opacity: 1; }
+  90% { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+/* Legal: the beam settles into balance */
+.ind-scale-beam { animation: ind-rock 5s ease-in-out infinite; }
+@keyframes ind-rock { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+/* Finance: the line draws once per cycle, bars grow with it */
+.ind-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ind-draw 4s ease-out infinite; }
+@keyframes ind-draw { 0% { stroke-dashoffset: 1; } 50%, 100% { stroke-dashoffset: 0; } }
+.ind-area { animation: ind-fade 4s ease-out infinite; }
+@keyframes ind-fade { 0%, 25% { opacity: 0; } 55%, 100% { opacity: 0.14; } }
+.ind-bar { animation: ind-grow 4s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+@keyframes ind-grow { 0% { transform: scaleY(0); } 35%, 100% { transform: scaleY(1); } }
+/* Technology: lines type out, the cursor blinks, blocks float */
+.ind-type { animation: ind-type 5s steps(12, end) infinite; }
+@keyframes ind-type { 0% { transform: scaleX(0); } 40%, 100% { transform: scaleX(1); } }
+.ind-cursor { animation: ind-blink 1s steps(2, start) infinite; }
+@keyframes ind-blink { to { visibility: hidden; } }
+.ind-float { animation: ind-float 4s ease-in-out infinite; }
+@keyframes ind-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+/* AI: signals flow along edges, nodes breathe */
+.ind-flow { animation: ind-flow 1.6s linear infinite; }
+@keyframes ind-flow { to { stroke-dashoffset: -40; } }
+.ind-node { animation: ind-breathe 2.8s ease-in-out infinite; }
+@keyframes ind-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+/* Construction: the skyline rises, the crane swings */
+.ind-rise { animation: ind-rise 5s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+@keyframes ind-rise { 0% { transform: scaleY(0); } 30%, 100% { transform: scaleY(1); } }
+.ind-hook { animation: ind-swing 4s ease-in-out infinite; }
+@keyframes ind-swing { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+/* Hovering a tile speeds its motif up a touch */
+.ind-tile:hover .ind-anim * { animation-duration: 2.2s; }
+.ind-tile:hover .ind-cursor { animation-duration: 0.7s; }
+.ind-tile:hover .ind-flow { animation-duration: 0.9s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ind-anim * { animation: none !important; }
+  .ind-ecg, .ind-draw { stroke-dashoffset: 0; }
+  .ind-area { opacity: 0.14; }
+}

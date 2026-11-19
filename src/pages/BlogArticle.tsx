@@ -40,23 +40,39 @@ export default function BlogArticle() {
   const cover = coverImage(article);
   const coverUrl = `${siteConfig.url}${cover.src}`;
   const personId = `${siteConfig.url}#person-hunain-qureshi`;
+  const isNews = article.format === "news";
+  const wordCount = [article.excerpt, ...(article.takeaways ?? []), ...article.content.sections.flatMap((s) => [s.heading, s.body, s.highlight ?? "", ...(s.bullets ?? [])])]
+    .join(" ")
+    .split(/\s+/)
+    .filter(Boolean).length;
 
   const schemas = [
     {
       "@context": "https://schema.org",
-      "@type": "BlogPosting",
+      "@type": isNews ? "NewsArticle" : "BlogPosting",
       "@id": `${url}#article`,
       headline: article.title,
       description: article.excerpt,
       datePublished: article.date,
       dateModified: article.updated ?? article.date,
-      author: { "@type": "Person", "@id": personId, name: article.author, jobTitle: "Founder & CEO", url: `${siteConfig.url}${FOUNDER_PATH}`, worksFor: { "@id": `${siteConfig.url}#organization` } },
+      author: {
+        "@type": "Person",
+        "@id": personId,
+        name: article.author,
+        jobTitle: "Founder & CEO",
+        url: `${siteConfig.url}${FOUNDER_PATH}`,
+        ...(founder.photo ? { image: `${siteConfig.url}${founder.photo}` } : {}),
+        worksFor: { "@id": `${siteConfig.url}#organization` },
+      },
       publisher: { "@id": `${siteConfig.url}#organization` },
       mainEntityOfPage: url,
       image: { "@type": "ImageObject", url: coverUrl, width: 1200, height: 630, caption: cover.alt },
       inLanguage: "en-US",
       keywords: article.keywords.join(", "),
       articleSection: article.category,
+      wordCount,
+      isAccessibleForFree: true,
+      speakable: { "@type": "SpeakableSpecification", cssSelector: [".article-headline", ".article-takeaways"] },
       ...(article.sources?.length ? { citation: article.sources.map((s) => s.url) } : {}),
     },
     {
@@ -102,7 +118,7 @@ export default function BlogArticle() {
               <Breadcrumbs items={[{ label: "Insights", href: "/blog" }, { label: article.category }]} />
               <div className="max-w-4xl">
                 <Eyebrow className="mb-6">{pillar?.name ?? article.category}</Eyebrow>
-                <h1 className="font-display text-4xl leading-[1.08] text-foreground md:text-5xl lg:text-[3.5rem]">
+                <h1 className="article-headline font-display text-4xl leading-[1.08] text-foreground md:text-5xl lg:text-[3.5rem]">
                   <RevealText text={article.title} trigger="mount" />
                 </h1>
                 <p className="mt-6 max-w-3xl text-lg leading-relaxed text-text-secondary md:text-xl">{article.excerpt}</p>
@@ -139,7 +155,7 @@ export default function BlogArticle() {
 
             <article className="max-w-[70ch]">
               {article.takeaways && (
-                <motion.aside {...reveal} className="mb-12 border border-border bg-secondary p-6 md:p-8" aria-label="Key takeaways">
+                <motion.aside {...reveal} className="article-takeaways mb-12 border border-border bg-secondary p-6 md:p-8" aria-label="Key takeaways">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Key takeaways</p>
                   <ul className="mt-4 space-y-3">
                     {article.takeaways.map((t) => (

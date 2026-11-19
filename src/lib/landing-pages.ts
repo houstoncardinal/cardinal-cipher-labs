@@ -32,6 +32,11 @@ export interface LandingPage {
   challenges: string[];
   features: { icon: LucideIcon; title: string; description: string }[];
   considerations?: { title: string; body: string }[];
+  /**
+   * Extra long-form sections (process, AI search, why local…). Rendered as numbered cards after
+   * the features. Gives the page the depth to answer the whole search, not just the headline.
+   */
+  sections?: { id: string; eyebrow: string; title: string; intro?: string; items: { title: string; body: string }[] }[];
   research?: ResearchStat[];
   investment: { label: string; value: string; note: string }[];
   faqs: { question: string; answer: string }[];
@@ -84,16 +89,17 @@ export const landingPages: LandingPage[] = [
     neighborhoods: HOUSTON_AREAS,
     kind: "houston",
     name: "Web Design Houston",
-    eyebrow: "Web design company in Houston, TX",
+    eyebrow: "Houston web design company",
     headline: "Web design for Houston businesses that want more customers",
     summary:
-      "Cardinal Consulting is a Houston web design company headquartered in Uptown near the Galleria. We design and build fast, custom, search-ready websites for Houston companies — from five-page marketing sites to e-commerce stores and customer portals.",
+      "Cardinal Consulting is a Houston web design company headquartered in Uptown near the Galleria. We design and build fast, custom websites for Houston companies — from five-page marketing sites to e-commerce stores and customer portals — set up to rank on Google and to be read and cited by AI search tools like Google AI Overviews and ChatGPT.",
     primaryService: "web-development",
     atAGlance: [
       "Custom design — no templates",
       "Mobile-first and built for Core Web Vitals",
-      "SEO setup and Google Business Profile guidance included",
+      "Local SEO and AI search setup included",
       "Marketing sites from $3,500, typically live in 72 hours to 2 weeks",
+      "Google Business Profile guidance included",
       "Local team at 2100 West Loop S Fwy, Houston",
     ],
     challenges: [
@@ -115,6 +121,46 @@ export const landingPages: LandingPage[] = [
       { title: "Accessible to every visitor", body: "We design toward WCAG 2.1 AA: readable contrast, keyboard navigation, descriptive links, and form labels. Accessible sites reach more customers and reduce legal risk." },
       { title: "You own everything", body: "Your domain, your content, and your website files belong to you. No lock-in contracts." },
     ],
+    sections: [
+      {
+        id: "process",
+        eyebrow: "How it works",
+        title: "Our Houston web design process",
+        intro: "Five steps, a written price before any work starts, and one senior team from the first meeting to launch day.",
+        items: [
+          { title: "Free consultation", body: "We meet at our Uptown office, by video, or at your place of business to learn your goals, your customers, and what your current website is or isn't doing. You leave with honest advice whether or not you hire us." },
+          { title: "Written plan and fixed price", body: "You receive a written scope listing pages, features, integrations, timeline, and a fixed price. Projects are typically billed 50% at kickoff and 50% at launch." },
+          { title: "Custom design", body: "We design your key pages in Figma around your brand and your customers, then refine them with you. Nothing is built until you approve the design." },
+          { title: "Build, content, and SEO", body: "We build mobile-first, polish your page copy, set up page titles, structured data, analytics, and Google Business Profile alignment, and redirect old URLs so you keep the search traffic you've earned." },
+          { title: "Launch and support", body: "We test on real phones and browsers, launch, and stay on call. Care plans from $299 a month cover updates, backups, security monitoring, and content changes." },
+        ],
+      },
+      {
+        id: "ai-search",
+        eyebrow: "Built for AI search",
+        title: "Websites that Google and AI assistants can understand",
+        intro: "Search is no longer only ten blue links. Google AI Overviews, ChatGPT search, Perplexity, and Microsoft Copilot summarize the web and cite the sites they can read and trust. We build Houston websites for them from day one.",
+        items: [
+          { title: "Content every crawler can read", body: "Pages are pre-rendered to plain HTML, so search engines and AI crawlers see every heading, price, and answer without having to run JavaScript." },
+          { title: "Structured data that names your business", body: "Schema.org markup for your organization, services, service area, and FAQs helps Google and AI systems connect your website to the right business in the right city." },
+          { title: "Answers stated plainly", body: "Clear, specific answers to the questions your customers ask — what you do, where, for whom, and what it costs — in the short, factual form AI answers tend to quote." },
+          { title: "Open to AI search crawlers", body: "robots.txt rules that let AI search crawlers such as OAI-SearchBot, PerplexityBot, and Claude-SearchBot index your site, plus Bing Webmaster Tools setup, since Bing's index feeds Microsoft Copilot." },
+          { title: "AI features on your website", body: "Optional AI assistants that answer common questions, smart forms that qualify and route leads, and automations that connect your site to your CRM, built by our AI & automation team." },
+          { title: "Measured, not promised", body: "No one can guarantee a ranking or an AI citation. We track rankings, traffic, calls, and form leads, and we report what changed and what we'll do next." },
+        ],
+      },
+      {
+        id: "why-local",
+        eyebrow: "Why a Houston team",
+        title: "Why work with a Houston web design company",
+        items: [
+          { title: "Meet in person", body: "Our office is at 2100 West Loop S Fwy, near the Galleria. Workshops and design reviews can happen face to face, which keeps decisions moving." },
+          { title: "We know the local market", body: "We've built websites for Houston businesses including a makeup studio, a property management firm, a construction company, and a Texas law firm, and we structure pages around the neighborhoods and suburbs your customers search from." },
+          { title: "Same time zone, fast replies", body: "We work on Central Time, and every inquiry gets a reply within 24 hours." },
+          { title: "Accountable after launch", body: "You get a local partner you can call. Care plans keep your site updated, secure, and fast, and you can reach the people who built it." },
+        ],
+      },
+    ],
     research: [
       LIGHTHOUSE_SPEED,
       { value: "8.4%", label: "more retail conversions when key mobile speed metrics improved by 0.1 seconds across 37 brand sites.", source: "Deloitte & Google, Milliseconds Make Millions", year: "2020", url: "https://web.dev/case-studies/milliseconds-make-millions" },
@@ -128,13 +174,17 @@ export const landingPages: LandingPage[] = [
       { question: "Do you only work with Houston businesses?", answer: "Our office is in Houston and we're glad to meet in person around the metro area, but we also work with clients across the U.S. remotely." },
       { question: "Will my new website rank on Google?", answer: "Every site launches with technical SEO, structured data, and fast load times — the foundation Google needs. Ranking for competitive Houston searches also depends on content, reviews, and links over time, which is what our SEO plans are for. No honest company can guarantee a specific ranking." },
       { question: "Can you redesign my existing website?", answer: "Yes. We review what's working on your current site — pages that rank, forms that convert — keep it, and redirect old URLs so you don't lose search traffic during the redesign." },
+      { question: "How do I choose the best web design company in Houston?", answer: "Compare Houston web design companies on evidence rather than claims: test their recent client sites on your phone and in Google PageSpeed Insights, ask for a written fixed-price proposal, confirm you will own your domain, content, and website files, and ask what support looks like after launch. Cardinal Consulting offers custom design, fixed pricing from $3,500, full ownership, and a local team you can meet near the Galleria — and we're glad to be compared." },
+      { question: "Will my website show up in Google AI Overviews and ChatGPT?", answer: "No one can guarantee placement in AI answers, but we build websites that AI search can read and cite: pre-rendered pages crawlers can read without JavaScript, structured data describing your business and service area, plain answers to customer questions, and robots.txt rules that admit AI search crawlers. Those are the same foundations Google rankings rely on, together with reviews and reputable mentions of your business." },
+      { question: "Can you add AI features to my website?", answer: "Yes. Our AI & automation team can add an AI assistant that answers common questions, smart forms that qualify and route leads, and automations that connect your website to your CRM, calendar, and email. Each feature is scoped and priced in writing before we build it." },
+      { question: "What's included in a Houston web design project?", answer: "Every website includes custom design, a mobile-first build, on-page SEO (titles, descriptions, headings, and structured data), analytics setup, contact forms, Google Business Profile guidance, redirects from your old site, and launch testing on real devices. Larger projects add integrations such as booking, payments, CRM, portals, and online sales." },
     ],
-    related: ["web-development", "seo-analytics", "website-maintenance"],
-    caseStudies: ["hda-studio", "svrlawfirm", "unitedccr"],
+    related: ["web-development", "seo-analytics", "ai-automation"],
+    caseStudies: ["hda-studio", "hougenpros", "houinc"],
     seo: {
-      title: "Web Design Houston — Custom Websites",
-      description: "Custom website design in Houston for businesses that need more leads: mobile-first, SEO-ready and fast. Websites from $3,500 with a fixed-price guarantee.",
-      keywords: ["web design Houston", "Houston web design company", "website design Houston TX", "Houston web designer", "small business website design Houston", "website redesign Houston", "custom website design Houston", "web design agency Houston"],
+      title: "Web Design Houston, TX — Custom Websites from $3,500",
+      description: "Houston web design company near the Galleria: custom, mobile-first websites built to rank on Google and in AI search. From $3,500, fixed price.",
+      keywords: ["web design Houston", "Houston web design", "Houston web design company", "website design Houston TX", "Houston web designer", "web design agency Houston", "small business website design Houston", "website redesign Houston", "custom website design Houston", "AI website design Houston"],
     },
   },
 

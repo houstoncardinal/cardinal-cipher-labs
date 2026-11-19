@@ -11,17 +11,17 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
-const SITE = "https://visitcardinal.com";
-
 // The generated Supabase client reads localStorage when imported; give Node an inert stand-in.
 const memoryStorage = { getItem: () => null, setItem() {}, removeItem() {}, clear() {}, key: () => null, length: 0 };
 globalThis.localStorage ??= memoryStorage;
 globalThis.sessionStorage ??= memoryStorage;
 
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
-const { render, publicPaths, noindexPaths, redirects, services, landingPages, caseStudies, articles, homeFaqs } = await import(
+const { render, publicPaths, noindexPaths, redirects, services, landingPages, caseStudies, articles, homeFaqs, siteConfig } = await import(
   pathToFileURL(path.join(root, "dist-ssr", "entry-server.js")).href
 );
+// One canonical origin for canonicals, sitemaps and llms.txt (siteConfig.url in src/lib/seo-config.ts).
+const SITE = siteConfig.url;
 
 const SEO_BLOCK = /<!--seo-start-->[\s\S]*?<!--seo-end-->/;
 
@@ -86,6 +86,21 @@ fs.writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.join("\n")}\n</urlset>\n`,
 );
 
+// news-sitemap.xml — Google News sitemaps list only articles published in the last two days.
+// News-format articles qualify; the file is always written (possibly empty) so robots.txt can
+// reference it permanently.
+const NEWS_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
+const newsEntries = articles
+  .filter((a) => a.format === "news" && Date.now() - new Date(`${a.date}T12:00:00Z`).getTime() <= NEWS_WINDOW_MS)
+  .map(
+    (a) =>
+      `  <url>\n    <loc>${xml(`${SITE}/blog/${a.slug}`)}</loc>\n    <news:news>\n      <news:publication><news:name>Cardinal Consulting</news:name><news:language>en</news:language></news:publication>\n      <news:publication_date>${a.date}</news:publication_date>\n      <news:title>${xml(a.title)}</news:title>\n    </news:news>\n  </url>`,
+  );
+fs.writeFileSync(
+  path.join(dist, "news-sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n${newsEntries.join("\n")}\n</urlset>\n`,
+);
+
 // Netlify _redirects — generated from src/lib/redirects.ts so it can never drift from the app
 const redirectLines = Object.entries(redirects).map(([from, to]) => `${from.padEnd(52)} ${to.padEnd(44)} 301`);
 fs.writeFileSync(
@@ -117,10 +132,11 @@ const priceLine = (svc) => {
   if (!priced.length) return "Custom quote after a free consultation";
   return svc.tiers.map((t) => `${t.name}: ${t.price}${/\d/.test(t.price) ? ` ${t.billing}` : ""}`).join("; ");
 };
+const houstonHub = landingPages.find((p) => p.path === "/houston-web-design");
 const llms = [
-  "# Cardinal Consulting",
+  "# Cardinal Consulting — Houston Web Design & App Development",
   "",
-  "> Cardinal Consulting is a digital agency headquartered in Houston, Texas (founded 2020) that designs, builds, and grows digital businesses: web development, mobile apps, AI & automation, brand identity, UX/UI design, SEO, digital marketing, social media management, technical consulting (including fractional CTO), and website care & maintenance. It serves Houston-area businesses in person and clients across the United States remotely.",
+  "> Cardinal Consulting is a Houston web design and app development company headquartered in Uptown Houston near the Galleria (founded 2020). It designs, builds, and grows digital businesses: custom websites, mobile apps, AI & automation, brand identity, UX/UI design, SEO, digital marketing, social media management, technical consulting (including fractional CTO), and website care & maintenance. It serves Houston-area businesses in person and clients across the United States remotely.",
   "",
   "## Key facts",
   "- Legal name: Cardinal Consulting LLC",
@@ -128,8 +144,15 @@ const llms = [
   "- Headquarters: 2100 West Loop S Fwy, Houston, TX 77027 (Uptown / Galleria area)",
   "- Phone: (281) 901-7016",
   "- Email: Hunain@visitcardinal.com",
-  "- Website: https://visitcardinal.com",
-  "- Free consultation; replies within 24 hours; written scope, timeline, and price before work begins",
+  `- Website: ${SITE}`,
+  "- Hours: Monday–Friday, 9 AM–6 PM Central",
+  "- Free consultation; replies within 24 hours; written scope, timeline, and fixed price before work begins",
+  "",
+  "## Web design in Houston",
+  `Main page: ${SITE}/houston-web-design`,
+  ...(houstonHub ? ["", houstonHub.summary, "", ...houstonHub.atAGlance.map((a) => `- ${a}`)] : []),
+  "- Areas served: Downtown, Uptown / Galleria, Midtown, the Heights, Montrose, River Oaks, Memorial, Energy Corridor, Katy, Sugar Land, The Woodlands, Pearland, Cypress, Spring, Kingwood, and the rest of Greater Houston",
+  "- Pricing: marketing websites from $3,500; business growth websites from $6,500; custom platforms from $15,000; care plans from $299/month",
   "",
   "## Services",
   ...services.map((svc) => `- [${svc.name}](${SITE}${svc.path}): ${svc.summary} Pricing — ${priceLine(svc)}.`),

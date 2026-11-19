@@ -139,10 +139,11 @@ function Cell({ value }: { value: string | boolean | null }) {
 function Compare({ columns, rows, highlight }: { columns: string[]; rows: { label: string; values: (string | boolean | null)[] }[]; highlight?: number }) {
   return (
     <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+      <p className="mb-2 text-xs text-muted-foreground sm:hidden">Swipe sideways to see every column.</p>
       <motion.table {...inView} variants={{ show: { transition: { staggerChildren: 0.06 } } }} className="w-full min-w-[34rem] border-collapse border border-border text-sm">
         <thead>
           <tr className="bg-secondary">
-            <th className="p-3 text-left font-semibold text-foreground" scope="col">
+            <th className="sticky left-0 z-10 bg-secondary p-3 text-left font-semibold text-foreground" scope="col">
               <span className="sr-only">Factor</span>
             </th>
             {columns.map((c, i) => (
@@ -155,7 +156,7 @@ function Compare({ columns, rows, highlight }: { columns: string[]; rows: { labe
         <tbody>
           {rows.map((r) => (
             <motion.tr key={r.label} className="border-t border-border" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.5 } } }}>
-              <th scope="row" className="p-3 text-left font-medium text-foreground">{r.label}</th>
+              <th scope="row" className="sticky left-0 z-10 bg-background p-3 text-left font-medium text-foreground">{r.label}</th>
               {r.values.map((v, i) => (
                 <td key={i} className={cn("p-3 text-center text-text-secondary", i === highlight && "bg-primary/[0.06] font-medium text-foreground")}>
                   <Cell value={v} />

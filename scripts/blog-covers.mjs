@@ -108,7 +108,7 @@ const motifs = {
     <path d="M152 206l32 32 66-70" stroke="#fff" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
 };
 
-const fallbackMotif = { websites: "chart", seo: "rank", growth: "chart", "ai-technology": "spark", industry: "shield" };
+const fallbackMotif = { news: "rank", websites: "chart", seo: "rank", growth: "chart", "ai-technology": "spark", industry: "shield" };
 const escapeHtml = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 function html(a) {

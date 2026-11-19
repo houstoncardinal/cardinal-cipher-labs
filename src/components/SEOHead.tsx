@@ -20,7 +20,11 @@ export interface SEOProps {
 
 const LEGACY_ORIGIN = /https?:\/\/(www\.)?visitcardinal\.com/g;
 
-/** Every URL we emit uses the one canonical origin (the live site serves visitcardinal.com; www 301s). */
+/**
+ * Every URL we emit uses the one canonical origin, siteConfig.url. Netlify's primary domain is
+ * www.visitcardinal.com (the bare domain 301s to it), so canonicals must use www too: a canonical
+ * that points at a redirect sends Google conflicting signals about which URL to index.
+ */
 export function canonicalUrl(url?: string): string {
   const raw = (url || siteConfig.url).replace(LEGACY_ORIGIN, siteConfig.url);
   const { origin, pathname } = new URL(raw);
@@ -59,6 +63,13 @@ function sanitize(node: unknown, depth = 0): unknown {
     if (obj['@type'] === 'HowTo') return undefined;
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(obj)) {
+      // sameAs links to Wikidata identify places and topics (Houston, web design), not our own
+      // profiles, so they are kept; any other sameAs on page-level markup is still stripped.
+      if (k === 'sameAs') {
+        const entityLinks = ([] as unknown[]).concat(v).filter((u) => typeof u === 'string' && u.startsWith('https://www.wikidata.org/'));
+        if (entityLinks.length) out[k] = entityLinks.length === 1 ? entityLinks[0] : entityLinks;
+        continue;
+      }
       if (STRIPPED_KEYS.has(k)) continue;
       const clean = sanitize(v, depth + 1);
       if (clean !== undefined) out[k] = clean;
@@ -94,12 +105,12 @@ export function SEOHead({
     ? title.includes(siteConfig.name) || title.length + brandSuffix.length > 62
       ? title
       : `${title}${brandSuffix}`
-    : `${siteConfig.name} — Houston Web Design & Development`;
+    : `${siteConfig.name} — Web Design, App Development & SEO`;
 
   const pageDescription = description || siteConfig.description;
   const pageImage = (image || siteConfig.ogImage).replace(LEGACY_ORIGIN, siteConfig.url);
   const pageUrl = canonicalUrl(url);
-  const pageImageAlt = `${siteConfig.name} — web design, app development and digital growth, Houston TX`;
+  const pageImageAlt = `${siteConfig.name} — web design, app development and digital growth`;
   const cleanSchemas = [
     organizationSchema(),
     websiteSchema(),

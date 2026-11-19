@@ -37,9 +37,14 @@ export const homeFaqs = [
       "Yes. We offer independent technical assessments (architecture, code, cloud, and security), ongoing advisory retainers, and fractional CTO leadership for companies that need senior technology guidance without a full-time executive hire.",
   },
   {
-    question: "Do you work with businesses outside Houston?",
+    question: "Are you a web design company in Houston?",
     answer:
-      "Yes. We're headquartered at 2100 West Loop S Fwy in Houston and work with clients across the United States remotely, with in-person meetings available in the Houston area.",
+      "Yes. Cardinal Consulting is a Houston web design and app development company headquartered at 2100 West Loop S Fwy, in Uptown near the Galleria. We meet clients across Greater Houston, including Katy, Sugar Land, The Woodlands, Pearland, and Cypress, and work with businesses across the United States remotely. Every engagement follows the same process: a free consultation, a written plan and price, then a senior team that owns the result.",
+  },
+  {
+    question: "Will my website show up in Google AI Overviews and ChatGPT?",
+    answer:
+      "No one can guarantee placement in AI answers, but we build websites that AI search can easily read and cite: pages can be pre-rendered so crawlers see the full content without running JavaScript, key facts (services, prices, location, hours) are stated plainly, structured data describes your business, and AI search crawlers such as OAI-SearchBot and PerplexityBot are allowed in. The same foundations that earn Google rankings, including helpful content, reviews, and reputable mentions, are what AI assistants draw on.",
   },
   {
     question: "Can you maintain or improve a website someone else built?",

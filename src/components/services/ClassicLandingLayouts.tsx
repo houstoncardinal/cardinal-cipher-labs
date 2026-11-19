@@ -13,7 +13,7 @@ import { siteConfig } from "@/lib/seo-config";
 import { getService } from "@/lib/services-catalog";
 import { getCaseStudies } from "@/lib/case-studies";
 import { industries } from "@/lib/industries";
-import { faqSchema, webPageSchema } from "@/lib/site-schema";
+import { faqSchema, webPageSchema, houstonAreaServed, HOUSTON_ENTITY, WEB_DESIGN_ENTITY } from "@/lib/site-schema";
 import { contactHref, rememberService } from "@/lib/contact-intent";
 import { houstonLinks, type LandingPage } from "@/lib/landing-pages";
 import { cn } from "@/lib/utils";
@@ -35,33 +35,73 @@ const WHY_HEADINGS: Record<string, string> = {
   "/industry/construction": "Why contractors choose Cardinal",
 };
 
+const HOUSTON_HUB = "/houston-web-design";
+
+/** Breadcrumb trail. The Houston hub sits directly under Home; other Houston pages sit under the hub. */
+function crumbs(page: LandingPage): { name: string; path: string }[] {
+  if (page.path === HOUSTON_HUB) return [{ name: "Home", path: "/" }, { name: page.name, path: page.path }];
+  const parent = page.kind === "houston" ? { name: "Web Design Houston", path: HOUSTON_HUB } : { name: "Services", path: "/services" };
+  return [{ name: "Home", path: "/" }, parent, { name: page.name, path: page.path }];
+}
+
+/** "From $3,500" → 3500; "From $299/mo" → 299 (monthly). Returns null for "Custom" and similar. */
+function parsePrice(value: string): { amount: number; monthly: boolean } | null {
+  const m = value.replace(/,/g, "").match(/\$(\d+(?:\.\d+)?)/);
+  return m ? { amount: Number(m[1]), monthly: /\/\s*mo|per month|monthly/i.test(value) } : null;
+}
+
 function buildSchemas(page: LandingPage) {
   const url = `${siteConfig.url}${page.path}`;
   const service = getService(page.primaryService);
+  const houston = page.kind === "houston";
+  const offers = page.investment
+    .map((inv) => ({ inv, price: parsePrice(inv.value) }))
+    .filter((o) => o.price)
+    .map(({ inv, price }) => ({
+      "@type": "Offer",
+      name: inv.label,
+      description: inv.note,
+      priceCurrency: "USD",
+      priceSpecification: {
+        "@type": price!.monthly ? "UnitPriceSpecification" : "PriceSpecification",
+        minPrice: price!.amount,
+        priceCurrency: "USD",
+        ...(price!.monthly ? { unitText: "MONTH" } : {}),
+      },
+      url: `${url}#pricing`,
+    }));
   return [
-    webPageSchema({ url, name: page.seo.title, description: page.seo.description }),
+    {
+      ...webPageSchema({ url, name: page.seo.title, description: page.seo.description }),
+      breadcrumb: { "@id": `${url}#breadcrumb` },
+      mainEntity: { "@id": `${url}#service` },
+      ...(houston ? { about: [HOUSTON_ENTITY, WEB_DESIGN_ENTITY] } : {}),
+    },
     {
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": `${url}#service`,
-      name: page.headline,
+      name: houston ? page.name : page.headline,
+      alternateName: page.path === HOUSTON_HUB ? ["Houston Web Design", "Website Design Houston, TX"] : undefined,
       serviceType: service.seo.serviceName,
+      category: houston ? "Web design" : service.seo.category,
       description: page.summary,
       url,
       provider: { "@id": `${siteConfig.url}#organization` },
-      areaServed: page.kind === "houston" ? { "@type": "City", name: "Houston" } : { "@type": "Country", name: "United States" },
+      areaServed: houston ? houstonAreaServed() : { "@type": "Country", name: "United States" },
+      ...(offers.length ? { offers } : {}),
     },
     faqSchema(url, page.faqs),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-        page.kind === "houston"
-          ? { "@type": "ListItem", position: 2, name: "Web Design Houston", item: `${siteConfig.url}/houston-web-design` }
-          : { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}/services` },
-        { "@type": "ListItem", position: 3, name: page.name, item: url },
-      ],
+      "@id": `${url}#breadcrumb`,
+      itemListElement: crumbs(page).map((c, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: c.name,
+        item: c.path === "/" ? siteConfig.url : `${siteConfig.url}${c.path}`,
+      })),
     },
   ];
 }
@@ -141,11 +181,16 @@ export function LandingLayout({ page }: { page: LandingPage }) {
             <Container className="relative grid items-center gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
               <div>
                 <nav aria-label="Breadcrumb" className="mb-5 text-sm text-gray-500">
-                  <Link to="/" className="hover:text-gray-900">Home</Link>
-                  <span className="mx-1.5">/</span>
-                  <Link to={houston ? "/houston-web-design" : "/services"} className="hover:text-gray-900">{houston ? "Web Design Houston" : "Services"}</Link>
-                  <span className="mx-1.5">/</span>
-                  <span className="text-gray-900">{page.name}</span>
+                  {crumbs(page).map((c, i, all) =>
+                    i < all.length - 1 ? (
+                      <span key={c.path}>
+                        <Link to={c.path} className="hover:text-gray-900">{c.name}</Link>
+                        <span className="mx-1.5">/</span>
+                      </span>
+                    ) : (
+                      <span key={c.path} className="text-gray-900" aria-current="page">{c.name}</span>
+                    ),
+                  )}
                 </nav>
                 <Headline page={page} icon={Icon} className="font-display text-4xl leading-[1.08] text-gray-900 sm:text-5xl xl:text-6xl" />
                 <motion.p initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16, duration: 0.7, ease: EASE }} className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-600">
@@ -251,6 +296,24 @@ export function LandingLayout({ page }: { page: LandingPage }) {
               </div>
             </Container>
           </section>
+
+          {/* ── LONG-FORM SECTIONS (process, AI search, why local…) ─────── */}
+          {page.sections?.map((s, si) => (
+            <section key={s.id} id={s.id} className={cn("scroll-mt-24 border-t border-gray-100 py-14 lg:py-20", si % 2 === 1 && "bg-gray-50/70")}>
+              <Container>
+                <Heading eyebrow={s.eyebrow} title={s.title} description={s.intro} />
+                <ol className={cn("grid gap-4 sm:grid-cols-2 lg:gap-5", s.items.length % 3 === 0 || s.items.length === 5 ? "lg:grid-cols-3" : "lg:grid-cols-2")}>
+                  {s.items.map((item, i) => (
+                    <motion.li key={item.title} {...stagger(i)} className="relative rounded-2xl border border-gray-100 bg-white p-6 lg:p-7">
+                      <span className="font-display text-sm font-semibold tabular-nums text-brand-600">{String(i + 1).padStart(2, "0")}</span>
+                      <h3 className="mt-3 font-display text-lg font-semibold text-gray-900">{item.title}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-gray-600">{item.body}</p>
+                    </motion.li>
+                  ))}
+                </ol>
+              </Container>
+            </section>
+          ))}
 
           {/* ── INDUSTRY DETAILS (dark band) ─────────────────────────────── */}
           <section className="relative overflow-hidden bg-gray-950 py-14 text-white lg:py-20">

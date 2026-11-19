@@ -34,7 +34,7 @@ export function Hero() {
               (10vw on phones; fixed steps that fit the column above that). */}
           <h1 className="font-display text-[clamp(2.25rem,10vw,3rem)] leading-[1.08] text-foreground md:text-6xl lg:text-[3.375rem] xl:text-[4.25rem]">
             <motion.span className="mb-8 block font-sans leading-normal" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <Eyebrow>Houston enterprise web design, app development &amp; SEO</Eyebrow>
+              <Eyebrow>Houston web design, app development &amp; SEO</Eyebrow>
             </motion.span>
             <span className="sr-only">: </span>
             <span className="block">
@@ -51,7 +51,7 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="mt-8 max-w-xl text-lg leading-relaxed text-text-secondary md:text-xl"
           >
-            Websites, apps, brands, and marketing for mid-market and enterprise organizations — delivered by one senior team and measured by business results.
+            Websites, apps, brands, and marketing for mid-market and enterprise organizations — delivered by one senior team from our Houston headquarters and measured by business results.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}

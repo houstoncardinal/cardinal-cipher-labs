@@ -13,6 +13,7 @@ export { landingPages } from "./lib/landing-pages";
 export { caseStudies } from "./lib/case-studies";
 export { articles } from "./lib/blog-data";
 export { homeFaqs } from "./lib/home-faqs";
+export { siteConfig } from "./lib/seo-config";
 
 export function render(url: string) {
   const helmetContext: { helmet?: HelmetServerState } = {};

@@ -12,17 +12,24 @@ export const siteConfig = {
   name: 'Cardinal Consulting',
   legalName: 'Cardinal Consulting LLC',
   description: "Cardinal Consulting designs, builds, and grows digital businesses from Houston, TX: websites, mobile apps, branding, SEO, social media, AI automation, and technical consulting.",
-  url: 'https://visitcardinal.com',
-  ogImage: 'https://visitcardinal.com/og-image.jpg',
+  url: 'https://www.visitcardinal.com',
+  ogImage: 'https://www.visitcardinal.com/og-image.jpg',
   /** Square brand mark (Google prefers a square logo of at least 112×112) */
-  logo: 'https://visitcardinal.com/brand/cardinal-consulting-mark-512.png',
+  logo: 'https://www.visitcardinal.com/brand/cardinal-consulting-mark-512.png',
   /** Full-color wordmark, used on light backgrounds */
-  wordmark: 'https://visitcardinal.com/brand/cardinal-consulting-logo.png',
+  wordmark: 'https://www.visitcardinal.com/brand/cardinal-consulting-logo.png',
   /**
    * Official profiles emitted as schema.org `sameAs`. Only add URLs for accounts that exist
    * and that you control — Google uses these to connect your Knowledge Panel.
    */
   verifiedProfiles: [] as string[],
+  /**
+   * Your Google Business Profile map link (Google Maps → your listing → Share → Copy link, e.g.
+   * https://maps.app.goo.gl/… or https://www.google.com/maps?cid=…). Emitted as schema.org `hasMap`,
+   * which ties this website to your map listing — the strongest local ranking signal for
+   * "web design Houston" map-pack results. Leave empty until the listing is verified.
+   */
+  mapsUrl: '',
   
   links: {
     twitter: 'https://twitter.com/cardinalconsult',
