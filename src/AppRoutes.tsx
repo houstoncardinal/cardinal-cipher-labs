@@ -4,6 +4,8 @@ import { ServicePageLayout } from "@/components/services/ServicePageLayout";
 import { HoustonClassicLayout, IndustryClassicLayout } from "@/components/services/ClassicLandingLayouts";
 import { services } from "@/lib/services-catalog";
 import { landingPages } from "@/lib/landing-pages";
+import { startPages } from "@/lib/start-pages";
+import { StartLandingLayout } from "@/components/start/StartLandingLayout";
 import { caseStudies } from "@/lib/case-studies";
 import { articles as blogArticles } from "@/lib/blog-data";
 import { redirects } from "@/lib/redirects";
@@ -58,6 +60,7 @@ export const publicPaths: string[] = [
   ...staticPages.map((p) => p.path),
   ...services.map((s) => s.path),
   ...landingPages.map((p) => p.path),
+  ...startPages.map((p) => p.path),
   ...caseStudies.filter((c) => c.detail).map((c) => `/portfolio/${c.slug}`),
   ...blogArticles.map((a) => `/blog/${a.slug}`),
 ];
@@ -80,6 +83,9 @@ export function AppRoutes() {
       {staticPages.map((p) => <Route key={p.path} path={p.path} element={p.element} />)}
       {landingPages.map((p) => (
         <Route key={p.path} path={p.path} element={p.kind === "houston" ? <HoustonClassicLayout page={p} /> : <IndustryClassicLayout page={p} />} />
+      ))}
+      {startPages.map((p) => (
+        <Route key={p.path} path={p.path} element={<StartLandingLayout page={p} />} />
       ))}
       {Object.entries(redirects).map(([from, to]) => (
         <Route key={from} path={from} element={<Navigate to={to} replace />} />

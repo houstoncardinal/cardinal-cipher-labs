@@ -10,6 +10,7 @@ import { AppRoutes, noindexPaths, publicPaths, redirects } from "./AppRoutes";
 export { noindexPaths, publicPaths, redirects };
 export { services, carePlans } from "./lib/services-catalog";
 export { landingPages } from "./lib/landing-pages";
+export { startPages } from "./lib/start-pages";
 export { caseStudies } from "./lib/case-studies";
 export { articles } from "./lib/blog-data";
 export { homeFaqs } from "./lib/home-faqs";

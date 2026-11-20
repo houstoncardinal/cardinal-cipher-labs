@@ -5,6 +5,8 @@ import { ArrowUpRight, Inbox } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { serviceGroups, services } from '@/lib/services-catalog';
 import { useLeads } from '@/lib/admin';
+import { startPageFor } from '@/lib/start-pages';
+import { siteConfig } from '@/lib/seo-config';
 
 const DAY = 86_400_000;
 
@@ -49,6 +51,9 @@ export function AdminServices() {
               .filter((s) => s.group === g.group)
               .map((s) => {
                 const d = demand[s.slug];
+                const lp = startPageFor(s.slug);
+                // Leads that came through this service's /start landing page (form page or first page of the visit)
+                const lpLeads = lp ? leads.filter((l) => l.source_page?.startsWith(lp.path) || l.landing_page?.startsWith(lp.path)).length : 0;
                 return (
                   <article key={s.slug} className="flex flex-col border border-border bg-background">
                     <header className="flex items-start gap-3 border-b border-border p-5">
@@ -86,7 +91,27 @@ export function AdminServices() {
                         </div>
                       ))}
                     </dl>
-                    <footer className="mt-auto flex items-center justify-between border-t border-border px-5 py-3 text-sm">
+                    {lp && (
+                      <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border bg-secondary/40 px-5 py-3 text-sm">
+                        <span className="text-muted-foreground">
+                          Landing page <code className="text-foreground">{lp.path}</code> · {lpLeads} lead{lpLeads === 1 ? '' : 's'}
+                        </span>
+                        <span className="flex items-center gap-4">
+                          <button
+                            type="button"
+                            onClick={() => void navigator.clipboard?.writeText(`${siteConfig.url}${lp.path}?utm_source=google&utm_medium=cpc&utm_campaign=${lp.slug}`)}
+                            className="font-medium text-muted-foreground hover:text-foreground"
+                            title="Copies the page URL with UTM tags for a Google Ads campaign"
+                          >
+                            Copy ad link
+                          </button>
+                          <a href={lp.path} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-medium text-primary">
+                            Open <ArrowUpRight className="h-3.5 w-3.5" />
+                          </a>
+                        </span>
+                      </div>
+                    )}
+                    <footer className={`${lp ? '' : 'mt-auto '}flex items-center justify-between border-t border-border px-5 py-3 text-sm`}>
                       <span className="text-muted-foreground">
                         {d.total ? `${Math.round((d.won / d.total) * 100)}% lead → win` : 'No leads yet'}
                       </span>

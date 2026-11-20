@@ -49,17 +49,31 @@ function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; chi
   );
 }
 
-export function GuidedContactForm() {
+interface GuidedContactFormProps {
+  /** Pre-select a service (landing pages). Overrides ?service= and the last viewed service. */
+  defaultService?: string;
+  /** Pre-select a package; changing this prop later (e.g. a "Choose" button) updates the form. */
+  plan?: string;
+  /** With defaultService, open on the project step: the visitor's first tap is about their needs. */
+  startAtProject?: boolean;
+}
+
+export function GuidedContactForm({ defaultService, plan: planProp, startAtProject }: GuidedContactFormProps = {}) {
   const location = useLocation();
   const params = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const presetService = defaultService && services.some((x) => x.slug === defaultService) ? defaultService : "";
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(startAtProject && presetService ? 1 : 0);
   const [dir, setDir] = useState(1);
   const [serviceSlug, setServiceSlug] = useState<string>(() => {
+    if (presetService) return presetService;
     const s = params.get("service");
     return s && services.some((x) => x.slug === s) ? s : "";
   });
-  const [plan, setPlan] = useState(params.get("plan") ?? "");
+  const [plan, setPlan] = useState(planProp ?? params.get("plan") ?? "");
+  useEffect(() => {
+    if (planProp) setPlan(planProp);
+  }, [planProp]);
   const [needs, setNeeds] = useState<string[]>([]);
   const [timeline, setTimeline] = useState("");
   const [budget, setBudget] = useState("");
@@ -103,7 +117,7 @@ export function GuidedContactForm() {
     if (slug !== serviceSlug) {
       setNeeds([]);
       setBudget("");
-      if (slug !== params.get("service")) setPlan("");
+      if (slug !== params.get("service") && slug !== presetService) setPlan("");
     }
     setServiceSlug(slug);
     go(1);
@@ -294,7 +308,7 @@ export function GuidedContactForm() {
             {step === 1 && (
               <div className="space-y-5">
                 <div>
-                  <p className="font-display text-xl text-foreground md:text-2xl">{service ? `Tell us about your ${service.name.toLowerCase()} project` : "Tell us about your project"}</p>
+                  <p className="font-display text-xl text-foreground md:text-2xl">{service ? `Tell us about your ${/^(SEO|UX|AI)/.test(service.name) ? service.name : service.name.toLowerCase()} project` : "Tell us about your project"}</p>
                   {plan && (
                     <p className="mt-1 text-sm text-muted-foreground">
                       Package: <strong className="text-foreground">{plan}</strong>{" "}

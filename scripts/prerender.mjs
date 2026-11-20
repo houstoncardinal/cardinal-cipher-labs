@@ -17,7 +17,7 @@ globalThis.localStorage ??= memoryStorage;
 globalThis.sessionStorage ??= memoryStorage;
 
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
-const { render, publicPaths, noindexPaths, redirects, services, landingPages, caseStudies, articles, homeFaqs, siteConfig } = await import(
+const { render, publicPaths, noindexPaths, redirects, services, landingPages, startPages, caseStudies, articles, homeFaqs, siteConfig } = await import(
   pathToFileURL(path.join(root, "dist-ssr", "entry-server.js")).href
 );
 // One canonical origin for canonicals, sitemaps and llms.txt (siteConfig.url in src/lib/seo-config.ts).
@@ -59,7 +59,7 @@ fs.writeFileSync(path.join(dist, "404.html"), page("/__404__"));
 // sitemap.xml — indexable pages only. Blog posts carry their publish date; case studies list
 // their screenshots (image sitemap) so the work can surface in image search.
 const today = new Date().toISOString().slice(0, 10);
-const priority = (u) => (u === "/" ? "1.0" : /^\/services(\/|$)/.test(u) ? "0.9" : /^\/(portfolio|about|contact|pricing)/.test(u) ? "0.8" : "0.7");
+const priority = (u) => (u === "/" ? "1.0" : /^\/services(\/|$)/.test(u) ? "0.9" : /^\/(portfolio|about|contact|pricing|start)/.test(u) ? "0.8" : "0.7");
 const xml = (v) => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const absolute = (src) => (/^https?:/.test(src) ? src : `${SITE}${src}`);
 const lastmod = (u) => articles.find((a) => `/blog/${a.slug}` === u)?.date || today;
@@ -156,6 +156,10 @@ const llms = [
   "",
   "## Services",
   ...services.map((svc) => `- [${svc.name}](${SITE}${svc.path}): ${svc.summary} Pricing — ${priceLine(svc)}.`),
+  "",
+  "## Start a project",
+  "Step-by-step getting-started pages: what happens after you reach out, what to have ready, packages with prices, and a short request form.",
+  ...startPages.map((p) => `- [${p.eyebrow}](${SITE}${p.path}): ${p.subhead}`),
   "",
   "## Industry and Houston pages",
   ...landingPages.map((p) => `- [${p.name}](${SITE}${p.path}): ${p.summary}`),

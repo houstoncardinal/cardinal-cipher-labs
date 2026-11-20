@@ -14,6 +14,7 @@ import { siteConfig } from "@/lib/seo-config";
 import { getService, serviceGroups, tierAssurance, type ServiceDefinition, type ServiceTier } from "@/lib/services-catalog";
 import { getCaseStudies } from "@/lib/case-studies";
 import { contactHref, rememberService } from "@/lib/contact-intent";
+import { startPageFor } from "@/lib/start-pages";
 import { cn } from "@/lib/utils";
 import { CardinalMark } from "@/components/site/CardinalMark";
 
@@ -195,6 +196,7 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
   const related = service.related.map(getService);
   const work = getCaseStudies(service.caseStudies ?? []);
   const group = serviceGroups.find((g) => g.group === service.group);
+  const startPage = startPageFor(service.slug);
   useEffect(() => rememberService(service.slug), [service.slug]);
 
   const monthly = service.startingBilling === "per month";
@@ -265,6 +267,13 @@ export function ServicePageLayout({ service }: { service: ServiceDefinition }) {
                     </li>
                   ))}
                 </motion.ul>
+                {startPage && (
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="mt-5 text-sm">
+                    <Link to={startPage.path} className="inline-flex items-center gap-1.5 font-semibold text-brand-600 hover:text-brand-700">
+                      New to Cardinal? See exactly how getting started works <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </motion.p>
+                )}
               </div>
 
               {/* Packages panel */}
