@@ -1,1 +1,7 @@
-project_id = "jghtztbejkgbvghsndtj"
+project_id = "qhgrcynkdpzntzozpsqp"
+
+# Only the admin account (created in the dashboard / by script) may sign in. Public sign-ups stay
+# off: every admin table checks public.is_admin(), but there is no reason to allow new accounts.
+[auth]
+site_url = "https://www.visitcardinal.com"
+enable_signup = false

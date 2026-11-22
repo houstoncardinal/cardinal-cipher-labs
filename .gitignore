@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .icloud-placeholders-backup/
+
+# Supabase CLI link state (local only)
+supabase/.temp/
