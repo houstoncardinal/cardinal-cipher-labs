@@ -527,8 +527,8 @@ export function generatePersonSchemas() {
     sameAs: [
       person.linkedin,
       ...(person.twitter ? [person.twitter] : []),
-      siteConfig.links.linkedin,
-      siteConfig.links.twitter,
+      siteConfig.links.facebook,
+      siteConfig.links.instagram,
     ].filter(Boolean),
   }));
 }

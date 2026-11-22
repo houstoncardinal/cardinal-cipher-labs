@@ -153,7 +153,6 @@ export function SEOHead({
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />
       <meta name="twitter:image:alt" content={pageImageAlt} />
-      <meta name="twitter:site" content="@cardinalconsult" />
 
       {cleanSchemas.map((schema, index) => (
         <script key={`schema-${index}`} type="application/ld+json">{JSON.stringify(schema)}</script>

@@ -37,6 +37,26 @@ export function AppProviders({ children, helmetContext }: { children: ReactNode;
   );
 }
 
+/**
+ * Everything inside the router. The pre-renderer (src/entry-server.tsx) renders this exact tree,
+ * so the browser can hydrate the static HTML instead of throwing it away and rendering again.
+ */
+export function AppShell() {
+  return (
+    <>
+      <SkipLink />
+      <ScrollToTop />
+      <CursorLabel />
+      <CardinalFlight />
+      <ErrorBoundary>
+        <PageFade>
+          <AppRoutes />
+        </PageFade>
+      </ErrorBoundary>
+    </>
+  );
+}
+
 const App = () => {
   useEffect(() => {
     captureAttribution();
@@ -46,15 +66,7 @@ const App = () => {
   return (
     <AppProviders>
       <BrowserRouter>
-        <SkipLink />
-        <ScrollToTop />
-        <CursorLabel />
-        <CardinalFlight />
-        <ErrorBoundary>
-          <PageFade>
-            <AppRoutes />
-          </PageFade>
-        </ErrorBoundary>
+        <AppShell />
       </BrowserRouter>
     </AppProviders>
   );

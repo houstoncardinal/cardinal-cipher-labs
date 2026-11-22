@@ -6,7 +6,7 @@ import { services } from "@/lib/services-catalog";
 import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, PROMPTS, TIMELINES } from "@/lib/contact-options";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution, lastViewedService } from "@/lib/contact-intent";
-import { recordLead } from "@/lib/leads";
+import { submitLead } from "@/lib/leads";
 
 /**
  * Netlify Forms: every field name below must also appear in the static form copies in
@@ -16,16 +16,6 @@ import { recordLead } from "@/lib/leads";
 const field =
   "w-full border border-input bg-background px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-colors focus:border-foreground focus:outline-none focus:ring-2 focus:ring-ring/20";
 const label = "mb-2 block text-sm font-medium text-foreground";
-
-async function submitToNetlify(form: HTMLFormElement) {
-  const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
-  const res = await fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body,
-  });
-  if (!res.ok) throw new Error(`Submission failed (${res.status})`);
-}
 
 export function ContactForm({
   formName,
@@ -73,8 +63,8 @@ export function ContactForm({
     const form = e.currentTarget;
     setStatus("submitting");
     try {
-      await submitToNetlify(form);
-      void recordLead(Object.fromEntries(new FormData(form)) as Record<string, string>);
+      // FormData values are strings here (the form has no file inputs)
+      await submitLead(Object.fromEntries(new FormData(form)) as Record<string, string>);
       // GA4 recommended lead event — mark "generate_lead" as a key event in GA4 to count conversions.
       trackEvent("generate_lead", {
         form_name: formName,

@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { services } from "@/lib/services-catalog";
 import { trackEvent } from "@/lib/analytics";
 import { getAttribution, lastViewedService } from "@/lib/contact-intent";
-import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, postNetlifyForm, PROMPTS, TIMELINES } from "@/lib/contact-options";
-import { recordLead } from "@/lib/leads";
+import { isMonthly, MONTHLY_BUDGETS, NEEDS, ONE_TIME_BUDGETS, PROMPTS, TIMELINES } from "@/lib/contact-options";
+import { submitLead } from "@/lib/leads";
 
 /**
  * Guided three-step version of the "contact" Netlify form for the homepage:
@@ -159,8 +159,7 @@ export function GuidedContactForm({ defaultService, plan: planProp, startAtProje
         utm_medium: attribution.utmMedium,
         utm_campaign: attribution.utmCampaign,
       };
-      await postNetlifyForm(payload);
-      void recordLead(payload);
+      await submitLead(payload);
       trackEvent("generate_lead", {
         form_name: FORM_NAME,
         service: service?.name ?? "Not sure yet",

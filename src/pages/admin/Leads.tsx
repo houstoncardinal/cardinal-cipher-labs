@@ -319,7 +319,7 @@ export function AdminLeads() {
       <div className="border border-border bg-background">
         {error ? (
           <p className="p-8 text-center text-sm text-muted-foreground">
-            Couldn't load leads. If this is a fresh setup, run the <code>leads</code> migration in Supabase (see the project README).
+            Couldn't load leads. Run <code>supabase/migrations/20261120000000_secure_admin_and_leads.sql</code> in Lovable Cloud, and make sure this account's email is on its admin list. Until then, leads are still delivered to Netlify Forms.
           </p>
         ) : isLoading ? (
           <p className="p-8 text-center text-sm text-muted-foreground">Loading leads…</p>

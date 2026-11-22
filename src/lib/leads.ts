@@ -1,15 +1,20 @@
-// Saves every website enquiry to the admin leads pipeline (Supabase `leads` table).
-// Runs alongside Netlify Forms and never blocks or fails the visitor's submission.
+// Every website enquiry is delivered to TWO places at once, so no lead is lost if one is down:
+//   1. Netlify Forms (email notifications + a backup copy in the Netlify dashboard)
+//   2. The admin leads pipeline (Supabase `leads` table → /admin/leads)
+// The visitor sees success if either one accepted the lead.
 import { supabase } from "@/integrations/supabase/client";
 import type { TablesInsert } from "@/integrations/supabase/types";
+import { postNetlifyForm } from "@/lib/contact-options";
+import { captureAttribution, getAttribution } from "@/lib/contact-intent";
 
 type LeadFields = Record<string, string | undefined>;
 
 const clean = (v?: string) => (v && v.trim() ? v.trim().slice(0, 5000) : null);
 
-export async function recordLead(fields: LeadFields) {
-  // Skip spam (Netlify honeypot filled) and incomplete submissions
-  if (fields["bot-field"] || !fields.name?.trim() || !fields.email?.trim()) return;
+/** Saves the lead to the admin pipeline. Resolves true when the database stored it. */
+export async function recordLead(fields: LeadFields): Promise<boolean> {
+  // Spam (Netlify honeypot filled) and incomplete submissions are never stored
+  if (fields["bot-field"] || !fields.name?.trim() || !fields.email?.trim()) return false;
   const lead: TablesInsert<"leads"> = {
     name: fields.name.trim().slice(0, 200),
     email: fields.email.trim().slice(0, 320),
@@ -34,8 +39,37 @@ export async function recordLead(fields: LeadFields) {
   };
   try {
     const { error } = await supabase.from("leads").insert(lead);
-    if (error) console.warn("Lead pipeline save failed (Netlify Forms still received it):", error.message);
+    if (error) {
+      console.error("Lead pipeline save failed:", error.message);
+      return false;
+    }
+    return true;
   } catch (e) {
-    console.warn("Lead pipeline unavailable:", e);
+    console.error("Lead pipeline unavailable:", e);
+    return false;
   }
+}
+
+/**
+ * Submit a lead from any website form: Netlify Forms and the database in parallel.
+ * Throws only when BOTH failed, so the form can ask the visitor to retry or call.
+ */
+export async function submitLead(input: Record<string, string>) {
+  // Attribution is read at submit time: on the first page of a visit (e.g. an ad landing page) the
+  // form mounts before the app records how the visit started, so values read on mount are empty.
+  captureAttribution();
+  const a = getAttribution();
+  const fields: Record<string, string> = {
+    ...input,
+    landing_page: input.landing_page || a?.landingPage || "",
+    referrer: input.referrer || a?.referrer || "",
+    utm_source: input.utm_source || a?.utmSource || "",
+    utm_medium: input.utm_medium || a?.utmMedium || "",
+    utm_campaign: input.utm_campaign || a?.utmCampaign || "",
+  };
+  const [netlify, database] = await Promise.allSettled([postNetlifyForm(fields), recordLead(fields)]);
+  const netlifyOk = netlify.status === "fulfilled";
+  const databaseOk = database.status === "fulfilled" && database.value;
+  if (!netlifyOk && !databaseOk) throw new Error("Lead could not be delivered");
+  return { netlifyOk, databaseOk };
 }

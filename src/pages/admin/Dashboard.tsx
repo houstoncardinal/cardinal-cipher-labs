@@ -108,7 +108,7 @@ export function AdminDashboard() {
 
       {leadsError && (
         <p className="border-l-2 border-primary bg-primary/5 px-4 py-3 text-sm text-foreground">
-          The leads pipeline isn't set up in the database yet. Run <code>supabase/migrations/20261030000000_leads_pipeline.sql</code> in Supabase to turn it on.
+          Leads can't be loaded. Either the leads table isn't set up yet (run <code>supabase/migrations/20261120000000_secure_admin_and_leads.sql</code> in Lovable Cloud), or this account isn't on the admin list in that file.
         </p>
       )}
 

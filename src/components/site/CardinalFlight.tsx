@@ -42,7 +42,8 @@ export function CardinalFlight() {
     return () => clearTimeout(timer);
   }, [reduce, launch]);
 
-  if (reduce) return null;
+  // The (empty) layer renders even with reduced motion, so the pre-rendered HTML and the first
+  // browser render match during hydration; with reduced motion no birds are ever launched.
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 z-[44] overflow-hidden">
       {birds.map((b) => (

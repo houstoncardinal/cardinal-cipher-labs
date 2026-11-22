@@ -22,7 +22,12 @@ export const siteConfig = {
    * Official profiles emitted as schema.org `sameAs`. Only add URLs for accounts that exist
    * and that you control — Google uses these to connect your Knowledge Panel.
    */
-  verifiedProfiles: [] as string[],
+  verifiedProfiles: [
+    // Confirmed 2026-11-21: the Facebook page and Instagram account connected to the business's
+    // Windsor.ai workspace. Add LinkedIn, Clutch, Yelp etc. here once those profiles are live.
+    'https://www.facebook.com/1853073011682492',
+    'https://www.instagram.com/cardinalhouston/',
+  ] as string[],
   /**
    * Your Google Business Profile map link (Google Maps → your listing → Share → Copy link, e.g.
    * https://maps.app.goo.gl/… or https://www.google.com/maps?cid=…). Emitted as schema.org `hasMap`,
@@ -31,12 +36,10 @@ export const siteConfig = {
    */
   mapsUrl: '',
   
+  // Only profiles that exist. (twitter.com/cardinalconsult and facebook.com/cardinalconsulting do not.)
   links: {
-    twitter: 'https://twitter.com/cardinalconsult',
-    linkedin: 'https://linkedin.com/company/cardinal-consulting',
-    github: 'https://github.com/cardinal-consulting',
-    facebook: 'https://facebook.com/cardinalconsulting',
-    youtube: 'https://youtube.com/@cardinalconsulting',
+    facebook: 'https://www.facebook.com/1853073011682492',
+    instagram: 'https://www.instagram.com/cardinalhouston/',
   },
   
   contact: {
@@ -227,11 +230,8 @@ export const siteConfig = {
   },
   
   socialProfiles: [
-    'https://twitter.com/cardinalconsult',
-    'https://linkedin.com/company/cardinal-consulting',
-    'https://github.com/cardinal-consulting',
-    'https://facebook.com/cardinalconsulting',
-    'https://youtube.com/@cardinalconsulting',
+    'https://www.facebook.com/1853073011682492',
+    'https://www.instagram.com/cardinalhouston/',
   ],
   
   portfolio: [

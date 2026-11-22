@@ -54,8 +54,9 @@ export function CountUp({ value, className }: { value: string; className?: strin
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const reduce = useReducedMotion();
-  const isClient = typeof window !== "undefined";
-  const [display, setDisplay] = useState<string | null>(match && isClient && !reduce ? "0" : null);
+  // Starts on the final value on the server AND the first browser render, so hydration matches;
+  // the count from 0 begins when the number scrolls into view.
+  const [display, setDisplay] = useState<string | null>(null);
 
   useEffect(() => {
     if (!match || reduce || !inView) return;

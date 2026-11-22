@@ -4,8 +4,8 @@
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import type { HelmetServerState } from "react-helmet-async";
-import { AppProviders } from "./App";
-import { AppRoutes, noindexPaths, publicPaths, redirects } from "./AppRoutes";
+import { AppProviders, AppShell } from "./App";
+import { noindexPaths, publicPaths, redirects } from "./AppRoutes";
 
 export { noindexPaths, publicPaths, redirects };
 export { services, carePlans } from "./lib/services-catalog";
@@ -21,7 +21,7 @@ export function render(url: string) {
   const html = renderToString(
     <AppProviders helmetContext={helmetContext}>
       <StaticRouter location={url}>
-        <AppRoutes />
+        <AppShell />
       </StaticRouter>
     </AppProviders>,
   );
